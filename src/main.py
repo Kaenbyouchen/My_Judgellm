@@ -1,0 +1,354 @@
+"""
+Main entry point for the evaluation pipeline.
+"""
+import os
+import sys
+from pathlib import Path
+from typing import Dict, Any
+from loguru import logger
+
+# Add project root to path to enable absolute imports
+project_root = Path(__file__).parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+from src.utils.io import load_yaml, save_yaml
+from src.utils.logging import setup_logging
+from src.utils.reproducibility import set_seed
+from src.utils.cli import parse_args
+from src.utils.paths import get_dataset_name, get_run_dir
+from src.pipeline.run_pairwise import run_pairwise_evaluation
+from src.pipeline.run_scalar import run_scalar_evaluation
+from src.models.registry import ModelRegistry
+
+
+def get_bias_name(bias_config: dict) -> str:
+    """
+    Get bias name string from bias config.
+    
+    Args:
+        bias_config: Bias configuration dictionary
+        
+    Returns:
+        Bias name string (e.g., "jargon_overloading", "authority+jargon_overloading", or "none")
+    """
+    if not bias_config.get("enabled", False):
+        return "none"
+    
+    bias_type = bias_config.get("type", "")
+    # Support multiple biases if type is a list
+    if isinstance(bias_type, list):
+        return "+".join(bias_type)
+    elif isinstance(bias_type, str) and bias_type:
+        return bias_type
+    else:
+        return "none"
+
+
+def get_judge_name(judge_type: str, judge_model_name: str, judge_model_config: dict) -> str:
+    """
+    Get judge name string for directory naming.
+    
+    Args:
+        judge_type: Type of judge ("mock", "openai", "hf", etc.)
+        judge_model_name: Name of judge model
+        judge_model_config: Judge model configuration
+        
+    Returns:
+        Judge name string (e.g., "mock", "openai_gpt-4", "hf_llama-2-7b")
+    """
+    if judge_type == "mock":
+        return "mock"
+    elif judge_type in {"openai", "anthropic", "gemini"}:
+        model = judge_model_config.get("model", judge_model_name)
+        return f"{judge_type}_{model}"
+    elif judge_type == "hf":
+        model = judge_model_config.get("model_name", judge_model_name)
+        # Extract short name from full path (e.g., "meta-llama/Llama-2-7b-chat-hf" -> "llama-2-7b")
+        if "/" in model:
+            model = model.split("/")[-1]
+        return f"hf_{model}"
+    else:
+        # Fallback: use type and model name
+        return f"{judge_type}_{judge_model_name}"
+
+
+def main():
+    """Main function."""
+    args = parse_args()
+    
+    # Get project root
+    project_root = Path(__file__).parent.parent
+    if not (project_root / "configs").exists():
+        # Try to find project root by looking for configs directory
+        current = Path.cwd()
+        if (current / "configs").exists():
+            project_root = current
+        else:
+            logger.error("Cannot find project root. Please run from project root directory.")
+            sys.exit(1)
+    
+    # Load configuration
+    config_path = args.config
+    if not os.path.isabs(config_path):
+        config_path = str(project_root / config_path)
+    
+    if not os.path.exists(config_path):
+        logger.error(f"Configuration file not found: {config_path}")
+        sys.exit(1)
+    
+    config = load_yaml(config_path)
+    
+    # Load models.yaml separately (it's a separate config file)
+    models_yaml_path = project_root / "configs" / "models.yaml"
+    if models_yaml_path.exists():
+        models_config = load_yaml(str(models_yaml_path))
+    else:
+        # Fallback: try to get from experiment.yaml if it has models section
+        models_config = config.get("models", {})
+        if not models_config:
+            logger.warning(f"models.yaml not found at {models_yaml_path}, using empty config")
+            models_config = {}
+
+    # Make model pool available globally (so BiasInjector / ModelJudge can resolve provider+model_id)
+    ModelRegistry.set_models_config(models_config)
+    
+    # Load prompts.yaml separately (optional)
+    prompts_yaml_path = project_root / "configs" / "prompts.yaml"
+    prompts_config = {}
+    if prompts_yaml_path.exists():
+        prompts_config = load_yaml(str(prompts_yaml_path))
+
+    # Load datasets.yaml separately (optional)
+    datasets_yaml_path = project_root / "configs" / "datasets.yaml"
+    datasets_config = {}
+    if datasets_yaml_path.exists():
+        datasets_config = load_yaml(str(datasets_yaml_path))
+    
+    # Get experiment config
+    exp_config = config.get("experiment", {})
+    data_config = config.get("data", {})
+    bias_config = config.get("bias", {})
+    # Log raw bias config (before logging setup)
+    logger.info(f"Bias config raw: {bias_config}")
+    # Normalize bias injector type (default mock)
+    bias_injector_type = bias_config.get("injector_type") or "mock"
+    bias_config["injector_type"] = bias_injector_type
+    # Optional: allow fallback to mock for bias injection (default False when using external model)
+    bias_allow_fallback_mock = bool(bias_config.get("allow_fallback_mock", False))
+    judge_config = config.get("judge", {})
+    eval_config = config.get("evaluation", {})
+    
+    # Override data path if provided
+    data_path = args.data_path or data_config.get("path", "data/dummy/pairwise.jsonl")
+    if not os.path.isabs(data_path):
+        data_path = str(project_root / data_path)
+    
+    # Judge model selection
+    # - New format (recommended): judge.provider + judge.model_id (models.yaml is the model pool)
+    # - Old format (compatible): judge.type + judge.model_name (treat model_name as model_id)
+    judge_provider = judge_config.get("provider") or judge_config.get("type") or "mock"
+    judge_model_id = judge_config.get("model_id") or judge_config.get("model_name") or "mock-judge-v1"
+
+    # Per-run overrides (do NOT embed concrete model name strings here)
+    judge_model_overrides = {
+        k: v
+        for k, v in judge_config.items()
+        if k not in {"provider", "type", "model_id", "model_name"}
+    }
+
+    # Resolve once for logging + directory naming (actual model name may differ from model_id)
+    resolved_judge_model_name, resolved_judge_model_config = ModelRegistry.resolve_model_config(
+        provider=judge_provider,
+        model_id=judge_model_id,
+        overrides=judge_model_overrides,
+    )
+
+    judge_type = judge_provider
+    judge_model_name = judge_model_id  # pass model_id; ModelRegistry will map it to actual model name
+
+    # Build bias injector model config (so bias injection can actually use OpenAI/HF)
+    injector_model_config: Dict[str, Any] = {}
+    injector_system_prompt = None
+    injector_user_template = None
+    injector_resolved_model_name = None
+
+    # Build judge prompt config (from prompts.yaml if available)
+    judge_system_prompt = None
+    judge_user_template = None
+    judge_prompt_cfg = (prompts_config.get("judge", {}) or {}).get("pairwise", {}) if prompts_config else {}
+    if isinstance(judge_prompt_cfg, dict):
+        judge_system_prompt = judge_prompt_cfg.get("system")
+        judge_user_template = judge_prompt_cfg.get("user")
+    if bias_injector_type != "mock":
+        injector_provider = bias_injector_type
+        # Allow bias to specify its own model, otherwise reuse judge model id/name
+        injector_model_id = bias_config.get("model_id") or bias_config.get("model_name") or judge_model_id
+
+        # Allow passing model overrides for the bias injector from experiment.yaml (e.g., api_key_env, temperature).
+        injector_model_overrides = {
+            k: v
+            for k, v in bias_config.items()
+            if k
+            not in {
+                "enabled",
+                "type",
+                "inject_to",
+                "injector_type",
+                "model_id",
+                "model_name",
+                "allow_fallback_mock",
+            }
+        }
+        injector_model_config = {
+            # Keep model_id so BiasInjector can pass it into ModelRegistry.create_model
+            "model_id": injector_model_id,
+            "allow_fallback_mock": bias_allow_fallback_mock,
+        }
+        injector_model_config.update(injector_model_overrides)
+        try:
+            injector_resolved_model_name, _ = ModelRegistry.resolve_model_config(
+                provider=injector_provider,
+                model_id=injector_model_id,
+                overrides={"allow_fallback_mock": bias_allow_fallback_mock},
+            )
+        except Exception:
+            injector_resolved_model_name = None
+
+        # Load prompt template for bias injection if available
+        bias_type_name = bias_config.get("type", "jargon_overloading")
+        bias_prompt_cfg = (prompts_config.get("bias_injection", {}) or {}).get(bias_type_name, {}) if prompts_config else {}
+        if isinstance(bias_prompt_cfg, dict):
+            injector_system_prompt = bias_prompt_cfg.get("system")
+            injector_user_template = bias_prompt_cfg.get("user")
+    
+    # Create run directory (before logging setup, so we can log to file)
+    base_output_dir = Path(args.output_dir or config.get("experiment", {}).get("output_dir", "output"))
+    if not base_output_dir.is_absolute():
+        base_output_dir = project_root / base_output_dir
+    
+    dataset_name = get_dataset_name(
+        config=config,
+        data_path=data_path,
+        datasets_config=datasets_config,
+        project_root=project_root,
+    )
+    bias_name = get_bias_name(bias_config)
+    judge_name = get_judge_name(judge_type, judge_model_name, resolved_judge_model_config)
+
+    run_dir = get_run_dir(
+        config=config,
+        base_output_dir=base_output_dir,
+        dataset_name=dataset_name,
+        bias_name=bias_name,
+        judge_name=judge_name,
+    )
+    
+    # Setup logging (log file goes into run_dir)
+    log_file = str(run_dir / "logs.txt")
+    setup_logging(log_file=log_file, level="INFO")
+    
+    # Log configuration details (after logging setup)
+    logger.info("="*60)
+    logger.info("Judge Configuration Details")
+    logger.info("="*60)
+    logger.info(f"  Provider/Type: {judge_provider}")
+    logger.info(f"  Model ID/Name: {judge_model_id}")
+    logger.info(f"  Models Config Available: {bool(models_config)}")
+    logger.info(f"  Provider in Models Config: {judge_provider in models_config}")
+    if judge_provider in models_config:
+        provider_cfg = models_config[judge_provider]
+        if isinstance(provider_cfg, dict):
+            logger.info(f"  Provider Config Keys: {list(provider_cfg.keys())}")
+    logger.info(f"  Bias injector_type: {bias_injector_type} (allow_fallback_mock={bias_allow_fallback_mock})")
+    if bias_injector_type != "mock":
+        logger.info(f"  Bias injector model_id: {bias_config.get('model_id') or bias_config.get('model_name') or judge_model_id}")
+        if injector_resolved_model_name:
+            logger.info(f"  Bias injector resolved model: {injector_resolved_model_name}")
+    if judge_system_prompt or judge_user_template:
+        logger.info("  Judge prompt source: configs/prompts.yaml (judge.pairwise)")
+    logger.info(f"  API Key Env: {resolved_judge_model_config.get('api_key_env', 'N/A')}")
+    
+    # Check API key availability (without exposing the key)
+    api_key_env_name = resolved_judge_model_config.get("api_key_env", "OPENAI_API_KEY")
+    api_key_available = bool(os.getenv(api_key_env_name))
+    logger.info(f"  API Key Available: {api_key_available}")
+    logger.info(f"  Resolved Model Name: {resolved_judge_model_name}")
+    logger.info(f"  Model Config Keys: {list(resolved_judge_model_config.keys())}")
+    logger.info("="*60)
+    
+    logger.info("="*60)
+    logger.info("JudgeLLM Medical Bias Evaluation")
+    logger.info("="*60)
+    logger.info(f"Project root: {project_root}")
+    logger.info(f"Configuration: {config_path}")
+    logger.info(f"Run directory: {run_dir}")
+    
+    # Save resolved config to run_dir
+    import copy
+    config_resolved = copy.deepcopy(config)
+    if "experiment" not in config_resolved:
+        config_resolved["experiment"] = {}
+    config_resolved["experiment"]["run_dir"] = str(run_dir)
+    config_resolved["experiment"]["dataset_name"] = dataset_name
+    config_resolved["experiment"]["bias_name"] = bias_name
+    config_resolved["experiment"]["judge_name"] = judge_name
+    # Persist normalized bias injector type
+    if "bias" not in config_resolved:
+        config_resolved["bias"] = {}
+    config_resolved["bias"]["injector_type"] = bias_injector_type
+    config_resolved["bias"]["allow_fallback_mock"] = bias_allow_fallback_mock
+    # Persist resolved bias injector model_id (even if user didn't specify it, for reproducibility)
+    if bias_injector_type != "mock":
+        config_resolved["bias"]["model_id"] = bias_config.get("model_id") or bias_config.get("model_name") or judge_model_id
+    if injector_model_config:
+        config_resolved["bias"]["injector_model_config_keys"] = list(injector_model_config.keys())
+    save_yaml(config_resolved, str(run_dir / "config_resolved.yaml"))
+    logger.info(f"Saved resolved config to {run_dir / 'config_resolved.yaml'}")
+    
+    # Set seed
+    seed = args.seed or config.get("experiment", {}).get("seed", 42)
+    set_seed(seed)
+    
+    # Run pipeline based on data type
+    data_type = data_config.get("type", "pairwise")
+    
+    if data_type == "pairwise":
+        logger.info("Running pairwise evaluation pipeline")
+        results = run_pairwise_evaluation(
+            data_path=data_path,
+            bias_type=bias_config.get("type", "jargon_overloading"),
+            bias_enabled=bias_config.get("enabled", True),
+            injector_type=bias_config.get("injector_type", "mock"),
+            injector_model_config=injector_model_config,
+            injector_system_prompt=injector_system_prompt,
+            injector_user_template=injector_user_template,
+            judge_system_prompt=judge_system_prompt,
+            judge_user_template=judge_user_template,
+            judge_type=judge_type,
+            judge_model_name=judge_model_name,
+            judge_config=judge_model_overrides,
+            compute_original_acc=eval_config.get("compute_original_acc", True),
+            compute_bias_metrics=eval_config.get("compute_bias_metrics", True),
+            run_dir=str(run_dir)
+        )
+    elif data_type == "scalar":
+        logger.info("Running scalar evaluation pipeline (placeholder)")
+        results = run_scalar_evaluation(
+            data_path=data_path,
+            judge_type=judge_type,
+            judge_model_name=judge_model_name,
+            judge_config=judge_model_overrides,
+            run_dir=str(run_dir)
+        )
+    else:
+        logger.error(f"Unknown data type: {data_type}")
+        sys.exit(1)
+    
+    logger.info("Evaluation completed successfully")
+    return results
+
+
+if __name__ == "__main__":
+    main()
+

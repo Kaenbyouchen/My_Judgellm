@@ -1,0 +1,67 @@
+# Model Pool (模型池)
+# - models.yaml 只声明“所有可用模型”，不决定本次实验用哪个模型
+# - experiment.yaml 通过 provider + model_id 选择
+#
+# New (recommended) format:
+#   <provider>:
+#     defaults: {... optional provider-level defaults ...}
+#     <model_id_1>: {... model-specific config ...}
+#     <model_id_2>: {...}
+#
+# Backward compatible (old) format is still supported by code:
+#   <provider>: { flat config ... }
+#   and experiment.yaml's model_id/model_name will be treated as the actual model name.
+
+openai:
+  defaults:
+    api_key_env: "OPENAI_API_KEY"
+    temperature: 0.0
+    max_tokens: 1000
+  gpt4omini:
+    model_name: "gpt-4o-mini"
+  gpt41:
+    model_name: "gpt-4.1"
+  gpt52:
+    model_name: "gpt-5.2"
+
+anthropic:
+  defaults:
+    api_key_env: "ANTHROPIC_API_KEY"
+    temperature: 0.0
+    max_tokens: 1000
+  claude35_sonnet:
+    model_name: "claude-3-5-sonnet-20240620"
+
+gemini:
+  defaults:
+    api_key_env: "GEMINI_API_KEY"
+    temperature: 0.0
+    max_tokens: 1000
+  gemini15_pro:
+    model_name: "gemini-1.5-pro"
+  med_gemini:
+    model_name: "med-gemini"
+
+hf:
+  defaults:
+    device: "cuda"  # will fallback to cpu if not available
+    dtype: "float16"
+    max_length: 2048
+  llama2_7b_chat:
+    model_name: "meta-llama/Llama-2-7b-chat-hf"
+
+# vllm provider is kept as a placeholder (not wired into ModelRegistry by default)
+vllm:
+  defaults:
+    tensor_parallel_size: 1
+    max_model_len: 2048
+  llama2_7b_chat:
+    model_name: "meta-llama/Llama-2-7b-chat-hf"
+
+mock:
+  defaults:
+    enabled: true
+    deterministic: true
+  mock-judge-v1:
+    model_name: "mock-judge-v1"
+

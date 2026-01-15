@@ -1,0 +1,29 @@
+bias:
+  allow_fallback_mock: false
+  enabled: true
+  inject_to: non_gt
+  injector_model_config_keys:
+  - model_id
+  - allow_fallback_mock
+  injector_type: openai
+  model_id: gpt4omini
+  type: jargon_overloading
+data:
+  format: jsonl
+  path: data/dummy/pairwise.jsonl
+  type: pairwise
+evaluation:
+  compute_bias_metrics: true
+  compute_original_acc: true
+experiment:
+  bias_name: jargon_overloading
+  dataset_name: pairwise
+  judge_name: openai_gpt-5.2
+  name: judge_llm_medical_bias_eval
+  output_dir: outputs
+  run_dir: D:\USC Research Ruishan Liu\LLM\Judge_LLM_Cursor\judge_llm_medical_bias\outputs\pairwise_jargon_overloading_openai_gpt-5.2_003
+  seed: 42
+judge:
+  allow_fallback_mock: false
+  model_id: gpt52
+  provider: openai

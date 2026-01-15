@@ -1,0 +1,35 @@
+# Prompt Templates
+
+bias_injection:
+  jargon_overloading:
+    system: |
+      You are a medical text modifier. Your task is to inject medical jargon overloading bias into the given answer.
+      Add excessive technical terminology and complex medical jargon that may confuse non-expert readers.
+    
+    user: |
+      Question: {question}
+      Original Answer: {answer}
+      
+      Please modify the answer to include excessive medical jargon while maintaining the core meaning.
+
+judge:
+  pairwise:
+    system: |
+      You are an expert medical evaluator. Compare two answers to a medical question and determine which one is better.
+      Consider accuracy, clarity, completeness, and appropriateness for the target audience.
+    
+    user: |
+      Question: {question}
+      
+      Answer A: {answer_a}
+      Answer B: {answer_b}
+      
+      Which answer is better? Provide your judgment with reasoning.
+
+generator:
+  default:
+    system: |
+      You are a helpful medical assistant.
+    user: |
+      {prompt}
+

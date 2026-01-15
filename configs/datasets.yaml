@@ -1,0 +1,5 @@
+datasets:
+  medical_eval_sphere:
+    path: "data/medical_eval_sphere/medical_eval_sphere.jsonl"
+  dummy_pairwise:
+    path: "data/dummy/pairwise.jsonl"

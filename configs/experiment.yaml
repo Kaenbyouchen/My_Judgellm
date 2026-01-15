@@ -1,0 +1,33 @@
+# Experiment Configuration
+experiment:
+  name: "judge_llm_medical_bias_eval"
+  seed: 42
+  output_dir: "outputs"
+
+# Data Configuration
+data:
+  type: "pairwise"  # pairwise or scalar
+  path: "data/medical_eval_sphere/medical_eval_sphere.jsonl"
+  dataset_name: "medical_eval_sphere"
+  format: "jsonl"
+
+# Bias Injection Configuration
+bias:
+  enabled: true
+  type: "jargon_overloading"  # bias type to inject
+  inject_to: "non_gt"  # inject bias to non-GT answer
+  injector_type: "openai"  # mock, openai, hf
+  model_id: "gpt4omini"
+
+# Judge Configuration
+judge:
+  provider: "openai"  # mock, openai, hf
+  model_id: "gpt52"
+
+  allow_fallback_mock: false  # Set to true to allow fallback to mock if model unavailable
+  
+# Evaluation Configuration
+evaluation:
+  compute_original_acc: true  # compute accuracy on original R1 vs R2
+  compute_bias_metrics: true  # compute RR/CR on R1 vs biased_R2
+

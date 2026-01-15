@@ -1,0 +1,111 @@
+2026-01-07 02:49:20 | INFO     | src.main:main:324 - ============================================================
+2026-01-07 02:49:20 | INFO     | src.main:main:325 - Judge Configuration Details
+2026-01-07 02:49:20 | INFO     | src.main:main:326 - ============================================================
+2026-01-07 02:49:20 | INFO     | src.main:main:327 -   Provider/Type: openai
+2026-01-07 02:49:20 | INFO     | src.main:main:328 -   Model ID/Name: gpt52
+2026-01-07 02:49:20 | INFO     | src.main:main:329 -   Models Config Available: True
+2026-01-07 02:49:20 | INFO     | src.main:main:330 -   Provider in Models Config: True
+2026-01-07 02:49:20 | INFO     | src.main:main:334 -   Provider Config Keys: ['defaults', 'gpt4omini', 'gpt41', 'gpt52']
+2026-01-07 02:49:20 | INFO     | src.main:main:335 -   Bias injector_type: openai (allow_fallback_mock=False)
+2026-01-07 02:49:20 | INFO     | src.main:main:337 -   Bias injector model_id: gpt4omini
+2026-01-07 02:49:20 | INFO     | src.main:main:339 -   Bias injector resolved model: gpt-4o-mini
+2026-01-07 02:49:20 | INFO     | src.main:main:341 -   Judge prompt source: configs/prompts.yaml (judge.pairwise)
+2026-01-07 02:49:20 | INFO     | src.main:main:342 -   API Key Env: OPENAI_API_KEY
+2026-01-07 02:49:20 | INFO     | src.main:main:347 -   API Key Available: True
+2026-01-07 02:49:20 | INFO     | src.main:main:348 -   Resolved Model Name: gpt-5.2
+2026-01-07 02:49:20 | INFO     | src.main:main:349 -   Model Config Keys: ['api_key_env', 'temperature', 'max_tokens', 'model_name', 'allow_fallback_mock', 'model']
+2026-01-07 02:49:20 | INFO     | src.main:main:350 - ============================================================
+2026-01-07 02:49:20 | INFO     | src.main:main:352 - ============================================================
+2026-01-07 02:49:20 | INFO     | src.main:main:353 - JudgeLLM Medical Bias Evaluation
+2026-01-07 02:49:20 | INFO     | src.main:main:354 - ============================================================
+2026-01-07 02:49:20 | INFO     | src.main:main:355 - Project root: D:\USC Research Ruishan Liu\LLM\Judge_LLM_Cursor\judge_llm_medical_bias
+2026-01-07 02:49:20 | INFO     | src.main:main:356 - Configuration: D:\USC Research Ruishan Liu\LLM\Judge_LLM_Cursor\judge_llm_medical_bias\configs\experiment.yaml
+2026-01-07 02:49:20 | INFO     | src.main:main:357 - Run directory: D:\USC Research Ruishan Liu\LLM\Judge_LLM_Cursor\judge_llm_medical_bias\outputs\pairwise_jargon_overloading_openai_gpt-5.2_003
+2026-01-07 02:49:20 | INFO     | src.main:main:379 - Saved resolved config to D:\USC Research Ruishan Liu\LLM\Judge_LLM_Cursor\judge_llm_medical_bias\outputs\pairwise_jargon_overloading_openai_gpt-5.2_003\config_resolved.yaml
+2026-01-07 02:49:23 | INFO     | src.utils.reproducibility:set_seed:38 - Random seed set to 42
+2026-01-07 02:49:23 | INFO     | src.main:main:389 - Running pairwise evaluation pipeline
+2026-01-07 02:49:23 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:58 - Starting pairwise evaluation pipeline
+2026-01-07 02:49:23 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:61 - Loading data from D:\USC Research Ruishan Liu\LLM\Judge_LLM_Cursor\judge_llm_medical_bias\data\dummy\pairwise.jsonl
+2026-01-07 02:49:23 | INFO     | src.dataset.loaders:load_pairwise_jsonl:47 - Loaded 8 pairwise samples from D:\USC Research Ruishan Liu\LLM\Judge_LLM_Cursor\judge_llm_medical_bias\data\dummy\pairwise.jsonl
+2026-01-07 02:49:23 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:70 - Loaded 8 samples
+2026-01-07 02:49:23 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:71 - GT coverage: 100.00% (8 with GT, 0 without)
+2026-01-07 02:49:23 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:79 - Initializing bias injector: type=jargon_overloading, injector=openai
+2026-01-07 02:49:23 | INFO     | src.models.registry:create_model:140 - ModelRegistry.create_model called:
+2026-01-07 02:49:23 | INFO     | src.models.registry:create_model:141 -   model_type: openai
+2026-01-07 02:49:23 | INFO     | src.models.registry:create_model:142 -   model_id/name: gpt4omini
+2026-01-07 02:49:23 | INFO     | src.models.registry:create_model:143 -   resolved_model_name: gpt-4o-mini
+2026-01-07 02:49:23 | INFO     | src.models.registry:create_model:144 -   config keys: ['api_key_env', 'temperature', 'max_tokens', 'model_name', 'allow_fallback_mock', 'model']
+2026-01-07 02:49:23 | INFO     | src.models.openai_client:__init__:26 - OpenAIModel: API key found from environment variable 'OPENAI_API_KEY'
+2026-01-07 02:49:24 | INFO     | src.models.openai_client:_log_openai_info:45 - OpenAIModel[initial]: python=C:\Users\18310\.conda\envs\judge_llm\python.exe
+2026-01-07 02:49:24 | INFO     | src.models.openai_client:_log_openai_info:46 - OpenAIModel[initial]: openai version=2.14.0, module_path=C:\Users\18310\.conda\envs\judge_llm\lib\site-packages\openai\__init__.py
+2026-01-07 02:49:24 | INFO     | src.models.openai_client:_log_openai_info:47 - OpenAIModel[initial]: openai_has_OpenAI=True
+2026-01-07 02:49:25 | INFO     | src.models.openai_client:__init__:103 - OpenAIModel: Using openai>=1.0 client
+2026-01-07 02:49:25 | INFO     | src.models.registry:create_model:154 - Created openai model instance: gpt-4o-mini
+2026-01-07 02:49:25 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-4o-mini
+2026-01-07 02:49:25 | INFO     | src.models.registry:create_model:172 - Model openai:gpt-4o-mini is available and ready to use
+2026-01-07 02:49:25 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-4o-mini
+2026-01-07 02:49:25 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:89 - Initializing judge: type=openai, model=gpt52
+2026-01-07 02:49:25 | INFO     | src.judge.judge_runner:__init__:105 - ModelJudge: Initializing openai model 'gpt52'
+2026-01-07 02:49:25 | INFO     | src.models.registry:create_model:140 - ModelRegistry.create_model called:
+2026-01-07 02:49:25 | INFO     | src.models.registry:create_model:141 -   model_type: openai
+2026-01-07 02:49:25 | INFO     | src.models.registry:create_model:142 -   model_id/name: gpt52
+2026-01-07 02:49:25 | INFO     | src.models.registry:create_model:143 -   resolved_model_name: gpt-5.2
+2026-01-07 02:49:25 | INFO     | src.models.registry:create_model:144 -   config keys: ['api_key_env', 'temperature', 'max_tokens', 'model_name', 'allow_fallback_mock', 'model']
+2026-01-07 02:49:25 | INFO     | src.models.openai_client:__init__:26 - OpenAIModel: API key found from environment variable 'OPENAI_API_KEY'
+2026-01-07 02:49:25 | INFO     | src.models.openai_client:_log_openai_info:45 - OpenAIModel[initial]: python=C:\Users\18310\.conda\envs\judge_llm\python.exe
+2026-01-07 02:49:25 | INFO     | src.models.openai_client:_log_openai_info:46 - OpenAIModel[initial]: openai version=2.14.0, module_path=C:\Users\18310\.conda\envs\judge_llm\lib\site-packages\openai\__init__.py
+2026-01-07 02:49:25 | INFO     | src.models.openai_client:_log_openai_info:47 - OpenAIModel[initial]: openai_has_OpenAI=True
+2026-01-07 02:49:26 | INFO     | src.models.openai_client:__init__:103 - OpenAIModel: Using openai>=1.0 client
+2026-01-07 02:49:26 | INFO     | src.models.registry:create_model:154 - Created openai model instance: gpt-5.2
+2026-01-07 02:49:26 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:49:26 | INFO     | src.models.registry:create_model:172 - Model openai:gpt-5.2 is available and ready to use
+2026-01-07 02:49:26 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:49:26 | INFO     | src.judge.judge_runner:__init__:122 - ModelJudge: Successfully initialized openai model 'gpt52'
+2026-01-07 02:49:26 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:108 - Evaluating original R1 vs R2...
+2026-01-07 02:49:26 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:49:32 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:49:40 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:49:45 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:49:52 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:49:58 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:50:05 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:50:11 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:50:18 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:135 - Injecting bias and evaluating GT vs biased answer...
+2026-01-07 02:50:18 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-4o-mini
+2026-01-07 02:50:24 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:50:33 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:50:41 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-4o-mini
+2026-01-07 02:50:46 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:50:54 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:51:02 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-4o-mini
+2026-01-07 02:51:10 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:51:17 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:51:22 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-4o-mini
+2026-01-07 02:51:27 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:51:38 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:51:46 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-4o-mini
+2026-01-07 02:51:51 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:51:59 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:52:05 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-4o-mini
+2026-01-07 02:52:09 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:52:19 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:52:27 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-4o-mini
+2026-01-07 02:52:31 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:52:38 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:52:47 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-4o-mini
+2026-01-07 02:52:53 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:53:02 | DEBUG    | src.models.openai_client:is_available:177 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-01-07 02:53:12 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:192 - Computing accuracy on original R1 vs R2...
+2026-01-07 02:53:12 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:202 - Computing RR and CR...
+2026-01-07 02:53:12 | INFO     | src.metrics.reports:save_judgments_jsonl:99 - Judgments saved to D:\USC Research Ruishan Liu\LLM\Judge_LLM_Cursor\judge_llm_medical_bias\outputs\pairwise_jargon_overloading_openai_gpt-5.2_003\judge_raw_original.jsonl (8 judgments)
+2026-01-07 02:53:12 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:237 - Original judgments saved to D:\USC Research Ruishan Liu\LLM\Judge_LLM_Cursor\judge_llm_medical_bias\outputs\pairwise_jargon_overloading_openai_gpt-5.2_003\judge_raw_original.jsonl
+2026-01-07 02:53:12 | INFO     | src.metrics.reports:save_judgments_jsonl:99 - Judgments saved to D:\USC Research Ruishan Liu\LLM\Judge_LLM_Cursor\judge_llm_medical_bias\outputs\pairwise_jargon_overloading_openai_gpt-5.2_003\judge_raw_bias.jsonl (8 judgments)
+2026-01-07 02:53:12 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:242 - Bias judgments saved to D:\USC Research Ruishan Liu\LLM\Judge_LLM_Cursor\judge_llm_medical_bias\outputs\pairwise_jargon_overloading_openai_gpt-5.2_003\judge_raw_bias.jsonl
+2026-01-07 02:53:12 | INFO     | src.metrics.reports:save_judgments_jsonl:99 - Judgments saved to D:\USC Research Ruishan Liu\LLM\Judge_LLM_Cursor\judge_llm_medical_bias\outputs\pairwise_jargon_overloading_openai_gpt-5.2_003\judge_raw.jsonl (16 judgments)
+2026-01-07 02:53:12 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:254 - All judgments saved to D:\USC Research Ruishan Liu\LLM\Judge_LLM_Cursor\judge_llm_medical_bias\outputs\pairwise_jargon_overloading_openai_gpt-5.2_003\judge_raw.jsonl
+2026-01-07 02:53:12 | INFO     | src.metrics.reports:save_metrics_json:25 - Metrics saved to D:\USC Research Ruishan Liu\LLM\Judge_LLM_Cursor\judge_llm_medical_bias\outputs\pairwise_jargon_overloading_openai_gpt-5.2_003\metrics.json
+2026-01-07 02:53:12 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:259 - Metrics saved to D:\USC Research Ruishan Liu\LLM\Judge_LLM_Cursor\judge_llm_medical_bias\outputs\pairwise_jargon_overloading_openai_gpt-5.2_003\metrics.json
+2026-01-07 02:53:12 | INFO     | src.metrics.reports:save_metrics_csv:80 - Metrics summary saved to D:\USC Research Ruishan Liu\LLM\Judge_LLM_Cursor\judge_llm_medical_bias\outputs\pairwise_jargon_overloading_openai_gpt-5.2_003\results.csv
+2026-01-07 02:53:12 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:263 - Metrics summary saved to D:\USC Research Ruishan Liu\LLM\Judge_LLM_Cursor\judge_llm_medical_bias\outputs\pairwise_jargon_overloading_openai_gpt-5.2_003\results.csv
+2026-01-07 02:53:12 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:268 - Pipeline completed successfully
+2026-01-07 02:53:12 | INFO     | src.main:main:420 - Evaluation completed successfully

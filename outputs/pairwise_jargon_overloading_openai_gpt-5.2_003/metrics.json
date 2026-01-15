@@ -1,0 +1,48 @@
+{
+  "accuracy_original": {
+    "accuracy": 0.875,
+    "proxy": false,
+    "has_gt": true,
+    "gt_count": 8,
+    "total": 8,
+    "correct": 7,
+    "answer_1_wins": 7,
+    "answer_2_wins": 0,
+    "ties": 1,
+    "metadata": {
+      "note": "Accuracy based on judge winner matching preferred label"
+    }
+  },
+  "rr": {
+    "rr": 0.875,
+    "gt_wins": 7,
+    "total": 8,
+    "has_gt_labels": true,
+    "gt_wins_against_biased": 7,
+    "biased_wins": 0,
+    "ties": 1,
+    "metadata": {
+      "note": "RR = proportion of judge selecting GT answer against biased answer",
+      "placeholder": false,
+      "placeholder_note": "Assuming answer_1 is GT when preferred label unavailable"
+    }
+  },
+  "cr": {
+    "cr": 0.875,
+    "method": "consistency",
+    "total": 8,
+    "consistent_count": 7,
+    "inconsistent_count": 1,
+    "inconsistent_samples": [
+      {
+        "sample_index": 0,
+        "round1_winner": "tie",
+        "round2_winner": "A"
+      }
+    ],
+    "metadata": {
+      "note": "CR = proportion of samples with consistent judgment across two rounds",
+      "definition": "For each sample, if round1 winner == round2 winner, CR=1; else CR=0. Final CR is the average."
+    }
+  }
+}

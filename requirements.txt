@@ -1,0 +1,18 @@
+# Core dependencies (required)
+pyyaml>=6.0
+jsonlines>=3.1.0
+numpy>=1.24.0,<2.0.0
+pandas>=2.0.0
+tqdm>=4.65.0
+loguru>=0.7.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Optional dependencies (for real model inference)
+# If not installed, the project will automatically fall back to mock mode
+openai>=1.0.0
+anthropic>=0.25.0
+google-generativeai>=0.7.0
+transformers>=4.30.0
+torch>=2.0.0
+
