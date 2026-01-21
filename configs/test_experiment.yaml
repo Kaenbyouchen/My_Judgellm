@@ -1,0 +1,30 @@
+# Test Experiment Configuration (使用 mock 模式，无需 API key)
+experiment:
+  name: "test_run"
+  seed: 42
+  output_dir: "outputs"
+
+# Data Configuration
+data:
+  type: "pairwise"
+  path: "data/dummy/pairwise.jsonl"
+  dataset_name: "dummy"
+  format: "jsonl"
+
+# Bias Injection Configuration
+bias:
+  enabled: true
+  type: "jargon_overloading"  # bias type to inject
+  inject_to: "non_gt"  # inject bias to non-GT answer
+  injector_type: "mock"  # 使用 mock 模式，无需 API key
+
+# Judge Configuration
+judge:
+  provider: "mock"  # 使用 mock 模式，无需 API key
+  model_id: "mock-judge-v1"
+  allow_fallback_mock: false
+
+# Evaluation Configuration
+evaluation:
+  compute_original_acc: true
+  compute_bias_metrics: true
