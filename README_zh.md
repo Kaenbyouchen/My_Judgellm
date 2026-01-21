@@ -14,6 +14,7 @@
 
 - ✅ **多种偏置类型**：`jargon_overloading`（术语过载）、`authority`（权威背书）、`complexity`（复杂化）
 - ✅ **多种判断后端**：Mock（离线）、OpenAI、HuggingFace、Gemini、Anthropic
+- ✅ **支持最新模型**：Gemini 3 Pro/Flash、Claude Opus 4.5、Claude Sonnet 4.5
 - ✅ **配置驱动**：所有设置通过 YAML 文件管理
 - ✅ **成对评估**：并排比较两个答案
 - ✅ **完整指标**：准确率、RR、CR 及详细输出
@@ -42,11 +43,12 @@ pip install -r requirements.txt
 
 ### 1. 设置环境变量（可选）
 
-如果使用 OpenAI 或 Gemini 模型：
+如果使用 API 模型：
 
 ```bash
 export OPENAI_API_KEY="your-openai-key"
 export GEMINI_API_KEY="your-gemini-key"
+export ANTHROPIC_API_KEY="your-anthropic-key"
 ```
 
 ### 2. 使用 Mock 模式运行（无需 API Key）
@@ -64,11 +66,11 @@ python scripts/run_experiment.py --config configs/test_experiment.yaml
 ```yaml
 judge:
   provider: "openai"  # 或 "gemini", "anthropic"
-  model_id: "gpt52"
+  model_id: "gpt52"  # 或 "gemini3_pro", "claude_opus_45" 等
 
 bias:
-  injector_type: "openai"  # 或 "mock" 用于离线模式
-  model_id: "gpt4omini"
+  injector_type: "openai"  # 或 "mock", "gemini", "anthropic"
+  model_id: "gpt4omini"  # 或 "gemini3_flash" 等
 ```
 
 然后运行：
@@ -113,6 +115,34 @@ evaluation:
 | `bias.injector_type` | 偏置注入方式 | `mock`（离线）, `openai`, `hf`, `gemini` |
 | `judge.provider` | 判断后端 | `mock`, `openai`, `hf`, `gemini`, `anthropic` |
 | `judge.model_id` | 使用的具体模型 | 见 `configs/models.yaml` |
+
+## 支持的模型
+
+框架支持多个模型提供商。可用模型在 `configs/models.yaml` 中配置：
+
+### OpenAI
+- `gpt4omini` → `gpt-4o-mini`
+- `gpt41` → `gpt-4.1`
+- `gpt52` → `gpt-5.2`
+
+### Anthropic (Claude)
+- `claude35_sonnet` → `claude-3-5-sonnet-20240620`
+- `claude_opus_45` → `claude-opus-4.5` ⭐ **最新**
+- `claude_sonnet_45` → `claude-sonnet-4.5` ⭐ **最新**
+
+### Gemini
+- `gemini15_pro` → `gemini-1.5-pro`
+- `med_gemini` → `med-gemini`
+- `gemini3_pro` → `gemini-3-pro` ⭐ **最新**
+- `gemini3_flash` → `gemini-3-flash` ⭐ **最新**
+
+### HuggingFace
+- `llama2_7b_chat` → `meta-llama/Llama-2-7b-chat-hf`
+
+### Mock（离线）
+- `mock-judge-v1` → 无需 API key 的测试模型
+
+要使用某个模型，在 `configs/experiment.yaml` 中设置 `judge.model_id` 或 `bias.model_id` 为上面列出的模型 ID。
 
 ## 项目结构
 

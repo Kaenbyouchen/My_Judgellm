@@ -14,6 +14,7 @@ This project tests whether judge models can still identify the best answer when 
 
 - ✅ **Multiple bias types**: `jargon_overloading`, `authority`, `complexity`
 - ✅ **Multiple judge backends**: Mock (offline), OpenAI, HuggingFace, Gemini, Anthropic
+- ✅ **Latest models supported**: Gemini 3 Pro/Flash, Claude Opus 4.5, Claude Sonnet 4.5
 - ✅ **Configuration-driven**: All settings in YAML files
 - ✅ **Pairwise evaluation**: Compare two answers side-by-side
 - ✅ **Comprehensive metrics**: Accuracy, RR, CR with detailed outputs
@@ -42,11 +43,12 @@ pip install -r requirements.txt
 
 ### 1. Set Environment Variables (Optional)
 
-If using OpenAI or Gemini models:
+If using API-based models:
 
 ```bash
 export OPENAI_API_KEY="your-openai-key"
 export GEMINI_API_KEY="your-gemini-key"
+export ANTHROPIC_API_KEY="your-anthropic-key"
 ```
 
 ### 2. Run with Mock Mode (No API Key Required)
@@ -64,11 +66,11 @@ Edit `configs/experiment.yaml` to use real models:
 ```yaml
 judge:
   provider: "openai"  # or "gemini", "anthropic"
-  model_id: "gpt52"
+  model_id: "gpt52"  # or "gemini3_pro", "claude_opus_45", etc.
 
 bias:
-  injector_type: "openai"  # or "mock" for offline
-  model_id: "gpt4omini"
+  injector_type: "openai"  # or "mock", "gemini", "anthropic"
+  model_id: "gpt4omini"  # or "gemini3_flash", etc.
 ```
 
 Then run:
@@ -113,6 +115,34 @@ evaluation:
 | `bias.injector_type` | How to inject bias | `mock` (offline), `openai`, `hf`, `gemini` |
 | `judge.provider` | Judge backend | `mock`, `openai`, `hf`, `gemini`, `anthropic` |
 | `judge.model_id` | Specific model to use | See `configs/models.yaml` |
+
+## Supported Models
+
+The framework supports multiple model providers. Available models are configured in `configs/models.yaml`:
+
+### OpenAI
+- `gpt4omini` → `gpt-4o-mini`
+- `gpt41` → `gpt-4.1`
+- `gpt52` → `gpt-5.2`
+
+### Anthropic (Claude)
+- `claude35_sonnet` → `claude-3-5-sonnet-20240620`
+- `claude_opus_45` → `claude-opus-4.5` ⭐ **Latest**
+- `claude_sonnet_45` → `claude-sonnet-4.5` ⭐ **Latest**
+
+### Gemini
+- `gemini15_pro` → `gemini-1.5-pro`
+- `med_gemini` → `med-gemini`
+- `gemini3_pro` → `gemini-3-pro` ⭐ **Latest**
+- `gemini3_flash` → `gemini-3-flash` ⭐ **Latest**
+
+### HuggingFace
+- `llama2_7b_chat` → `meta-llama/Llama-2-7b-chat-hf`
+
+### Mock (Offline)
+- `mock-judge-v1` → For testing without API keys
+
+To use a model, set `judge.model_id` or `bias.model_id` in `configs/experiment.yaml` to the model ID listed above.
 
 ## Project Structure
 
