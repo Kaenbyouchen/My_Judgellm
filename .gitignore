@@ -20,3 +20,33 @@ outputs/
 
 # VSCode / Cursor
 .vscode/
+
+my_note.txt
+
+# Downloaded models (keep Python source files)
+# Ignore downloaded model directories in src/models/
+src/models/google_*/
+src/models/meta-llama*/
+src/models/*/
+# But keep Python source files
+!src/models/*.py
+!src/models/__init__.py
+
+# Environment variables
+.env
+.env.local
+*.env
+
+# Large model files (safetensors, bin, etc.)
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.h5
+
+# Model cache directories
+*.cache/
+.cache/
+huggingface_cache/
+transformers_cache/

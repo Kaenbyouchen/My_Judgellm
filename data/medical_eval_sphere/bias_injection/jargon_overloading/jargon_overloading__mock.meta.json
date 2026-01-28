@@ -1,0 +1,15 @@
+{
+  "bias_type": "jargon_overloading",
+  "model_name": "mock",
+  "original_dataset": "/Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/data/medical_eval_sphere/medical_eval_sphere.jsonl",
+  "num_samples": 400,
+  "created_at": "2026-01-26T18:46:55.263261",
+  "injector_config": {
+    "injector_type": "mock",
+    "model_config": {}
+  },
+  "prompt_config": {
+    "system_prompt": null,
+    "user_template": null
+  }
+}

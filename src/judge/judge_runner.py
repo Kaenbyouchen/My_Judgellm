@@ -2,6 +2,7 @@
 Judge implementations.
 """
 import re
+import json
 from typing import Dict, Any, Optional
 from loguru import logger
 
@@ -167,7 +168,48 @@ class ModelJudge(BaseJudge):
         try:
             response = self.model.generate(user_prompt, system_prompt=system_prompt)
             
-            # Parse response to extract winner and scores
+            # Check if response indicates quota error or other blocking errors
+            if isinstance(response, str):
+                if "quota exceeded" in response.lower() or "quota" in response.lower() and "exceeded" in response.lower():
+                    logger.error(f"Quota error detected in response: {response}")
+                    allow_fallback = bool(self.model_config.get("allow_fallback_mock", False))
+                    if allow_fallback:
+                        logger.warning("Using mock judge for this judgment due to quota error (allow_fallback_mock=True)")
+                        mock_judge = MockJudge()
+                        return mock_judge.judge_pairwise(question, answer_A, answer_B)
+                    else:
+                        # Return invalid result for quota errors to prevent metric pollution
+                        logger.warning("Quota error but allow_fallback_mock=False. Returning invalid result (will be excluded from metrics).")
+                        return JudgeResult(
+                            winner="tie",
+                            score_A=0.0,
+                            score_B=0.0,
+                            explanation=f"Quota error: {response}",
+                            raw={"model_response": response, "error": "quota_exceeded"},
+                            is_valid=False  # Mark as invalid to exclude from metrics
+                        )
+                elif "timeout" in response.lower() or "blocked" in response.lower():
+                    logger.warning(f"Error response detected: {response}")
+                    allow_fallback = bool(self.model_config.get("allow_fallback_mock", False))
+                    if allow_fallback:
+                        logger.warning("Using mock judge for this judgment due to error response (allow_fallback_mock=True)")
+                        mock_judge = MockJudge()
+                        return mock_judge.judge_pairwise(question, answer_A, answer_B)
+                    else:
+                        # Return invalid result for timeout/blocked errors to prevent metric pollution
+                        # This will be excluded from final metrics calculation
+                        error_type = "safety_filter" if "safety filter" in response.lower() else "timeout_or_blocked"
+                        logger.warning(f"Error response but allow_fallback_mock=False. Returning invalid result (will be excluded from metrics). Error: {error_type}")
+                        return JudgeResult(
+                            winner="tie",
+                            score_A=0.0,
+                            score_B=0.0,
+                            explanation=f"Error: {response}",
+                            raw={"model_response": response, "error": error_type},
+                            is_valid=False  # Mark as invalid to exclude from metrics
+                        )
+            
+            # Parse response to extract winner, scores, and explanation
             winner, score_A, score_B, explanation = self._parse_response(response, answer_A, answer_B)
             
             return JudgeResult(
@@ -179,16 +221,31 @@ class ModelJudge(BaseJudge):
             )
         except Exception as e:
             logger.error(f"Error in model judgment: {e}")
+            # Check if it's a quota error
+            error_str = str(e)
+            is_quota_error = "429" in error_str or ("ResourceExhausted" in type(e).__name__ and "quota" in error_str.lower())
+            
             allow_fallback = bool(self.model_config.get("allow_fallback_mock", False))
             if allow_fallback:
                 logger.warning("Using mock judge for this judgment due to runtime error (allow_fallback_mock=True)")
                 mock_judge = MockJudge()
                 return mock_judge.judge_pairwise(question, answer_A, answer_B)
+            elif is_quota_error:
+                # For quota errors, return tie result even if allow_fallback_mock is False
+                logger.warning("Quota error but allow_fallback_mock=False. Returning tie result to allow continuation.")
+                return JudgeResult(
+                    winner="tie",
+                    score_A=0.0,
+                    score_B=0.0,
+                    explanation=f"Quota error: {error_str}",
+                    raw={"error": "quota_exceeded", "exception": str(e)}
+                )
             raise
     
     def _parse_response(self, response: str, answer_A: str, answer_B: str) -> tuple[str, Optional[float], Optional[float], str]:
         """
         Parse model response to extract judgment.
+        Supports both JSON format and free-text format for backward compatibility.
         
         Args:
             response: Model response text
@@ -198,35 +255,86 @@ class ModelJudge(BaseJudge):
         Returns:
             Tuple of (winner, score_A, score_B, explanation)
         """
-        response_lower = response.lower()
-        
-        # Try to extract winner
-        winner = "tie"
-        if "answer a" in response_lower or "answer_a" in response_lower or "a is better" in response_lower:
-            winner = "A"
-        elif "answer b" in response_lower or "answer_b" in response_lower or "b is better" in response_lower:
-            winner = "B"
-        elif "tie" in response_lower or "equal" in response_lower or "both" in response_lower:
+        # Try to parse as JSON first (new format)
+        try:
+            # Extract JSON from response (may be wrapped in markdown code blocks)
+            json_text = response.strip()
+            # Remove markdown code blocks if present
+            if json_text.startswith("```"):
+                # Extract content between ```json and ```
+                json_match = re.search(r'```(?:json)?\s*(.*?)\s*```', json_text, re.DOTALL)
+                if json_match:
+                    json_text = json_match.group(1).strip()
+                else:
+                    # Try to extract JSON from between first { and last }
+                    json_match = re.search(r'\{.*\}', json_text, re.DOTALL)
+                    if json_match:
+                        json_text = json_match.group(0)
+            
+            # Parse JSON
+            parsed = json.loads(json_text)
+            
+            winner = parsed.get("winner", "tie").upper()
+            if winner not in ["A", "B", "TIE"]:
+                winner = "tie"
+            elif winner == "TIE":
+                winner = "tie"
+            
+            explanation = parsed.get("explanation", "")
+            
+            # Scores are not in new format, set to None
+            score_A = None
+            score_B = None
+            
+            logger.debug(f"Successfully parsed JSON response: winner={winner}")
+            return winner, score_A, score_B, explanation
+            
+        except (json.JSONDecodeError, AttributeError, KeyError) as e:
+            # Fall back to text-based parsing (supports both new format and old format)
+            logger.debug(f"Failed to parse as JSON, falling back to text parsing: {e}")
+            response_lower = response.lower()
+            
+            # Try new format first: "Explanation:" and "[[A]]" or "[[B]]"
             winner = "tie"
-        
-        # Try to extract scores
-        score_A = None
-        score_B = None
-        
-        # Look for numeric scores
-        score_pattern = r'score[_\s]*(?:a|1)[:\s]*(\d+\.?\d*)'
-        match = re.search(score_pattern, response_lower)
-        if match:
-            score_A = float(match.group(1))
-        
-        score_pattern = r'score[_\s]*(?:b|2)[:\s]*(\d+\.?\d*)'
-        match = re.search(score_pattern, response_lower)
-        if match:
-            score_B = float(match.group(1))
-        
-        explanation = response[:500]  # Truncate if too long
-        
-        return winner, score_A, score_B, explanation
+            explanation = ""
+            
+            # Extract explanation from "Explanation:" line
+            explanation_match = re.search(r'explanation:\s*(.+?)(?:\n|verdict:|$)', response, re.IGNORECASE | re.DOTALL)
+            if explanation_match:
+                explanation = explanation_match.group(1).strip()
+            
+            # Extract verdict from "[[A]]" or "[[B]]" format
+            verdict_match = re.search(r'\[\[([AB])\]\]', response, re.IGNORECASE)
+            if verdict_match:
+                winner = verdict_match.group(1).upper()
+            else:
+                # Fall back to old format parsing for backward compatibility
+                if "answer a" in response_lower or "answer_a" in response_lower or "a is better" in response_lower:
+                    winner = "A"
+                elif "answer b" in response_lower or "answer_b" in response_lower or "b is better" in response_lower:
+                    winner = "B"
+                elif "tie" in response_lower or "equal" in response_lower or "both" in response_lower:
+                    winner = "tie"
+                
+                # If no explanation extracted, use first 500 chars as fallback
+                if not explanation:
+                    explanation = response[:500].strip()
+            
+            # Try to extract scores (for old format compatibility)
+            score_A = None
+            score_B = None
+            
+            score_pattern = r'score[_\s]*(?:a|1)[:\s]*(\d+\.?\d*)'
+            match = re.search(score_pattern, response_lower)
+            if match:
+                score_A = float(match.group(1))
+            
+            score_pattern = r'score[_\s]*(?:b|2)[:\s]*(\d+\.?\d*)'
+            match = re.search(score_pattern, response_lower)
+            if match:
+                score_B = float(match.group(1))
+            
+            return winner, score_A, score_B, explanation
     
     def is_available(self) -> bool:
         """Check if judge model is available."""
@@ -244,7 +352,7 @@ def create_judge(
     Create a judge instance.
     
     Args:
-        judge_type: Type of judge ("mock", "openai", "hf")
+        judge_type: Type of judge ("mock", "openai", "hf", "gemini", "anthropic")
         model_name: Name of the model
         config: Judge configuration
         
@@ -253,7 +361,7 @@ def create_judge(
     """
     if judge_type == "mock":
         return MockJudge(model_name=model_name, config=config)
-    elif judge_type in ["openai", "hf"]:
+    elif judge_type in ["openai", "hf", "gemini", "anthropic"]:
         return ModelJudge(
             model_type=judge_type,
             model_name=model_name,
@@ -262,5 +370,5 @@ def create_judge(
             user_template=user_template,
         )
     else:
-        raise ValueError(f"Unknown judge type: {judge_type}. Available: mock, openai, hf")
+        raise ValueError(f"Unknown judge type: {judge_type}. Available: mock, openai, hf, gemini, anthropic")
 

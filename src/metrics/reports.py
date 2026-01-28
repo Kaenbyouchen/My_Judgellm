@@ -2,6 +2,7 @@
 Report generation for evaluation results.
 """
 import json
+import os
 import pandas as pd
 from pathlib import Path
 from typing import Dict, Any, List
@@ -80,23 +81,51 @@ def save_metrics_csv(metrics: Dict[str, Any], output_path: str):
     logger.info(f"Metrics summary saved to {output_path}")
 
 
-def save_judgments_jsonl(judgments: List[Dict[str, Any]], output_path: str):
+def save_judgment_jsonl_single(judgment: Dict[str, Any], output_path: str):
     """
-    Save judgments to JSONL file.
+    Append a single judgment to JSONL file (for incremental saving during evaluation).
+    
+    Args:
+        judgment: Single judgment dictionary
+        output_path: Path to save JSONL file
+    """
+    try:
+        output_path = Path(output_path)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        with open(str(output_path), 'a', encoding='utf-8') as f:
+            formatted_json = json.dumps(judgment, indent=2, ensure_ascii=False)
+            f.write(formatted_json)
+            f.write('\n')
+            f.flush()  # Ensure immediate write to disk
+            os.fsync(f.fileno())  # Force write to disk
+    except Exception as e:
+        logger.error(f"Failed to save judgment incrementally to {output_path}: {e}")
+        raise
+
+
+def save_judgments_jsonl(judgments: List[Dict[str, Any]], output_path: str, append: bool = False):
+    """
+    Save judgments to JSONL file with formatted JSON (each key on a new line).
     
     Args:
         judgments: List of judgment dictionaries
         output_path: Path to save JSONL file
+        append: If True, append to existing file; if False, overwrite
     """
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     
-    import jsonlines
-    with jsonlines.open(str(output_path), mode='w') as writer:
+    mode = 'a' if append else 'w'
+    with open(str(output_path), mode, encoding='utf-8') as f:
         for judgment in judgments:
-            writer.write(judgment)
+            # Format each JSON object with indentation (2 spaces)
+            formatted_json = json.dumps(judgment, indent=2, ensure_ascii=False)
+            f.write(formatted_json)
+            f.write('\n')  # Add newline after each JSON object
     
-    logger.info(f"Judgments saved to {output_path} ({len(judgments)} judgments)")
+    action = "appended" if append else "saved"
+    logger.info(f"Judgments {action} to {output_path} ({len(judgments)} judgments)")
 
 
 def print_metrics_summary(metrics: Dict[str, Any]):
@@ -117,6 +146,10 @@ def print_metrics_summary(metrics: Dict[str, Any]):
         print(f"  Proxy: {acc.get('proxy', False)}")
         print(f"  Has GT: {acc.get('has_gt', False)}")
         print(f"  Total: {acc.get('total', 0)}")
+        if acc.get('valid_count') is not None:
+            print(f"  Valid samples: {acc.get('valid_count', 0)}")
+        if acc.get('invalid_count', 0) > 0:
+            print(f"  ⚠️  Invalid samples excluded: {acc.get('invalid_count', 0)} (safety filter, quota errors, etc.)")
         if acc.get('metadata', {}).get('note'):
             print(f"  Note: {acc['metadata']['note']}")
     
@@ -124,8 +157,12 @@ def print_metrics_summary(metrics: Dict[str, Any]):
         rr = metrics["rr"]
         print(f"\nRobustness Rate (RR):")
         print(f"  Value: {rr.get('rr', 0.0):.4f}")
-        print(f"  GT Wins: {rr.get('gt_wins', 0)}/{rr.get('total', 0)}")
+        print(f"  GT Wins: {rr.get('gt_wins', 0)}/{rr.get('valid_count', rr.get('total', 0))}")
         print(f"  Has GT Labels: {rr.get('has_gt_labels', False)}")
+        if rr.get('valid_count') is not None:
+            print(f"  Valid samples: {rr.get('valid_count', 0)}")
+        if rr.get('invalid_count', 0) > 0:
+            print(f"  ⚠️  Invalid samples excluded: {rr.get('invalid_count', 0)} (safety filter, quota errors, etc.)")
         if rr.get('metadata', {}).get('note'):
             print(f"  Note: {rr['metadata']['note']}")
         if rr.get('metadata', {}).get('placeholder'):
@@ -137,6 +174,10 @@ def print_metrics_summary(metrics: Dict[str, Any]):
         print(f"  Value: {cr.get('cr', 0.0):.4f}")
         print(f"  Method: {cr.get('method', 'unknown')}")
         print(f"  Total: {cr.get('total', 0)}")
+        if cr.get('valid_count') is not None:
+            print(f"  Valid pairs: {cr.get('valid_count', 0)}")
+        if cr.get('invalid_count', 0) > 0:
+            print(f"  ⚠️  Invalid pairs excluded: {cr.get('invalid_count', 0)} (safety filter, quota errors, etc.)")
         if cr.get('metadata', {}).get('note'):
             print(f"  Note: {cr['metadata']['note']}")
         if cr.get('metadata', {}).get('todo'):

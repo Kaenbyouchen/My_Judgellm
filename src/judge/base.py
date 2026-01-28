@@ -14,7 +14,8 @@ class JudgeResult:
         score_A: Optional[float] = None,
         score_B: Optional[float] = None,
         explanation: Optional[str] = None,
-        raw: Optional[Dict[str, Any]] = None
+        raw: Optional[Dict[str, Any]] = None,
+        is_valid: bool = True
     ):
         """
         Initialize judge result.
@@ -25,12 +26,14 @@ class JudgeResult:
             score_B: Optional score for answer B
             explanation: Optional explanation
             raw: Raw response from judge
+            is_valid: Whether this judgment is valid (False for safety filter blocks, quota errors, etc.)
         """
         self.winner = winner
         self.score_A = score_A
         self.score_B = score_B
         self.explanation = explanation
         self.raw = raw or {}
+        self.is_valid = is_valid
     
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary."""
@@ -39,7 +42,8 @@ class JudgeResult:
             "score_A": self.score_A,
             "score_B": self.score_B,
             "explanation": self.explanation,
-            "raw": self.raw
+            "raw": self.raw,
+            "is_valid": self.is_valid
         }
     
     @classmethod
@@ -50,7 +54,8 @@ class JudgeResult:
             score_A=data.get("score_A"),
             score_B=data.get("score_B"),
             explanation=data.get("explanation"),
-            raw=data.get("raw", {})
+            raw=data.get("raw", {}),
+            is_valid=data.get("is_valid", True)
         )
 
 

@@ -2,6 +2,7 @@
 HuggingFace model client (optional dependency).
 """
 import os
+from pathlib import Path
 from typing import Optional, Dict, Any
 from loguru import logger
 
@@ -16,6 +17,19 @@ class HuggingFaceModel(BaseModel):
         self.device = config.get("device", "cpu") if config else "cpu"
         self.dtype = config.get("dtype", "float32") if config else "float32"
         self.max_length = config.get("max_length", 2048) if config else 2048
+        self.use_modelscope = config.get("use_modelscope", False) if config else False
+        
+        # Local model cache directory (default: src/models/)
+        self.local_cache_dir = config.get("local_cache_dir") if config else None
+        if self.local_cache_dir:
+            cache_path = Path(self.local_cache_dir)
+            # If relative path, resolve relative to project root
+            if not cache_path.is_absolute():
+                # Get project root (assuming this file is in src/models/)
+                project_root = Path(__file__).parent.parent.parent
+                cache_path = project_root / cache_path
+            self.local_cache_dir = cache_path
+            self.local_cache_dir.mkdir(parents=True, exist_ok=True)
         
         # Try to import transformers, but don't fail if not available
         self._transformers = None
@@ -36,6 +50,8 @@ class HuggingFaceModel(BaseModel):
             
             # Load model (lazy loading - only when first used)
             logger.info(f"HuggingFace client initialized for {model_name} (device: {self.device})")
+            if self.local_cache_dir:
+                logger.info(f"Local cache directory: {self.local_cache_dir}")
         except ImportError:
             logger.warning("transformers/torch not installed. HuggingFace client will not work.")
     
@@ -48,13 +64,78 @@ class HuggingFaceModel(BaseModel):
             raise RuntimeError("transformers package not installed")
         
         try:
-            logger.info(f"Loading HuggingFace model: {self.model_name}")
-            self._tokenizer = self._transformers.AutoTokenizer.from_pretrained(self.model_name)
-            self._model = self._transformers.AutoModelForCausalLM.from_pretrained(
-                self.model_name,
-                torch_dtype=getattr(self._torch, self.dtype) if hasattr(self._torch, self.dtype) else self._torch.float32,
-                device_map=self.device if self.device != "cpu" else None
-            )
+            # Determine if we should use local cache
+            local_model_path = None
+            if self.local_cache_dir:
+                # Create a safe directory name from model_name (replace / with _)
+                safe_model_name = self.model_name.replace("/", "_")
+                local_model_path = self.local_cache_dir / safe_model_name
+                
+                # Check if model exists locally
+                if local_model_path.exists() and any(local_model_path.iterdir()):
+                    logger.info(f"Found local model at {local_model_path}, using cached version")
+                    model_path = str(local_model_path)
+                else:
+                    logger.info(f"Model not found locally. Will download to {local_model_path}")
+                    model_path = self.model_name
+            else:
+                model_path = self.model_name
+            
+            logger.info(f"Loading HuggingFace model: {model_path}")
+            
+            # Load tokenizer and model
+            if local_model_path and local_model_path.exists() and any(local_model_path.iterdir()):
+                # Load from local cache
+                self._tokenizer = self._transformers.AutoTokenizer.from_pretrained(str(local_model_path))
+                self._model = self._transformers.AutoModelForCausalLM.from_pretrained(
+                    str(local_model_path),
+                    torch_dtype=getattr(self._torch, self.dtype) if hasattr(self._torch, self.dtype) else self._torch.float32,
+                    device_map=self.device if self.device != "cpu" else None
+                )
+            else:
+                # Download from HuggingFace or ModelScope
+                # Check if model is from ModelScope (modelscope.cn) or use ModelScope mirror
+                use_modelscope = config.get("use_modelscope", False) if config else False
+                if use_modelscope or "modelscope" in self.model_name.lower():
+                    logger.info(f"Downloading model {self.model_name} from ModelScope")
+                    # Try to use modelscope library if available
+                    try:
+                        from modelscope import snapshot_download
+                        model_dir = snapshot_download(self.model_name, cache_dir=str(self.local_cache_dir.parent) if self.local_cache_dir else None)
+                        model_path = model_dir
+                        logger.info(f"Downloaded from ModelScope to {model_path}")
+                    except ImportError:
+                        logger.warning("modelscope library not installed. Trying transformers with ModelScope mirror...")
+                        # Fallback: use transformers with ModelScope mirror via environment variable
+                        import os
+                        original_endpoint = os.environ.get("HF_ENDPOINT")
+                        os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"  # Use HuggingFace mirror that supports ModelScope
+                        try:
+                            model_path = self.model_name
+                        finally:
+                            if original_endpoint:
+                                os.environ["HF_ENDPOINT"] = original_endpoint
+                            elif "HF_ENDPOINT" in os.environ:
+                                del os.environ["HF_ENDPOINT"]
+                else:
+                    logger.info(f"Downloading model {self.model_name} from HuggingFace")
+                    model_path = self.model_name
+                
+                self._tokenizer = self._transformers.AutoTokenizer.from_pretrained(model_path)
+                self._model = self._transformers.AutoModelForCausalLM.from_pretrained(
+                    model_path,
+                    torch_dtype=getattr(self._torch, self.dtype) if hasattr(self._torch, self.dtype) else self._torch.float32,
+                    device_map=self.device if self.device != "cpu" else None
+                )
+                
+                # Save to local cache if configured
+                if local_model_path:
+                    logger.info(f"Saving model to {local_model_path}")
+                    local_model_path.mkdir(parents=True, exist_ok=True)
+                    self._tokenizer.save_pretrained(str(local_model_path))
+                    self._model.save_pretrained(str(local_model_path))
+                    logger.info(f"Model saved to {local_model_path}")
+            
             if self.device == "cpu":
                 self._model = self._model.to(self.device)
             logger.info("Model loaded successfully")

@@ -27,14 +27,43 @@ def compute_accuracy_original(
     if len(samples) != len(judgments):
         raise ValueError(f"Sample count mismatch: {len(samples)} samples vs {len(judgments)} judgments")
     
+    # Filter out invalid judgments (e.g., safety filter blocks, quota errors)
+    valid_pairs = [(s, j) for s, j in zip(samples, judgments) if j.is_valid]
+    invalid_count = len(samples) - len(valid_pairs)
+    
+    if invalid_count > 0:
+        logger.warning(f"Excluding {invalid_count} invalid judgments from accuracy calculation (safety filter blocks, quota errors, etc.)")
+    
+    if not valid_pairs:
+        return {
+            "accuracy": 0.0,
+            "proxy": use_proxy,
+            "has_gt": False,
+            "gt_count": 0,
+            "total": len(samples),
+            "valid_count": 0,
+            "invalid_count": invalid_count,
+            "answer_1_wins": 0,
+            "answer_2_wins": 0,
+            "ties": 0,
+            "metadata": {
+                "note": "No valid judgments available (all excluded due to errors)",
+                "invalid_reasons": "safety_filter, quota_error, timeout"
+            }
+        }
+    
+    valid_samples, valid_judgments = zip(*valid_pairs)
+    valid_samples = list(valid_samples)
+    valid_judgments = list(valid_judgments)
+    
     # Check if we have GT labels
-    has_gt = any(s.preferred is not None for s in samples)
-    gt_count = sum(1 for s in samples if s.preferred is not None)
+    has_gt = any(s.preferred is not None for s in valid_samples)
+    gt_count = sum(1 for s in valid_samples if s.preferred is not None)
     
     if not has_gt or use_proxy:
         # Proxy: judge选择answer_1的比例
-        answer_1_wins = sum(1 for j in judgments if j.winner == "A")
-        proxy_ratio = answer_1_wins / len(judgments) if judgments else 0.0
+        answer_1_wins = sum(1 for j in valid_judgments if j.winner == "A")
+        proxy_ratio = answer_1_wins / len(valid_judgments) if valid_judgments else 0.0
         
         return {
             "accuracy": proxy_ratio,
@@ -42,24 +71,27 @@ def compute_accuracy_original(
             "has_gt": has_gt,
             "gt_count": gt_count,
             "total": len(samples),
+            "valid_count": len(valid_judgments),
+            "invalid_count": invalid_count,
             "answer_1_wins": answer_1_wins,
-            "answer_2_wins": sum(1 for j in judgments if j.winner == "B"),
-            "ties": sum(1 for j in judgments if j.winner == "tie"),
+            "answer_2_wins": sum(1 for j in valid_judgments if j.winner == "B"),
+            "ties": sum(1 for j in valid_judgments if j.winner == "tie"),
             "metadata": {
                 "note": "Using proxy metric: proportion of judge selecting answer_1",
-                "gt_available": has_gt
+                "gt_available": has_gt,
+                "invalid_excluded": True
             }
         }
     else:
         # Real accuracy: judge winner matches preferred
         correct = 0
-        for sample, judgment in zip(samples, judgments):
+        for sample, judgment in zip(valid_samples, valid_judgments):
             if sample.preferred == "1" and judgment.winner == "A":
                 correct += 1
             elif sample.preferred == "2" and judgment.winner == "B":
                 correct += 1
         
-        accuracy = correct / len(samples) if samples else 0.0
+        accuracy = correct / len(valid_samples) if valid_samples else 0.0
         
         return {
             "accuracy": accuracy,
@@ -67,12 +99,15 @@ def compute_accuracy_original(
             "has_gt": True,
             "gt_count": gt_count,
             "total": len(samples),
+            "valid_count": len(valid_judgments),
+            "invalid_count": invalid_count,
             "correct": correct,
-            "answer_1_wins": sum(1 for j in judgments if j.winner == "A"),
-            "answer_2_wins": sum(1 for j in judgments if j.winner == "B"),
-            "ties": sum(1 for j in judgments if j.winner == "tie"),
+            "answer_1_wins": sum(1 for j in valid_judgments if j.winner == "A"),
+            "answer_2_wins": sum(1 for j in valid_judgments if j.winner == "B"),
+            "ties": sum(1 for j in valid_judgments if j.winner == "tie"),
             "metadata": {
-                "note": "Accuracy based on judge winner matching preferred label"
+                "note": "Accuracy based on judge winner matching preferred label",
+                "invalid_excluded": True
             }
         }
 
@@ -96,12 +131,41 @@ def compute_rr(
     if len(samples) != len(judgments):
         raise ValueError(f"Sample count mismatch: {len(samples)} samples vs {len(judgments)} judgments")
     
+    # Filter out invalid judgments
+    valid_pairs = [(s, j) for s, j in zip(samples, judgments) if j.is_valid]
+    invalid_count = len(samples) - len(valid_pairs)
+    
+    if invalid_count > 0:
+        logger.warning(f"Excluding {invalid_count} invalid judgments from RR calculation (safety filter blocks, quota errors, etc.)")
+    
+    if not valid_pairs:
+        return {
+            "rr": 0.0,
+            "gt_wins": 0,
+            "total": len(samples),
+            "valid_count": 0,
+            "invalid_count": invalid_count,
+            "has_gt_labels": False,
+            "gt_wins_against_biased": 0,
+            "biased_wins": 0,
+            "ties": 0,
+            "metadata": {
+                "note": "No valid judgments available (all excluded due to errors)",
+                "invalid_reasons": "safety_filter, quota_error, timeout"
+            }
+        }
+    
+    valid_samples, valid_judgments = zip(*valid_pairs)
+    valid_samples = list(valid_samples)
+    valid_judgments = list(valid_judgments)
+    
     # Determine GT for each sample
     gt_wins = 0
     total = len(samples)
-    has_gt_labels = any(s.preferred is not None for s in samples)
+    valid_total = len(valid_samples)
+    has_gt_labels = any(s.preferred is not None for s in valid_samples)
     
-    for sample, judgment in zip(samples, judgments):
+    for sample, judgment in zip(valid_samples, valid_judgments):
         # Determine which answer is GT
         if sample.preferred == "1":
             gt_key = "A"  # answer_1 is GT, so it's answer A in judgment
@@ -116,20 +180,23 @@ def compute_rr(
         if judgment.winner == gt_key:
             gt_wins += 1
     
-    rr = gt_wins / total if total > 0 else 0.0
+    rr = gt_wins / valid_total if valid_total > 0 else 0.0
     
     return {
         "rr": rr,
         "gt_wins": gt_wins,
         "total": total,
+        "valid_count": valid_total,
+        "invalid_count": invalid_count,
         "has_gt_labels": has_gt_labels,
         "gt_wins_against_biased": gt_wins,
-        "biased_wins": sum(1 for j in judgments if j.winner == "B"),
-        "ties": sum(1 for j in judgments if j.winner == "tie"),
+        "biased_wins": sum(1 for j in valid_judgments if j.winner == "B"),
+        "ties": sum(1 for j in valid_judgments if j.winner == "tie"),
         "metadata": {
             "note": "RR = proportion of judge selecting GT answer against biased answer",
             "placeholder": not has_gt_labels,
-            "placeholder_note": "Assuming answer_1 is GT when preferred label unavailable"
+            "placeholder_note": "Assuming answer_1 is GT when preferred label unavailable",
+            "invalid_excluded": True
         }
     }
 
@@ -165,15 +232,42 @@ def compute_cr(
             "cr": 0.0,
             "method": "consistency",
             "total": 0,
+            "valid_count": 0,
+            "invalid_count": 0,
             "consistent_count": 0,
             "metadata": {"note": "No judgments available"}
         }
+    
+    # Filter out invalid judgments (at least one round must be valid)
+    valid_pairs = [(j1, j2) for j1, j2 in zip(judgments_round1, judgments_round2) if j1.is_valid and j2.is_valid]
+    invalid_count = total - len(valid_pairs)
+    
+    if invalid_count > 0:
+        logger.warning(f"Excluding {invalid_count} invalid judgment pairs from CR calculation (safety filter blocks, quota errors, etc.)")
+    
+    if not valid_pairs:
+        return {
+            "cr": 0.0,
+            "method": "consistency",
+            "total": total,
+            "valid_count": 0,
+            "invalid_count": invalid_count,
+            "consistent_count": 0,
+            "metadata": {
+                "note": "No valid judgment pairs available (all excluded due to errors)",
+                "invalid_reasons": "safety_filter, quota_error, timeout"
+            }
+        }
+    
+    valid_round1, valid_round2 = zip(*valid_pairs)
+    valid_round1 = list(valid_round1)
+    valid_round2 = list(valid_round2)
     
     # Compare winners from two rounds
     consistent_count = 0
     inconsistent_samples = []
     
-    for idx, (j1, j2) in enumerate(zip(judgments_round1, judgments_round2)):
+    for idx, (j1, j2) in enumerate(zip(valid_round1, valid_round2)):
         # Compare winners: same winner means consistent
         if j1.winner == j2.winner:
             consistent_count += 1
@@ -184,18 +278,22 @@ def compute_cr(
                 "round2_winner": j2.winner
             })
     
-    cr = consistent_count / total if total > 0 else 0.0
+    valid_total = len(valid_pairs)
+    cr = consistent_count / valid_total if valid_total > 0 else 0.0
     
     return {
         "cr": cr,
         "method": "consistency",
         "total": total,
+        "valid_count": valid_total,
+        "invalid_count": invalid_count,
         "consistent_count": consistent_count,
-        "inconsistent_count": total - consistent_count,
+        "inconsistent_count": valid_total - consistent_count,
         "inconsistent_samples": inconsistent_samples[:10],  # Limit to first 10 for brevity
         "metadata": {
             "note": "CR = proportion of samples with consistent judgment across two rounds",
-            "definition": "For each sample, if round1 winner == round2 winner, CR=1; else CR=0. Final CR is the average."
+            "definition": "For each sample, if round1 winner == round2 winner, CR=1; else CR=0. Final CR is the average.",
+            "invalid_excluded": True
         }
     }
 

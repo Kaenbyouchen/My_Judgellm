@@ -31,12 +31,46 @@ class ModelRegistry:
     _models_config: Dict[str, Any] = {}
 
     _RESERVED_POOL_KEYS = {"defaults"}
-    _MODEL_REF_KEYS = {"provider", "type", "model_id", "model_name"}
+    _MODEL_REF_KEYS = {"provider", "type", "model_id", "model_name", "model"}
 
     @classmethod
     def set_models_config(cls, models_config: Optional[Dict[str, Any]]) -> None:
         """Set the model pool config (usually loaded from configs/models.yaml)."""
         cls._models_config = models_config or {}
+    
+    @classmethod
+    def infer_provider_from_model_id(cls, model_id: str) -> Optional[str]:
+        """
+        Infer provider from model_id by searching through the model pool.
+        
+        Args:
+            model_id: Model identifier (e.g., "gpt4omini", "gemini3_pro")
+            
+        Returns:
+            Provider name if found, None otherwise
+        """
+        if not model_id or not cls._models_config:
+            return None
+        
+        # Search through all providers
+        for provider, provider_cfg in cls._models_config.items():
+            if not isinstance(provider_cfg, dict):
+                continue
+            
+            # Check if model_id exists in this provider (excluding reserved keys)
+            non_reserved_items = {k: v for k, v in provider_cfg.items() if k not in cls._RESERVED_POOL_KEYS}
+            is_pool = any(isinstance(v, dict) for v in non_reserved_items.values())
+            
+            if is_pool:
+                # Model pool format: check if model_id exists
+                if model_id in provider_cfg and model_id not in cls._RESERVED_POOL_KEYS:
+                    return provider
+            else:
+                # Flat format: model_id might be the actual model name, but we can't reliably infer
+                # Skip for now - user should specify provider explicitly
+                pass
+        
+        return None
 
     @classmethod
     def resolve_model_config(

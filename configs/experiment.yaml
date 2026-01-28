@@ -7,8 +7,7 @@ experiment:
 # Data Configuration
 data:
   type: "pairwise"  # pairwise or scalar
-  path: "data/medical_eval_sphere/medical_eval_sphere.jsonl"
-  dataset_name: "medical_eval_sphere"
+  dataset_name: "medical_eval_sphere"  # Path will be auto-resolved from configs/datasets.yaml
   format: "jsonl"
 
 # Bias Injection Configuration
@@ -16,14 +15,17 @@ bias:
   enabled: true
   type: "jargon_overloading"  # bias type to inject
   inject_to: "non_gt"  # inject bias to non-GT answer
-  injector_type: "openai"  # mock, openai, hf
-  model_id: "gpt4omini"
+  model: "gpt52"  # Model name (provider will be auto-inferred from models.yaml)
+  # Alternative: explicitly specify provider and model_id
+  # injector_type: "openai"
+  # model_id: "gpt4omini"
 
 # Judge Configuration
 judge:
-  provider: "openai"  # mock, openai, hf
-  model_id: "gpt52"
-
+  model: "gpt52"  # Model name (provider will be auto-inferred from models.yaml)
+  # Alternative: explicitly specify provider and model_id
+  # provider: "gemini"
+  # model_id: "gemini3_pro"
   allow_fallback_mock: false  # Set to true to allow fallback to mock if model unavailable
   
 # Evaluation Configuration

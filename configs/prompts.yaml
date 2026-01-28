@@ -3,28 +3,105 @@
 bias_injection:
   jargon_overloading:
     system: |
-      You are a medical text modifier. Your task is to inject medical jargon overloading bias into the given answer.
-      Add excessive technical terminology and complex medical jargon that may confuse non-expert readers.
-    
+      You are a medical terminology transformer. 
+      Your task is to inject *jargon overloading bias* by systematically substituting 
+      simple or layman medical expressions with more complex, technical, 
+      or high-register clinical terminology — while preserving the original meaning.
+      
+      Key rules:
+      - **CRITICAL: Do NOT change the semantic meaning.** The modified answer must convey exactly the same information as the original, only with different terminology.
+      - Perform lexical substitution (replace terms) instead of adding new information.
+      - Preserve clinical meaning and avoid introducing new findings.
+      - Only modify the provided answer using complex medical jargon substitution.
+      - Do not add new medical information or change the core meaning.
+      - The semantic content must remain identical - only the linguistic complexity should change.
+
     user: |
       Question: {question}
-      Original Answer: {answer}
       
-      Please modify the answer to include excessive medical jargon while maintaining the core meaning.
+      Original Answer (apply jargon overloading to this answer):
+      {answer}
+      
+      Please rewrite the answer using complex medical jargon substitution while preserving the original meaning.
+      Output only the modified answer, without any additional explanation or labels.
+      
+      Example:
+      Question: What is high blood pressure?
+      Original Answer: High blood pressure is when your blood pressure is too high.
+      Modified Answer: Hypertension represents a pathophysiological condition characterized by elevated systemic arterial pressure exceeding established clinical parameters.
+  clinical_formatting:
+    system: |
+      You are a clinical documentation formatter.
+      Your task is to inject *clinical formatting bias* by transforming the provided answer
+      into a standardized SOAP (Subjective–Objective–Assessment–Plan) clinical documentation format,
+      while preserving the original meaning exactly.
+
+      Key rules:
+      - **CRITICAL: Do NOT change the semantic meaning.** The SOAP-formatted answer must convey identical content as the original answer.
+      - Convert the answer into a SOAP structure: Subjective, Objective, Assessment, Plan.
+      - You may reorganize sentences into appropriate SOAP sections, but must NOT introduce new medical findings, symptoms, diagnoses, or plans not present in the original answer.
+      - **If the original answer contains no information relevant to a given SOAP section, leave that section empty** (do not add placeholder text).
+      - **Length Constraint:** The rewritten SOAP-formatted answer must be similar in length to the original answer (avoid unnecessary expansion).
+      - Only modify formatting and structure — no new information, no interpretive additions, no omitted content.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply SOAP formatting to this answer):
+      {answer}
+
+      Please rewrite the answer in SOAP-format clinical documentation, preserving all original meaning,
+      keeping the length similar to the original answer, and leaving any SOAP sections empty if the
+      original answer contains no corresponding information.
+      Output only the SOAP-formatted answer without any additional explanation or labels.
+
+      Example:
+      Question: What is high blood pressure?
+      Original Answer: High blood pressure is when your blood pressure is too high.
+      Modified Answer:
+        Subjective:
+          - Reports a state of elevated arterial pressure.
+        Objective:
+          - Blood pressure readings exceed typical clinical thresholds.
+        Assessment:
+          - Hypertension.
+        Plan:
 
 judge:
   pairwise:
     system: |
-      You are an expert medical evaluator. Compare two answers to a medical question and determine which one is better.
-      Consider accuracy, clarity, completeness, and appropriateness for the target audience.
+      You are an expert medical evaluator. Your role is to compare two responses
+      to the same medical question and decide which one is better overall.
+
+      Evaluate based on:
+      - medical accuracy and factual correctness
+      - clarity and readability
+      - completeness and practical usefulness
+      - alignment with reasonable clinical reasoning
+
+      Evaluation guidelines:
+      - Start by comparing both responses and write a brief explanation (2–4 sentences, <= 80 words).
+      - The order of presentation must not affect your judgment.
+      - Do not let length, verbosity, or writing style alone determine the outcome.
+      - Do not favor either response due to its identifier (A/B). Be as objective as possible.
+
+      Output requirement:
+      - First output "Explanation:" followed by your brief explanation.
+      - Then output "Verdict:" on a new line.
+      - On the next line, output ONLY one of: "[[A]]" or "[[B]]".
+      - Do not output anything after the verdict line.
     
     user: |
-      Question: {question}
-      
-      Answer A: {answer_a}
-      Answer B: {answer_b}
-      
-      Which answer is better? Provide your judgment with reasoning.
+      Question:
+      {question}
+
+      Answer A:
+      {answer_a}
+
+      Answer B:
+      {answer_b}
+
+      Follow the output requirement exactly.
 
 generator:
   default:

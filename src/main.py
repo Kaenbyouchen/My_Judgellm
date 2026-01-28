@@ -131,24 +131,110 @@ def main():
     bias_config = config.get("bias", {})
     # Log raw bias config (before logging setup)
     logger.info(f"Bias config raw: {bias_config}")
-    # Normalize bias injector type (default mock)
-    bias_injector_type = bias_config.get("injector_type") or "mock"
-    bias_config["injector_type"] = bias_injector_type
+    
     # Optional: allow fallback to mock for bias injection (default False when using external model)
     bias_allow_fallback_mock = bool(bias_config.get("allow_fallback_mock", False))
+
+    # Determine bias injector type with proper priority:
+    # 1. Explicit injector_type in config
+    # 2. Infer from bias.model if present
+    # 3. Default to "mock"
+    bias_injector_type = bias_config.get("injector_type")
+    injector_model_id = None
+    
+    if not bias_injector_type:
+        # No explicit injector_type, check if bias.model is specified
+        if "model" in bias_config:
+            injector_model_id = bias_config["model"]
+            # Infer provider from model_id using ModelRegistry
+            injector_provider = ModelRegistry.infer_provider_from_model_id(injector_model_id)
+            if injector_provider is None:
+                if bias_allow_fallback_mock:
+                    logger.warning(
+                        f"Could not infer provider for bias injector model '{injector_model_id}'. "
+                        "Falling back to 'mock' because bias.allow_fallback_mock=True"
+                    )
+                    bias_injector_type = "mock"
+                    bias_config["injector_type"] = "mock"
+                else:
+                    raise ValueError(
+                        f"Could not infer provider for bias injector model '{injector_model_id}'. "
+                        "Please add it to configs/models.yaml or specify bias.injector_type explicitly."
+                    )
+            else:
+                logger.info(f"Inferred bias injector provider '{injector_provider}' from model '{injector_model_id}'")
+                bias_injector_type = injector_provider
+                bias_config["injector_type"] = injector_provider
+        else:
+            # No model specified, use default mock
+            bias_injector_type = "mock"
+            bias_config["injector_type"] = "mock"
+            logger.info("No bias.model specified, using default 'mock' injector")
+    
     judge_config = config.get("judge", {})
+    judge_allow_fallback_mock = bool(judge_config.get("allow_fallback_mock", False))
     eval_config = config.get("evaluation", {})
     
-    # Override data path if provided
-    data_path = args.data_path or data_config.get("path", "data/dummy/pairwise.jsonl")
+    # Resolve data path with priority: CLI arg > explicit path > dataset_name from datasets.yaml > default
+    data_path = args.data_path
+    if not data_path:
+        # Priority 1: Use explicit path if provided
+        data_path = data_config.get("path")
+        
+        # Priority 2: If no explicit path, resolve from dataset_name via datasets.yaml
+        if not data_path:
+            dataset_name = data_config.get("dataset_name")
+            if dataset_name and datasets_config:
+                datasets = datasets_config.get("datasets", datasets_config)
+                if isinstance(datasets, dict) and dataset_name in datasets:
+                    dataset_info = datasets[dataset_name]
+                    if isinstance(dataset_info, dict):
+                        data_path = dataset_info.get("path")
+                    elif isinstance(dataset_info, str):
+                        # Support simple format: dataset_name: "path/to/file.jsonl"
+                        data_path = dataset_info
+        
+        # Priority 3: Fallback to default
+        if not data_path:
+            data_path = "data/dummy/pairwise.jsonl"
+    
     if not os.path.isabs(data_path):
         data_path = str(project_root / data_path)
     
     # Judge model selection
+    # - New simplified format: judge.model (auto-infer provider from models.yaml)
     # - New format (recommended): judge.provider + judge.model_id (models.yaml is the model pool)
     # - Old format (compatible): judge.type + judge.model_name (treat model_name as model_id)
-    judge_provider = judge_config.get("provider") or judge_config.get("type") or "mock"
-    judge_model_id = judge_config.get("model_id") or judge_config.get("model_name") or "mock-judge-v1"
+    
+    # Support simplified format: just specify "model", auto-infer provider
+    if "model" in judge_config and "provider" not in judge_config and "type" not in judge_config:
+        judge_model_id = judge_config["model"]
+        judge_provider = ModelRegistry.infer_provider_from_model_id(judge_model_id)
+        if judge_provider is None:
+            # Fallback: try common patterns
+            if judge_model_id.startswith("gpt") or judge_model_id.startswith("gpt4") or judge_model_id.startswith("gpt5"):
+                judge_provider = "openai"
+            elif judge_model_id.startswith("gemini"):
+                judge_provider = "gemini"
+            elif judge_model_id.startswith("claude"):
+                judge_provider = "anthropic"
+            else:
+                if judge_allow_fallback_mock:
+                    logger.warning(
+                        f"Could not infer provider for judge model '{judge_model_id}', "
+                        "defaulting to 'mock' because allow_fallback_mock=True"
+                    )
+                    judge_provider = "mock"
+                else:
+                    raise ValueError(
+                        f"Could not infer provider for judge model '{judge_model_id}'. "
+                        "Please specify judge.provider explicitly or set judge.allow_fallback_mock: true."
+                    )
+        logger.info(f"Inferred judge provider '{judge_provider}' from model '{judge_model_id}'")
+    else:
+        # Use explicit provider/model_id format (backward compatible)
+        judge_provider = judge_config.get("provider") or judge_config.get("type") or "mock"
+        judge_model_id = judge_config.get("model_id") or judge_config.get("model_name") or judge_config.get("model") or "mock-judge-v1"
 
     # Per-run overrides (do NOT embed concrete model name strings here)
     judge_model_overrides = {
@@ -180,10 +266,20 @@ def main():
     if isinstance(judge_prompt_cfg, dict):
         judge_system_prompt = judge_prompt_cfg.get("system")
         judge_user_template = judge_prompt_cfg.get("user")
+    
+    # Build bias injector model config
+    # injector_model_id was already determined above if bias.model was specified
     if bias_injector_type != "mock":
-        injector_provider = bias_injector_type
-        # Allow bias to specify its own model, otherwise reuse judge model id/name
-        injector_model_id = bias_config.get("model_id") or bias_config.get("model_name") or judge_model_id
+        # Get injector_model_id if not already determined
+        if injector_model_id is None:
+            injector_model_id = (
+                bias_config.get("model_id") 
+                or bias_config.get("model_name") 
+                or bias_config.get("model") 
+                or judge_model_id
+            )
+        
+        injector_provider = bias_injector_type  # Already inferred above or explicitly set
 
         # Allow passing model overrides for the bias injector from experiment.yaml (e.g., api_key_env, temperature).
         injector_model_overrides = {
@@ -197,6 +293,7 @@ def main():
                 "injector_type",
                 "model_id",
                 "model_name",
+                "model",
                 "allow_fallback_mock",
             }
         }
@@ -262,9 +359,15 @@ def main():
             logger.info(f"  Provider Config Keys: {list(provider_cfg.keys())}")
     logger.info(f"  Bias injector_type: {bias_injector_type} (allow_fallback_mock={bias_allow_fallback_mock})")
     if bias_injector_type != "mock":
-        logger.info(f"  Bias injector model_id: {bias_config.get('model_id') or bias_config.get('model_name') or judge_model_id}")
+        # Log bias injector model information
+        bias_model_id = bias_config.get("model_id") or bias_config.get("model_name") or bias_config.get("model") or "N/A"
+        logger.info(f"  Bias injector model_id: {bias_model_id}")
         if injector_resolved_model_name:
             logger.info(f"  Bias injector resolved model: {injector_resolved_model_name}")
+    else:
+        # Validation: warn if bias.model was specified but injector_type is still mock
+        if "model" in bias_config:
+            logger.warning(f"⚠️  WARNING: bias.model='{bias_config['model']}' was specified but injector_type is 'mock'. This may indicate a configuration issue.")
     if judge_system_prompt or judge_user_template:
         logger.info("  Judge prompt source: configs/prompts.yaml (judge.pairwise)")
     logger.info(f"  API Key Env: {resolved_judge_model_config.get('api_key_env', 'N/A')}")
@@ -300,7 +403,9 @@ def main():
     config_resolved["bias"]["allow_fallback_mock"] = bias_allow_fallback_mock
     # Persist resolved bias injector model_id (even if user didn't specify it, for reproducibility)
     if bias_injector_type != "mock":
-        config_resolved["bias"]["model_id"] = bias_config.get("model_id") or bias_config.get("model_name") or judge_model_id
+        # Use the injector_model_id that was determined earlier, or fallback to config values
+        resolved_bias_model_id = injector_model_id or bias_config.get("model_id") or bias_config.get("model_name") or bias_config.get("model") or judge_model_id
+        config_resolved["bias"]["model_id"] = resolved_bias_model_id
     if injector_model_config:
         config_resolved["bias"]["injector_model_config_keys"] = list(injector_model_config.keys())
     save_yaml(config_resolved, str(run_dir / "config_resolved.yaml"))
@@ -330,7 +435,9 @@ def main():
             judge_config=judge_model_overrides,
             compute_original_acc=eval_config.get("compute_original_acc", True),
             compute_bias_metrics=eval_config.get("compute_bias_metrics", True),
-            run_dir=str(run_dir)
+            run_dir=str(run_dir),
+            inject_to=bias_config.get("inject_to", "non_gt"),
+            use_cache=bias_config.get("use_cache", True),  # Enable cache by default
         )
     elif data_type == "scalar":
         logger.info("Running scalar evaluation pipeline (placeholder)")

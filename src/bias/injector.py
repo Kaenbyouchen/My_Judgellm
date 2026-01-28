@@ -1,6 +1,7 @@
 """
 Bias injector that applies biases to answers.
 """
+import re
 from typing import Dict, Any, Optional
 from loguru import logger
 
@@ -77,16 +78,81 @@ class BiasInjector:
                 else:
                     raise
     
+    def _clean_biased_output(self, raw_output: str, original_answer: str) -> str:
+        """
+        Clean model output to extract only the modified answer.
+        
+        This method removes:
+        - Labels like "Modified Answer:", "Answer:", etc.
+        - Explanations or additional text
+        - Quotation marks if they wrap the entire answer
+        - Leading/trailing whitespace
+        
+        Args:
+            raw_output: Raw output from the model
+            original_answer: Original answer (for reference)
+            
+        Returns:
+            Cleaned answer text
+        """
+        if not raw_output:
+            return ""
+        
+        text = raw_output.strip()
+        
+        # Remove common labels/prefixes (case-insensitive)
+        labels = [
+            r"^(?:modified\s+)?answer\s*:?\s*",
+            r"^(?:修改后的)?答案\s*:?\s*",
+            r"^(?:modified\s+)?response\s*:?\s*",
+            r"^(?:修改后的)?回答\s*:?\s*",
+            r"^output\s*:?\s*",
+            r"^输出\s*:?\s*",
+        ]
+        for label_pattern in labels:
+            text = re.sub(label_pattern, "", text, flags=re.IGNORECASE)
+            text = text.strip()
+        
+        # Remove quotation marks if they wrap the entire text
+        if (text.startswith('"') and text.endswith('"')) or (text.startswith("'") and text.endswith("'")):
+            text = text[1:-1].strip()
+        if (text.startswith('「') and text.endswith('」')) or (text.startswith('"') and text.endswith('"')):
+            text = text[1:-1].strip()
+        
+        # If output contains "Example:" or similar, try to extract the answer part
+        # Look for patterns like "Example:\n...\nModified Answer: ..."
+        example_pattern = r"(?:example|示例)[\s\S]*?modified\s+answer\s*:?\s*(.+)"
+        match = re.search(example_pattern, text, re.IGNORECASE | re.DOTALL)
+        if match:
+            text = match.group(1).strip()
+        
+        # Remove trailing explanations that start with common phrases
+        explanation_markers = [
+            r"\n\s*(?:note|注意|说明|explanation|note:).*$",
+            r"\n\s*(?:this|这|that|那).*$",
+        ]
+        for marker in explanation_markers:
+            text = re.sub(marker, "", text, flags=re.IGNORECASE | re.DOTALL)
+            text = text.strip()
+        
+        # If the cleaned text is too short (likely incomplete extraction), return original
+        # But if it's significantly longer than original, it might be correct
+        if len(text) < len(original_answer) * 0.3 and len(text) < 20:
+            logger.warning(f"Cleaned output seems too short, using raw output. Original length: {len(original_answer)}, Cleaned: {len(text)}")
+            return raw_output.strip()
+        
+        return text
+    
     def inject(self, text: str, question: Optional[str] = None) -> str:
         """
         Inject bias into text.
         
         Args:
-            text: Text to inject bias into
+            text: Text to inject bias into (non-GT answer)
             question: Optional question context
             
         Returns:
-            Text with bias injected
+            Text with bias injected (cleaned to ensure only modified answer is returned)
         """
         if self.injector_type == "mock":
             # Rule-based injection
@@ -106,8 +172,16 @@ class BiasInjector:
             
             try:
                 system_prompt = self.system_prompt or f"You are a text modifier that injects {self.bias_type} bias into medical answers."
-                biased_text = self.model.generate(prompt, system_prompt=system_prompt)
-                return biased_text
+                raw_biased_text = self.model.generate(prompt, system_prompt=system_prompt)
+                
+                # Clean the output to ensure only the modified answer is returned
+                cleaned_biased_text = self._clean_biased_output(raw_biased_text, text)
+                
+                # Log if significant cleaning was performed
+                if len(raw_biased_text) != len(cleaned_biased_text) or raw_biased_text != cleaned_biased_text:
+                    logger.debug(f"Cleaned bias injection output: {len(raw_biased_text)} -> {len(cleaned_biased_text)} chars")
+                
+                return cleaned_biased_text
             except Exception as e:
                 allow_fallback = bool(self.model_config.get("allow_fallback_mock", False))
                 logger.error(f"Error in AI-based bias injection: {e}")

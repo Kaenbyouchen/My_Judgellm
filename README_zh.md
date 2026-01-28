@@ -124,6 +124,7 @@ evaluation:
 - `gpt4omini` → `gpt-4o-mini`
 - `gpt41` → `gpt-4.1`
 - `gpt52` → `gpt-5.2`
+- `gpt5mini` → `gpt-5-mini`
 
 ### Anthropic (Claude)
 - `claude35_sonnet` → `claude-3-5-sonnet-20240620`
@@ -131,13 +132,38 @@ evaluation:
 - `claude_sonnet_45` → `claude-sonnet-4.5` ⭐ **最新**
 
 ### Gemini
-- `gemini15_pro` → `gemini-1.5-pro`
-- `med_gemini` → `med-gemini`
 - `gemini3_pro` → `gemini-3-pro` ⭐ **最新**
 - `gemini3_flash` → `gemini-3-flash` ⭐ **最新**
 
 ### HuggingFace
-- `llama2_7b_chat` → `meta-llama/Llama-2-7b-chat-hf`
+
+#### General SOTA (通用 SOTA 模型)
+- `qwen3_next_80b_a3b_instruct` → `Qwen/Qwen3-Next-80B-A3B-Instruct`
+
+#### Medical SOTA (医疗领域 SOTA 模型)
+- `medgemma_4b` → `google/medgemma-4b-it`
+- `medgemma_27b` → `google/medgemma-27b-it`
+- `biomistral_7b` → `BioMistral/BioMistral-7B`
+- `medical_qwen3_14b_1218` → `zjydiary/Medical-Qwen3-14B-1218` (ModelScope)
+
+#### Judge Expert (判断专家模型)
+- `m_prometheus_3b` → `Unbabel/M-Prometheus-3B`
+- `m_prometheus_7b` → `Unbabel/M-Prometheus-7B`
+- `m_prometheus_14b` → `Unbabel/M-Prometheus-14B`
+
+#### Small Models (小型模型)
+- `gemma3_4b` → `google/gemma-3-4b-it`
+- `gemma3_12b` → `google/gemma-3-12b-it`
+- `gemma3_27b` → `google/gemma-3-27b-it`
+- `qwen3_4b_instruct` → `Qwen/Qwen3-4B-Instruct-2507`
+- `qwen3_14b_instruct` → `OpenPipe/Qwen3-14B-Instruct`
+- `llama32_3b_instruct` → `meta-llama/Llama-3.2-3B-Instruct`
+- `llama31_8b_instruct` → `meta-llama/Llama-3.1-8B-Instruct`
+- `llama4_scout_instruct` → `meta-llama/Llama-4-Scout-17B-16E-Instruct`
+- `llama33_70b_instruct` → `meta-llama/Llama-3.3-70B-Instruct`
+- `deepseek_r1_distill_llama_8b` → `deepseek-ai/DeepSeek-R1-Distill-Llama-8B`
+- `deepseek_r1_distill_qwen_7b` → `deepseek-ai/DeepSeek-R1-Distill-Qwen-7B`
+- `deepseek_r1_distill_qwen_14b` → `deepseek-ai/DeepSeek-R1-Distill-Qwen-14B`
 
 ### Mock（离线）
 - `mock-judge-v1` → 无需 API key 的测试模型
