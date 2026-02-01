@@ -63,6 +63,26 @@ class JargonOverloadingBias(BaseBias):
         
         return modified
 
+    def apply_word_replacement(self, text: str, context: Optional[Dict[str, Any]] = None) -> str:
+        """
+        Only replace words/phrases with medical jargon without restructuring.
+        """
+        modified = text
+        replacements = {
+            "cause": "etiological factor",
+            "reason": "pathophysiological mechanism",
+            "treatment": "therapeutic intervention",
+            "medicine": "pharmacological agent",
+            "disease": "pathological condition",
+            "symptom": "clinical manifestation",
+            "test": "diagnostic procedure",
+            "result": "diagnostic finding"
+        }
+        for simple, jargon in replacements.items():
+            pattern = r'\b' + re.escape(simple) + r'\b'
+            modified = re.sub(pattern, jargon, modified, flags=re.IGNORECASE)
+        return modified
+
 
 class ComplexityBias(BaseBias):
     """Make text unnecessarily complex."""

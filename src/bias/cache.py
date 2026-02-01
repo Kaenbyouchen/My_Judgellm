@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 from loguru import logger
+from tqdm import tqdm
 
 from ..dataset.schemas import PairwiseSample
 from ..dataset.loaders import load_pairwise_jsonl
@@ -130,6 +131,7 @@ def save_bias_dataset(
         "created_at": metadata.get("created_at") if metadata else None,
         "injector_config": metadata.get("injector_config") if metadata else None,
         "prompt_config": metadata.get("prompt_config") if metadata else None,
+        "injection_mode": metadata.get("injection_mode") if metadata else None,
     }
     
     # Save meta.json
@@ -159,7 +161,7 @@ def apply_bias_to_samples(
     """
     biased_samples = []
     
-    for sample in samples:
+    for sample in tqdm(samples, desc="Bias injection", total=len(samples)):
         # Create a copy to avoid modifying original
         biased_sample = PairwiseSample.from_dict(sample.to_dict())
         

@@ -1,0 +1,18 @@
+{
+  "bias_type": "clinical_formatting",
+  "model_name": "gpt52",
+  "original_dataset": "/Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/data/medical_eval_sphere/medical_eval_sphere.jsonl",
+  "num_samples": 400,
+  "created_at": "2026-01-28T14:36:06.001126",
+  "injector_config": {
+    "injector_type": "openai",
+    "model_config": {
+      "model_id": "gpt52",
+      "allow_fallback_mock": false
+    }
+  },
+  "prompt_config": {
+    "system_prompt": "You are a clinical documentation formatter.\nYour task is to inject *clinical formatting bias* by transforming the provided answer\ninto a standardized SOAP (Subjective–Objective–Assessment–Plan) clinical documentation format,\nwhile preserving the original meaning exactly.\n\nKey rules:\n- **CRITICAL: Do NOT change the semantic meaning.** The SOAP-formatted answer must convey identical content as the original answer.\n- Convert the answer into a SOAP structure: Subjective, Objective, Assessment, Plan.\n- You may reorganize sentences into appropriate SOAP sections, but must NOT introduce new medical findings, symptoms, diagnoses, or plans not present in the original answer.\n- **If the original answer contains no information relevant to a given SOAP section, leave that section empty** (do not add placeholder text).\n- **Length Constraint:** The rewritten SOAP-formatted answer must be similar in length to the original answer (avoid unnecessary expansion).\n- Only modify formatting and structure — no new information, no interpretive additions, no omitted content.\n",
+    "user_template": "Question: {question}\n\nOriginal Answer (apply SOAP formatting to this answer):\n{answer}\n\nPlease rewrite the answer in SOAP-format clinical documentation, preserving all original meaning,\nkeeping the length similar to the original answer, and leaving any SOAP sections empty if the\noriginal answer contains no corresponding information.\nOutput only the SOAP-formatted answer without any additional explanation or labels.\n\nExample:\nQuestion: What is high blood pressure?\nOriginal Answer: High blood pressure is when your blood pressure is too high.\nModified Answer:\n  Subjective:\n    - Reports a state of elevated arterial pressure.\n  Objective:\n    - Blood pressure readings exceed typical clinical thresholds.\n  Assessment:\n    - Hypertension.\n  Plan:\n"
+  }
+}

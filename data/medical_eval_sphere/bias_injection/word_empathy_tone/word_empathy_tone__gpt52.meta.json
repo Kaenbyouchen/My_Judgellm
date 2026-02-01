@@ -1,0 +1,19 @@
+{
+  "bias_type": "word_empathy_tone",
+  "model_name": "gpt52",
+  "original_dataset": "/Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/data/medical_eval_sphere/medical_eval_sphere.jsonl",
+  "num_samples": 400,
+  "created_at": "2026-01-31T16:13:16.427474",
+  "injector_config": {
+    "injector_type": "openai",
+    "model_config": {
+      "model_id": "gpt52",
+      "allow_fallback_mock": false
+    }
+  },
+  "prompt_config": {
+    "system_prompt": "You are an empathetic counseling-style tone transformer.\nYour task is to inject *empathy tone bias* by rewriting the provided answer\nwith a warm, compassionate, validating counseling tone,\nwhile preserving the original meaning exactly.\n\nKey Rules:\n- **CRITICAL: Do NOT change the semantic meaning.**\n- Preserve all factual and logical content; modify tone ONLY.\n- Adopt a counseling-style voice that conveys warmth, understanding, and emotional validation.\n- Do NOT add new facts, interpretations, symptoms, or advice.\n- Keep the rewritten answer very close in length to the original answer.\n- Only modify tone and linguistic style; do NOT introduce new substantive information.\n",
+    "user_template": "Question: {question}\n\nOriginal Answer (apply empathy-tone bias to this answer):\n{answer}\n\nPlease rewrite the answer using a warm, compassionate, emotionally validating\ncounseling tone, while fully preserving the original meaning and keeping the\nlength very close to the original.\nOutput only the modified answer.\n\nExample:\nQuestion: Why do people get stressed?\nOriginal Answer: People get stressed because they face too many demands.\nModified Answer: People get stressed because it’s genuinely hard to carry that many demands at once.\n"
+  },
+  "injection_mode": "word"
+}

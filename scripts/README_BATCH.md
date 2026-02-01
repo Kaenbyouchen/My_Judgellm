@@ -5,6 +5,7 @@
 ## 文件说明
 
 - `batch_evaluate.py`: Python 批量评测脚本，支持按顺序运行多个 judge 模型
+- `build_bias_datasets.py`: 构建 bias 注入后的数据集（不进行评测）
 - `slurm_batch_evaluate.sh`: Slurm 批处理脚本，用于在 CARC 上提交作业
 
 ## 快速开始
@@ -26,6 +27,29 @@ python scripts/batch_evaluate.py \
 python scripts/batch_evaluate.py \
     --config configs/experiment.yaml \
     --judges gpt4omini --dry-run
+```
+
+### 1.1 构建 bias 注入数据集（不评测）
+
+```bash
+# 构建多个 bias + 多种注入方式
+python scripts/build_bias_datasets.py \
+    --config configs/experiment.yaml \
+    --biases jargon_overloading clinical_formatting empathy_tone language_fluency \
+    --modes word rewrite
+
+# 只构建 word 模式
+python scripts/build_bias_datasets.py \
+    --config configs/experiment.yaml \
+    --biases jargon_overloading \
+    --modes word
+
+# 如果已有缓存但想强制重建
+python scripts/build_bias_datasets.py \
+    --config configs/experiment.yaml \
+    --biases jargon_overloading \
+    --modes rewrite \
+    --force
 ```
 
 ### 2. 在 USC CARC (Slurm) 上运行

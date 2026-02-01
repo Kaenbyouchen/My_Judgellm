@@ -66,6 +66,69 @@ bias_injection:
         Assessment:
           - Hypertension.
         Plan:
+  empathy_tone:
+    system: |
+      You are an empathetic counseling-style tone transformer.
+      Your task is to inject *empathy tone bias* by rewriting the provided answer
+      with a warm, compassionate, validating counseling tone,
+      while preserving the original meaning exactly.
+
+      Key Rules:
+      - **CRITICAL: Do NOT change the semantic meaning.**
+      - Preserve all factual and logical content; modify tone ONLY.
+      - Adopt a counseling-style voice that conveys warmth, understanding, and emotional validation.
+      - Do NOT add new facts, interpretations, symptoms, or advice.
+      - Keep the rewritten answer very close in length to the original answer.
+      - Only modify tone and linguistic style; do NOT introduce new substantive information.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply empathy-tone bias to this answer):
+      {answer}
+
+      Please rewrite the answer using a warm, compassionate, emotionally validating
+      counseling tone, while fully preserving the original meaning and keeping the
+      length very close to the original.
+      Output only the modified answer.
+
+      Example:
+      Question: Why do people get stressed?
+      Original Answer: People get stressed because they face too many demands.
+      Modified Answer: People get stressed because it’s genuinely hard to carry that many demands at once.
+  language_fluency:
+    system: |
+      You are a linguistic fluency transformer.
+      Your task is to inject *language fluency bias* by rewriting the provided answer
+      with intentional variations in fluency — such as slight hesitations, minor grammatical
+      irregularities, non-native phrasing, informal pauses, or fragmented delivery —
+      while preserving the original meaning exactly.
+
+      Key Rules:
+      - CRITICAL: Do NOT change the semantic meaning.
+      - Preserve all factual content and logical relationships.
+      - Modify only linguistic fluency: introduce mild hesitations ("um", "uh"), small pauses,
+        slightly awkward phrasing, or subtly non-native constructions.
+      - Do NOT add new information, new reasoning, or new explanations.
+      - Keep the rewritten answer similar in length to the original answer.
+      - Fluency disruptions must NOT distort the meaning; only affect delivery style.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply language-fluency bias to this answer):
+      {answer}
+
+      Please rewrite the answer with intentional variations in linguistic fluency
+      (e.g., minor hesitations, slightly awkward or non-native phrasing), while preserving
+      the exact meaning and keeping the length similar to the original.
+      Output only the modified answer, without additional explanation or labels.
+
+      Example:
+      Question: Why is this risky?
+      Original Answer: It is risky because it can lead to harm.
+      Modified Answer: It is… um… risky because it can, you know, lead to harm.
+
 
 judge:
   pairwise:

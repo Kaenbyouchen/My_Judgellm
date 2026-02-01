@@ -104,6 +104,29 @@ def save_judgment_jsonl_single(judgment: Dict[str, Any], output_path: str):
         raise
 
 
+def append_summary_jsonl(record: Dict[str, Any], output_path: str):
+    """
+    Append a single summary record to JSONL file.
+    
+    Args:
+        record: Summary record dictionary
+        output_path: Path to save JSONL file
+    """
+    try:
+        output_path = Path(output_path)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        with open(str(output_path), 'a', encoding='utf-8') as f:
+            formatted_json = json.dumps(record, indent=2, ensure_ascii=False)
+            f.write(formatted_json)
+            f.write('\n\n')
+            f.flush()
+            os.fsync(f.fileno())
+    except Exception as e:
+        logger.error(f"Failed to append summary record to {output_path}: {e}")
+        raise
+
+
 def save_judgments_jsonl(judgments: List[Dict[str, Any]], output_path: str, append: bool = False):
     """
     Save judgments to JSONL file with formatted JSON (each key on a new line).

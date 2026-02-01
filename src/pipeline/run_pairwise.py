@@ -43,6 +43,7 @@ def _signal_handler(signum, frame):
 def run_pairwise_evaluation(
     data_path: str,
     bias_type: str,
+    bias_variant_name: str,
     bias_enabled: bool,
     injector_type: str,
     judge_type: str,
@@ -54,6 +55,7 @@ def run_pairwise_evaluation(
     injector_model_config: Optional[Dict[str, Any]] = None,
     injector_system_prompt: Optional[str] = None,
     injector_user_template: Optional[str] = None,
+    injection_mode: str = "rewrite",
     judge_system_prompt: Optional[str] = None,
     judge_user_template: Optional[str] = None,
     inject_to: str = "non_gt",
@@ -65,11 +67,13 @@ def run_pairwise_evaluation(
     Args:
         data_path: Path to pairwise data file
         bias_type: Type of bias to inject
+        bias_variant_name: Cache name for bias variant (e.g., "jargon_overloading" or "word_jargon_overloading")
         bias_enabled: Whether to enable bias injection
         injector_type: Type of bias injector ("mock", "openai", "hf")
         injector_model_config: Model config for bias injector (if using AI-based injection)
         injector_system_prompt: Optional system prompt for bias injection
         injector_user_template: Optional user prompt template for bias injection
+        injection_mode: "rewrite" for full rewrite, "word" for word/phrase replacement
         judge_system_prompt: Optional system prompt for judge pairwise prompt
         judge_user_template: Optional user prompt template for judge pairwise prompt
         judge_type: Type of judge ("mock", "openai", "hf")
@@ -127,6 +131,7 @@ def run_pairwise_evaluation(
             model_config=injector_model_config or {},
             system_prompt=injector_system_prompt,
             prompt_template=injector_user_template,
+            injection_mode=injection_mode,
         )
     
     # Initialize judge
@@ -248,10 +253,12 @@ def run_pairwise_evaluation(
         # Check cache
         cached_samples = None
         if use_cache:
-            logger.info(f"Checking cache for bias-injected dataset: bias_type={bias_type}, model={cache_model_name}")
-            if check_cache_exists(data_path, bias_type, cache_model_name):
+            logger.info(
+                f"Checking cache for bias-injected dataset: bias_type={bias_variant_name}, model={cache_model_name}"
+            )
+            if check_cache_exists(data_path, bias_variant_name, cache_model_name):
                 logger.info("Cache found! Loading cached bias-injected dataset...")
-                cached_samples = load_cached_bias_dataset(data_path, bias_type, cache_model_name)
+                cached_samples = load_cached_bias_dataset(data_path, bias_variant_name, cache_model_name)
                 if cached_samples:
                     logger.info(f"Successfully loaded {len(cached_samples)} samples from cache")
                 else:
@@ -276,11 +283,12 @@ def run_pairwise_evaluation(
                         "system_prompt": injector_system_prompt,
                         "user_template": injector_user_template,
                     },
+                    "injection_mode": injection_mode,
                 }
                 save_bias_dataset(
                     biased_samples,
                     data_path,
-                    bias_type,
+                    bias_variant_name,
                     cache_model_name,
                     metadata=metadata
                 )

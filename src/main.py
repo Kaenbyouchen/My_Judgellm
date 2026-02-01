@@ -2,6 +2,7 @@
 Main entry point for the evaluation pipeline.
 """
 import os
+import datetime
 import sys
 from pathlib import Path
 from typing import Dict, Any
@@ -20,6 +21,7 @@ from src.utils.paths import get_dataset_name, get_run_dir
 from src.pipeline.run_pairwise import run_pairwise_evaluation
 from src.pipeline.run_scalar import run_scalar_evaluation
 from src.models.registry import ModelRegistry
+from src.metrics.reports import append_summary_jsonl
 
 
 def get_bias_name(bias_config: dict) -> str:
@@ -38,11 +40,16 @@ def get_bias_name(bias_config: dict) -> str:
     bias_type = bias_config.get("type", "")
     # Support multiple biases if type is a list
     if isinstance(bias_type, list):
-        return "+".join(bias_type)
+        base_name = "+".join(bias_type)
     elif isinstance(bias_type, str) and bias_type:
-        return bias_type
+        base_name = bias_type
     else:
         return "none"
+
+    injection_mode = bias_config.get("injection_mode", "rewrite")
+    if injection_mode == "word":
+        return f"word_{base_name}"
+    return base_name
 
 
 def get_judge_name(judge_type: str, judge_model_name: str, judge_model_config: dict) -> str:
@@ -141,6 +148,7 @@ def main():
     # 3. Default to "mock"
     bias_injector_type = bias_config.get("injector_type")
     injector_model_id = None
+    bias_injection_mode = bias_config.get("injection_mode", "rewrite")
     
     if not bias_injector_type:
         # No explicit injector_type, check if bias.model is specified
@@ -290,6 +298,7 @@ def main():
                 "enabled",
                 "type",
                 "inject_to",
+                "injection_mode",
                 "injector_type",
                 "model_id",
                 "model_name",
@@ -312,12 +321,21 @@ def main():
         except Exception:
             injector_resolved_model_name = None
 
-        # Load prompt template for bias injection if available
+        # Load prompt template for bias injection (required for AI-based injection)
         bias_type_name = bias_config.get("type", "jargon_overloading")
         bias_prompt_cfg = (prompts_config.get("bias_injection", {}) or {}).get(bias_type_name, {}) if prompts_config else {}
+        if not bias_prompt_cfg:
+            raise ValueError(
+                f"Bias prompt not found for bias type '{bias_type_name}'. "
+                "Please add it under bias_injection in configs/prompts.yaml."
+            )
         if isinstance(bias_prompt_cfg, dict):
             injector_system_prompt = bias_prompt_cfg.get("system")
             injector_user_template = bias_prompt_cfg.get("user")
+        else:
+            raise ValueError(
+                f"Bias prompt for '{bias_type_name}' must be a mapping with 'system' and 'user' fields."
+            )
     
     # Create run directory (before logging setup, so we can log to file)
     base_output_dir = Path(args.output_dir or config.get("experiment", {}).get("output_dir", "output"))
@@ -401,6 +419,7 @@ def main():
         config_resolved["bias"] = {}
     config_resolved["bias"]["injector_type"] = bias_injector_type
     config_resolved["bias"]["allow_fallback_mock"] = bias_allow_fallback_mock
+    config_resolved["bias"]["injection_mode"] = bias_injection_mode
     # Persist resolved bias injector model_id (even if user didn't specify it, for reproducibility)
     if bias_injector_type != "mock":
         # Use the injector_model_id that was determined earlier, or fallback to config values
@@ -423,11 +442,13 @@ def main():
         results = run_pairwise_evaluation(
             data_path=data_path,
             bias_type=bias_config.get("type", "jargon_overloading"),
+            bias_variant_name=bias_name,
             bias_enabled=bias_config.get("enabled", True),
             injector_type=bias_config.get("injector_type", "mock"),
             injector_model_config=injector_model_config,
             injector_system_prompt=injector_system_prompt,
             injector_user_template=injector_user_template,
+            injection_mode=bias_injection_mode,
             judge_system_prompt=judge_system_prompt,
             judge_user_template=judge_user_template,
             judge_type=judge_type,
@@ -451,6 +472,27 @@ def main():
     else:
         logger.error(f"Unknown data type: {data_type}")
         sys.exit(1)
+
+    # Append summary record to outputs/results_summary.jsonl
+    metrics = results.get("metrics", {}) if isinstance(results, dict) else {}
+    summary_record = {
+        "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "dataset_name": dataset_name,
+        "data_path": data_path,
+        "data_type": data_type,
+        "bias_enabled": bias_config.get("enabled", True),
+        "bias_type": bias_config.get("type", "none"),
+        "bias_injection_mode": bias_injection_mode,
+        "bias_injector_model_id": injector_model_id if bias_injector_type != "mock" else "mock",
+        "judge_model_id": judge_model_id,
+        "metrics": {
+            "accuracy_original": metrics.get("accuracy_original", {}).get("accuracy"),
+            "rr": metrics.get("rr", {}).get("rr"),
+            "cr": metrics.get("cr", {}).get("cr"),
+        },
+    }
+    summary_path = base_output_dir / "results_summary.jsonl"
+    append_summary_jsonl(summary_record, str(summary_path))
     
     logger.info("Evaluation completed successfully")
     return results

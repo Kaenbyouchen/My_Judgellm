@@ -20,7 +20,8 @@ class BiasInjector:
         injector_type: str = "mock",
         model_config: Optional[Dict[str, Any]] = None,
         prompt_template: Optional[str] = None,
-        system_prompt: Optional[str] = None
+        system_prompt: Optional[str] = None,
+        injection_mode: str = "rewrite"
     ):
         """
         Initialize bias injector.
@@ -30,18 +31,22 @@ class BiasInjector:
             injector_type: "mock" (rule-based) or "openai"/"hf" (AI-based)
             model_config: Configuration for AI model (if using AI-based)
             prompt_template: Prompt template for AI-based injection
+            injection_mode: "rewrite" for full rewrite, "word" for word/phrase replacement
         """
         self.bias_type = bias_type
         self.injector_type = injector_type
         self.model_config = model_config or {}
         self.prompt_template = prompt_template
         self.system_prompt = system_prompt
+        if injection_mode not in {"rewrite", "word"}:
+            raise ValueError(f"Unknown injection_mode: {injection_mode}. Use 'rewrite' or 'word'.")
+        self.injection_mode = injection_mode
         
-        # Initialize bias handler
+        # Initialize bias handler (only needed for rule-based injection)
         if bias_type in BUILTIN_BIASES:
             self.bias_handler = BUILTIN_BIASES[bias_type](config={})
         else:
-            raise ValueError(f"Unknown bias type: {bias_type}. Available: {list(BUILTIN_BIASES.keys())}")
+            self.bias_handler = None
         
         # Initialize model if using AI-based injection
         self.model = None
@@ -63,6 +68,11 @@ class BiasInjector:
                 if not self.model.is_available():
                     msg = "Bias injector model not available"
                     if allow_fallback:
+                        if self.bias_handler is None:
+                            raise RuntimeError(
+                                f"{msg}. allow_fallback_mock=True but no rule-based bias handler exists "
+                                f"for bias_type='{self.bias_type}'."
+                            )
                         logger.warning(f"{msg}, falling back to rule-based injection (allow_fallback_mock=True)")
                         self.injector_type = "mock"
                         self.model = None
@@ -72,6 +82,11 @@ class BiasInjector:
                         )
             except Exception as e:
                 if allow_fallback:
+                    if self.bias_handler is None:
+                        raise RuntimeError(
+                            f"Error initializing model for bias injection: {e}. "
+                            f"allow_fallback_mock=True but no rule-based bias handler exists for bias_type='{self.bias_type}'."
+                        )
                     logger.warning(f"Error initializing model for bias injection: {e}, falling back to rule-based")
                     self.injector_type = "mock"
                     self.model = None
@@ -156,7 +171,14 @@ class BiasInjector:
         """
         if self.injector_type == "mock":
             # Rule-based injection
+            if self.bias_handler is None:
+                raise ValueError(
+                    f"Bias type '{self.bias_type}' does not have a rule-based handler. "
+                    "Please use an AI-based injector (openai/hf/gemini/anthropic) and define prompts.yaml."
+                )
             context = {"question": question} if question else {}
+            if self.injection_mode == "word":
+                return self.bias_handler.apply_word_replacement(text, context)
             return self.bias_handler.apply(text, context)
         else:
             # AI-based injection
@@ -172,6 +194,11 @@ class BiasInjector:
             
             try:
                 system_prompt = self.system_prompt or f"You are a text modifier that injects {self.bias_type} bias into medical answers."
+                if self.injection_mode == "word":
+                    system_prompt = (
+                        system_prompt
+                        + " Only replace words or short phrases; do not restructure, reorder, or add new sentences."
+                    )
                 raw_biased_text = self.model.generate(prompt, system_prompt=system_prompt)
                 
                 # Clean the output to ensure only the modified answer is returned
@@ -186,6 +213,10 @@ class BiasInjector:
                 allow_fallback = bool(self.model_config.get("allow_fallback_mock", False))
                 logger.error(f"Error in AI-based bias injection: {e}")
                 if allow_fallback:
+                    if self.bias_handler is None:
+                        raise RuntimeError(
+                            f"Falling back requested but no rule-based bias handler exists for bias_type='{self.bias_type}'."
+                        )
                     logger.warning("Falling back to rule-based injection due to error (allow_fallback_mock=True)")
                     context = {"question": question} if question else {}
                     return self.bias_handler.apply(text, context)

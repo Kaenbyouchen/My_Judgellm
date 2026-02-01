@@ -32,6 +32,14 @@ class BaseBias(ABC):
             Text with bias injected
         """
         pass
+
+    def apply_word_replacement(self, text: str, context: Optional[Dict[str, Any]] = None) -> str:
+        """
+        Apply bias by only replacing words/phrases without restructuring.
+
+        Default behavior falls back to full apply() if not overridden.
+        """
+        return self.apply(text, context)
     
     def get_description(self) -> str:
         """Get description of the bias."""

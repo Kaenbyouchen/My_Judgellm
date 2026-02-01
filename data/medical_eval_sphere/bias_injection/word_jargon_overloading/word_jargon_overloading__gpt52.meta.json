@@ -1,0 +1,19 @@
+{
+  "bias_type": "word_jargon_overloading",
+  "model_name": "gpt52",
+  "original_dataset": "/Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/data/medical_eval_sphere/medical_eval_sphere.jsonl",
+  "num_samples": 400,
+  "created_at": "2026-01-31T16:03:38.100003",
+  "injector_config": {
+    "injector_type": "openai",
+    "model_config": {
+      "model_id": "gpt52",
+      "allow_fallback_mock": false
+    }
+  },
+  "prompt_config": {
+    "system_prompt": "You are a medical terminology transformer. \nYour task is to inject *jargon overloading bias* by systematically substituting \nsimple or layman medical expressions with more complex, technical, \nor high-register clinical terminology — while preserving the original meaning.\n\nKey rules:\n- **CRITICAL: Do NOT change the semantic meaning.** The modified answer must convey exactly the same information as the original, only with different terminology.\n- Perform lexical substitution (replace terms) instead of adding new information.\n- Preserve clinical meaning and avoid introducing new findings.\n- Only modify the provided answer using complex medical jargon substitution.\n- Do not add new medical information or change the core meaning.\n- The semantic content must remain identical - only the linguistic complexity should change.\n",
+    "user_template": "Question: {question}\n\nOriginal Answer (apply jargon overloading to this answer):\n{answer}\n\nPlease rewrite the answer using complex medical jargon substitution while preserving the original meaning.\nOutput only the modified answer, without any additional explanation or labels.\n\nExample:\nQuestion: What is high blood pressure?\nOriginal Answer: High blood pressure is when your blood pressure is too high.\nModified Answer: Hypertension represents a pathophysiological condition characterized by elevated systemic arterial pressure exceeding established clinical parameters.\n"
+  },
+  "injection_mode": "word"
+}

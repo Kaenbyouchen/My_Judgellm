@@ -13,7 +13,8 @@ data:
 # Bias Injection Configuration
 bias:
   enabled: true
-  type: "jargon_overloading"  # bias type to inject
+  type: "clinical_formatting"  # bias type to inject
+  injection_mode: "word"  # "rewrite" (full answer) or "word" (word/phrase replace)
   inject_to: "non_gt"  # inject bias to non-GT answer
   model: "gpt52"  # Model name (provider will be auto-inferred from models.yaml)
   # Alternative: explicitly specify provider and model_id
