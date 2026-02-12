@@ -111,11 +111,53 @@ class AuthorityBias(BaseBias):
         return modified
 
 
+class PlainLanguageBias(BaseBias):
+    """Simplify medical wording to plain language while preserving meaning."""
+
+    def __init__(self, config: Optional[Dict[str, Any]] = None):
+        super().__init__("plain_language", config)
+
+    def apply(self, text: str, context: Optional[Dict[str, Any]] = None) -> str:
+        """
+        Rewrite with simpler medical language.
+
+        Rule-based approximation for offline/mock mode.
+        """
+        modified = text
+        replacements = {
+            "hypertension": "high blood pressure",
+            "myocardial infarction": "heart attack",
+            "cerebrovascular accident": "stroke",
+            "dyspnea": "shortness of breath",
+            "edema": "swelling",
+            "analgesic": "pain medicine",
+            "pharmacological management": "medicine treatment",
+            "therapeutic intervention": "treatment",
+            "etiology": "cause",
+            "pathophysiology": "how the disease works in the body",
+            "prognosis": "likely outcome",
+            "diagnostic procedure": "medical test",
+            "clinical manifestation": "symptom",
+        }
+
+        # Prefer longer matches first to avoid partial replacement collisions.
+        for complex_term, simple_term in sorted(replacements.items(), key=lambda x: len(x[0]), reverse=True):
+            pattern = r"\b" + re.escape(complex_term) + r"\b"
+            modified = re.sub(pattern, simple_term, modified, flags=re.IGNORECASE)
+
+        return modified
+
+    def apply_word_replacement(self, text: str, context: Optional[Dict[str, Any]] = None) -> str:
+        """Only replace terms/short phrases without restructuring."""
+        return self.apply(text, context)
+
+
 # Registry of built-in biases
 BUILTIN_BIASES = {
     "jargon_overloading": JargonOverloadingBias,
     "complexity": ComplexityBias,
     "authority": AuthorityBias,
+    "plain_language": PlainLanguageBias,
 }
 
 

@@ -52,12 +52,13 @@ gemini:
   gemini25_flash:
     model_name: "gemini-2.5-flash"
 
-hf:
+vllm:
   defaults:
-    device: "cuda"  # will fallback to cpu if not available
-    dtype: "float16"
-    max_length: 2048
-    local_cache_dir: "src/models"  # Local cache directory for downloaded models
+    tensor_parallel_size: 1
+    max_model_len: 2048
+    dtype: "auto"
+    gpu_memory_utilization: 0.9
+    download_dir: "src/models"  # Local cache directory for downloaded models
   
   # ============================================================================
   # General SOTA Models (通用 SOTA 模型)
@@ -86,14 +87,11 @@ hf:
   # ============================================================================
   # Judge Expert Models (判断专家模型)
   # ============================================================================
-  m_prometheus_3b:
-    model_name: "Unbabel/M-Prometheus-3B"  # M-Prometheus 3B model
+  prometheus2_7b:
+    model_name: "prometheus-eval/prometheus-7b-v2.0"  # Prometheus 2 7B model
     local_cache_dir: "src/models"  # Download to src/models/ folder
-  m_prometheus_7b:
-    model_name: "Unbabel/M-Prometheus-7B"  # M-Prometheus 7B model
-    local_cache_dir: "src/models"  # Download to src/models/ folder
-  m_prometheus_14b:
-    model_name: "Unbabel/M-Prometheus-14B"  # M-Prometheus 14B model
+  prometheus2_8x7b:
+    model_name: "prometheus-eval/prometheus-8x7b-v2.0"  # Prometheus 2 8x7B model
     local_cache_dir: "src/models"  # Download to src/models/ folder
   
   # ============================================================================
@@ -135,12 +133,6 @@ hf:
   deepseek_r1_distill_qwen_14b:
     model_name: "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"  # DeepSeek R1 Distill Qwen 14B model
     local_cache_dir: "src/models"  # Download to src/models/ folder
-
-# vllm provider is kept as a placeholder (not wired into ModelRegistry by default)
-vllm:
-  defaults:
-    tensor_parallel_size: 1
-    max_model_len: 2048
 
 mock:
   defaults:

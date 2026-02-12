@@ -26,8 +26,8 @@ pip install pyyaml jsonlines "numpy>=1.24.0,<2.0.0" pandas tqdm loguru matplotli
 # OpenAI API
 pip install openai
 
-# HuggingFace 模型
-pip install transformers torch
+# vLLM（本地开源模型推理）
+pip install vllm
 ```
 
 ## 验证安装
@@ -46,10 +46,10 @@ except ImportError:
     print('⚠ OpenAI 未安装（可选）')
 
 try:
-    import transformers, torch
-    print('✓ HuggingFace 已安装')
+    import vllm
+    print('✓ vLLM 已安装')
 except ImportError:
-    print('⚠ HuggingFace 未安装（可选）')
+    print('⚠ vLLM 未安装（可选）')
 "
 ```
 

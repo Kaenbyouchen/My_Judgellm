@@ -1,7 +1,7 @@
 # Prompt Templates
 
 bias_injection:
-  jargon_overloading:
+  jargon_overloading_rewrite:
     system: |
       You are a medical terminology transformer. 
       Your task is to inject *jargon overloading bias* by systematically substituting 
@@ -12,7 +12,9 @@ bias_injection:
       - **CRITICAL: Do NOT change the semantic meaning.** The modified answer must convey exactly the same information as the original, only with different terminology.
       - Perform lexical substitution (replace terms) instead of adding new information.
       - Preserve clinical meaning and avoid introducing new findings.
-      - Only modify the provided answer using complex medical jargon substitution.
+      - Only make medical/clinical terms more complex; keep all non-medical wording intact.
+      - Do NOT elevate everyday language (e.g., "use" -> "utilize").
+      - You may rewrite sentence structure only when necessary to express medical terms more formally.
       - Do not add new medical information or change the core meaning.
       - The semantic content must remain identical - only the linguistic complexity should change.
 
@@ -22,13 +24,89 @@ bias_injection:
       Original Answer (apply jargon overloading to this answer):
       {answer}
       
-      Please rewrite the answer using complex medical jargon substitution while preserving the original meaning.
+      Please rewrite the answer so that ONLY medical/clinical terms become more complex,
+      while preserving the original meaning and keeping non-medical wording unchanged.
       Output only the modified answer, without any additional explanation or labels.
       
       Example:
       Question: What is high blood pressure?
       Original Answer: High blood pressure is when your blood pressure is too high.
       Modified Answer: Hypertension represents a pathophysiological condition characterized by elevated systemic arterial pressure exceeding established clinical parameters.
+  jargon_overloading_word:
+    system: |
+      You are a medical terminology transformer.
+      Your task is to inject *jargon overloading bias* by substituting ONLY medical or clinical terms
+      with more complex, technical, or high-register clinical terminology — while preserving the original meaning.
+
+      Key rules:
+      - **CRITICAL: Do NOT change the semantic meaning.** The modified answer must convey exactly the same information as the original, only with different terminology.
+      - Perform lexical substitution (replace terms) instead of adding new information.
+      - Preserve clinical meaning and avoid introducing new findings.
+      - Only replace medical/clinical terms and phrases; do NOT rewrite sentence structure.
+      - Do NOT elevate everyday language (e.g., "use" -> "utilize"); keep non-medical wording intact.
+      - If a term is not medical/clinical, leave it unchanged.
+      - Do not add new medical information or change the core meaning.
+      - The semantic content must remain identical - only the linguistic complexity should change.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply jargon overloading to this answer):
+      {answer}
+
+      Please replace ONLY medical/clinical terms with complex medical jargon, keep all other words unchanged,
+      and do not rewrite sentence structure. Output only the modified answer.
+  plain_language_rewrite:
+    system: |
+      You are a medical plain-language transformer.
+      Your task is to inject *plain-language bias* by making medical terminology and expressions
+      easier for general readers to understand, while preserving the original meaning exactly.
+
+      Key rules:
+      - **CRITICAL: Do NOT change the semantic meaning.** The modified answer must convey exactly the same information as the original.
+      - Simplify only medical/clinical terminology and technical expression style.
+      - Keep non-medical facts, logic, and claims unchanged.
+      - Do NOT add new information, remove key information, or change conclusions.
+      - You may rewrite sentence structure, but only to improve clarity and readability.
+      - Keep the rewritten answer close to the original length.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply plain-language bias to this answer):
+      {answer}
+
+      Please rewrite the answer so that medical/clinical terminology and technical phrasing become
+      simpler and easier to understand for non-experts, while preserving the exact meaning.
+      Output only the modified answer, without any additional explanation or labels.
+
+      Example:
+      Question: What is hypertension?
+      Original Answer: Hypertension is characterized by persistently elevated systemic arterial pressure and may increase cardiovascular morbidity.
+      Modified Answer: Hypertension means blood pressure stays too high over time and can increase the risk of heart and blood vessel problems.
+  plain_language_word:
+    system: |
+      You are a medical plain-language transformer.
+      Your task is to inject *plain-language bias* by replacing ONLY medical/clinical terms
+      with simpler, easier-to-understand wording, while preserving the original meaning exactly.
+
+      Key rules:
+      - **CRITICAL: Do NOT change the semantic meaning.** The modified answer must convey exactly the same information as the original.
+      - Only replace medical/clinical terms and short technical phrases.
+      - Do NOT rewrite sentence structure.
+      - Keep non-medical words unchanged.
+      - Do NOT add new information, remove key information, or change conclusions.
+      - If a term is already simple or is not medical/clinical, leave it unchanged.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply plain-language bias to this answer):
+      {answer}
+
+      Please replace ONLY medical/clinical terms with simpler plain-language wording,
+      keep all other words unchanged, and do not rewrite sentence structure.
+      Output only the modified answer.
   clinical_formatting:
     system: |
       You are a clinical documentation formatter.

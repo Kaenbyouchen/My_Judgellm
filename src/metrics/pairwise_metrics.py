@@ -27,12 +27,15 @@ def compute_accuracy_original(
     if len(samples) != len(judgments):
         raise ValueError(f"Sample count mismatch: {len(samples)} samples vs {len(judgments)} judgments")
     
-    # Filter out invalid judgments (e.g., safety filter blocks, quota errors)
+    # Exclude model-invalid judgments from denominator
     valid_pairs = [(s, j) for s, j in zip(samples, judgments) if j.is_valid]
     invalid_count = len(samples) - len(valid_pairs)
     
     if invalid_count > 0:
-        logger.warning(f"Excluding {invalid_count} invalid judgments from accuracy calculation (safety filter blocks, quota errors, etc.)")
+        logger.warning(
+            f"Excluding {invalid_count} model-invalid judgments from accuracy denominator "
+            "(e.g., safety filter blocks, quota errors, timeout)."
+        )
     
     if not valid_pairs:
         return {
@@ -47,7 +50,7 @@ def compute_accuracy_original(
             "answer_2_wins": 0,
             "ties": 0,
             "metadata": {
-                "note": "No valid judgments available (all excluded due to errors)",
+                "note": "No valid judgments available (all excluded due to model-side errors)",
                 "invalid_reasons": "safety_filter, quota_error, timeout"
             }
         }
@@ -131,12 +134,15 @@ def compute_rr(
     if len(samples) != len(judgments):
         raise ValueError(f"Sample count mismatch: {len(samples)} samples vs {len(judgments)} judgments")
     
-    # Filter out invalid judgments
+    # Exclude model-invalid judgments from denominator
     valid_pairs = [(s, j) for s, j in zip(samples, judgments) if j.is_valid]
     invalid_count = len(samples) - len(valid_pairs)
     
     if invalid_count > 0:
-        logger.warning(f"Excluding {invalid_count} invalid judgments from RR calculation (safety filter blocks, quota errors, etc.)")
+        logger.warning(
+            f"Excluding {invalid_count} model-invalid judgments from RR denominator "
+            "(e.g., safety filter blocks, quota errors, timeout)."
+        )
     
     if not valid_pairs:
         return {
@@ -150,7 +156,7 @@ def compute_rr(
             "biased_wins": 0,
             "ties": 0,
             "metadata": {
-                "note": "No valid judgments available (all excluded due to errors)",
+                "note": "No valid judgments available (all excluded due to model-side errors)",
                 "invalid_reasons": "safety_filter, quota_error, timeout"
             }
         }
@@ -238,12 +244,15 @@ def compute_cr(
             "metadata": {"note": "No judgments available"}
         }
     
-    # Filter out invalid judgments (at least one round must be valid)
+    # Exclude model-invalid judgment pairs from denominator
     valid_pairs = [(j1, j2) for j1, j2 in zip(judgments_round1, judgments_round2) if j1.is_valid and j2.is_valid]
     invalid_count = total - len(valid_pairs)
     
     if invalid_count > 0:
-        logger.warning(f"Excluding {invalid_count} invalid judgment pairs from CR calculation (safety filter blocks, quota errors, etc.)")
+        logger.warning(
+            f"Excluding {invalid_count} model-invalid judgment pairs from CR denominator "
+            "(e.g., safety filter blocks, quota errors, timeout)."
+        )
     
     if not valid_pairs:
         return {
@@ -254,7 +263,7 @@ def compute_cr(
             "invalid_count": invalid_count,
             "consistent_count": 0,
             "metadata": {
-                "note": "No valid judgment pairs available (all excluded due to errors)",
+                "note": "No valid judgment pairs available (all excluded due to model-side errors)",
                 "invalid_reasons": "safety_filter, quota_error, timeout"
             }
         }

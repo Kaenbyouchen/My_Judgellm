@@ -87,7 +87,7 @@ class ModelJudge(BaseJudge):
         Initialize model-based judge.
         
         Args:
-            model_type: Type of model ("openai", "hf")
+            model_type: Type of model ("openai", "vllm")
             model_name: Name of the model
             config: Model configuration
             system_prompt: Optional system prompt for pairwise judging
@@ -170,7 +170,38 @@ class ModelJudge(BaseJudge):
             
             # Check if response indicates quota error or other blocking errors
             if isinstance(response, str):
-                if "quota exceeded" in response.lower() or "quota" in response.lower() and "exceeded" in response.lower():
+                response_lower = response.lower().strip()
+                # If the response already looks like a valid judgment output,
+                # do not treat generic words (e.g., "blocked conduction") as runtime errors.
+                looks_like_valid_judgment = any(
+                    marker in response_lower
+                    for marker in ("verdict:", "[[a]]", "[[b]]", '"winner"')
+                )
+
+                quota_error_patterns = [
+                    "quota exceeded",
+                    "rate limit exceeded",
+                    "insufficient_quota",
+                ]
+                timeout_error_patterns = [
+                    "request timed out",
+                    "timed out",
+                    "timeout after",
+                    "context deadline exceeded",
+                    "deadline exceeded",
+                    "read timeout",
+                    "connection timed out",
+                ]
+                blocked_error_patterns = [
+                    "blocked by safety",
+                    "blocked by policy",
+                    "content blocked",
+                    "safety filter",
+                    "policy violation",
+                    "violates safety policy",
+                ]
+
+                if any(p in response_lower for p in quota_error_patterns):
                     logger.error(f"Quota error detected in response: {response}")
                     allow_fallback = bool(self.model_config.get("allow_fallback_mock", False))
                     if allow_fallback:
@@ -188,7 +219,13 @@ class ModelJudge(BaseJudge):
                             raw={"model_response": response, "error": "quota_exceeded"},
                             is_valid=False  # Mark as invalid to exclude from metrics
                         )
-                elif "timeout" in response.lower() or "blocked" in response.lower():
+                elif (
+                    not looks_like_valid_judgment
+                    and (
+                        any(p in response_lower for p in timeout_error_patterns)
+                        or any(p in response_lower for p in blocked_error_patterns)
+                    )
+                ):
                     logger.warning(f"Error response detected: {response}")
                     allow_fallback = bool(self.model_config.get("allow_fallback_mock", False))
                     if allow_fallback:
@@ -198,7 +235,7 @@ class ModelJudge(BaseJudge):
                     else:
                         # Return invalid result for timeout/blocked errors to prevent metric pollution
                         # This will be excluded from final metrics calculation
-                        error_type = "safety_filter" if "safety filter" in response.lower() else "timeout_or_blocked"
+                        error_type = "safety_filter" if any(p in response_lower for p in blocked_error_patterns) else "timeout_or_blocked"
                         logger.warning(f"Error response but allow_fallback_mock=False. Returning invalid result (will be excluded from metrics). Error: {error_type}")
                         return JudgeResult(
                             winner="tie",
@@ -352,7 +389,7 @@ def create_judge(
     Create a judge instance.
     
     Args:
-        judge_type: Type of judge ("mock", "openai", "hf", "gemini", "anthropic")
+        judge_type: Type of judge ("mock", "openai", "vllm", "gemini", "anthropic")
         model_name: Name of the model
         config: Judge configuration
         
@@ -361,7 +398,7 @@ def create_judge(
     """
     if judge_type == "mock":
         return MockJudge(model_name=model_name, config=config)
-    elif judge_type in ["openai", "hf", "gemini", "anthropic"]:
+    elif judge_type in ["openai", "vllm", "gemini", "anthropic", "hf"]:
         return ModelJudge(
             model_type=judge_type,
             model_name=model_name,
@@ -370,5 +407,5 @@ def create_judge(
             user_template=user_template,
         )
     else:
-        raise ValueError(f"Unknown judge type: {judge_type}. Available: mock, openai, hf, gemini, anthropic")
+        raise ValueError(f"Unknown judge type: {judge_type}. Available: mock, openai, vllm, gemini, anthropic")
 

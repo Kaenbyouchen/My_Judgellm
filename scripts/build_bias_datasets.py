@@ -231,10 +231,22 @@ def main():
             injector_system_prompt = None
             injector_user_template = None
             if injector_type != "mock":
-                bias_prompt_cfg = (prompts_config.get("bias_injection", {}) or {}).get(bias_type, {})
+                bias_prompts_root = (prompts_config.get("bias_injection", {}) or {})
+                bias_prompt_key = bias_type
+                if mode == "word":
+                    for candidate in (f"{bias_type}_word", f"word_{bias_type}"):
+                        if candidate in bias_prompts_root:
+                            bias_prompt_key = candidate
+                            break
+                else:
+                    for candidate in (f"{bias_type}_rewrite",):
+                        if candidate in bias_prompts_root:
+                            bias_prompt_key = candidate
+                            break
+                bias_prompt_cfg = bias_prompts_root.get(bias_prompt_key, {})
                 if not bias_prompt_cfg:
                     raise ValueError(
-                        f"Bias prompt not found for bias type '{bias_type}'. "
+                        f"Bias prompt not found for bias type '{bias_type}' (mode='{mode}'). "
                         "Please add it under bias_injection in configs/prompts.yaml."
                     )
                 injector_system_prompt = bias_prompt_cfg.get("system")

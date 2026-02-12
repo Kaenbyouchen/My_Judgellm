@@ -1,5 +1,14 @@
+dataset_types:
+  - "medical_knowledge_qa"
+  - "emotional_support"
+  - "general_health_qa"
+  - "non_medical_qa"
+  - "test_dummy"
+
 datasets:
   medical_eval_sphere:
     path: "data/medical_eval_sphere/medical_eval_sphere.jsonl"
+    dataset_category: "medical_knowledge_qa"
   dummy_pairwise:
     path: "data/dummy/pairwise.jsonl"
+    dataset_category: "test_dummy"

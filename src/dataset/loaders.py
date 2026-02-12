@@ -54,6 +54,28 @@ def load_pairwise_jsonl(file_path: str) -> List[PairwiseSample]:
                     if field not in line:
                         raise ValueError(f"Missing required field '{field}' in line {idx+1}")
                 
+                # Preserve additional fields (e.g., category, source, model names) in meta
+                # so downstream evaluation can filter/group by dataset type.
+                base_meta = line.get("meta") if isinstance(line.get("meta"), dict) else {}
+                extra_meta = {
+                    k: v
+                    for k, v in line.items()
+                    if k
+                    not in {
+                        "id",
+                        "question",
+                        "answer_1",
+                        "answer_2",
+                        "preferred",
+                        "meta",
+                        # alias/source fields already normalized above
+                        "answer1",
+                        "answer2",
+                        "GT",
+                    }
+                }
+                line["meta"] = {**base_meta, **extra_meta}
+
                 sample = PairwiseSample.from_dict(line)
                 samples.append(sample)
             except Exception as e:
@@ -102,6 +124,25 @@ def load_pairwise_jsonl_streaming(file_path: str) -> Iterator[PairwiseSample]:
                     if field not in line:
                         raise ValueError(f"Missing required field '{field}' in line {idx+1}")
                 
+                base_meta = line.get("meta") if isinstance(line.get("meta"), dict) else {}
+                extra_meta = {
+                    k: v
+                    for k, v in line.items()
+                    if k
+                    not in {
+                        "id",
+                        "question",
+                        "answer_1",
+                        "answer_2",
+                        "preferred",
+                        "meta",
+                        "answer1",
+                        "answer2",
+                        "GT",
+                    }
+                }
+                line["meta"] = {**base_meta, **extra_meta}
+
                 sample = PairwiseSample.from_dict(line)
                 yield sample
             except Exception as e:

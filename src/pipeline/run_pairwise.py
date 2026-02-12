@@ -69,14 +69,14 @@ def run_pairwise_evaluation(
         bias_type: Type of bias to inject
         bias_variant_name: Cache name for bias variant (e.g., "jargon_overloading" or "word_jargon_overloading")
         bias_enabled: Whether to enable bias injection
-        injector_type: Type of bias injector ("mock", "openai", "hf")
+        injector_type: Type of bias injector ("mock", "openai", "vllm")
         injector_model_config: Model config for bias injector (if using AI-based injection)
         injector_system_prompt: Optional system prompt for bias injection
         injector_user_template: Optional user prompt template for bias injection
         injection_mode: "rewrite" for full rewrite, "word" for word/phrase replacement
         judge_system_prompt: Optional system prompt for judge pairwise prompt
         judge_user_template: Optional user prompt template for judge pairwise prompt
-        judge_type: Type of judge ("mock", "openai", "hf")
+        judge_type: Type of judge ("mock", "openai", "vllm")
         judge_model_name: Name of judge model
         judge_config: Judge model configuration
         compute_original_acc: Whether to compute accuracy on original R1 vs R2
@@ -419,6 +419,99 @@ def run_pairwise_evaluation(
     
     # Compute metrics
     metrics = {}
+
+    # Keep run non-blocking: if local interruption causes count mismatch, patch with
+    # explicit local-invalid placeholders instead of raising and aborting.
+    if compute_original_acc and results.get("original_judgments_list") is not None:
+        expected = len(samples)
+        actual = len(results["original_judgments_list"])
+        if actual < expected:
+            missing = expected - actual
+            logger.warning(
+                f"Original judgments incomplete due to local interruption: expected {expected}, got {actual}. "
+                f"Padding {missing} local-invalid placeholders."
+            )
+            results["original_judgments_list"].extend(
+                [
+                    JudgeResult(
+                        winner="tie",
+                        score_A=0.0,
+                        score_B=0.0,
+                        explanation="Local pipeline interruption: judgment missing.",
+                        raw={"error": "local_missing_judgment"},
+                        is_valid=False,
+                    )
+                    for _ in range(missing)
+                ]
+            )
+        elif actual > expected:
+            logger.warning(
+                f"Original judgments exceed sample count: expected {expected}, got {actual}. Truncating extras."
+            )
+            results["original_judgments_list"] = results["original_judgments_list"][:expected]
+
+    if compute_bias_metrics and results.get("bias_judgments_list") is not None:
+        expected = len(samples)
+        actual_bias = len(results["bias_judgments_list"])
+        if actual_bias < expected:
+            missing = expected - actual_bias
+            logger.warning(
+                f"Bias round1 judgments incomplete due to local interruption: expected {expected}, got {actual_bias}. "
+                f"Padding {missing} local-invalid placeholders."
+            )
+            results["bias_judgments_list"].extend(
+                [
+                    JudgeResult(
+                        winner="tie",
+                        score_A=0.0,
+                        score_B=0.0,
+                        explanation="Local pipeline interruption: judgment missing.",
+                        raw={"error": "local_missing_judgment"},
+                        is_valid=False,
+                    )
+                    for _ in range(missing)
+                ]
+            )
+        elif actual_bias > expected:
+            logger.warning(
+                f"Bias round1 judgments exceed sample count: expected {expected}, got {actual_bias}. Truncating extras."
+            )
+            results["bias_judgments_list"] = results["bias_judgments_list"][:expected]
+
+        round2 = results.get("bias_judgments_round2", [])
+        actual_round2 = len(round2)
+        if actual_round2 < expected:
+            missing = expected - actual_round2
+            logger.warning(
+                f"Bias round2 judgments incomplete due to local interruption: expected {expected}, got {actual_round2}. "
+                f"Padding {missing} local-invalid placeholders."
+            )
+            round2.extend(
+                [
+                    JudgeResult(
+                        winner="tie",
+                        score_A=0.0,
+                        score_B=0.0,
+                        explanation="Local pipeline interruption: round2 judgment missing.",
+                        raw={"error": "local_missing_judgment_round2"},
+                        is_valid=False,
+                    )
+                    for _ in range(missing)
+                ]
+            )
+            results["bias_judgments_round2"] = round2
+        elif actual_round2 > expected:
+            logger.warning(
+                f"Bias round2 judgments exceed sample count: expected {expected}, got {actual_round2}. Truncating extras."
+            )
+            results["bias_judgments_round2"] = round2[:expected]
+
+        answers = results.get("biased_answers", [])
+        if len(answers) < expected:
+            answers.extend([""] * (expected - len(answers)))
+            results["biased_answers"] = answers
+        elif len(answers) > expected:
+            results["biased_answers"] = answers[:expected]
     
     if compute_original_acc and results.get("original_judgments_list"):
         logger.info("Computing accuracy on original R1 vs R2...")

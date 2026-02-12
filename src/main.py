@@ -57,7 +57,7 @@ def get_judge_name(judge_type: str, judge_model_name: str, judge_model_config: d
     Get judge name string for directory naming.
     
     Args:
-        judge_type: Type of judge ("mock", "openai", "hf", etc.)
+        judge_type: Type of judge ("mock", "openai", "vllm", etc.)
         judge_model_name: Name of judge model
         judge_model_config: Judge model configuration
         
@@ -69,12 +69,12 @@ def get_judge_name(judge_type: str, judge_model_name: str, judge_model_config: d
     elif judge_type in {"openai", "anthropic", "gemini"}:
         model = judge_model_config.get("model", judge_model_name)
         return f"{judge_type}_{model}"
-    elif judge_type == "hf":
+    elif judge_type in {"hf", "vllm"}:
         model = judge_model_config.get("model_name", judge_model_name)
         # Extract short name from full path (e.g., "meta-llama/Llama-2-7b-chat-hf" -> "llama-2-7b")
         if "/" in model:
             model = model.split("/")[-1]
-        return f"hf_{model}"
+        return f"{judge_type}_{model}"
     else:
         # Fallback: use type and model name
         return f"{judge_type}_{judge_model_name}"
@@ -185,22 +185,21 @@ def main():
     
     # Resolve data path with priority: CLI arg > explicit path > dataset_name from datasets.yaml > default
     data_path = args.data_path
+    dataset_name_from_config = data_config.get("dataset_name")
+    datasets = datasets_config.get("datasets", datasets_config) if isinstance(datasets_config, dict) else {}
+    dataset_info = datasets.get(dataset_name_from_config, {}) if isinstance(datasets, dict) and dataset_name_from_config else {}
     if not data_path:
         # Priority 1: Use explicit path if provided
         data_path = data_config.get("path")
         
         # Priority 2: If no explicit path, resolve from dataset_name via datasets.yaml
         if not data_path:
-            dataset_name = data_config.get("dataset_name")
-            if dataset_name and datasets_config:
-                datasets = datasets_config.get("datasets", datasets_config)
-                if isinstance(datasets, dict) and dataset_name in datasets:
-                    dataset_info = datasets[dataset_name]
-                    if isinstance(dataset_info, dict):
-                        data_path = dataset_info.get("path")
-                    elif isinstance(dataset_info, str):
-                        # Support simple format: dataset_name: "path/to/file.jsonl"
-                        data_path = dataset_info
+            if dataset_name_from_config and datasets_config:
+                if isinstance(dataset_info, dict):
+                    data_path = dataset_info.get("path")
+                elif isinstance(dataset_info, str):
+                    # Support simple format: dataset_name: "path/to/file.jsonl"
+                    data_path = dataset_info
         
         # Priority 3: Fallback to default
         if not data_path:
@@ -208,6 +207,11 @@ def main():
     
     if not os.path.isabs(data_path):
         data_path = str(project_root / data_path)
+
+    # Dataset category is metadata only (does not affect evaluation logic).
+    dataset_category = "uncategorized"
+    if isinstance(dataset_info, dict):
+        dataset_category = str(dataset_info.get("dataset_category", "uncategorized")).strip() or "uncategorized"
     
     # Judge model selection
     # - New simplified format: judge.model (auto-infer provider from models.yaml)
@@ -261,7 +265,7 @@ def main():
     judge_type = judge_provider
     judge_model_name = judge_model_id  # pass model_id; ModelRegistry will map it to actual model name
 
-    # Build bias injector model config (so bias injection can actually use OpenAI/HF)
+    # Build bias injector model config (so bias injection can actually use OpenAI/vLLM)
     injector_model_config: Dict[str, Any] = {}
     injector_system_prompt = None
     injector_user_template = None
@@ -323,10 +327,22 @@ def main():
 
         # Load prompt template for bias injection (required for AI-based injection)
         bias_type_name = bias_config.get("type", "jargon_overloading")
-        bias_prompt_cfg = (prompts_config.get("bias_injection", {}) or {}).get(bias_type_name, {}) if prompts_config else {}
+        bias_prompts_root = (prompts_config.get("bias_injection", {}) or {}) if prompts_config else {}
+        bias_prompt_key = bias_type_name
+        if bias_injection_mode == "word":
+            for candidate in (f"{bias_type_name}_word", f"word_{bias_type_name}"):
+                if candidate in bias_prompts_root:
+                    bias_prompt_key = candidate
+                    break
+        else:
+            for candidate in (f"{bias_type_name}_rewrite",):
+                if candidate in bias_prompts_root:
+                    bias_prompt_key = candidate
+                    break
+        bias_prompt_cfg = bias_prompts_root.get(bias_prompt_key, {})
         if not bias_prompt_cfg:
             raise ValueError(
-                f"Bias prompt not found for bias type '{bias_type_name}'. "
+                f"Bias prompt not found for bias type '{bias_type_name}' (mode='{bias_injection_mode}'). "
                 "Please add it under bias_injection in configs/prompts.yaml."
             )
         if isinstance(bias_prompt_cfg, dict):
@@ -404,6 +420,7 @@ def main():
     logger.info(f"Project root: {project_root}")
     logger.info(f"Configuration: {config_path}")
     logger.info(f"Run directory: {run_dir}")
+    logger.info(f"Dataset category: {dataset_category}")
     
     # Save resolved config to run_dir
     import copy
@@ -412,6 +429,7 @@ def main():
         config_resolved["experiment"] = {}
     config_resolved["experiment"]["run_dir"] = str(run_dir)
     config_resolved["experiment"]["dataset_name"] = dataset_name
+    config_resolved["experiment"]["dataset_category"] = dataset_category
     config_resolved["experiment"]["bias_name"] = bias_name
     config_resolved["experiment"]["judge_name"] = judge_name
     # Persist normalized bias injector type
@@ -478,6 +496,7 @@ def main():
     summary_record = {
         "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "dataset_name": dataset_name,
+        "dataset_category": dataset_category,
         "data_path": data_path,
         "data_type": data_type,
         "bias_enabled": bias_config.get("enabled", True),

@@ -168,7 +168,7 @@ def parse_judge_spec(judge_spec: str) -> tuple[str, str]:
     - "gpt4omini" -> ("openai", "gpt4omini")
     - "openai:gpt4omini" -> ("openai", "gpt4omini")
     - "gemini:gemini3_pro" -> ("gemini", "gemini3_pro")
-    - "qwen3_4b_instruct" -> ("hf", "qwen3_4b_instruct") (inferred from models.yaml)
+    - "qwen3_4b_instruct" -> ("vllm", "qwen3_4b_instruct") (inferred from models.yaml)
     
     Args:
         judge_spec: Judge specification string
@@ -209,9 +209,9 @@ def parse_judge_spec(judge_spec: str) -> tuple[str, str]:
         elif model_id.startswith("claude"):
             return "anthropic", model_id
         else:
-            # For unknown models, try 'hf' as default (most unlisted models are HF)
-            logger.warning(f"Could not infer provider for {model_id}, defaulting to 'hf' (most unlisted models are HuggingFace)")
-            return "hf", model_id
+            # For unknown models, default to vLLM (most unlisted models are open-source)
+            logger.warning(f"Could not infer provider for {model_id}, defaulting to 'vllm'")
+            return "vllm", model_id
 
 
 def main():

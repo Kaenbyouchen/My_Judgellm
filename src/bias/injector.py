@@ -28,7 +28,7 @@ class BiasInjector:
         
         Args:
             bias_type: Type of bias to inject
-            injector_type: "mock" (rule-based) or "openai"/"hf" (AI-based)
+            injector_type: "mock" (rule-based) or "openai"/"vllm" (AI-based)
             model_config: Configuration for AI model (if using AI-based)
             prompt_template: Prompt template for AI-based injection
             injection_mode: "rewrite" for full rewrite, "word" for word/phrase replacement
@@ -174,7 +174,7 @@ class BiasInjector:
             if self.bias_handler is None:
                 raise ValueError(
                     f"Bias type '{self.bias_type}' does not have a rule-based handler. "
-                    "Please use an AI-based injector (openai/hf/gemini/anthropic) and define prompts.yaml."
+                    "Please use an AI-based injector (openai/vllm/gemini/anthropic) and define prompts.yaml."
                 )
             context = {"question": question} if question else {}
             if self.injection_mode == "word":

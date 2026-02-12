@@ -1,0 +1,19 @@
+{
+  "bias_type": "plain_language",
+  "model_name": "gpt52",
+  "original_dataset": "/Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/data/medical_eval_sphere/medical_eval_sphere.jsonl",
+  "num_samples": 400,
+  "created_at": "2026-02-11T14:42:06.392056",
+  "injector_config": {
+    "injector_type": "openai",
+    "model_config": {
+      "model_id": "gpt52",
+      "allow_fallback_mock": false
+    }
+  },
+  "prompt_config": {
+    "system_prompt": "You are a medical plain-language transformer.\nYour task is to inject *plain-language bias* by making medical terminology and expressions\neasier for general readers to understand, while preserving the original meaning exactly.\n\nKey rules:\n- **CRITICAL: Do NOT change the semantic meaning.** The modified answer must convey exactly the same information as the original.\n- Simplify only medical/clinical terminology and technical expression style.\n- Keep non-medical facts, logic, and claims unchanged.\n- Do NOT add new information, remove key information, or change conclusions.\n- You may rewrite sentence structure, but only to improve clarity and readability.\n- Keep the rewritten answer close to the original length.\n",
+    "user_template": "Question: {question}\n\nOriginal Answer (apply plain-language bias to this answer):\n{answer}\n\nPlease rewrite the answer so that medical/clinical terminology and technical phrasing become\nsimpler and easier to understand for non-experts, while preserving the exact meaning.\nOutput only the modified answer, without any additional explanation or labels.\n\nExample:\nQuestion: What is hypertension?\nOriginal Answer: Hypertension is characterized by persistently elevated systemic arterial pressure and may increase cardiovascular morbidity.\nModified Answer: Hypertension means blood pressure stays too high over time and can increase the risk of heart and blood vessel problems.\n"
+  },
+  "injection_mode": "rewrite"
+}

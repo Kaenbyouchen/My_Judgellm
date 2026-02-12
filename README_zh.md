@@ -12,8 +12,8 @@
 
 ## 核心功能
 
-- ✅ **多种偏置类型**：`jargon_overloading`（术语过载）、`authority`（权威背书）、`complexity`（复杂化）
-- ✅ **多种判断后端**：Mock（离线）、OpenAI、HuggingFace、Gemini、Anthropic
+- ✅ **多种偏置类型**：`jargon_overloading`（术语过载）、`plain_language`（通俗化）、`authority`（权威背书）、`complexity`（复杂化）
+- ✅ **多种判断后端**：Mock（离线）、OpenAI、vLLM、Gemini、Anthropic
 - ✅ **支持最新模型**：Gemini 3 Pro/Flash、Claude Opus 4.5、Claude Sonnet 4.5
 - ✅ **配置驱动**：所有设置通过 YAML 文件管理
 - ✅ **成对评估**：并排比较两个答案
@@ -94,11 +94,11 @@ data:
 bias:
   enabled: true
   type: "jargon_overloading"  # jargon_overloading, authority, complexity
-  injector_type: "mock"  # mock, openai, hf, gemini
+  injector_type: "mock"  # mock, openai, vllm, gemini
 
 # 判断模型
 judge:
-  provider: "mock"  # mock, openai, hf, gemini, anthropic
+  provider: "mock"  # mock, openai, vllm, gemini, anthropic
   model_id: "mock-judge-v1"
 
 # 评估配置
@@ -111,9 +111,9 @@ evaluation:
 
 | 参数 | 说明 | 选项 |
 |------|------|------|
-| `bias.type` | 要注入的偏置类型 | `jargon_overloading`, `authority`, `complexity` |
-| `bias.injector_type` | 偏置注入方式 | `mock`（离线）, `openai`, `hf`, `gemini` |
-| `judge.provider` | 判断后端 | `mock`, `openai`, `hf`, `gemini`, `anthropic` |
+| `bias.type` | 要注入的偏置类型 | `jargon_overloading`, `plain_language`, `authority`, `complexity` |
+| `bias.injector_type` | 偏置注入方式 | `mock`（离线）, `openai`, `vllm`, `gemini` |
+| `judge.provider` | 判断后端 | `mock`, `openai`, `vllm`, `gemini`, `anthropic` |
 | `judge.model_id` | 使用的具体模型 | 见 `configs/models.yaml` |
 
 ## 支持的模型
@@ -135,7 +135,7 @@ evaluation:
 - `gemini3_pro` → `gemini-3-pro` ⭐ **最新**
 - `gemini3_flash` → `gemini-3-flash` ⭐ **最新**
 
-### HuggingFace
+### vLLM
 
 #### General SOTA (通用 SOTA 模型)
 - `qwen3_next_80b_a3b_instruct` → `Qwen/Qwen3-Next-80B-A3B-Instruct`
@@ -147,9 +147,8 @@ evaluation:
 - `medical_qwen3_14b_1218` → `zjydiary/Medical-Qwen3-14B-1218` (ModelScope)
 
 #### Judge Expert (判断专家模型)
-- `m_prometheus_3b` → `Unbabel/M-Prometheus-3B`
-- `m_prometheus_7b` → `Unbabel/M-Prometheus-7B`
-- `m_prometheus_14b` → `Unbabel/M-Prometheus-14B`
+- `prometheus2_7b` → `prometheus-eval/prometheus-7b-v2.0`
+- `prometheus2_8x7b` → `prometheus-eval/prometheus-8x7b-v2.0`
 
 #### Small Models (小型模型)
 - `gemma3_4b` → `google/gemma-3-4b-it`

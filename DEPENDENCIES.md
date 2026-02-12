@@ -33,29 +33,21 @@ pip install openai
 
 **说明**：如果未安装，代码会自动回退到 mock 模式，不会报错。
 
-### 2. HuggingFace Transformers（用于本地开源模型）
-
-```bash
-pip install transformers torch
-```
-
-**用途**：
-- 作为 JudgeLLM（`judge.type: "hf"`）
-- 作为 Bias 注入的 GenAI（`bias.injector_type: "hf"`）
-
-**代码位置**：`src/models/hf_client.py`
-
-**说明**：
-- 如果未安装，代码会自动回退到 mock 模式
-- 如果使用 GPU，需要安装支持 CUDA 的 PyTorch 版本
-
-### 3. vLLM（用于高效推理，当前未实现）
+### 2. vLLM（用于本地开源模型）
 
 ```bash
 pip install vllm
 ```
 
-**状态**：配置文件中已有占位，但代码中尚未实现。
+**用途**：
+- 作为 JudgeLLM（`judge.type: "vllm"`）
+- 作为 Bias 注入的 GenAI（`bias.injector_type: "vllm"`）
+
+**代码位置**：`src/models/vllm_client.py`
+
+**说明**：
+- 如果未安装，代码会自动回退到 mock 模式
+- vLLM 主要面向 GPU 推理，确保环境具备 CUDA 驱动
 
 ## 📦 标准库（无需安装）
 
@@ -80,7 +72,7 @@ pip install vllm
 pip list | grep -E "pyyaml|jsonlines|numpy|pandas|tqdm|loguru|matplotlib|seaborn"
 
 # 检查可选依赖
-pip list | grep -E "openai|transformers|torch"
+pip list | grep -E "openai|vllm"
 ```
 
 ### 验证安装
@@ -101,8 +93,8 @@ pip install -r requirements.txt
 # 安装 OpenAI（用于 GPT-4 等）
 pip install openai
 
-# 安装 HuggingFace（用于本地模型）
-pip install transformers torch
+# 安装 vLLM（用于本地模型）
+pip install vllm
 
 # 如果需要 GPU 支持
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
@@ -124,7 +116,7 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
    export OPENAI_API_KEY="your-api-key"
    ```
 
-2. **使用 HuggingFace 模型**：
+2. **使用 vLLM 模型**：
    ```bash
    pip install transformers torch
    ```

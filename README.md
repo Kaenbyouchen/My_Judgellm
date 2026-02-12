@@ -12,8 +12,8 @@ This project tests whether judge models can still identify the best answer when 
 
 ## Features
 
-- ✅ **Multiple bias types**: `jargon_overloading`, `authority`, `complexity`
-- ✅ **Multiple judge backends**: Mock (offline), OpenAI, HuggingFace, Gemini, Anthropic
+- ✅ **Multiple bias types**: `jargon_overloading`, `plain_language`, `authority`, `complexity`
+- ✅ **Multiple judge backends**: Mock (offline), OpenAI, vLLM, Gemini, Anthropic
 - ✅ **Latest models supported**: Gemini 3 Pro/Flash, Claude Opus 4.5, Claude Sonnet 4.5
 - ✅ **Configuration-driven**: All settings in YAML files
 - ✅ **Pairwise evaluation**: Compare two answers side-by-side
@@ -94,11 +94,11 @@ data:
 bias:
   enabled: true
   type: "jargon_overloading"  # jargon_overloading, authority, complexity
-  injector_type: "mock"  # mock, openai, hf, gemini
+  injector_type: "mock"  # mock, openai, vllm, gemini
 
 # Judge Model
 judge:
-  provider: "mock"  # mock, openai, hf, gemini, anthropic
+  provider: "mock"  # mock, openai, vllm, gemini, anthropic
   model_id: "mock-judge-v1"
 
 # Evaluation
@@ -111,9 +111,9 @@ evaluation:
 
 | Parameter | Description | Options |
 |-----------|-------------|---------|
-| `bias.type` | Bias style to inject | `jargon_overloading`, `authority`, `complexity` |
-| `bias.injector_type` | How to inject bias | `mock` (offline), `openai`, `hf`, `gemini` |
-| `judge.provider` | Judge backend | `mock`, `openai`, `hf`, `gemini`, `anthropic` |
+| `bias.type` | Bias style to inject | `jargon_overloading`, `plain_language`, `authority`, `complexity` |
+| `bias.injector_type` | How to inject bias | `mock` (offline), `openai`, `vllm`, `gemini` |
+| `judge.provider` | Judge backend | `mock`, `openai`, `vllm`, `gemini`, `anthropic` |
 | `judge.model_id` | Specific model to use | See `configs/models.yaml` |
 
 ## Supported Models
@@ -135,7 +135,7 @@ The framework supports multiple model providers. Available models are configured
 - `gemini3_pro` → `gemini-3-pro` ⭐ **Latest**
 - `gemini3_flash` → `gemini-3-flash` ⭐ **Latest**
 
-### HuggingFace
+### vLLM
 
 #### General SOTA (通用 SOTA 模型)
 - `qwen3_next_80b_a3b_instruct` → `Qwen/Qwen3-Next-80B-A3B-Instruct`
@@ -147,9 +147,8 @@ The framework supports multiple model providers. Available models are configured
 - `medical_qwen3_14b_1218` → `zjydiary/Medical-Qwen3-14B-1218` (ModelScope)
 
 #### Judge Expert (判断专家模型)
-- `m_prometheus_3b` → `Unbabel/M-Prometheus-3B`
-- `m_prometheus_7b` → `Unbabel/M-Prometheus-7B`
-- `m_prometheus_14b` → `Unbabel/M-Prometheus-14B`
+- `prometheus2_7b` → `prometheus-eval/prometheus-7b-v2.0`
+- `prometheus2_8x7b` → `prometheus-eval/prometheus-8x7b-v2.0`
 
 #### Small Models (小型模型)
 - `gemma3_4b` → `google/gemma-3-4b-it`

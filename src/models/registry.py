@@ -12,6 +12,7 @@ from .openai_client import OpenAIModel
 from .anthropic_client import AnthropicModel
 from .gemini_client import GeminiModel
 from .hf_client import HuggingFaceModel
+from .vllm_client import VLLMModel
 
 
 class ModelRegistry:
@@ -23,6 +24,7 @@ class ModelRegistry:
         "anthropic": AnthropicModel,
         "gemini": GeminiModel,
         "hf": HuggingFaceModel,
+        "vllm": VLLMModel,
     }
 
     # A "model pool" loaded from configs/models.yaml.
@@ -86,7 +88,7 @@ class ModelRegistry:
         - Old models.yaml: models[provider] is a flat config dict (we treat model_id as the actual model name)
 
         Args:
-            provider: e.g. "openai", "hf", "mock"
+            provider: e.g. "openai", "vllm", "mock"
             model_id: a stable identifier in experiment.yaml (new) or an actual model name (old)
             overrides: optional per-run overrides (e.g. allow_fallback_mock)
 
@@ -151,7 +153,7 @@ class ModelRegistry:
         Create a model instance.
         
         Args:
-            model_type: Type of model ("mock", "openai", "hf")
+            model_type: Type of model ("mock", "openai", "vllm")
             model_name: Name of the model (backward compatible) OR model_id (when using model pool)
             config: Model configuration overrides (optional). If a model pool is set, the final config is:
                 models.yaml[model_type][model_name] (or flat models.yaml[model_type]) merged with overrides.

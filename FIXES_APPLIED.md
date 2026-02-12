@@ -10,12 +10,12 @@
 
 **修复**：
 - 修改 `parse_judge_spec()` 使用 `ModelRegistry.infer_provider_from_model_id()` 从 `models.yaml` 推断
-- 添加 fallback 逻辑：如果无法推断，对于未知模型默认使用 `hf`（因为大部分未匹配的模型是 HF 模型）
+- 添加 fallback 逻辑：如果无法推断，对于未知模型默认使用 `vllm`（因为大部分未匹配的模型是开源模型）
 
 **验证**：
 ```bash
-✓ qwen3_4b_instruct -> ('hf', 'qwen3_4b_instruct')
-✓ gemma3_4b -> ('hf', 'gemma3_4b')
+✓ qwen3_4b_instruct -> ('vllm', 'qwen3_4b_instruct')
+✓ gemma3_4b -> ('vllm', 'gemma3_4b')
 ✓ gpt4omini -> ('openai', 'gpt4omini')
 ✓ gemini3_pro -> ('gemini', 'gemini3_pro')
 ```
