@@ -3,7 +3,6 @@ dataset_types:
   - "emotional_support"
   - "general_health_qa"
   - "non_medical_qa"
-  - "test_dummy"
 
 datasets:
   medical_eval_sphere:

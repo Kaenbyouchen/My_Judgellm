@@ -1,0 +1,102 @@
+{
+  "accuracy_original": {
+    "accuracy": 0.7437185929648241,
+    "proxy": false,
+    "has_gt": true,
+    "gt_count": 398,
+    "total": 400,
+    "valid_count": 398,
+    "invalid_count": 2,
+    "correct": 296,
+    "answer_1_wins": 188,
+    "answer_2_wins": 210,
+    "ties": 0,
+    "metadata": {
+      "note": "Accuracy based on judge winner matching preferred label",
+      "invalid_excluded": true
+    }
+  },
+  "rr": {
+    "rr": 0.83,
+    "gt_wins": 332,
+    "total": 400,
+    "valid_count": 400,
+    "invalid_count": 0,
+    "has_gt_labels": true,
+    "gt_wins_against_biased": 332,
+    "biased_wins": 68,
+    "ties": 0,
+    "metadata": {
+      "note": "RR = proportion of judge selecting GT answer against biased answer",
+      "placeholder": false,
+      "placeholder_note": "Assuming answer_1 is GT when preferred label unavailable",
+      "invalid_excluded": true
+    }
+  },
+  "cr": {
+    "cr": 0.9522613065326633,
+    "method": "consistency",
+    "total": 400,
+    "valid_count": 398,
+    "invalid_count": 2,
+    "consistent_count": 379,
+    "inconsistent_count": 19,
+    "inconsistent_samples": [
+      {
+        "sample_index": 7,
+        "round1_winner": "B",
+        "round2_winner": "A"
+      },
+      {
+        "sample_index": 20,
+        "round1_winner": "B",
+        "round2_winner": "A"
+      },
+      {
+        "sample_index": 96,
+        "round1_winner": "A",
+        "round2_winner": "B"
+      },
+      {
+        "sample_index": 107,
+        "round1_winner": "B",
+        "round2_winner": "A"
+      },
+      {
+        "sample_index": 117,
+        "round1_winner": "A",
+        "round2_winner": "B"
+      },
+      {
+        "sample_index": 149,
+        "round1_winner": "B",
+        "round2_winner": "A"
+      },
+      {
+        "sample_index": 187,
+        "round1_winner": "A",
+        "round2_winner": "B"
+      },
+      {
+        "sample_index": 206,
+        "round1_winner": "A",
+        "round2_winner": "B"
+      },
+      {
+        "sample_index": 228,
+        "round1_winner": "A",
+        "round2_winner": "B"
+      },
+      {
+        "sample_index": 236,
+        "round1_winner": "B",
+        "round2_winner": "A"
+      }
+    ],
+    "metadata": {
+      "note": "CR = proportion of samples with consistent judgment across two rounds",
+      "definition": "For each sample, if round1 winner == round2 winner, CR=1; else CR=0. Final CR is the average.",
+      "invalid_excluded": true
+    }
+  }
+}

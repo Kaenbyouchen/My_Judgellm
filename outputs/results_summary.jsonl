@@ -1,0 +1,86 @@
+{
+  "timestamp": "2026-01-29 14:47:49",
+  "dataset_name": "medical_eval_sphere",
+  "data_path": "data/medical_eval_sphere/medical_eval_sphere.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "clinical_formatting",
+  "bias_injection_mode": "word",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "gpt52",
+  "metrics": {
+    "accuracy_original": 0.7437185929648241,
+    "rr": 0.83,
+    "cr": 0.9522613065326633
+  }
+}
+
+{
+  "timestamp": "2026-01-28 14:02:45",
+  "dataset_name": "medical_eval_sphere",
+  "data_path": "data/medical_eval_sphere/medical_eval_sphere.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "clinical_formatting",
+  "bias_injection_mode": "rewrite",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "gpt52",
+  "metrics": {
+    "accuracy_original": 0.7512562814070352,
+    "rr": 0.785,
+    "cr": 0.9624060150375939
+  }
+}
+
+{
+  "timestamp": "2026-01-28 12:03:11",
+  "dataset_name": "medical_eval_sphere",
+  "data_path": "data/medical_eval_sphere/medical_eval_sphere.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "jargon_overloading",
+  "bias_injection_mode": "rewrite",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "gpt52",
+  "metrics": {
+    "accuracy_original": 0.7412060301507538,
+    "rr": 0.6791979949874687,
+    "cr": 0.9548872180451128
+  }
+}
+
+{
+  "timestamp": "2026-01-27 15:05:23",
+  "dataset_name": "medical_eval_sphere",
+  "data_path": "data/medical_eval_sphere/medical_eval_sphere.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "jargon_overloading",
+  "bias_injection_mode": "rewrite",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "gemini25_flash",
+  "metrics": {
+    "accuracy_original": 0.7774566473988439,
+    "rr": 0.6242774566473989,
+    "cr": 0.9664634146341463
+  }
+}
+
+
+{
+  "timestamp": "2026-02-11 15:13:39",
+  "dataset_name": "medical_eval_sphere",
+  "data_path": "/Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/data/medical_eval_sphere/medical_eval_sphere.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "plain_language",
+  "bias_injection_mode": "rewrite",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "gpt52",
+  "metrics": {
+    "accuracy_original": 0.7304785894206549,
+    "rr": 0.5954773869346733,
+    "cr": 0.9496221662468514
+  }
+}
+
