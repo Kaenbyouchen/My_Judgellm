@@ -12,6 +12,7 @@ batch:
   # 指定评测模型（judge），可一次配置多个
   # 推荐使用 judge_models（列表）；judge_model 保留兼容旧写法
   judge_models:
+    - "gpt52"
     - "medgemma_4b"
     - "biomistral_7b"
     - "prometheus2_7b"
