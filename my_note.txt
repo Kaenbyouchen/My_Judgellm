@@ -1,0 +1,26 @@
+git status
+git add -A
+git commit -m "3.1 starting adding more datasets and deploying opensource models"
+git push origin main
+
+git remote -v
+git pull origin main
+conda activate Judgellm
+
+2.11
+更换jargon_overloading为仅替换医学术语
+将m-prometheus换为prometheus v2.0
+huggingface全部模型替换到vllm
+添加dataset分类，在output json中同样输出
+
+2.4
+添加两种版本的bias_injected datasets
+添加统一显示result的json
+1.31
+添加批量生成bias版本数据集的功能
+
+1.16
+添加复用bias数据集功能（已确认）
+添加不同模型（open source model未确认）
+添加脚本批量evaluate多个judgellm（未确认）
+添加断点续训功能（未确认）

@@ -20,7 +20,6 @@ __pycache__/
 # VSCode / Cursor
 .vscode/
 
-my_note.txt
 
 # Downloaded models (keep Python source files)
 # Ignore downloaded model directories in src/models/
