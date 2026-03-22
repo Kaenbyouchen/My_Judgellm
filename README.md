@@ -176,7 +176,8 @@ Ruishan_Judgellm_Ours/
 ├── configs/              # Configuration files
 │   ├── experiment.yaml   # Main experiment config
 │   ├── models.yaml       # Model registry
-│   └── prompts.yaml      # Prompt templates
+│   ├── MCQ_prompt.yaml   # Base prompt templates (MCQ/default)
+│   └── *_prompt.yaml     # Category-specific prompt overrides
 ├── data/                 # Datasets
 │   └── dummy/            # Test data
 ├── outputs/              # Experiment results

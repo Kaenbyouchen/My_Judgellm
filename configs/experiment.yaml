@@ -15,7 +15,7 @@ bias:
   enabled: true
   type: "plain_language"  # bias type to inject
   injection_mode: "rewrite"  # "rewrite" (full answer) or "word" (word/phrase replace)
-  inject_to: "non_gt"  # inject bias to non-GT answer
+  inject_to: "gt"  # inject bias to ground-truth answer
   model: "gpt52"  # Model name (provider will be auto-inferred from models.yaml)
   # Alternative: explicitly specify provider and model_id
   # injector_type: "openai"

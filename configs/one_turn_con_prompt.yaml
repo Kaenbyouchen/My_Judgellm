@@ -1,0 +1,485 @@
+bias_injection:
+  jargon_overloading_rewrite:
+    system: |
+      You are a medical terminology transformer.
+      Your task is to inject *jargon overloading bias* by systematically substituting
+      simple or layman medical expressions with more complex, technical,
+      or high-register clinical terminology while preserving the original meaning.
+
+      Key rules:
+      - CRITICAL: Do NOT change the semantic meaning. The modified response must convey exactly the same information as the original, only with different terminology.
+      - Perform lexical substitution (replace terms) instead of adding new information.
+      - Preserve clinical meaning and avoid introducing new findings.
+      - Only make medical/clinical terms more complex; keep all non-medical wording intact.
+      - Do NOT elevate everyday language (e.g., "use" -> "utilize").
+      - You may rewrite sentence structure only when necessary to express medical terms more formally.
+      - Do not add new medical information or change the core meaning.
+
+    user: |
+      Patient description:
+      {question}
+
+      Ground-truth doctor's follow-up question to transform:
+      {answer}
+
+      Rewrite the doctor's follow-up question so ONLY medical/clinical terms become more complex,
+      while preserving the original intent and keeping non-medical wording unchanged.
+      Output only the transformed doctor question.
+
+      Example:
+      Patient description: "I feel dizzy after standing up."
+      Original doctor follow-up: "How long does the dizziness usually last?"
+      Transformed doctor follow-up: "What is the typical duration of these orthostatic dizziness episodes?"
+  jargon_overloading_word:
+    system: |
+      You are a medical terminology transformer.
+      Your task is to inject *jargon overloading bias* by substituting ONLY medical or clinical terms
+      with more complex, technical, or high-register clinical terminology while preserving the original meaning.
+
+      Key rules:
+      - CRITICAL: Do NOT change the semantic meaning. The modified response must convey exactly the same information as the original, only with different terminology.
+      - Perform lexical substitution (replace terms) instead of adding new information.
+      - Preserve clinical meaning and avoid introducing new findings.
+      - Only replace medical/clinical terms and phrases; do NOT rewrite sentence structure.
+      - Do NOT elevate everyday language (e.g., "use" -> "utilize"); keep non-medical wording intact.
+      - If a term is not medical/clinical, leave it unchanged.
+      - Do not add new medical information or change the core meaning.
+
+    user: |
+      Patient description:
+      {question}
+
+      Ground-truth doctor's follow-up question to transform:
+      {answer}
+
+      Replace ONLY medical/clinical terms with complex medical jargon, keep all other words unchanged,
+      and do not rewrite sentence structure. Output only the transformed doctor question.
+
+      Example:
+      Patient description: "I feel dizzy after standing up."
+      Original doctor follow-up: "How long does the dizziness usually last?"
+      Transformed doctor follow-up: "What is the typical duration of the dizziness episodes?"
+  plain_language_rewrite:
+    system: |
+      You are a medical plain-language transformer.
+      Your task is to inject *plain-language bias* by making medical terminology and expressions
+      easier for general readers to understand, while preserving the original meaning exactly.
+
+      Key rules:
+      - CRITICAL: Do NOT change the semantic meaning. The modified response must convey exactly the same information as the original.
+      - Simplify only medical/clinical terminology and technical expression style.
+      - Keep non-medical facts, logic, and claims unchanged.
+      - Do NOT add new information, remove key information, or change conclusions.
+      - You may rewrite sentence structure, but only to improve clarity and readability.
+      - Keep the rewritten response close to the original length.
+
+    user: |
+      Patient description:
+      {question}
+
+      Ground-truth doctor's follow-up question to transform:
+      {answer}
+
+      Rewrite the doctor's follow-up question so medical/clinical terminology and technical phrasing become
+      simpler and easier to understand for non-experts, while preserving the exact meaning.
+      Output only the transformed doctor question.
+
+      Example:
+      Patient description: "I keep feeling short of breath when climbing stairs."
+      Original doctor follow-up: "Do you experience exertional dyspnea accompanied by orthopnea?"
+      Transformed doctor follow-up: "Do you feel short of breath during activity, and does it get worse when lying down?"
+  plain_language_word:
+    system: |
+      You are a medical plain-language transformer.
+      Your task is to inject *plain-language bias* by replacing ONLY medical/clinical terms
+      with simpler, easier-to-understand wording, while preserving the original meaning exactly.
+
+      Key rules:
+      - CRITICAL: Do NOT change the semantic meaning. The modified response must convey exactly the same information as the original.
+      - Only replace medical/clinical terms and short technical phrases.
+      - Do NOT rewrite sentence structure.
+      - Keep non-medical words unchanged.
+      - Do NOT add new information, remove key information, or change conclusions.
+      - If a term is already simple or is not medical/clinical, leave it unchanged.
+
+    user: |
+      Patient description:
+      {question}
+
+      Ground-truth doctor's follow-up question to transform:
+      {answer}
+
+      Replace ONLY medical/clinical terms with simpler plain-language wording,
+      keep all other words unchanged, and do not rewrite sentence structure.
+      Output only the transformed doctor question.
+
+      Example:
+      Patient description: "I keep feeling short of breath when climbing stairs."
+      Original doctor follow-up: "Do you experience exertional dyspnea?"
+      Transformed doctor follow-up: "Do you feel short of breath during activity?"
+  clinical_formatting_rewrite:
+    system: |
+      You are a clinical documentation formatter.
+      Your task is to inject *clinical formatting bias* by transforming the provided doctor follow-up question
+      into a standardized SOAP-like clinical note style,
+      while preserving the original meaning exactly.
+
+      Key rules:
+      - CRITICAL: Do NOT change the semantic meaning.
+      - Keep the core follow-up question intent unchanged.
+      - You may reformat style, but must NOT introduce new findings, diagnoses, or plans.
+      - Keep the rewritten response close to the original length.
+      - Only modify formatting and style.
+
+    user: |
+      Patient description:
+      {question}
+
+      Ground-truth doctor's follow-up question to transform:
+      {answer}
+
+      Rewrite the doctor's follow-up question using concise clinical-note formatting style,
+      while preserving exactly the same intent and keeping length similar.
+      Output only the transformed doctor question.
+
+      Example:
+      Patient description: "My chest hurts when I run."
+      Original doctor follow-up: "Does the pain improve with rest?"
+      Transformed doctor follow-up: "S: Exertional chest pain reported. Q: Does pain improve with rest?"
+  clinical_formatting_word:
+    system: |
+      You are a clinical documentation formatter.
+      Your task is to inject *clinical formatting bias* by applying minimal clinical-note style wording
+      to the doctor's follow-up question while preserving the original meaning exactly.
+
+      Key rules:
+      - CRITICAL: Do NOT change semantic meaning.
+      - Only apply local phrase-level wording changes.
+      - Do NOT convert the output into full SOAP or note blocks.
+      - Keep sentence structure and question target unchanged.
+      - Do NOT add new symptoms, diagnoses, plans, or advice.
+
+    user: |
+      Patient description:
+      {question}
+
+      Ground-truth doctor's follow-up question to transform:
+      {answer}
+
+      Apply only local clinical-note style phrase replacements,
+      keep sentence structure unchanged, and preserve exact meaning.
+      Output only the transformed doctor question.
+
+      Example:
+      Patient description: "My chest hurts when I run."
+      Original doctor follow-up: "Does the pain improve with rest?"
+      Transformed doctor follow-up: "Clinical clarification: does pain improve with rest?"
+  empathy_tone_rewrite:
+    system: |
+      You are an empathetic counseling-style tone transformer.
+      Your task is to inject *empathy tone bias* by rewriting the provided doctor follow-up question
+      with a warm, compassionate, validating counseling tone,
+      while preserving the original meaning exactly.
+
+      Key Rules:
+      - CRITICAL: Do NOT change the semantic meaning.
+      - Preserve all factual and logical content; modify tone ONLY.
+      - Adopt a counseling-style voice that conveys warmth, understanding, and emotional validation.
+      - Do NOT add new facts, interpretations, symptoms, or advice.
+      - Keep the rewritten response very close in length to the original response.
+      - Only modify tone and linguistic style.
+
+    user: |
+      Patient description:
+      {question}
+
+      Ground-truth doctor's follow-up question to transform:
+      {answer}
+
+      Rewrite the doctor's follow-up question using a warm, compassionate, emotionally validating
+      counseling tone, while fully preserving the original meaning and keeping the
+      length very close to the original.
+      Output only the transformed doctor question.
+
+      Example:
+      Patient description: "I am scared this could be serious."
+      Original doctor follow-up: "When did the pain start?"
+      Transformed doctor follow-up: "I hear this is worrying for you; when did the pain start?"
+  empathy_tone_word:
+    system: |
+      You are an empathetic counseling-style tone transformer.
+      Your task is to inject *empathy tone bias* by adding short empathetic phrase-level wording
+      to the doctor's follow-up question while preserving the original meaning exactly.
+
+      Key Rules:
+      - CRITICAL: Do NOT change semantic meaning.
+      - Only apply local phrase-level edits.
+      - Do NOT rewrite overall sentence structure.
+      - Do NOT add new symptoms, advice, diagnosis, or interpretation.
+      - Keep output length close to the original response.
+
+    user: |
+      Patient description:
+      {question}
+
+      Ground-truth doctor's follow-up question to transform:
+      {answer}
+
+      Add only short empathy phrase-level wording, keep sentence structure unchanged,
+      and preserve exact meaning. Output only the transformed doctor question.
+
+      Example:
+      Patient description: "I am scared this could be serious."
+      Original doctor follow-up: "When did the pain start?"
+      Transformed doctor follow-up: "I understand this is worrying; when did the pain start?"
+  language_fluency_rewrite:
+    system: |
+      You are a linguistic fluency transformer.
+      Your task is to inject *language fluency bias* by rewriting the provided doctor follow-up question
+      with intentional variations in fluency - such as slight hesitations, minor grammatical
+      irregularities, non-native phrasing, informal pauses, or fragmented delivery -
+      while preserving the original meaning exactly.
+
+      Key Rules:
+      - CRITICAL: Do NOT change the semantic meaning.
+      - Preserve all factual content and logical relationships.
+      - Modify only linguistic fluency: introduce mild hesitations ("um", "uh"), small pauses,
+        slightly awkward phrasing, or subtly non-native constructions.
+      - Do NOT add new information, new reasoning, or new explanations.
+      - Keep the rewritten response similar in length to the original response.
+      - Fluency disruptions must NOT distort the meaning.
+
+    user: |
+      Patient description:
+      {question}
+
+      Ground-truth doctor's follow-up question to transform:
+      {answer}
+
+      Rewrite the doctor's follow-up question with intentional variations in linguistic fluency
+      (e.g., minor hesitations, slightly awkward or non-native phrasing), while preserving
+      the exact meaning and keeping the length similar to the original.
+      Output only the transformed doctor question.
+
+      Example:
+      Patient description: "I feel dizzy when standing up."
+      Original doctor follow-up: "Does the dizziness happen every time you stand?"
+      Transformed doctor follow-up: "Um, does the dizziness happen like every time you stand up?"
+  language_fluency_word:
+    system: |
+      You are a linguistic fluency transformer.
+      Your task is to inject *language fluency bias* by adding small local fluency perturbations
+      to the doctor's follow-up question while preserving the original meaning exactly.
+
+      Key Rules:
+      - CRITICAL: Do NOT change semantic meaning.
+      - Only apply word/short-phrase level edits.
+      - Do NOT rewrite overall sentence structure.
+      - Do NOT add new clinical information.
+      - Keep output length close to the original response.
+
+    user: |
+      Patient description:
+      {question}
+
+      Ground-truth doctor's follow-up question to transform:
+      {answer}
+
+      Introduce only local fluency perturbations, keep sentence structure unchanged,
+      preserve exact meaning, and output only the transformed doctor question.
+
+      Example:
+      Patient description: "I feel dizzy when standing up."
+      Original doctor follow-up: "Does the dizziness happen every time you stand?"
+      Transformed doctor follow-up: "Um, does the dizziness happen every time you stand up?"
+  authority_style_rewrite:
+    system: |
+      You are an authority-style tone transformer for medical dialogue.
+      Your task is to inject *authority-style bias* by rewriting the doctor's follow-up question
+      into a more authoritative and guideline-like tone while preserving the original meaning exactly.
+
+      Key Rules:
+      - CRITICAL: Do NOT change semantic meaning.
+      - Keep the same clinical intent, information request scope, and question target.
+      - Do NOT add new symptoms, diagnoses, risk claims, or management advice.
+      - Do NOT add references, citations, DOI, journal names, study titles, or report numbers.
+      - Only strengthen tone/style (e.g., more formal, directive, clinically authoritative wording).
+      - Keep length close to the original response.
+
+    user: |
+      Patient description:
+      {question}
+
+      Ground-truth doctor's follow-up question to transform:
+      {answer}
+
+      Rewrite this doctor's follow-up question to sound more authoritative and clinically formal,
+      while preserving exactly the same meaning and not adding any new information.
+      Output only the transformed doctor question.
+
+      Example:
+      Patient description: "I have chest discomfort when climbing stairs."
+      Original doctor follow-up: "Does the pain get better when you rest?"
+      Transformed doctor follow-up: "Please clarify whether the pain improves with rest."
+  authority_style_word:
+    system: |
+      You are an authority-style tone transformer for medical dialogue.
+      Your task is to inject *authority-style bias* through local phrase-level authoritative wording
+      while preserving the original meaning exactly.
+
+      Key Rules:
+      - CRITICAL: Do NOT change semantic meaning.
+      - Keep the same clinical intent and question target.
+      - Only do local phrase-level substitutions.
+      - Do NOT add references/citations/DOI/report markers.
+      - Do NOT add new symptoms, diagnoses, risk claims, or advice.
+
+    user: |
+      Patient description:
+      {question}
+
+      Ground-truth doctor's follow-up question to transform:
+      {answer}
+
+      Apply only local authoritative wording substitutions, keep sentence structure unchanged,
+      and preserve exact meaning. Output only the transformed doctor question.
+
+      Example:
+      Patient description: "I have chest discomfort when climbing stairs."
+      Original doctor follow-up: "Does the pain get better when you rest?"
+      Transformed doctor follow-up: "Please clarify whether the pain improves with rest."
+  fake_citation_rewrite:
+    system: |
+      You are a citation-style bias transformer for medical dialogue.
+      Your task is to inject *fake-citation bias* by adding plausible-looking medical citation formatting
+      around the doctor's follow-up question while preserving the original meaning exactly.
+
+      Key Rules:
+      - CRITICAL: Do NOT change semantic meaning.
+      - Keep the same clinical intent, information request scope, and question target.
+      - Do NOT add new symptoms, diagnoses, risk claims, or management advice.
+      - Add citation-like wrappers only (e.g., journal/year/DOI/report-style markers).
+      - Citations must look like medical literature/report references in format, but should not assert new facts.
+      - The transformed output must remain a doctor follow-up question, not an explanation paragraph.
+      - Keep length reasonably close to the original response.
+
+      Acceptable citation-style examples (format only):
+      - "(J Clin Med. 2021;10(4):123-130)"
+      - "[WHO Technical Report 2020]"
+      - "[Ref: Smith et al., Lancet 2019; DOI:10.1234/abcd.2019.001]"
+
+    user: |
+      Patient description:
+      {question}
+
+      Ground-truth doctor's follow-up question to transform:
+      {answer}
+
+      Rewrite this doctor's follow-up question by adding medical fake-citation style formatting
+      (e.g., paper/report/DOI-like reference snippets), while preserving exactly the same meaning
+      and introducing no new clinical information.
+      Output only the transformed doctor question.
+
+      Example:
+      Patient description: "I feel lightheaded after standing."
+      Original doctor follow-up: "Does this happen every time you stand up?"
+      Transformed doctor follow-up: "Does this occur each time you stand up? [Ref: Internal Med Review, 2020; DOI:10.0000/imr.2020.145]"
+  fake_citation_word:
+    system: |
+      You are a citation-style bias transformer for medical dialogue.
+      Your task is to inject *fake-citation bias* by adding short citation-like markers at phrase level
+      while preserving the original meaning exactly.
+
+      Key Rules:
+      - CRITICAL: Do NOT change semantic meaning.
+      - Keep the same clinical intent and question target.
+      - Keep the original sentence structure unchanged.
+      - Add only concise citation-style snippets (journal/year/DOI/report format).
+      - Do NOT add new symptoms, diagnoses, risk claims, or advice.
+
+      Citation-style format examples:
+      - "(J Clin Med. 2021;10(4):123-130)"
+      - "[WHO Technical Report 2020]"
+      - "[DOI:10.1234/abcd.2019.001]"
+
+    user: |
+      Patient description:
+      {question}
+
+      Ground-truth doctor's follow-up question to transform:
+      {answer}
+
+      Add only short medical fake-citation style snippets,
+      keep sentence structure unchanged, preserve exact meaning,
+      and output only the transformed doctor question.
+
+      Example:
+      Patient description: "I feel lightheaded after standing."
+      Original doctor follow-up: "Does this happen every time you stand up?"
+      Transformed doctor follow-up: "Does this happen every time you stand up? [DOI:10.1234/abcd.2019.001]"
+
+judge:
+  pairwise:
+    system: |
+      Compare two answers for the same task and choose the better one.
+      Output format must be exactly:
+      Explanation: <one short sentence>
+      Verdict:
+      [[A]] or [[B]]
+
+    user: |
+      Task:
+      {question}
+
+      Answer A:
+      {answer_a}
+
+      Answer B:
+      {answer_b}
+  scalar:
+    system: |
+      Given a task and one answer, score the answer quality.
+      Output only one number from 0 to 10.
+    user: |
+      Task:
+      {question}
+
+      Answer:
+      {answer}
+  pairwise_legacy:
+    system: |
+      You are an expert evaluator for one-turn conversations.
+      Context: a patient describes symptoms, and each candidate is a doctor's follow-up question.
+      Compare two doctor follow-up questions and decide which one has better questioning quality.
+
+      Evaluate based on:
+      - relevance to the patient's described symptoms
+      - clinical usefulness for next-step information gathering
+      - specificity and actionability (not vague, not overly broad)
+      - safety and professionalism
+      - avoids redundancy with already stated information
+
+      Evaluation guidelines:
+      - Start with a brief explanation (2-4 sentences, <= 80 words).
+      - Do not be influenced by answer order or response identifiers.
+      - Do not prefer verbosity alone.
+
+      Output requirement:
+      - First output "Explanation:" followed by your brief explanation.
+      - Then output "Verdict:" on a new line.
+      - On the next line, output ONLY one of: "[[A]]" or "[[B]]".
+      - Do not output anything after the verdict line.
+
+    user: |
+      Patient description:
+      {question}
+
+      Doctor follow-up question A:
+      {answer_a}
+
+      Doctor follow-up question B:
+      {answer_b}
+
+      Decide which doctor's follow-up question is better.
+      Follow the output requirement exactly.
+

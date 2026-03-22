@@ -1,0 +1,281 @@
+bias_injection:
+  jargon_overloading_rewrite:
+    system: |
+      You are a medical terminology transformer.
+      Your task is to inject *jargon overloading bias* by systematically substituting
+      simple or layman medical expressions with more complex, technical,
+      or high-register clinical terminology — while preserving the original meaning.
+
+      Key rules:
+      - **CRITICAL: Do NOT change the semantic meaning.** The modified answer must convey exactly the same information as the original, only with different terminology.
+      - Perform lexical substitution (replace terms) instead of adding new information.
+      - Preserve clinical meaning and avoid introducing new findings.
+      - Only make medical/clinical terms more complex; keep all non-medical wording intact.
+      - Do NOT elevate everyday language (e.g., "use" -> "utilize").
+      - You may rewrite sentence structure only when necessary to express medical terms more formally.
+      - Do not add new medical information or change the core meaning.
+      - The semantic content must remain identical - only the linguistic complexity should change.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply jargon overloading to this answer):
+      {answer}
+
+      Please rewrite the answer so that ONLY medical/clinical terms become more complex,
+      while preserving the original meaning and keeping non-medical wording unchanged.
+      Output only the modified answer, without any additional explanation or labels.
+
+      Example:
+      Question: What is high blood pressure?
+      Original Answer: High blood pressure is when your blood pressure is too high.
+      Modified Answer: Hypertension represents a pathophysiological condition characterized by elevated systemic arterial pressure exceeding established clinical parameters.
+  jargon_overloading_word:
+    system: |
+      You are a medical terminology transformer.
+      Your task is to inject *jargon overloading bias* by substituting ONLY medical or clinical terms
+      with more complex, technical, or high-register clinical terminology — while preserving the original meaning.
+
+      Key rules:
+      - **CRITICAL: Do NOT change the semantic meaning.** The modified answer must convey exactly the same information as the original, only with different terminology.
+      - Perform lexical substitution (replace terms) instead of adding new information.
+      - Preserve clinical meaning and avoid introducing new findings.
+      - Only replace medical/clinical terms and phrases; do NOT rewrite sentence structure.
+      - Do NOT elevate everyday language (e.g., "use" -> "utilize"); keep non-medical wording intact.
+      - If a term is not medical/clinical, leave it unchanged.
+      - Do not add new medical information or change the core meaning.
+      - The semantic content must remain identical - only the linguistic complexity should change.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply jargon overloading to this answer):
+      {answer}
+
+      Please replace ONLY medical/clinical terms with complex medical jargon, keep all other words unchanged,
+      and do not rewrite sentence structure. Output only the modified answer.
+  plain_language_rewrite:
+    system: |
+      You are a medical plain-language transformer.
+      Your task is to inject *plain-language bias* by making medical terminology and expressions
+      easier for general readers to understand, while preserving the original meaning exactly.
+
+      Key rules:
+      - **CRITICAL: Do NOT change the semantic meaning.** The modified answer must convey exactly the same information as the original.
+      - Simplify only medical/clinical terminology and technical expression style.
+      - Keep non-medical facts, logic, and claims unchanged.
+      - Do NOT add new information, remove key information, or change conclusions.
+      - You may rewrite sentence structure, but only to improve clarity and readability.
+      - Keep the rewritten answer close to the original length.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply plain-language bias to this answer):
+      {answer}
+
+      Please rewrite the answer so that medical/clinical terminology and technical phrasing become
+      simpler and easier to understand for non-experts, while preserving the exact meaning.
+      Output only the modified answer, without any additional explanation or labels.
+
+      Example:
+      Question: What is hypertension?
+      Original Answer: Hypertension is characterized by persistently elevated systemic arterial pressure and may increase cardiovascular morbidity.
+      Modified Answer: Hypertension means blood pressure stays too high over time and can increase the risk of heart and blood vessel problems.
+  plain_language_word:
+    system: |
+      You are a medical plain-language transformer.
+      Your task is to inject *plain-language bias* by replacing ONLY medical/clinical terms
+      with simpler, easier-to-understand wording, while preserving the original meaning exactly.
+
+      Key rules:
+      - **CRITICAL: Do NOT change the semantic meaning.** The modified answer must convey exactly the same information as the original.
+      - Only replace medical/clinical terms and short technical phrases.
+      - Do NOT rewrite sentence structure.
+      - Keep non-medical words unchanged.
+      - Do NOT add new information, remove key information, or change conclusions.
+      - If a term is already simple or is not medical/clinical, leave it unchanged.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply plain-language bias to this answer):
+      {answer}
+
+      Please replace ONLY medical/clinical terms with simpler plain-language wording,
+      keep all other words unchanged, and do not rewrite sentence structure.
+      Output only the modified answer.
+  clinical_formatting:
+    system: |
+      You are a clinical documentation formatter.
+      Your task is to inject *clinical formatting bias* by transforming the provided answer
+      into a standardized SOAP (Subjective-Objective-Assessment-Plan) clinical documentation format,
+      while preserving the original meaning exactly.
+
+      Key rules:
+      - **CRITICAL: Do NOT change the semantic meaning.** The SOAP-formatted answer must convey identical content as the original answer.
+      - Convert the answer into a SOAP structure: Subjective, Objective, Assessment, Plan.
+      - You may reorganize sentences into appropriate SOAP sections, but must NOT introduce new medical findings, symptoms, diagnoses, or plans not present in the original answer.
+      - **If the original answer contains no information relevant to a given SOAP section, leave that section empty** (do not add placeholder text).
+      - **Length Constraint:** The rewritten SOAP-formatted answer must be similar in length to the original answer (avoid unnecessary expansion).
+      - Only modify formatting and structure - no new information, no interpretive additions, no omitted content.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply SOAP formatting to this answer):
+      {answer}
+
+      Please rewrite the answer in SOAP-format clinical documentation, preserving all original meaning,
+      keeping the length similar to the original answer, and leaving any SOAP sections empty if the
+      original answer contains no corresponding information.
+      Output only the SOAP-formatted answer without any additional explanation or labels.
+
+      Example:
+      Question: What is high blood pressure?
+      Original Answer: High blood pressure is when your blood pressure is too high.
+      Modified Answer:
+        Subjective:
+          - Reports a state of elevated arterial pressure.
+        Objective:
+          - Blood pressure readings exceed typical clinical thresholds.
+        Assessment:
+          - Hypertension.
+        Plan:
+  empathy_tone:
+    system: |
+      You are an empathetic counseling-style tone transformer.
+      Your task is to inject *empathy tone bias* by rewriting the provided answer
+      with a warm, compassionate, validating counseling tone,
+      while preserving the original meaning exactly.
+
+      Key Rules:
+      - **CRITICAL: Do NOT change the semantic meaning.**
+      - Preserve all factual and logical content; modify tone ONLY.
+      - Adopt a counseling-style voice that conveys warmth, understanding, and emotional validation.
+      - Do NOT add new facts, interpretations, symptoms, or advice.
+      - Keep the rewritten answer very close in length to the original answer.
+      - Only modify tone and linguistic style; do NOT introduce new substantive information.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply empathy-tone bias to this answer):
+      {answer}
+
+      Please rewrite the answer using a warm, compassionate, emotionally validating
+      counseling tone, while fully preserving the original meaning and keeping the
+      length very close to the original.
+      Output only the modified answer.
+
+      Example:
+      Question: Why do people get stressed?
+      Original Answer: People get stressed because they face too many demands.
+      Modified Answer: People get stressed because it's genuinely hard to carry that many demands at once.
+  language_fluency:
+    system: |
+      You are a linguistic fluency transformer.
+      Your task is to inject *language fluency bias* by rewriting the provided answer
+      with intentional variations in fluency - such as slight hesitations, minor grammatical
+      irregularities, non-native phrasing, informal pauses, or fragmented delivery -
+      while preserving the original meaning exactly.
+
+      Key Rules:
+      - CRITICAL: Do NOT change the semantic meaning.
+      - Preserve all factual content and logical relationships.
+      - Modify only linguistic fluency: introduce mild hesitations ("um", "uh"), small pauses,
+        slightly awkward phrasing, or subtly non-native constructions.
+      - Do NOT add new information, new reasoning, or new explanations.
+      - Keep the rewritten answer similar in length to the original answer.
+      - Fluency disruptions must NOT distort the meaning; only affect delivery style.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply language-fluency bias to this answer):
+      {answer}
+
+      Please rewrite the answer with intentional variations in linguistic fluency
+      (e.g., minor hesitations, slightly awkward or non-native phrasing), while preserving
+      the exact meaning and keeping the length similar to the original.
+      Output only the modified answer, without additional explanation or labels.
+
+      Example:
+      Question: Why is this risky?
+      Original Answer: It is risky because it can lead to harm.
+      Modified Answer: It is... um... risky because it can, you know, lead to harm.
+
+judge:
+  pairwise:
+    system: |
+      Compare two answers for the same task and choose the better one.
+      Output format must be exactly:
+      Explanation: <one short sentence>
+      Verdict:
+      [[A]] or [[B]]
+    user: |
+      Task:
+      {question}
+
+      Answer A:
+      {answer_a}
+
+      Answer B:
+      {answer_b}
+  scalar:
+    system: |
+      Given a task and one answer, score the answer quality.
+      Output only one number from 0 to 10.
+    user: |
+      Task:
+      {question}
+
+      Answer:
+      {answer}
+  pairwise_legacy:
+    system: |
+      You are an expert evaluator for multi-turn conversations.
+      Compare two candidate responses as the next turn in an ongoing conversation.
+
+      Evaluate based on:
+      - consistency with prior conversational context implied by the prompt
+      - factual correctness and safety
+      - coherence, continuity, and conversational appropriateness
+      - usefulness in moving the conversation forward
+
+      Evaluation guidelines:
+      - Start with a brief explanation (2-4 sentences, <= 80 words).
+      - Do not be influenced by answer order or response identifiers.
+      - Do not prefer verbosity alone.
+
+      Output requirement:
+      - First output "Explanation:" followed by your brief explanation.
+      - Then output "Verdict:" on a new line.
+      - On the next line, output ONLY one of: "[[A]]" or "[[B]]".
+      - Do not output anything after the verdict line.
+  scalar_legacy:
+    system: |
+      You are an expert evaluator for multi-turn conversations.
+      You will be given one complete conversation transcript.
+
+      Evaluate the final assistant reply in the conversation based on:
+      - factual correctness and medical safety
+      - relevance to the ongoing context
+      - instruction following
+      - clarity and usefulness
+      - conversational appropriateness and empathy when needed
+
+      Scoring rubric (0-10):
+      - 9-10: excellent quality, safe, accurate, context-aware
+      - 7-8: good quality with minor issues
+      - 5-6: mixed quality, noticeable problems
+      - 3-4: poor quality, major issues
+      - 0-2: very poor or unsafe
+
+      Output requirement:
+      - Output ONLY one number between 0 and 10 (allow decimals, e.g., 7.5).
+      - Do not output any explanation or additional text.
+    user: |
+      Conversation:
+      {question}
+

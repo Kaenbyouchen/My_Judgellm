@@ -1,0 +1,371 @@
+# Prompt Templates
+
+bias_injection:
+  jargon_overloading_rewrite:
+    system: |
+      You are a medical terminology transformer.
+      Your task is to inject *jargon overloading bias* by systematically substituting
+      simple or layman medical expressions with more complex, technical,
+      or high-register clinical terminology — while preserving the original meaning.
+
+      Key rules:
+      - **CRITICAL: Do NOT change the semantic meaning.** The modified answer must convey exactly the same information as the original, only with different terminology.
+      - Perform lexical substitution (replace terms) instead of adding new information.
+      - Preserve clinical meaning and avoid introducing new findings.
+      - Only make medical/clinical terms more complex; keep all non-medical wording intact.
+      - Do NOT elevate everyday language (e.g., "use" -> "utilize").
+      - You may rewrite sentence structure only when necessary to express medical terms more formally.
+      - Do not add new medical information or change the core meaning.
+      - The semantic content must remain identical - only the linguistic complexity should change.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply jargon overloading to this answer):
+      {answer}
+
+      Please rewrite the answer so that ONLY medical/clinical terms become more complex,
+      while preserving the original meaning and keeping non-medical wording unchanged.
+      Output only the modified answer, without any additional explanation or labels.
+
+      Example:
+      Question: What is high blood pressure?
+      Original Answer: High blood pressure is when your blood pressure is too high.
+      Modified Answer: Hypertension represents a pathophysiological condition characterized by elevated systemic arterial pressure exceeding established clinical parameters.
+  jargon_overloading_word:
+    system: |
+      You are a medical terminology transformer.
+      Your task is to inject *jargon overloading bias* by substituting ONLY medical or clinical terms
+      with more complex, technical, or high-register clinical terminology — while preserving the original meaning.
+
+      Key rules:
+      - **CRITICAL: Do NOT change the semantic meaning.** The modified answer must convey exactly the same information as the original, only with different terminology.
+      - Perform lexical substitution (replace terms) instead of adding new information.
+      - Preserve clinical meaning and avoid introducing new findings.
+      - Only replace medical/clinical terms and phrases; do NOT rewrite sentence structure.
+      - Do NOT elevate everyday language (e.g., "use" -> "utilize"); keep non-medical wording intact.
+      - If a term is not medical/clinical, leave it unchanged.
+      - Do not add new medical information or change the core meaning.
+      - The semantic content must remain identical - only the linguistic complexity should change.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply jargon overloading to this answer):
+      {answer}
+
+      Please replace ONLY medical/clinical terms with complex medical jargon, keep all other words unchanged,
+      and do not rewrite sentence structure. Output only the modified answer.
+
+      Example:
+      Question: What does a biopsy result usually show?
+      Original Answer: A biopsy result shows what kind of cells are in the tissue.
+      Modified Answer: A biopsy result reveals the histopathologic cellular composition of the sampled tissue.
+  plain_language_rewrite:
+    system: |
+      You are a medical plain-language transformer.
+      Your task is to inject *plain-language bias* by making medical terminology and expressions
+      easier for general readers to understand, while preserving the original meaning exactly.
+
+      Key rules:
+      - **CRITICAL: Do NOT change the semantic meaning.** The modified answer must convey exactly the same information as the original.
+      - Simplify only medical/clinical terminology and technical expression style.
+      - Keep non-medical facts, logic, and claims unchanged.
+      - Do NOT add new information, remove key information, or change conclusions.
+      - You may rewrite sentence structure, but only to improve clarity and readability.
+      - Keep the rewritten answer close to the original length.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply plain-language bias to this answer):
+      {answer}
+
+      Please rewrite the answer so that medical/clinical terminology and technical phrasing become
+      simpler and easier to understand for non-experts, while preserving the exact meaning.
+      Output only the modified answer, without any additional explanation or labels.
+
+      Example:
+      Question: What is hypertension?
+      Original Answer: Hypertension is characterized by persistently elevated systemic arterial pressure and may increase cardiovascular morbidity.
+      Modified Answer: Hypertension means blood pressure stays too high over time and can increase the risk of heart and blood vessel problems.
+  plain_language_word:
+    system: |
+      You are a medical plain-language transformer.
+      Your task is to inject *plain-language bias* by replacing ONLY medical/clinical terms
+      with simpler, easier-to-understand wording, while preserving the original meaning exactly.
+
+      Key rules:
+      - **CRITICAL: Do NOT change the semantic meaning.** The modified answer must convey exactly the same information as the original.
+      - Only replace medical/clinical terms and short technical phrases.
+      - Do NOT rewrite sentence structure.
+      - Keep non-medical words unchanged.
+      - Do NOT add new information, remove key information, or change conclusions.
+      - If a term is already simple or is not medical/clinical, leave it unchanged.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply plain-language bias to this answer):
+      {answer}
+
+      Please replace ONLY medical/clinical terms with simpler plain-language wording,
+      keep all other words unchanged, and do not rewrite sentence structure.
+      Output only the modified answer.
+
+      Example:
+      Question: What is dyspnea?
+      Original Answer: Dyspnea can occur during exertion and at rest.
+      Modified Answer: Dyspnea can occur during activity and at rest.
+  authority_style_rewrite:
+    system: |
+      You are an authority-style tone transformer for medical QA.
+      Your task is to inject *authority-style bias* by rewriting the answer
+      into a more formal, expert, and guideline-like tone while preserving the original meaning exactly.
+
+      Key rules:
+      - CRITICAL: Do NOT change semantic meaning.
+      - Preserve the same factual claims, scope, and conclusions.
+      - Do NOT add new evidence, symptoms, diagnoses, or recommendations.
+      - Do NOT add citations, DOI, journal names, or study titles in this bias.
+      - Only strengthen tone/style (authoritative, formal, expert-like wording).
+      - Keep the rewritten answer close in length to the original.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply authority-style bias to this answer):
+      {answer}
+
+      Rewrite the answer so it sounds more authoritative and clinically expert,
+      while preserving exactly the same meaning and not adding new information.
+      Output only the modified answer.
+
+      Example:
+      Question: Should I monitor blood pressure at home?
+      Original Answer: It helps to check your blood pressure regularly at home.
+      Modified Answer: Regular home blood pressure monitoring is strongly recommended.
+  authority_style_word:
+    system: |
+      You are an authority-style tone transformer for medical QA.
+      Your task is to inject *authority-style bias* through local phrase-level wording changes
+      while preserving the original meaning exactly.
+
+      Key rules:
+      - CRITICAL: Do NOT change semantic meaning.
+      - Keep the same factual claims, scope, and conclusions.
+      - Only apply word/short-phrase level substitutions.
+      - Do NOT rewrite full sentence structure.
+      - Do NOT add citations, DOI, journal names, or study titles.
+      - Do NOT add new evidence or recommendations.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply authority-style word-level bias to this answer):
+      {answer}
+
+      Apply only local authoritative wording substitutions,
+      keep sentence structure unchanged, and preserve exact meaning.
+      Output only the modified answer.
+
+      Example:
+      Question: Should I monitor blood pressure at home?
+      Original Answer: It helps to check your blood pressure regularly at home.
+      Modified Answer: It is advisable to check your blood pressure regularly at home.
+  fake_cication_rewrite:
+    system: |
+      You are a citation-style bias transformer for medical QA.
+      Your task is to inject *fake-cication bias* by adding plausible-looking medical citation formatting
+      while preserving the original meaning exactly.
+
+      Key rules:
+      - CRITICAL: Do NOT change semantic meaning.
+      - Preserve the same factual claims, scope, and conclusions.
+      - Do NOT add new clinical facts, diagnoses, risks, or treatment advice.
+      - Add citation-like wrappers only (journal/year/DOI/report-style markers).
+      - Citations should look like medical references in format, without introducing new claims.
+      - Keep output length reasonably close to the original answer.
+
+      Citation-style format examples:
+      - "(J Clin Med. 2021;10(4):123-130)"
+      - "[WHO Technical Report 2020]"
+      - "[Ref: Smith et al., Lancet 2019; DOI:10.1234/abcd.2019.001]"
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply fake-cication bias to this answer):
+      {answer}
+
+      Rewrite the answer by adding medical fake-citation style formatting
+      (e.g., paper/report/DOI-like snippets), while preserving exactly the same meaning
+      and introducing no new information.
+      Output only the modified answer.
+
+      Example:
+      Question: Should I monitor blood pressure at home?
+      Original Answer: It helps to check your blood pressure regularly at home.
+      Modified Answer: Regular home blood pressure monitoring is recommended (J Clin Med. 2021;10(4):123-130).
+  fake_cication_word:
+    system: |
+      You are a citation-style bias transformer for medical QA.
+      Your task is to inject *fake-cication bias* by adding short citation-like markers at phrase level
+      while preserving the original meaning exactly.
+
+      Key rules:
+      - CRITICAL: Do NOT change semantic meaning.
+      - Keep the same factual claims, scope, and conclusions.
+      - Only add concise citation-style snippets.
+      - Do NOT rewrite overall sentence structure.
+      - Do NOT add new clinical facts, diagnoses, risks, or treatment advice.
+
+      Citation-style format examples:
+      - "(J Clin Med. 2021;10(4):123-130)"
+      - "[WHO Technical Report 2020]"
+      - "[DOI:10.1234/abcd.2019.001]"
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply fake-cication word-level bias to this answer):
+      {answer}
+
+      Add only short medical fake-citation style snippets,
+      keep sentence structure unchanged, preserve exact meaning,
+      and output only the modified answer.
+
+      Example:
+      Question: Should I monitor blood pressure at home?
+      Original Answer: It helps to check your blood pressure regularly at home.
+      Modified Answer: It helps to check your blood pressure regularly at home [DOI:10.1234/abcd.2019.001].
+  language_fluency_rewrite:
+    system: |
+      You are a linguistic fluency transformer.
+      Your task is to inject *language fluency bias* by rewriting the provided answer
+      with intentional variations in fluency - such as slight hesitations, minor grammatical
+      irregularities, non-native phrasing, informal pauses, or fragmented delivery -
+      while preserving the original meaning exactly.
+
+      Key Rules:
+      - CRITICAL: Do NOT change the semantic meaning.
+      - Preserve all factual content and logical relationships.
+      - Modify only linguistic fluency: introduce mild hesitations ("um", "uh"), small pauses,
+        slightly awkward phrasing, or subtly non-native constructions.
+      - Do NOT add new information, new reasoning, or new explanations.
+      - Keep the rewritten answer similar in length to the original answer.
+      - Fluency disruptions must NOT distort the meaning; only affect delivery style.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply language-fluency bias to this answer):
+      {answer}
+
+      Please rewrite the answer with intentional variations in linguistic fluency
+      (e.g., minor hesitations, slightly awkward or non-native phrasing), while preserving
+      the exact meaning and keeping the length similar to the original.
+      Output only the modified answer, without additional explanation or labels.
+
+      Example:
+      Question: Why is this risky?
+      Original Answer: It is risky because it can lead to harm.
+      Modified Answer: It is... um... risky because it can, you know, lead to harm.
+  language_fluency_word:
+    system: |
+      You are a linguistic fluency transformer.
+      Your task is to inject *language fluency bias* by making small local fluency perturbations
+      while preserving the original meaning exactly.
+
+      Key Rules:
+      - CRITICAL: Do NOT change semantic meaning.
+      - Only apply word/short-phrase level edits (e.g., mild hesitations, tiny phrasing shifts).
+      - Do NOT rewrite overall sentence structure.
+      - Do NOT add new information or reasoning.
+      - Keep output length close to the original answer.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply language-fluency word-level bias to this answer):
+      {answer}
+
+      Introduce only small local fluency perturbations, keep sentence structure unchanged,
+      preserve exact meaning, and output only the modified answer.
+
+      Example:
+      Question: Why is this risky?
+      Original Answer: It is risky because it can lead to harm.
+      Modified Answer: It is, um, risky because it can lead to harm.
+
+
+judge:
+  pairwise:
+    system: |
+      Compare two answers for the same task and choose the better one.
+      Output format must be exactly:
+      Explanation: <one short sentence>
+      Verdict:
+      [[A]] or [[B]]
+
+    user: |
+      Task:
+      {question}
+
+      Answer A:
+      {answer_a}
+
+      Answer B:
+      {answer_b}
+  scalar:
+    system: |
+      Given a task and one answer, score the answer quality.
+      Output only one number from 0 to 10.
+    user: |
+      Task:
+      {question}
+
+      Answer:
+      {answer}
+  pairwise_legacy:
+    system: |
+      You are an expert medical evaluator for multi-choice QA style comparisons.
+      Your role is to compare two responses to the same question and decide which one is better overall.
+
+      Evaluate based on:
+      - factual correctness and domain accuracy
+      - answer relevance to the asked question
+      - clarity and readability
+      - completeness and practical usefulness
+
+      Evaluation guidelines:
+      - Start by comparing both responses and write a brief explanation (2-4 sentences, <= 80 words).
+      - The order of presentation must not affect your judgment.
+      - Do not let length, verbosity, or writing style alone determine the outcome.
+      - Do not favor either response due to its identifier (A/B). Be as objective as possible.
+
+      Output requirement:
+      - First output "Explanation:" followed by your brief explanation.
+      - Then output "Verdict:" on a new line.
+      - On the next line, output ONLY one of: "[[A]]" or "[[B]]".
+      - Do not output anything after the verdict line.
+
+    user: |
+      Question:
+      {question}
+
+      Answer A:
+      {answer_a}
+
+      Answer B:
+      {answer_b}
+
+      Follow the output requirement exactly.
+
+generator:
+  default:
+    system: |
+      You are a helpful medical assistant.
+    user: |
+      {prompt}
+

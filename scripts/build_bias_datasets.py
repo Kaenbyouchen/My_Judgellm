@@ -20,6 +20,7 @@ project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
 from src.utils.io import load_yaml
+from src.utils.prompt_config import load_prompts_for_category
 from src.models.registry import ModelRegistry
 from src.bias.injector import BiasInjector
 from src.bias.cache import check_cache_exists, save_bias_dataset, apply_bias_to_samples
@@ -191,16 +192,23 @@ def main():
     models_yaml_path = project_root / "configs" / "models.yaml"
     models_config = load_yaml(str(models_yaml_path)) if models_yaml_path.exists() else {}
 
-    # Load prompts.yaml
-    prompts_yaml_path = project_root / "configs" / "prompts.yaml"
-    prompts_config = load_yaml(str(prompts_yaml_path)) if prompts_yaml_path.exists() else {}
-
     # Load datasets.yaml
     datasets_yaml_path = project_root / "configs" / "datasets.yaml"
     datasets_config = load_yaml(str(datasets_yaml_path)) if datasets_yaml_path.exists() else {}
 
     data_path = resolve_data_path(config, datasets_config, project_root, args.data_path)
     logger.info(f"Using data path: {data_path}")
+
+    # Resolve dataset category for prompt routing.
+    data_cfg = config.get("data", {})
+    dataset_name = data_cfg.get("dataset_name")
+    datasets = datasets_config.get("datasets", datasets_config) if isinstance(datasets_config, dict) else {}
+    dataset_info = datasets.get(dataset_name, {}) if isinstance(datasets, dict) and dataset_name else {}
+    dataset_category = "uncategorized"
+    if isinstance(dataset_info, dict):
+        dataset_category = str(dataset_info.get("dataset_category", "uncategorized")).strip() or "uncategorized"
+    prompts_config, prompt_source = load_prompts_for_category(project_root, dataset_category)
+    logger.info(f"Using prompt config: {prompt_source}")
 
     bias_types = resolve_bias_list(bias_config, args.biases)
     injection_modes = args.modes
@@ -247,7 +255,7 @@ def main():
                 if not bias_prompt_cfg:
                     raise ValueError(
                         f"Bias prompt not found for bias type '{bias_type}' (mode='{mode}'). "
-                        "Please add it under bias_injection in configs/prompts.yaml."
+                        "Please add it under bias_injection in the selected prompt config."
                     )
                 injector_system_prompt = bias_prompt_cfg.get("system")
                 injector_user_template = bias_prompt_cfg.get("user")

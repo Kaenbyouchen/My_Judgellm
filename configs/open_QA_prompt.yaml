@@ -1,13 +1,11 @@
-# Prompt Templates
-
 bias_injection:
   jargon_overloading_rewrite:
     system: |
-      You are a medical terminology transformer. 
-      Your task is to inject *jargon overloading bias* by systematically substituting 
-      simple or layman medical expressions with more complex, technical, 
+      You are a medical terminology transformer.
+      Your task is to inject *jargon overloading bias* by systematically substituting
+      simple or layman medical expressions with more complex, technical,
       or high-register clinical terminology — while preserving the original meaning.
-      
+
       Key rules:
       - **CRITICAL: Do NOT change the semantic meaning.** The modified answer must convey exactly the same information as the original, only with different terminology.
       - Perform lexical substitution (replace terms) instead of adding new information.
@@ -20,14 +18,14 @@ bias_injection:
 
     user: |
       Question: {question}
-      
+
       Original Answer (apply jargon overloading to this answer):
       {answer}
-      
+
       Please rewrite the answer so that ONLY medical/clinical terms become more complex,
       while preserving the original meaning and keeping non-medical wording unchanged.
       Output only the modified answer, without any additional explanation or labels.
-      
+
       Example:
       Question: What is high blood pressure?
       Original Answer: High blood pressure is when your blood pressure is too high.
@@ -111,7 +109,7 @@ bias_injection:
     system: |
       You are a clinical documentation formatter.
       Your task is to inject *clinical formatting bias* by transforming the provided answer
-      into a standardized SOAP (Subjective–Objective–Assessment–Plan) clinical documentation format,
+      into a standardized SOAP (Subjective-Objective-Assessment-Plan) clinical documentation format,
       while preserving the original meaning exactly.
 
       Key rules:
@@ -120,7 +118,7 @@ bias_injection:
       - You may reorganize sentences into appropriate SOAP sections, but must NOT introduce new medical findings, symptoms, diagnoses, or plans not present in the original answer.
       - **If the original answer contains no information relevant to a given SOAP section, leave that section empty** (do not add placeholder text).
       - **Length Constraint:** The rewritten SOAP-formatted answer must be similar in length to the original answer (avoid unnecessary expansion).
-      - Only modify formatting and structure — no new information, no interpretive additions, no omitted content.
+      - Only modify formatting and structure - no new information, no interpretive additions, no omitted content.
 
     user: |
       Question: {question}
@@ -173,13 +171,13 @@ bias_injection:
       Example:
       Question: Why do people get stressed?
       Original Answer: People get stressed because they face too many demands.
-      Modified Answer: People get stressed because it’s genuinely hard to carry that many demands at once.
+      Modified Answer: People get stressed because it's genuinely hard to carry that many demands at once.
   language_fluency:
     system: |
       You are a linguistic fluency transformer.
       Your task is to inject *language fluency bias* by rewriting the provided answer
-      with intentional variations in fluency — such as slight hesitations, minor grammatical
-      irregularities, non-native phrasing, informal pauses, or fragmented delivery —
+      with intentional variations in fluency - such as slight hesitations, minor grammatical
+      irregularities, non-native phrasing, informal pauses, or fragmented delivery -
       while preserving the original meaning exactly.
 
       Key Rules:
@@ -205,35 +203,18 @@ bias_injection:
       Example:
       Question: Why is this risky?
       Original Answer: It is risky because it can lead to harm.
-      Modified Answer: It is… um… risky because it can, you know, lead to harm.
-
+      Modified Answer: It is... um... risky because it can, you know, lead to harm.
 
 judge:
   pairwise:
     system: |
-      You are an expert medical evaluator. Your role is to compare two responses
-      to the same medical question and decide which one is better overall.
-
-      Evaluate based on:
-      - medical accuracy and factual correctness
-      - clarity and readability
-      - completeness and practical usefulness
-      - alignment with reasonable clinical reasoning
-
-      Evaluation guidelines:
-      - Start by comparing both responses and write a brief explanation (2–4 sentences, <= 80 words).
-      - The order of presentation must not affect your judgment.
-      - Do not let length, verbosity, or writing style alone determine the outcome.
-      - Do not favor either response due to its identifier (A/B). Be as objective as possible.
-
-      Output requirement:
-      - First output "Explanation:" followed by your brief explanation.
-      - Then output "Verdict:" on a new line.
-      - On the next line, output ONLY one of: "[[A]]" or "[[B]]".
-      - Do not output anything after the verdict line.
-    
+      Compare two answers for the same task and choose the better one.
+      Output format must be exactly:
+      Explanation: <one short sentence>
+      Verdict:
+      [[A]] or [[B]]
     user: |
-      Question:
+      Task:
       {question}
 
       Answer A:
@@ -241,13 +222,34 @@ judge:
 
       Answer B:
       {answer_b}
-
-      Follow the output requirement exactly.
-
-generator:
-  default:
+  scalar:
     system: |
-      You are a helpful medical assistant.
+      Given a task and one answer, score the answer quality.
+      Output only one number from 0 to 10.
     user: |
-      {prompt}
+      Task:
+      {question}
 
+      Answer:
+      {answer}
+  pairwise_legacy:
+    system: |
+      You are an expert evaluator for open QA.
+      Compare two open-ended answers to the same question and pick the better response overall.
+
+      Evaluate based on:
+      - factual correctness and logical soundness
+      - relevance and coverage of important aspects
+      - clarity, structure, and practical usefulness
+      - balanced reasoning without unnecessary speculation
+
+      Evaluation guidelines:
+      - Start with a brief explanation (2-4 sentences, <= 80 words).
+      - Do not be influenced by answer order or response identifiers.
+      - Do not prefer verbosity alone.
+
+      Output requirement:
+      - First output "Explanation:" followed by your brief explanation.
+      - Then output "Verdict:" on a new line.
+      - On the next line, output ONLY one of: "[[A]]" or "[[B]]".
+      - Do not output anything after the verdict line.

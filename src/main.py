@@ -18,10 +18,11 @@ from src.utils.logging import setup_logging
 from src.utils.reproducibility import set_seed
 from src.utils.cli import parse_args
 from src.utils.paths import get_dataset_name, get_run_dir
+from src.utils.prompt_config import load_prompts_for_category
 from src.pipeline.run_pairwise import run_pairwise_evaluation
 from src.pipeline.run_scalar import run_scalar_evaluation
 from src.models.registry import ModelRegistry
-from src.metrics.reports import append_summary_jsonl
+from src.metrics.reports import append_summary_jsonl, append_summary_csv
 
 
 def get_bias_name(bias_config: dict) -> str:
@@ -120,12 +121,6 @@ def main():
     # Make model pool available globally (so BiasInjector / ModelJudge can resolve provider+model_id)
     ModelRegistry.set_models_config(models_config)
     
-    # Load prompts.yaml separately (optional)
-    prompts_yaml_path = project_root / "configs" / "prompts.yaml"
-    prompts_config = {}
-    if prompts_yaml_path.exists():
-        prompts_config = load_yaml(str(prompts_yaml_path))
-
     # Load datasets.yaml separately (optional)
     datasets_yaml_path = project_root / "configs" / "datasets.yaml"
     datasets_config = {}
@@ -212,6 +207,9 @@ def main():
     dataset_category = "uncategorized"
     if isinstance(dataset_info, dict):
         dataset_category = str(dataset_info.get("dataset_category", "uncategorized")).strip() or "uncategorized"
+
+    # Load prompt config routed by dataset category.
+    prompts_config, prompt_source = load_prompts_for_category(project_root, dataset_category)
     
     # Judge model selection
     # - New simplified format: judge.model (auto-infer provider from models.yaml)
@@ -271,7 +269,7 @@ def main():
     injector_user_template = None
     injector_resolved_model_name = None
 
-    # Build judge prompt config (from prompts.yaml if available)
+    # Build judge prompt config (from routed prompt file)
     judge_system_prompt = None
     judge_user_template = None
     judge_prompt_cfg = (prompts_config.get("judge", {}) or {}).get("pairwise", {}) if prompts_config else {}
@@ -343,7 +341,7 @@ def main():
         if not bias_prompt_cfg:
             raise ValueError(
                 f"Bias prompt not found for bias type '{bias_type_name}' (mode='{bias_injection_mode}'). "
-                "Please add it under bias_injection in configs/prompts.yaml."
+                "Please add it under bias_injection in the selected prompt config."
             )
         if isinstance(bias_prompt_cfg, dict):
             injector_system_prompt = bias_prompt_cfg.get("system")
@@ -403,7 +401,7 @@ def main():
         if "model" in bias_config:
             logger.warning(f"⚠️  WARNING: bias.model='{bias_config['model']}' was specified but injector_type is 'mock'. This may indicate a configuration issue.")
     if judge_system_prompt or judge_user_template:
-        logger.info("  Judge prompt source: configs/prompts.yaml (judge.pairwise)")
+        logger.info(f"  Judge prompt source: {prompt_source} (judge.pairwise)")
     logger.info(f"  API Key Env: {resolved_judge_model_config.get('api_key_env', 'N/A')}")
     
     # Check API key availability (without exposing the key)
@@ -491,7 +489,7 @@ def main():
         logger.error(f"Unknown data type: {data_type}")
         sys.exit(1)
 
-    # Append summary record to outputs/results_summary.jsonl
+    # Append summary records to outputs/results_summary.jsonl and outputs/results_summary.csv
     metrics = results.get("metrics", {}) if isinstance(results, dict) else {}
     summary_record = {
         "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -512,6 +510,8 @@ def main():
     }
     summary_path = base_output_dir / "results_summary.jsonl"
     append_summary_jsonl(summary_record, str(summary_path))
+    summary_csv_path = base_output_dir / "results_summary.csv"
+    append_summary_csv(summary_record, str(summary_csv_path))
     
     logger.info("Evaluation completed successfully")
     return results

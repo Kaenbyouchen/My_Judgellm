@@ -1,0 +1,50 @@
+# YAML-driven batch evaluation config
+# 用法:
+#   python scripts/run_batch_from_yaml.py --batch-config configs/batch_eval.yaml
+
+batch:
+  # 基础实验配置（会在每个组合上覆盖 data/judge/bias 部分字段）
+  base_experiment_config: "configs/experiment.yaml"
+
+  # 选择要跑的数据集（来自 configs/datasets.yaml 的 key）
+  dataset_name: "medical_eval_sphere"
+
+  # 指定评测模型（judge），可一次配置多个
+  # 推荐使用 judge_models（列表）；judge_model 保留兼容旧写法
+  judge_models:
+    - "medgemma_4b"
+    - "biomistral_7b"
+    - "prometheus2_7b"
+    - "gemma3_4b"
+    - "qwen3_4b_instruct"
+    - "llama32_3b_instruct"
+    - "deepseek_r1_distill_qwen_7b"
+    - "deepseek_r1_distill_llama_8b"
+  # judge_model: "qwen3_4b_instruct"
+
+  # 指定 bias 注入模型（可多个）:
+  # - "same_as_judge": 注入模型与当前 judge 模型保持一致
+  # - 或填具体模型ID列表
+  bias_injector_models:
+    - "gpt52"
+  # bias_injector_model: "qwen3_4b_instruct"  # 兼容旧写法
+
+  # bias 选择策略:
+  # - true: 使用该数据集类别下 prompt 文件中的全部 bias
+  # - false: 仅使用 bias_list
+  use_all_biases: true
+  bias_list: []
+  exclude_biases: []
+
+  # 注入模式（可选 rewrite / word，可多个）
+  modes:
+    - "rewrite"
+    - "word"
+
+  # 运行控制
+  continue_on_error: true
+  dry_run: false
+
+  # 可选：日志目录（不填则自动生成到 outputs/batch_logs）
+  log_dir: null
+

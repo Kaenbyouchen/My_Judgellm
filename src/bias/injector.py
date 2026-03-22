@@ -174,7 +174,7 @@ class BiasInjector:
             if self.bias_handler is None:
                 raise ValueError(
                     f"Bias type '{self.bias_type}' does not have a rule-based handler. "
-                    "Please use an AI-based injector (openai/vllm/gemini/anthropic) and define prompts.yaml."
+                    "Please use an AI-based injector (openai/vllm/gemini/anthropic) and define prompt configs."
                 )
             context = {"question": question} if question else {}
             if self.injection_mode == "word":

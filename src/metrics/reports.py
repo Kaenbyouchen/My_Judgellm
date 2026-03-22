@@ -3,6 +3,7 @@ Report generation for evaluation results.
 """
 import json
 import os
+import csv
 import pandas as pd
 from pathlib import Path
 from typing import Dict, Any, List
@@ -125,6 +126,65 @@ def append_summary_jsonl(record: Dict[str, Any], output_path: str):
     except Exception as e:
         logger.error(f"Failed to append summary record to {output_path}: {e}")
         raise
+
+
+def append_summary_csv(record: Dict[str, Any], output_path: str):
+    """
+    Append a single flattened summary record to CSV file.
+
+    CSV columns:
+    - data type (category): dataset category (one of six categories / dummy)
+    - dataset: dataset name
+    - bias type: injected bias type
+    - bias injection mode: rewrite or word
+    - data type (pairwise/scalar): evaluation data type
+    - judge llm: judge model id
+    - acc / cr / rr: core metrics
+    """
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    metrics = record.get("metrics", {}) if isinstance(record, dict) else {}
+    def _fmt_metric(val: Any):
+        if val is None:
+            return ""
+        try:
+            return f"{float(val) * 100:.2f}"
+        except (TypeError, ValueError):
+            return ""
+
+    row = {
+        "data type (category)": record.get("dataset_category", "uncategorized"),
+        "dataset": record.get("dataset_name", ""),
+        "bias type": record.get("bias_type", "none"),
+        "bias injection mode": record.get("bias_injection_mode", ""),
+        "data type (pairwise/scalar)": record.get("data_type", ""),
+        "judge llm": record.get("judge_model_id", ""),
+        "acc": _fmt_metric(metrics.get("accuracy_original")),
+        "cr": _fmt_metric(metrics.get("cr")),
+        "rr": _fmt_metric(metrics.get("rr")),
+    }
+
+    fieldnames = [
+        "data type (category)",
+        "dataset",
+        "bias type",
+        "bias injection mode",
+        "data type (pairwise/scalar)",
+        "judge llm",
+        "acc",
+        "cr",
+        "rr",
+    ]
+
+    file_exists = output_path.exists() and output_path.stat().st_size > 0
+    with open(output_path, "a", encoding="utf-8", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        if not file_exists:
+            writer.writeheader()
+        writer.writerow(row)
+        f.flush()
+        os.fsync(f.fileno())
 
 
 def save_judgments_jsonl(judgments: List[Dict[str, Any]], output_path: str, append: bool = False):

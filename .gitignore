@@ -49,3 +49,7 @@ src/models/*/
 .cache/
 huggingface_cache/
 transformers_cache/
+
+# Raw datasets (too large for GitHub)
+data/raw_data/**
+!data/raw_data/.gitkeep

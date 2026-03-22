@@ -1,13 +1,55 @@
 dataset_types:
-  - "medical_knowledge_qa"
-  - "emotional_support"
-  - "general_health_qa"
-  - "non_medical_qa"
+  - "dummy"
+  - "one turn conversation"
+  - "multi-turn conversation"
+  - "semantic Q&A"
+  - "multi-choice qa"
+  - "open Q&A"
+  - "EHR"
 
 datasets:
   medical_eval_sphere:
     path: "data/medical_eval_sphere/medical_eval_sphere.jsonl"
-    dataset_category: "medical_knowledge_qa"
+    dataset_category: "multi-choice qa"
+  mediq_askdocs:
+    path: "data/MediQ_AskDocs/mediq_askdocs_pairwise.jsonl"
+    dataset_category: "one turn conversation"
+  counselbench:
+    path: "data/Counselbench/counselbench_pairwise.jsonl"
+    dataset_category: "one turn conversation"
+  medval_bench:
+    path: "data/MedVAL_Bench/medval_bench_pairwise.jsonl"
+    dataset_category: "multi-turn conversation"
+  healthbench:
+    path: "data/Healthbench/healthbench_scalar.jsonl"
+    dataset_category: "multi-turn conversation"
+  augmented_clinical_notes:
+    path: "data/Augmented_Clinical_Notes/augmented_clinical_notes_scalar.jsonl"
+    dataset_category: "multi-turn conversation"
+  open_patient:
+    path: "data/Open_Patient/open_patient_ehr_1pct.jsonl"
+    dataset_category: "EHR"
+  medaesqa:
+    path: "data/MedAESQA/medaesqa_pairwise.jsonl"
+    dataset_category: "semantic Q&A"
+  realmedqa:
+    path: "data/RealMedQA/realmedqa_semantic_qa.jsonl"
+    dataset_category: "semantic Q&A"
+  mentalchat:
+    path: "data/MentalChat/mentalchat_one_turn_10pct.jsonl"
+    dataset_category: "one turn conversation"
+  medical_dialogue_en:
+    path: "data/medical_dialogue_en/medical_dialogue_en_1500.jsonl"
+    dataset_category: "one turn conversation"
+  medical_dialogue_cn:
+    path: "data/medical_dialogue_cn/medical_dialogue_cn_1500.jsonl"
+    dataset_category: "one turn conversation"
+  miriad:
+    path: "data/miriad/miriad_qa_2000.jsonl"
+    dataset_category: "open Q&A"
+  llmeval_med:
+    path: "data/LLMEval_Med/llmeval_med_openqa.jsonl"
+    dataset_category: "open Q&A"
   dummy_pairwise:
     path: "data/dummy/pairwise.jsonl"
-    dataset_category: "test_dummy"
+    dataset_category: "dummy"

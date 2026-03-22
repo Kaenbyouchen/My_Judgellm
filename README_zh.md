@@ -176,7 +176,8 @@ Ruishan_Judgellm_Ours/
 ├── configs/              # 配置文件
 │   ├── experiment.yaml   # 主实验配置
 │   ├── models.yaml       # 模型注册表
-│   └── prompts.yaml      # 提示词模板
+│   ├── MCQ_prompt.yaml   # 基础提示词模板（MCQ/默认）
+│   └── *_prompt.yaml     # 按数据类别覆盖的提示词
 ├── data/                 # 数据集
 │   └── dummy/            # 测试数据
 ├── outputs/              # 实验结果
