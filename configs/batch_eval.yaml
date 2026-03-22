@@ -31,9 +31,17 @@ batch:
 
   # bias 选择策略:
   # - true: 使用该数据集类别下 prompt 文件中的全部 bias
-  # - false: 仅使用 bias_list
-  use_all_biases: true
-  bias_list: []
+  # - false: 仅使用 eval_biases（兼容旧字段 bias_list）
+  use_all_biases: false
+  eval_biases:
+    - "jargon_overloading"
+    - "plain_language"
+    - "clinical_formatting"
+    - "empathy_tone"
+    - "authority_style"
+    - "fake_citation"
+    - "language_fluency"
+  # bias_list: []  # 旧字段，仍可用
   exclude_biases: []
 
   # 注入模式（可选 rewrite / word，可多个）

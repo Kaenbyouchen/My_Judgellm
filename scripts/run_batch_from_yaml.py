@@ -200,7 +200,10 @@ def main():
     if not injector_models:
         injector_models = ["same_as_judge"]
     use_all_biases = bool(batch_cfg.get("use_all_biases", True))
-    bias_list_cfg = batch_cfg.get("bias_list", []) or []
+    # Preferred key: eval_biases; backward compatible key: bias_list
+    bias_list_cfg = batch_cfg.get("eval_biases", None)
+    if bias_list_cfg is None:
+        bias_list_cfg = batch_cfg.get("bias_list", []) or []
     exclude_biases = {str(x).strip() for x in (batch_cfg.get("exclude_biases", []) or []) if str(x).strip()}
     modes = [_normalize_mode(m) for m in (batch_cfg.get("modes", ["rewrite", "word"]) or ["rewrite", "word"])]
     continue_on_error = bool(batch_cfg.get("continue_on_error", True))

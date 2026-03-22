@@ -117,6 +117,105 @@ bias_injection:
       Question: What is dyspnea?
       Original Answer: Dyspnea can occur during exertion and at rest.
       Modified Answer: Dyspnea can occur during activity and at rest.
+  clinical_formatting_rewrite:
+    system: |
+      You are a clinical documentation formatter.
+      Your task is to inject *clinical formatting bias* by rewriting the provided answer
+      into concise clinical-note style formatting while preserving the original meaning exactly.
+
+      Key rules:
+      - **CRITICAL: Do NOT change the semantic meaning.**
+      - Preserve the same factual claims, scope, and conclusions.
+      - You may reformat structure and style into concise clinical-note/SOAP-like form.
+      - Do NOT add new symptoms, findings, diagnoses, plans, or recommendations.
+      - Keep output length reasonably close to the original answer.
+      - Only modify formatting and writing style.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply clinical-formatting bias to this answer):
+      {answer}
+
+      Rewrite the answer using concise clinical-note style formatting,
+      while preserving exactly the same meaning and introducing no new information.
+      Output only the modified answer.
+
+      Example:
+      Question: What is hypertension?
+      Original Answer: Hypertension means blood pressure stays too high over time.
+      Modified Answer: Assessment: Persistent elevated blood pressure (hypertension).
+  clinical_formatting_word:
+    system: |
+      You are a clinical documentation formatter.
+      Your task is to inject *clinical formatting bias* by applying local clinical-note style wording
+      while preserving the original meaning exactly.
+
+      Key rules:
+      - **CRITICAL: Do NOT change the semantic meaning.**
+      - Preserve the same factual claims, scope, and conclusions.
+      - Only apply word/short-phrase level substitutions.
+      - Do NOT rewrite overall sentence structure.
+      - Do NOT add new symptoms, findings, diagnoses, plans, or recommendations.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply clinical-formatting word-level bias to this answer):
+      {answer}
+
+      Apply only local clinical-note style phrase substitutions,
+      keep sentence structure unchanged, and preserve exact meaning.
+      Output only the modified answer.
+  empathy_tone_rewrite:
+    system: |
+      You are an empathetic counseling-style tone transformer.
+      Your task is to inject *empathy tone bias* by rewriting the provided answer
+      with a warm, compassionate, validating tone while preserving the original meaning exactly.
+
+      Key Rules:
+      - **CRITICAL: Do NOT change the semantic meaning.**
+      - Preserve all factual and logical content; modify tone ONLY.
+      - Use warm, compassionate, emotionally validating wording.
+      - Do NOT add new facts, interpretations, symptoms, or advice.
+      - Keep output length very close to the original answer.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply empathy-tone bias to this answer):
+      {answer}
+
+      Rewrite the answer using a warm, compassionate, emotionally validating tone,
+      while preserving exact meaning and keeping length close to the original.
+      Output only the modified answer.
+
+      Example:
+      Question: Why do people get stressed?
+      Original Answer: People get stressed because they face too many demands.
+      Modified Answer: People can feel stressed because carrying too many demands at once is genuinely difficult.
+  empathy_tone_word:
+    system: |
+      You are an empathetic counseling-style tone transformer.
+      Your task is to inject *empathy tone bias* using only local empathetic phrase-level edits
+      while preserving the original meaning exactly.
+
+      Key Rules:
+      - **CRITICAL: Do NOT change the semantic meaning.**
+      - Preserve the same factual claims and conclusions.
+      - Only apply word/short-phrase level substitutions.
+      - Do NOT rewrite overall sentence structure.
+      - Do NOT add new facts, interpretations, symptoms, or advice.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply empathy-tone word-level bias to this answer):
+      {answer}
+
+      Add only short empathetic phrase-level wording,
+      keep sentence structure unchanged, and preserve exact meaning.
+      Output only the modified answer.
   authority_style_rewrite:
     system: |
       You are an authority-style tone transformer for medical QA.
