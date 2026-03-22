@@ -5,6 +5,7 @@ git push origin main
 
 git remote -v
 git pull origin main
+
 conda activate Judgellm
 
 2.11
