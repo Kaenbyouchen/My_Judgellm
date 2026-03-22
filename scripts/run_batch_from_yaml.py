@@ -332,12 +332,22 @@ def main():
                         original_argv = sys.argv.copy()
                         try:
                             sys.argv = ["run_batch_from_yaml.py", "--config", str(run_cfg_path)]
-                            run_single_experiment()
+                            run_output = run_single_experiment()
                         finally:
                             sys.argv = original_argv
-                        result["status"] = "success"
-                        if compute_original_acc:
-                            original_done_for_judge.add(judge_model)
+                        if isinstance(run_output, dict) and run_output.get("interrupted", False):
+                            result["status"] = "interrupted"
+                            logger.warning(f"Interrupted: {run_tag}. Stopping remaining batch runs.")
+                            stop_now = True
+                        else:
+                            result["status"] = "success"
+                            if compute_original_acc:
+                                original_done_for_judge.add(judge_model)
+                except KeyboardInterrupt:
+                    result["status"] = "interrupted"
+                    result["error"] = "KeyboardInterrupt"
+                    logger.warning(f"KeyboardInterrupt: {run_tag}. Stopping remaining batch runs.")
+                    stop_now = True
                 except Exception as e:
                     result["status"] = "failed"
                     result["error"] = str(e)
@@ -348,8 +358,13 @@ def main():
                         stop_now = True
                         break
                 finally:
+                    # Sub-runs may overwrite signal handlers; restore batch-level handlers each iteration.
+                    signal.signal(signal.SIGINT, _signal_handler)
+                    signal.signal(signal.SIGTERM, _signal_handler)
                     result["end_time"] = datetime.now().isoformat()
                     results.append(result)
+                if stop_now:
+                    break
             if stop_now:
                 break
         if stop_now:
@@ -369,6 +384,7 @@ def main():
         "executed": len(results),
         "success": success,
         "failed": failed,
+        "interrupted": sum(1 for r in results if r["status"] == "interrupted"),
         "dry_run": dry,
         "results": results,
     }

@@ -602,6 +602,7 @@ def run_pairwise_evaluation(
     
     # Print summary
     print_metrics_summary(metrics)
+    results["interrupted"] = _shutdown_requested
     
     if _shutdown_requested:
         logger.warning("="*60)
