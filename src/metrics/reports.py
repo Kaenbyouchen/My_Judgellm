@@ -64,6 +64,17 @@ def save_metrics_csv(metrics: Dict[str, Any], output_path: str):
             "has_gt_labels": rr.get("has_gt_labels", False),
             "note": rr.get("metadata", {}).get("note", "")
         })
+
+    # Biased accuracy metrics
+    if "accuracy_biased" in metrics:
+        acc_biased = metrics["accuracy_biased"]
+        rows.append({
+            "metric": "accuracy_biased",
+            "value": acc_biased.get("accuracy_biased", 0.0),
+            "has_gt_labels": acc_biased.get("has_gt_labels", False),
+            "total": acc_biased.get("total", 0),
+            "note": acc_biased.get("metadata", {}).get("note", "")
+        })
     
     # CR metrics
     if "cr" in metrics:
@@ -139,7 +150,7 @@ def append_summary_csv(record: Dict[str, Any], output_path: str):
     - bias injection mode: rewrite or word
     - data type (pairwise/scalar): evaluation data type
     - judge llm: judge model id
-    - acc / cr / rr: core metrics
+    - acc / acc_biased / cr / rr: core metrics
     """
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -161,6 +172,7 @@ def append_summary_csv(record: Dict[str, Any], output_path: str):
         "data type (pairwise/scalar)": record.get("data_type", ""),
         "judge llm": record.get("judge_model_id", ""),
         "acc": _fmt_metric(metrics.get("accuracy_original")),
+        "acc_biased": _fmt_metric(metrics.get("accuracy_biased")),
         "cr": _fmt_metric(metrics.get("cr")),
         "rr": _fmt_metric(metrics.get("rr")),
     }
@@ -173,6 +185,7 @@ def append_summary_csv(record: Dict[str, Any], output_path: str):
         "data type (pairwise/scalar)",
         "judge llm",
         "acc",
+        "acc_biased",
         "cr",
         "rr",
     ]
@@ -250,6 +263,19 @@ def print_metrics_summary(metrics: Dict[str, Any]):
             print(f"  Note: {rr['metadata']['note']}")
         if rr.get('metadata', {}).get('placeholder'):
             print(f"  ⚠️  Placeholder: {rr['metadata'].get('placeholder_note', '')}")
+
+    if "accuracy_biased" in metrics:
+        acc_biased = metrics["accuracy_biased"]
+        print(f"\nAccuracy (Biased GT vs Biased Answer):")
+        print(f"  Value: {acc_biased.get('accuracy_biased', 0.0):.4f}")
+        print(f"  Has GT Labels: {acc_biased.get('has_gt_labels', False)}")
+        print(f"  Total: {acc_biased.get('total', 0)}")
+        if acc_biased.get('valid_count') is not None:
+            print(f"  Valid samples: {acc_biased.get('valid_count', 0)}")
+        if acc_biased.get('invalid_count', 0) > 0:
+            print(f"  ⚠️  Invalid samples excluded: {acc_biased.get('invalid_count', 0)} (safety filter, quota errors, etc.)")
+        if acc_biased.get('metadata', {}).get('note'):
+            print(f"  Note: {acc_biased['metadata']['note']}")
     
     if "cr" in metrics:
         cr = metrics["cr"]

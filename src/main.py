@@ -504,6 +504,7 @@ def main():
         "judge_model_id": judge_model_id,
         "metrics": {
             "accuracy_original": metrics.get("accuracy_original", {}).get("accuracy"),
+            "accuracy_biased": metrics.get("accuracy_biased", {}).get("accuracy_biased"),
             "rr": metrics.get("rr", {}).get("rr"),
             "cr": metrics.get("cr", {}).get("cr"),
         },

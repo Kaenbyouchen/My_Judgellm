@@ -207,6 +207,67 @@ def compute_rr(
     }
 
 
+def compute_accuracy_biased(
+    samples: List[PairwiseSample],
+    judgments: List[JudgeResult],
+) -> Dict[str, Any]:
+    """
+    Compute accuracy on biased comparisons (GT vs biased answer).
+
+    This metric explicitly reports biased-set accuracy, separate from RR.
+    In the current evaluation setting (answer_A is GT, answer_B is biased),
+    it equals the proportion of judgments selecting GT on biased pairs.
+    """
+    if len(samples) != len(judgments):
+        raise ValueError(f"Sample count mismatch: {len(samples)} samples vs {len(judgments)} judgments")
+
+    valid_pairs = [(s, j) for s, j in zip(samples, judgments) if j.is_valid]
+    invalid_count = len(samples) - len(valid_pairs)
+
+    if invalid_count > 0:
+        logger.warning(
+            f"Excluding {invalid_count} model-invalid judgments from biased accuracy denominator "
+            "(e.g., safety filter blocks, quota errors, timeout)."
+        )
+
+    if not valid_pairs:
+        return {
+            "accuracy_biased": 0.0,
+            "correct": 0,
+            "total": len(samples),
+            "valid_count": 0,
+            "invalid_count": invalid_count,
+            "has_gt_labels": False,
+            "metadata": {
+                "note": "No valid judgments available (all excluded due to model-side errors)",
+                "invalid_reasons": "safety_filter, quota_error, timeout",
+            },
+        }
+
+    valid_samples, valid_judgments = zip(*valid_pairs)
+    valid_samples = list(valid_samples)
+    valid_judgments = list(valid_judgments)
+
+    has_gt_labels = any(s.preferred is not None for s in valid_samples)
+
+    # In this pipeline, answer_A is GT in biased evaluation.
+    correct = sum(1 for j in valid_judgments if j.winner == "A")
+    acc_biased = correct / len(valid_judgments) if valid_judgments else 0.0
+
+    return {
+        "accuracy_biased": acc_biased,
+        "correct": correct,
+        "total": len(samples),
+        "valid_count": len(valid_judgments),
+        "invalid_count": invalid_count,
+        "has_gt_labels": has_gt_labels,
+        "metadata": {
+            "note": "Accuracy on biased pairs (GT vs biased answer)",
+            "invalid_excluded": True,
+        },
+    }
+
+
 def compute_cr(
     judgments_round1: List[JudgeResult],
     judgments_round2: List[JudgeResult]

@@ -16,7 +16,7 @@ from ..bias.injector import BiasInjector
 from ..bias.cache import check_cache_exists, load_cached_bias_dataset, save_bias_dataset, apply_bias_to_samples
 from ..judge.judge_runner import create_judge
 from ..judge.base import JudgeResult
-from ..metrics.pairwise_metrics import compute_accuracy_original, compute_rr, compute_cr
+from ..metrics.pairwise_metrics import compute_accuracy_original, compute_accuracy_biased, compute_rr, compute_cr
 from ..metrics.reports import save_metrics_json, save_metrics_csv, save_judgments_jsonl, save_judgment_jsonl_single, print_metrics_summary
 from ..utils.resume import (
     check_resume_available,
@@ -524,7 +524,13 @@ def run_pairwise_evaluation(
         metrics["accuracy_original"] = acc_metrics
     
     if compute_bias_metrics and results.get("bias_judgments_list"):
-        logger.info("Computing RR and CR...")
+        logger.info("Computing biased accuracy, RR and CR...")
+        acc_biased_metrics = compute_accuracy_biased(
+            samples=samples,
+            judgments=results["bias_judgments_list"],
+        )
+        metrics["accuracy_biased"] = acc_biased_metrics
+
         rr_metrics = compute_rr(
             samples=samples,
             judgments=results["bias_judgments_list"],
