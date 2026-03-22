@@ -17,4 +17,6 @@ huggingface_hub>=0.24.0
 datasets>=2.20.0
 transformers>=4.30.0
 torch>=2.0.0
+# vLLM is for Linux GPU environments (e.g., CARC)
+vllm>=0.6.0; platform_system == "Linux"
 

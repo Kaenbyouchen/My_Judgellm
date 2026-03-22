@@ -1,6 +1,8 @@
 """
 vLLM model client (optional dependency).
 """
+import os
+import multiprocessing as mp
 from typing import Optional, Dict, Any
 from loguru import logger
 
@@ -22,16 +24,35 @@ class VLLMModel(BaseModel):
         self.download_dir = config.get("download_dir") or config.get("local_cache_dir")
         self.seed = config.get("seed")
         self.enforce_eager = config.get("enforce_eager", False)
+        # Prevent CUDA re-init crash in forked subprocesses on Linux HPC.
+        self.worker_multiproc_method = config.get("worker_multiproc_method", "spawn")
 
         self._vllm = None
         self._llm = None
 
         try:
+            self._ensure_vllm_multiprocessing_mode()
             import vllm
             self._vllm = vllm
             logger.info(f"vLLM client initialized for {model_name}")
         except ImportError:
             logger.warning("vllm not installed. vLLM client will not work.")
+
+    def _ensure_vllm_multiprocessing_mode(self) -> None:
+        """
+        Force vLLM worker multiprocessing mode to spawn.
+        This avoids: 'Cannot re-initialize CUDA in forked subprocess'.
+        """
+        method = str(self.worker_multiproc_method).strip().lower() or "spawn"
+        os.environ["VLLM_WORKER_MULTIPROC_METHOD"] = method
+        try:
+            current = mp.get_start_method(allow_none=True)
+            if current != method:
+                mp.set_start_method(method, force=True)
+                logger.info(f"Set multiprocessing start method to '{method}' for vLLM")
+        except RuntimeError:
+            # Start method may already be set by parent process; env var still helps vLLM.
+            pass
 
     def _load_model(self) -> None:
         """Lazy load the vLLM model."""
