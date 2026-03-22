@@ -6,6 +6,7 @@ git push origin main
 git remote -v
 git pull origin main
 
+python scripts/run_batch_from_yaml.py --batch-config configs/batch_eval.yaml
 conda activate Judgellm
 
 2.11
