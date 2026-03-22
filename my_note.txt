@@ -1,6 +1,6 @@
 git status
 git add -A
-git commit -m "3.1 starting adding more datasets and deploying opensource models"
+git commit -m "3.22 starting experiments on CARC"
 git push origin main
 
 git remote -v

@@ -105,6 +105,7 @@ def _build_run_config(
     injector_model: str,
     bias: str,
     mode: str,
+    compute_original_acc: bool,
 ) -> Dict[str, Any]:
     cfg = deepcopy(base_cfg)
 
@@ -123,6 +124,11 @@ def _build_run_config(
     cfg["bias"]["model"] = injector_model
     for k in ("injector_type", "model_id", "model_name"):
         cfg["bias"].pop(k, None)
+
+    # Avoid repeated original-judgment calls across many bias runs.
+    cfg.setdefault("evaluation", {})
+    cfg["evaluation"]["compute_original_acc"] = compute_original_acc
+    cfg["evaluation"]["compute_bias_metrics"] = True
 
     return cfg
 
@@ -208,6 +214,7 @@ def main():
     modes = [_normalize_mode(m) for m in (batch_cfg.get("modes", ["rewrite", "word"]) or ["rewrite", "word"])]
     continue_on_error = bool(batch_cfg.get("continue_on_error", True))
     dry_run = bool(batch_cfg.get("dry_run", False))
+    reuse_original_per_judge = bool(batch_cfg.get("reuse_original_per_judge", True))
 
     base_cfg = load_yaml(str(base_config_path))
     datasets_cfg = load_yaml(str(PROJECT_ROOT / "configs" / "datasets.yaml"))
@@ -260,6 +267,7 @@ def main():
     logger.info(f"Prompt source: {prompt_source}")
     logger.info(f"Selected biases: {selected_biases}")
     logger.info(f"Modes: {modes}")
+    logger.info(f"Reuse original per judge: {reuse_original_per_judge}")
     total_combo_count = len(judge_models) * len(injector_models) * len(combos)
     logger.info(f"Runnable bias/mode combos per model: {len(combos)}")
     logger.info(f"Total planned runs: {total_combo_count}")
@@ -269,6 +277,7 @@ def main():
     results: List[Dict[str, Any]] = []
     run_index = 0
     stop_now = False
+    original_done_for_judge: Set[str] = set()
     for judge_model in judge_models:
         for injector_spec in injector_models:
             injector_model = judge_model if injector_spec == "same_as_judge" else injector_spec
@@ -298,10 +307,24 @@ def main():
                 }
 
                 try:
-                    run_cfg = _build_run_config(base_cfg, dataset_name, judge_model, injector_model, bias, mode)
+                    if reuse_original_per_judge:
+                        compute_original_acc = judge_model not in original_done_for_judge
+                    else:
+                        compute_original_acc = True
+
+                    run_cfg = _build_run_config(
+                        base_cfg,
+                        dataset_name,
+                        judge_model,
+                        injector_model,
+                        bias,
+                        mode,
+                        compute_original_acc=compute_original_acc,
+                    )
                     run_cfg_path = run_cfg_dir / f"{run_tag}.yaml"
                     _write_yaml(run_cfg_path, run_cfg)
                     result["config_path"] = str(run_cfg_path)
+                    result["compute_original_acc"] = compute_original_acc
 
                     if dry_run:
                         result["status"] = "dry_run"
@@ -313,6 +336,8 @@ def main():
                         finally:
                             sys.argv = original_argv
                         result["status"] = "success"
+                        if compute_original_acc:
+                            original_done_for_judge.add(judge_model)
                 except Exception as e:
                     result["status"] = "failed"
                     result["error"] = str(e)
