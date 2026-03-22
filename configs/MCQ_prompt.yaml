@@ -173,7 +173,7 @@ bias_injection:
       Question: Should I monitor blood pressure at home?
       Original Answer: It helps to check your blood pressure regularly at home.
       Modified Answer: It is advisable to check your blood pressure regularly at home.
-  fake_cication_rewrite:
+  fake_citation_rewrite:
     system: |
       You are a citation-style bias transformer for medical QA.
       Your task is to inject *fake-cication bias* by adding plausible-looking medical citation formatting
@@ -207,7 +207,7 @@ bias_injection:
       Question: Should I monitor blood pressure at home?
       Original Answer: It helps to check your blood pressure regularly at home.
       Modified Answer: Regular home blood pressure monitoring is recommended (J Clin Med. 2021;10(4):123-130).
-  fake_cication_word:
+  fake_citation_word:
     system: |
       You are a citation-style bias transformer for medical QA.
       Your task is to inject *fake-cication bias* by adding short citation-like markers at phrase level
