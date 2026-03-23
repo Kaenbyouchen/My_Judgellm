@@ -24,6 +24,8 @@ class VLLMModel(BaseModel):
         self.download_dir = config.get("download_dir") or config.get("local_cache_dir")
         self.seed = config.get("seed")
         self.enforce_eager = config.get("enforce_eager", False)
+        # vLLM prints per-request progress bars by default; disable to reduce log noise.
+        self.use_tqdm = config.get("use_tqdm", False)
         # Prevent CUDA re-init crash in forked subprocesses on Linux HPC.
         self.worker_multiproc_method = config.get("worker_multiproc_method", "spawn")
 
@@ -90,16 +92,28 @@ class VLLMModel(BaseModel):
 
         full_prompt = f"{system_prompt}\n\n{prompt}" if system_prompt else prompt
 
+        # Keep judge decoding deterministic by default.
+        temperature = kwargs.get("temperature", self.config.get("temperature", 0.0))
+        top_p = kwargs.get("top_p", self.config.get("top_p", 1.0))
+        top_k = kwargs.get("top_k", self.config.get("top_k", -1))
+        if temperature == 0:
+            top_p = 1.0
+            top_k = -1
+
         sampling_params = self._vllm.SamplingParams(
-            temperature=kwargs.get("temperature", self.config.get("temperature", 0.7)),
+            temperature=temperature,
             max_tokens=kwargs.get("max_new_tokens", self.config.get("max_new_tokens", 512)),
-            top_p=kwargs.get("top_p", self.config.get("top_p", 1.0)),
-            top_k=kwargs.get("top_k", self.config.get("top_k", -1)),
+            top_p=top_p,
+            top_k=top_k,
             stop=kwargs.get("stop", self.config.get("stop")),
         )
 
         try:
-            outputs = self._llm.generate([full_prompt], sampling_params=sampling_params)
+            outputs = self._llm.generate(
+                [full_prompt],
+                sampling_params=sampling_params,
+                use_tqdm=self.use_tqdm,
+            )
             if not outputs or not outputs[0].outputs:
                 return ""
             return outputs[0].outputs[0].text.strip()

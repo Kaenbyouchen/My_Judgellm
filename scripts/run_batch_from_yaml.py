@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import signal
 import sys
 import traceback
@@ -330,14 +331,25 @@ def main():
                         result["status"] = "dry_run"
                     else:
                         original_argv = sys.argv.copy()
+                        prev_batch_flag = os.environ.get("JUDGELLM_ABORT_BATCH_ON_INTERRUPT")
                         try:
+                            # In batch mode, force sub-run interrupt to bubble up immediately.
+                            os.environ["JUDGELLM_ABORT_BATCH_ON_INTERRUPT"] = "1"
                             sys.argv = ["run_batch_from_yaml.py", "--config", str(run_cfg_path)]
                             run_output = run_single_experiment()
                         finally:
+                            if prev_batch_flag is None:
+                                os.environ.pop("JUDGELLM_ABORT_BATCH_ON_INTERRUPT", None)
+                            else:
+                                os.environ["JUDGELLM_ABORT_BATCH_ON_INTERRUPT"] = prev_batch_flag
                             sys.argv = original_argv
                         if isinstance(run_output, dict) and run_output.get("interrupted", False):
                             result["status"] = "interrupted"
                             logger.warning(f"Interrupted: {run_tag}. Stopping remaining batch runs.")
+                            stop_now = True
+                        elif _shutdown_requested:
+                            result["status"] = "interrupted"
+                            logger.warning(f"Batch interrupt flag detected: {run_tag}. Stopping remaining batch runs.")
                             stop_now = True
                         else:
                             result["status"] = "success"

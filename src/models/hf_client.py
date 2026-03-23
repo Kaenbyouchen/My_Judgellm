@@ -95,7 +95,7 @@ class HuggingFaceModel(BaseModel):
             else:
                 # Download from HuggingFace or ModelScope
                 # Check if model is from ModelScope (modelscope.cn) or use ModelScope mirror
-                use_modelscope = config.get("use_modelscope", False) if config else False
+                use_modelscope = self.use_modelscope
                 if use_modelscope or "modelscope" in self.model_name.lower():
                     logger.info(f"Downloading model {self.model_name} from ModelScope")
                     # Try to use modelscope library if available
@@ -169,11 +169,24 @@ class HuggingFaceModel(BaseModel):
             inputs = {k: v.to(self.device) for k, v in inputs.items()}
             
             with self._torch.no_grad():
+                temperature = kwargs.get("temperature", self.config.get("temperature", 0.0))
+                do_sample = kwargs.get("do_sample", self.config.get("do_sample", True))
+                top_p = kwargs.get("top_p", self.config.get("top_p", 1.0))
+                top_k = kwargs.get("top_k", self.config.get("top_k", 0))
+
+                # For judge consistency, force deterministic decoding when temperature is zero.
+                if temperature == 0:
+                    do_sample = False
+                    top_p = 1.0
+                    top_k = 0
+
                 outputs = self._model.generate(
                     **inputs,
-                    max_new_tokens=kwargs.get("max_new_tokens", 512),
-                    temperature=kwargs.get("temperature", 0.7),
-                    do_sample=kwargs.get("do_sample", True),
+                    max_new_tokens=kwargs.get("max_new_tokens", self.config.get("max_new_tokens", 512)),
+                    temperature=temperature,
+                    do_sample=do_sample,
+                    top_p=top_p,
+                    top_k=top_k,
                     pad_token_id=self._tokenizer.eos_token_id
                 )
             

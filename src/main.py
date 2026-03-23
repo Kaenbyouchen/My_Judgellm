@@ -515,6 +515,10 @@ def main():
     append_summary_csv(summary_record, str(summary_csv_path))
     
     logger.info("Evaluation completed successfully")
+    if isinstance(results, dict) and results.get("interrupted", False):
+        # When running under YAML batch runner, propagate interruption to stop the whole batch.
+        if os.getenv("JUDGELLM_ABORT_BATCH_ON_INTERRUPT", "0") == "1":
+            raise KeyboardInterrupt("Sub-run interrupted; aborting remaining batch runs.")
     return results
 
 

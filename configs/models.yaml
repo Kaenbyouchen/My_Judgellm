@@ -57,6 +57,9 @@ vllm:
     tensor_parallel_size: 1
     max_model_len: 2048
     dtype: "auto"
+    temperature: 0.0
+    top_p: 1.0
+    top_k: -1
     gpu_memory_utilization: 0.9
     download_dir: "src/models"  # Local cache directory for downloaded models
   
