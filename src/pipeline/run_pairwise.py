@@ -2,6 +2,7 @@
 Pipeline for pairwise evaluation.
 """
 import datetime
+import json
 import signal
 import sys
 from pathlib import Path
@@ -27,6 +28,11 @@ from ..utils.resume import (
 
 # Global flag for graceful shutdown
 _shutdown_requested = False
+
+
+def _is_answer1_key(key: str) -> bool:
+    """Normalize answer-key aliases to whether it points to answer_1."""
+    return str(key).strip().lower() in {"1", "answer_1", "answer1"}
 
 
 def _signal_handler(signum, frame):
@@ -60,6 +66,7 @@ def run_pairwise_evaluation(
     judge_user_template: Optional[str] = None,
     inject_to: str = "non_gt",
     use_cache: bool = True,
+    semantic_guard: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     """
     Run pairwise evaluation pipeline.
@@ -82,6 +89,7 @@ def run_pairwise_evaluation(
         compute_original_acc: Whether to compute accuracy on original R1 vs R2
         compute_bias_metrics: Whether to compute RR/CR on R1 vs biased_R2
         run_dir: Run directory for all output files
+        semantic_guard: Optional semantic guard config for bias injection
         
     Returns:
         Dictionary with all metrics and results
@@ -269,7 +277,12 @@ def run_pairwise_evaluation(
         # If cache not available, inject bias
         if cached_samples is None:
             logger.info("Injecting bias into samples...")
-            biased_samples = apply_bias_to_samples(samples, bias_injector, inject_to=inject_to)
+            biased_samples, guard_report = apply_bias_to_samples(
+                samples,
+                bias_injector,
+                inject_to=inject_to,
+                semantic_guard=semantic_guard,
+            )
             
             # Save to cache
             if use_cache:
@@ -284,6 +297,7 @@ def run_pairwise_evaluation(
                         "user_template": injector_user_template,
                     },
                     "injection_mode": injection_mode,
+                    "semantic_guard": semantic_guard or {},
                 }
                 save_bias_dataset(
                     biased_samples,
@@ -295,6 +309,30 @@ def run_pairwise_evaluation(
                 logger.info("Bias-injected dataset saved to cache")
         else:
             biased_samples = cached_samples
+            guard_report = {
+                "total_samples": len(cached_samples),
+                "from_cache": True,
+                "note": "Loaded from cache; per-sample injection checks are unavailable in this run."
+            }
+
+        # Save detailed bias injection report to run output directory
+        report_payload = {
+            "dataset_path": data_path,
+            "bias_type": bias_type,
+            "bias_variant_name": bias_variant_name,
+            "injection_mode": injection_mode,
+            "inject_to": inject_to,
+            "injector_type": injector_type,
+            "injector_model_config": injector_model_config or {},
+            "semantic_guard_config": semantic_guard or {},
+            "report": guard_report,
+        }
+        report_path = run_dir_path / "bias_injection_report.json"
+        with report_path.open("w", encoding="utf-8") as f:
+            json.dump(report_payload, f, ensure_ascii=False, indent=2)
+        logger.info(f"Bias injection report saved to {report_path}")
+        results["bias_injection_report"] = report_payload
+        results["bias_injection_report_path"] = str(report_path)
         
         # Filter completed samples for bias evaluation
         # Create mapping of sample_id to biased_sample for remaining samples
@@ -358,10 +396,10 @@ def run_pairwise_evaluation(
             non_gt_answer, non_gt_key = original_sample.get_non_gt_answer()
             
             # Get biased answer from biased sample
-            if gt_key == "answer_1":
-                biased_answer = biased_sample.answer_2
-            else:
+            if _is_answer1_key(non_gt_key):
                 biased_answer = biased_sample.answer_1
+            else:
+                biased_answer = biased_sample.answer_2
             
             biased_answers.append(biased_answer)
             

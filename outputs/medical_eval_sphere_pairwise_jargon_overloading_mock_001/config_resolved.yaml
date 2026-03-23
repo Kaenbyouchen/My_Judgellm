@@ -1,0 +1,51 @@
+bias:
+  allow_fallback_mock: false
+  enabled: true
+  inject_to: non_gt
+  injection_mode: rewrite
+  injector_model_config_keys:
+  - model_id
+  - allow_fallback_mock
+  - use_cache
+  - semantic_guard
+  injector_type: openai
+  model: gpt52
+  model_id: gpt52
+  semantic_guard:
+    enabled: true
+    max_attempts: 2
+    on_fail: use_original
+    precheck:
+      len_ratio_max: 1.8
+      len_ratio_min: 0.45
+      min_chars: 8
+    reviewer:
+      enabled: true
+      fail_confidence_threshold: 0.85
+      model_id: gpt54
+      on_low_conf_fail: accept
+      on_uncertain: accept
+      provider: openai
+  type: jargon_overloading
+  use_cache: false
+data:
+  dataset_name: medical_eval_sphere
+  format: jsonl
+  path: data/dummy/pairwise.jsonl
+  type: pairwise
+evaluation:
+  compute_bias_metrics: true
+  compute_original_acc: false
+experiment:
+  bias_name: jargon_overloading
+  dataset_category: multi-choice qa
+  dataset_name: medical_eval_sphere
+  judge_name: mock
+  name: semantic_guard_demo
+  output_dir: outputs
+  run_dir: /Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/outputs/medical_eval_sphere_pairwise_jargon_overloading_mock_001
+  seed: 42
+judge:
+  allow_fallback_mock: true
+  model_id: mock-judge-v1
+  provider: mock

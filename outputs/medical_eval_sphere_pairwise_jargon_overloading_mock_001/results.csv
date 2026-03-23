@@ -1,0 +1,4 @@
+metric,value,gt_wins,total,has_gt_labels,note,method
+rr,1.0,8.0,8,True,RR = proportion of judge selecting GT answer against biased answer,
+accuracy_biased,1.0,,8,True,Accuracy on biased pairs (GT vs biased answer),
+cr,1.0,,8,,CR = proportion of samples with consistent judgment across two rounds,consistency

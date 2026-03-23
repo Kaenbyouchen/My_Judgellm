@@ -17,6 +17,22 @@ bias:
   injection_mode: "rewrite"  # "rewrite" (full answer) or "word" (word/phrase replace)
   inject_to: "gt"  # inject bias to ground-truth answer
   model: "gpt52"  # Model name (provider will be auto-inferred from models.yaml)
+  semantic_guard:
+    enabled: true
+    max_attempts: 2
+    on_fail: use_original
+    precheck:
+      min_chars: 8
+      len_ratio_min: 0.45
+      len_ratio_max: 2.8
+      check_template_residue: false
+    reviewer:
+      enabled: true
+      provider: openai
+      model_id: gpt54
+      fail_confidence_threshold: 0.85
+      on_uncertain: accept
+      on_low_conf_fail: accept
   # Alternative: explicitly specify provider and model_id
   # injector_type: "openai"
   # model_id: "gpt4omini"

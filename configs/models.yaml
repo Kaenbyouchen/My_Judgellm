@@ -23,6 +23,8 @@ openai:
     model_name: "gpt-4.1"
   gpt52:
     model_name: "gpt-5.2"
+  gpt54:
+    model_name: "gpt-5.4"
   gpt5mini:
     model_name: "gpt-5-mini"
 

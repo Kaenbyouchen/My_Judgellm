@@ -1,16 +1,16 @@
 {
-  "timestamp": "2026-03-23 01:39:05",
+  "timestamp": "2026-03-23 01:42:30",
   "dataset_name": "medical_eval_sphere",
   "dataset_category": "multi-choice qa",
   "data_path": "/Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/data/dummy/pairwise.jsonl",
   "data_type": "pairwise",
   "bias_enabled": true,
-  "bias_type": "jargon_overloading",
+  "bias_type": "plain_language",
   "bias_injection_mode": "rewrite",
   "bias_injector_model_id": "gpt52",
-  "judge_model_id": "mock-judge-v1",
+  "judge_model_id": "gpt52",
   "metrics": {
-    "accuracy_original": null,
+    "accuracy_original": 1.0,
     "accuracy_biased": 1.0,
     "rr": 1.0,
     "cr": 1.0

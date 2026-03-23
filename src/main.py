@@ -3,6 +3,7 @@ Main entry point for the evaluation pipeline.
 """
 import os
 import datetime
+import json
 import sys
 from pathlib import Path
 from typing import Dict, Any
@@ -475,6 +476,7 @@ def main():
             run_dir=str(run_dir),
             inject_to=bias_config.get("inject_to", "non_gt"),
             use_cache=bias_config.get("use_cache", True),  # Enable cache by default
+            semantic_guard=bias_config.get("semantic_guard", {}),
         )
     elif data_type == "scalar":
         logger.info("Running scalar evaluation pipeline (placeholder)")
@@ -513,6 +515,39 @@ def main():
     append_summary_jsonl(summary_record, str(summary_path))
     summary_csv_path = base_output_dir / "results_summary.csv"
     append_summary_csv(summary_record, str(summary_csv_path))
+
+    # Append bias injection report into a global aggregated JSON file.
+    if isinstance(results, dict) and results.get("bias_injection_report"):
+        aggregated_path = base_output_dir / "bias_injection_report_all.json"
+        aggregated_entry = {
+            "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "run_dir": str(run_dir),
+            "dataset_name": dataset_name,
+            "dataset_category": dataset_category,
+            "bias_type": bias_config.get("type", "none"),
+            "bias_injection_mode": bias_injection_mode,
+            "bias_injector_model_id": injector_model_id if bias_injector_type != "mock" else "mock",
+            "judge_model_id": judge_model_id,
+            "report_path": results.get("bias_injection_report_path"),
+            "report": results.get("bias_injection_report"),
+        }
+
+        existing_entries = []
+        if aggregated_path.exists():
+            try:
+                with aggregated_path.open("r", encoding="utf-8") as f:
+                    loaded = json.load(f)
+                if isinstance(loaded, list):
+                    existing_entries = loaded
+                elif isinstance(loaded, dict):
+                    existing_entries = [loaded]
+            except Exception as e:
+                logger.warning(f"Failed to read existing aggregated bias report, recreating file: {e}")
+
+        existing_entries.append(aggregated_entry)
+        with aggregated_path.open("w", encoding="utf-8") as f:
+            json.dump(existing_entries, f, ensure_ascii=False, indent=2)
+        logger.info(f"Aggregated bias injection report updated: {aggregated_path}")
     
     logger.info("Evaluation completed successfully")
     if isinstance(results, dict) and results.get("interrupted", False):

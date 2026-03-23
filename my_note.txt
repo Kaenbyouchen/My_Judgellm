@@ -1,12 +1,15 @@
 git status
 git add -A
-git commit -m "3.22 starting experiments on CARC"
+git commit -m "3.23 add semantic check function"
 git push origin main
 
 git remote -v
 git pull origin main
 
 python scripts/run_batch_from_yaml.py --batch-config configs/batch_eval.yaml
+
+bash scripts/run_batch_carc.sh --batch-config configs/batch_eval.yaml
+
 conda activate Judgellm
 
 2.11

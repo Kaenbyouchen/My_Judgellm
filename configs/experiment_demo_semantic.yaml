@@ -1,0 +1,42 @@
+experiment:
+  name: "semantic_guard_demo"
+  seed: 42
+  output_dir: "outputs"
+
+data:
+  type: "pairwise"
+  dataset_name: "medical_eval_sphere"
+  path: "data/dummy/pairwise.jsonl"
+  format: "jsonl"
+
+bias:
+  enabled: true
+  type: "jargon_overloading"
+  injection_mode: "rewrite"
+  inject_to: "non_gt"
+  model: "gpt52"
+  use_cache: false
+  semantic_guard:
+    enabled: true
+    max_attempts: 2
+    on_fail: use_original
+    precheck:
+      min_chars: 8
+      len_ratio_min: 0.45
+      len_ratio_max: 1.8
+    reviewer:
+      enabled: true
+      provider: openai
+      model_id: gpt54
+      fail_confidence_threshold: 0.85
+      on_uncertain: accept
+      on_low_conf_fail: accept
+
+judge:
+  provider: "mock"
+  model_id: "mock-judge-v1"
+  allow_fallback_mock: true
+
+evaluation:
+  compute_original_acc: false
+  compute_bias_metrics: true

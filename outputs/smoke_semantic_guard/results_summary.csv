@@ -1,0 +1,2 @@
+data type (category),dataset,bias type,bias injection mode,data type (pairwise/scalar),judge llm,acc,acc_biased,cr,rr
+multi-choice qa,medical_eval_sphere,plain_language,rewrite,pairwise,gpt52,100.00,100.00,100.00,100.00
