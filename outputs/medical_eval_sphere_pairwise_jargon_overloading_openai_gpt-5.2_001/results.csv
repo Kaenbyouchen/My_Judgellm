@@ -1,4 +1,0 @@
-metric,value,proxy,has_gt,total,note,gt_wins,has_gt_labels,method
-accuracy_original,0.5975,False,True,400,Accuracy based on judge winner matching preferred label,,,
-rr,0.9925,,,400,RR = proportion of judge selecting GT answer against biased answer,397.0,True,
-cr,0.9975,,,400,CR = proportion of samples with consistent judgment across two rounds,,,consistency

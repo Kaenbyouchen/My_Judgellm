@@ -1,0 +1,38 @@
+# Batch config: one selected judge model over multiple datasets.
+# Bias list per dataset is loaded from configs/dataset_bias_plan.yaml
+#
+# Usage:
+#   python scripts/run_batch_from_yaml.py --batch-config configs/batch_eval_selected_model_all_datasets.yaml
+
+batch:
+  base_experiment_config: "configs/experiment.yaml"
+
+  # Pairwise-focused dataset list (from configs/datasets.yaml)
+  dataset_names:
+    - "medical_eval_sphere"
+    # - "mediq_askdocs"
+    # - "counselbench"
+    # - "medval_bench"
+    # - "medaesqa"
+
+  # Pick ONE judge model here (can be openai model_id or vllmserve_* model_id)
+  judge_models:
+    - "gpt52"
+
+  # Bias injector model(s)
+  # - use gpt52 for injection quality, or set to same_as_judge to use the selected judge model
+  bias_injector_models:
+    - "gpt52"
+
+  # Dataset->bias mapping file (required for this batch)
+  dataset_bias_plan: "configs/dataset_bias_plan.yaml"
+
+  # Unified injection mode for all datasets in this batch.
+  # Change to ["rewrite"] if you want rewrite-only runs.
+  modes:
+    - "word"
+
+  continue_on_error: true
+  dry_run: false
+  reuse_original_per_judge: true
+  log_dir: null

@@ -1,0 +1,24 @@
+[
+  {
+    "dataset_name": "medical_eval_sphere",
+    "dataset_category": "multi-choice qa",
+    "bias_type": "jargon_overloading",
+    "bias_injection_mode": "rewrite",
+    "bias_injector_model_id": "gpt52",
+    "status": "skipped_existing",
+    "timestamp": "2026-03-23 14:52:50",
+    "total_data_count": 400,
+    "semantic_pass_count": null
+  },
+  {
+    "dataset_name": "medical_eval_sphere",
+    "dataset_category": "multi-choice qa",
+    "bias_type": "jargon_overloading",
+    "bias_injection_mode": "word",
+    "bias_injector_model_id": "gpt52",
+    "status": "success",
+    "timestamp": "2026-03-23 14:52:50",
+    "total_data_count": 400,
+    "semantic_pass_count": 333
+  }
+]

@@ -154,8 +154,8 @@ bias_injection:
       Key rules:
       - **CRITICAL: Do NOT change the semantic meaning.**
       - Preserve the same factual claims, scope, and conclusions.
-      - Only apply word/short-phrase level substitutions.
-      - Do NOT rewrite overall sentence structure.
+      - Prefer word/short-phrase level substitutions; light local reordering is allowed when needed for note-like style.
+      - Minor connective-word adjustments are allowed if meaning remains unchanged.
       - Do NOT add new symptoms, findings, diagnoses, plans, or recommendations.
 
     user: |
@@ -164,8 +164,9 @@ bias_injection:
       Original Answer (apply clinical-formatting word-level bias to this answer):
       {answer}
 
-      Apply only local clinical-note style phrase substitutions,
-      keep sentence structure unchanged, and preserve exact meaning.
+      Apply clinical-note style wording with mostly local phrase substitutions.
+      You may make minimal local wording/ordering edits for fluency, but do not add or remove medical facts.
+      Preserve exact meaning.
       Output only the modified answer.
   empathy_tone_rewrite:
     system: |

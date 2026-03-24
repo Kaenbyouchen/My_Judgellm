@@ -36,18 +36,17 @@ batch:
   use_all_biases: false
   eval_biases:
     - "jargon_overloading"
-    - "plain_language"
-    - "clinical_formatting"
-    - "empathy_tone"
-    - "authority_style"
-    - "fake_citation"
-    - "language_fluency"
+    # - "plain_language"
+    # - "clinical_formatting"
+    # - "empathy_tone"
+    # - "authority_style"
+    # - "fake_citation"
+    # - "language_fluency"
   # bias_list: []  # 旧字段，仍可用
   exclude_biases: []
 
   # 注入模式（可选 rewrite / word，可多个）
   modes:
-    - "rewrite"
     - "word"
 
   # 运行控制

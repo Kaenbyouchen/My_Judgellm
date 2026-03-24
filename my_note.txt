@@ -1,15 +1,18 @@
 git status
 git add -A
-git commit -m "3.23 add semantic check function"
+git commit -m "3.24 start experiments"
 git push origin main
 
 git remote -v
 git pull origin main
 
+代码跑：
 python scripts/run_batch_from_yaml.py --batch-config configs/batch_eval.yaml
-
+服务器脚本跑：
 bash scripts/run_batch_carc.sh --batch-config configs/batch_eval.yaml
 
+只注入：
+python scripts/run_injection_from_yaml.py --batch-config configs/batch_eval.yaml
 conda activate Judgellm
 
 2.11

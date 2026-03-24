@@ -1,0 +1,70 @@
+# Dataset -> bias plan used by batch runner.
+# The batch runner reads this file to decide which biases/modes to run per dataset.
+#
+# Notes:
+# - Use "clinical_formatting" as the clinical-note style bias name.
+# - unsupported (dataset_category, bias, mode) combos are skipped automatically.
+# 全部bias：["jargon_overloading", 
+          # "plain_language", 
+          # "clinical_formatting", 
+          # "empathy_tone", 
+          # "authority_style", 
+          # "fake_citation", 
+          # "language_fluency"]
+dataset_biases:
+  # ===============================
+  # Pairwise datasets (requested group)
+  # ===============================
+  counselbench:
+    dataset_category: "one turn conversation"
+    biases: ["jargon_overloading", "plain_language", "clinical_formatting", "empathy_tone", "authority_style", "fake_citation", "language_fluency"]
+  medaesqa:
+    dataset_category: "semantic Q&A"
+    biases: ["jargon_overloading", "plain_language", "authority_style", "fake_citation", "language_fluency"]
+  medical_eval_sphere:
+    dataset_category: "multi-choice qa"
+    biases: ["jargon_overloading", "plain_language", "authority_style", "fake_citation", "language_fluency"]
+  mediq_askdocs:
+    dataset_category: "one turn conversation"
+    biases: ["jargon_overloading", "plain_language", "clinical_formatting", "empathy_tone", "authority_style", "fake_citation", "language_fluency"]
+  medval_bench:
+    dataset_category: "multi-turn conversation"
+    biases: ["jargon_overloading", "plain_language", "clinical_formatting", "empathy_tone", "authority_style", "fake_citation", "language_fluency"]
+
+  # ===============================
+  # Scalar datasets (remaining group)
+  # ===============================
+  healthbench:
+    dataset_category: "multi-turn conversation"
+    biases: ["jargon_overloading", "plain_language", "clinical_formatting", "empathy_tone", "authority_style", "fake_citation", "language_fluency"]
+  augmented_clinical_notes:
+    dataset_category: "multi-turn conversation"
+    biases: ["jargon_overloading", "plain_language", "clinical_formatting", "empathy_tone", "authority_style", "fake_citation", "language_fluency"]
+  open_patient:
+    dataset_category: "EHR"
+    biases: ["jargon_overloading", "plain_language", "clinical_formatting", "empathy_tone", "authority_style", "fake_citation", "language_fluency"]
+  realmedqa:
+    dataset_category: "semantic Q&A"
+    biases: ["jargon_overloading", "plain_language", "clinical_formatting", "empathy_tone", "authority_style", "fake_citation", "language_fluency"]
+  mentalchat:
+    dataset_category: "one turn conversation"
+    biases: ["jargon_overloading", "plain_language", "clinical_formatting", "empathy_tone", "authority_style", "fake_citation", "language_fluency"]
+  medical_dialogue_en:
+    dataset_category: "one turn conversation"
+    biases: ["jargon_overloading", "plain_language", "clinical_formatting", "empathy_tone", "authority_style", "fake_citation", "language_fluency"]
+  medical_dialogue_cn:
+    dataset_category: "one turn conversation"
+    biases: ["jargon_overloading", "plain_language", "clinical_formatting", "empathy_tone", "authority_style", "fake_citation", "language_fluency"]
+  miriad:
+    dataset_category: "open Q&A"
+    biases: ["jargon_overloading", "plain_language", "authority_style", "fake_citation", "language_fluency"]
+  llmeval_med:
+    dataset_category: "open Q&A"
+    biases: ["jargon_overloading", "plain_language", "authority_style", "fake_citation", "language_fluency"]
+  
+# Per-dataset semantic guard overrides by key:
+# - "<bias>"
+# - "<bias>:<mode>"
+#
+# Requested relax rule:
+# word version of clinical_formatting bias should be looser.

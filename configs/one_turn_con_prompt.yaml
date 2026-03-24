@@ -154,9 +154,9 @@ bias_injection:
 
       Key rules:
       - CRITICAL: Do NOT change semantic meaning.
-      - Only apply local phrase-level wording changes.
+      - Prefer local phrase-level wording changes; light local reordering is allowed if intent is unchanged.
       - Do NOT convert the output into full SOAP or note blocks.
-      - Keep sentence structure and question target unchanged.
+      - Keep question target unchanged.
       - Do NOT add new symptoms, diagnoses, plans, or advice.
 
     user: |
@@ -166,8 +166,9 @@ bias_injection:
       Ground-truth doctor's follow-up question to transform:
       {answer}
 
-      Apply only local clinical-note style phrase replacements,
-      keep sentence structure unchanged, and preserve exact meaning.
+      Apply clinical-note style wording with mostly local phrase replacements.
+      You may make minimal local wording/ordering edits for fluency, but do not add or remove medical facts.
+      Preserve exact meaning.
       Output only the transformed doctor question.
 
       Example:

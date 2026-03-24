@@ -27,6 +27,10 @@ class OpenAIModel(BaseModel):
         self.api_key = api_key
         self.allow_empty_api_key = bool(config.get("allow_empty_api_key", False)) if config else False
         self.base_url = (config.get("base_url") or config.get("api_base")) if config else None
+        if not self.base_url and config:
+            base_url_env_name = config.get("base_url_env")
+            if base_url_env_name:
+                self.base_url = os.getenv(str(base_url_env_name))
         self.organization = config.get("organization") if config else None
         self.project = config.get("project") if config else None
         self.default_headers = config.get("default_headers") if config else None

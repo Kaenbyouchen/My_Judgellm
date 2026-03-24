@@ -477,6 +477,7 @@ def main():
             inject_to=bias_config.get("inject_to", "non_gt"),
             use_cache=bias_config.get("use_cache", True),  # Enable cache by default
             semantic_guard=bias_config.get("semantic_guard", {}),
+            position_debias_pairwise=eval_config.get("position_debias_pairwise", True),
         )
     elif data_type == "scalar":
         logger.info("Running scalar evaluation pipeline (placeholder)")

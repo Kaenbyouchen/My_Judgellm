@@ -67,6 +67,7 @@ def run_pairwise_evaluation(
     inject_to: str = "non_gt",
     use_cache: bool = True,
     semantic_guard: Optional[Dict[str, Any]] = None,
+    position_debias_pairwise: bool = True,
 ) -> Dict[str, Any]:
     """
     Run pairwise evaluation pipeline.
@@ -90,6 +91,7 @@ def run_pairwise_evaluation(
         compute_bias_metrics: Whether to compute RR/CR on R1 vs biased_R2
         run_dir: Run directory for all output files
         semantic_guard: Optional semantic guard config for bias injection
+        position_debias_pairwise: If true, evaluate biased set twice with GT@A and GT@B and average metrics
         
     Returns:
         Dictionary with all metrics and results
@@ -334,58 +336,25 @@ def run_pairwise_evaluation(
         results["bias_injection_report"] = report_payload
         results["bias_injection_report_path"] = str(report_path)
         
-        # Filter completed samples for bias evaluation
-        # Create mapping of sample_id to biased_sample for remaining samples
-        remaining_samples_bias = []
-        remaining_biased_samples = []
-        completed_bias_samples = []
-        completed_bias_judgments_round1 = []
-        completed_bias_judgments_round2 = []
-        completed_biased_answers = []
-        
-        for original_sample, biased_sample in zip(samples, biased_samples):
-            if str(original_sample.id) in completed_bias_ids:
-                completed_bias_samples.append(original_sample)
-                # Find existing judgment for this sample
-                existing_judgment = next(
-                    (j for j in existing_bias_judgments if str(j.get("sample_id")) == str(original_sample.id)),
-                    None
-                )
-                if existing_judgment:
-                    # Reconstruct JudgeResult from existing judgment
-                    completed_bias_judgments_round1.append(JudgeResult.from_dict({
-                        "winner": existing_judgment.get("round1_winner") or existing_judgment.get("winner", "tie"),
-                        "score_A": existing_judgment.get("score_A"),
-                        "score_B": existing_judgment.get("score_B"),
-                        "explanation": existing_judgment.get("explanation"),
-                        "raw": existing_judgment.get("raw", {})
-                    }))
-                    completed_bias_judgments_round2.append(JudgeResult.from_dict({
-                        "winner": existing_judgment.get("round2_winner") or existing_judgment.get("winner", "tie"),
-                        "score_A": existing_judgment.get("score_A"),
-                        "score_B": existing_judgment.get("score_B"),
-                        "explanation": existing_judgment.get("explanation"),
-                        "raw": existing_judgment.get("raw", {})
-                    }))
-                    completed_biased_answers.append(existing_judgment.get("answer_B") or existing_judgment.get("original_non_gt", ""))
-            else:
-                remaining_samples_bias.append(original_sample)
-                remaining_biased_samples.append(biased_sample)
-        
-        if completed_bias_ids:
-            logger.info(f"Resuming bias evaluation: {len(completed_bias_samples)} samples already completed, {len(remaining_samples_bias)} remaining")
-            # Add existing bias judgments to results
-            results["bias_judgments"].extend(existing_bias_judgments)
-        
+        # Position-debias mode evaluates both orders:
+        # - GT@A:  answer_A=GT,    answer_B=biased(non-GT)
+        # - GT@B:  answer_A=biased, answer_B=GT
+        if completed_bias_ids and position_debias_pairwise:
+            logger.warning(
+                "Resume data for bias judgments is ignored in position_debias_pairwise mode. "
+                "Bias judgments will be recomputed for all samples to keep metric definitions consistent."
+            )
+
         # Prepare output file path for incremental saving
         bias_judgments_path = run_dir_path / "judge_raw_bias.jsonl"
-        
-        # Now evaluate using biased samples (only remaining ones)
-        bias_judgments_round1 = completed_bias_judgments_round1.copy()
-        bias_judgments_round2 = completed_bias_judgments_round2.copy()
-        biased_answers = completed_biased_answers.copy()
-        
-        for original_sample, biased_sample in tqdm(zip(remaining_samples_bias, remaining_biased_samples), desc="Judgment (2 rounds)", total=len(remaining_samples_bias)):
+
+        bias_judgments_posA_round1 = []
+        bias_judgments_posA_round2 = []
+        bias_judgments_posB_round1 = []
+        bias_judgments_posB_round2 = []
+        biased_answers = []
+
+        for original_sample, biased_sample in tqdm(zip(samples, biased_samples), desc="Judgment (GT@A + GT@B)", total=len(samples)):
             # Check for shutdown request
             if _shutdown_requested:
                 logger.warning("Shutdown requested. Saving progress and exiting gracefully...")
@@ -402,38 +371,53 @@ def run_pairwise_evaluation(
                 biased_answer = biased_sample.answer_2
             
             biased_answers.append(biased_answer)
-            
-            # Judge: GT vs biased answer (Round 1)
-            judgment_round1 = judge.judge_pairwise(
+
+            # GT@A
+            judgment_posA_round1 = judge.judge_pairwise(
                 question=original_sample.question,
-                answer_A=gt_answer,  # GT answer
-                answer_B=biased_answer  # Biased answer
+                answer_A=gt_answer,
+                answer_B=biased_answer
             )
-            bias_judgments_round1.append(judgment_round1)
-            
-            # Judge: GT vs biased answer (Round 2) - for CR consistency check
-            judgment_round2 = judge.judge_pairwise(
+            judgment_posA_round2 = judge.judge_pairwise(
                 question=original_sample.question,
-                answer_A=gt_answer,  # GT answer
-                answer_B=biased_answer  # Biased answer
+                answer_A=gt_answer,
+                answer_B=biased_answer
             )
-            bias_judgments_round2.append(judgment_round2)
-            
-            # Save judgment record (use round1 for RR calculation)
+
+            # GT@B
+            judgment_posB_round1 = judge.judge_pairwise(
+                question=original_sample.question,
+                answer_A=biased_answer,
+                answer_B=gt_answer
+            )
+            judgment_posB_round2 = judge.judge_pairwise(
+                question=original_sample.question,
+                answer_A=biased_answer,
+                answer_B=gt_answer
+            )
+
+            bias_judgments_posA_round1.append(judgment_posA_round1)
+            bias_judgments_posA_round2.append(judgment_posA_round2)
+            bias_judgments_posB_round1.append(judgment_posB_round1)
+            bias_judgments_posB_round2.append(judgment_posB_round2)
+
             judgment_record = {
                 "sample_id": original_sample.id,
                 "type": "bias",
                 "question": original_sample.question,
-                "answer_A": gt_answer,
-                "answer_B": biased_answer,
+                "gt_answer": gt_answer,
+                "biased_answer": biased_answer,
                 "original_non_gt": non_gt_answer,
                 "bias_type": bias_type,
                 "preferred": original_sample.preferred,
-                "round1_winner": judgment_round1.winner,
-                "round2_winner": judgment_round2.winner,
-                "consistent": judgment_round1.winner == judgment_round2.winner,
+                "posA_round1_winner": judgment_posA_round1.winner,
+                "posA_round2_winner": judgment_posA_round2.winner,
+                "posB_round1_winner": judgment_posB_round1.winner,
+                "posB_round2_winner": judgment_posB_round2.winner,
+                "consistent_posA": judgment_posA_round1.winner == judgment_posA_round2.winner,
+                "consistent_posB": judgment_posB_round1.winner == judgment_posB_round2.winner,
                 "from_cache": cached_samples is not None,
-                **judgment_round1.to_dict()
+                **judgment_posA_round1.to_dict()
             }
             results["bias_judgments"].append(judgment_record)
             
@@ -449,10 +433,14 @@ def run_pairwise_evaluation(
                 logger.warning("Shutdown requested after saving. Exiting gracefully...")
                 break
         
-        # Use round1 for RR calculation
-        results["bias_judgments_list"] = bias_judgments_round1
-        results["bias_judgments_round1"] = bias_judgments_round1
-        results["bias_judgments_round2"] = bias_judgments_round2
+        # Keep backward-compatible fields while exposing position-debias outputs.
+        results["bias_judgments_list"] = bias_judgments_posA_round1
+        results["bias_judgments_round1"] = bias_judgments_posA_round1
+        results["bias_judgments_round2"] = bias_judgments_posA_round2
+        results["bias_judgments_posA_round1"] = bias_judgments_posA_round1
+        results["bias_judgments_posA_round2"] = bias_judgments_posA_round2
+        results["bias_judgments_posB_round1"] = bias_judgments_posB_round1
+        results["bias_judgments_posB_round2"] = bias_judgments_posB_round2
         results["biased_answers"] = biased_answers
     
     # Compute metrics
@@ -561,35 +549,81 @@ def run_pairwise_evaluation(
         )
         metrics["accuracy_original"] = acc_metrics
     
-    if compute_bias_metrics and results.get("bias_judgments_list"):
-        logger.info("Computing biased accuracy, RR and CR...")
-        acc_biased_metrics = compute_accuracy_biased(
-            samples=samples,
-            judgments=results["bias_judgments_list"],
-        )
-        metrics["accuracy_biased"] = acc_biased_metrics
+    if compute_bias_metrics and results.get("bias_judgments_posA_round1"):
+        logger.info("Computing position-debiased biased accuracy, RR and CR...")
 
-        rr_metrics = compute_rr(
-            samples=samples,
-            judgments=results["bias_judgments_list"],
-            biased_answers=results["biased_answers"]
-        )
-        metrics["rr"] = rr_metrics
-        
-        # CR: consistency across two rounds of evaluation
-        if results.get("bias_judgments_round1") and results.get("bias_judgments_round2"):
-            cr_metrics = compute_cr(
-                judgments_round1=results["bias_judgments_round1"],
-                judgments_round2=results["bias_judgments_round2"]
-            )
-            metrics["cr"] = cr_metrics
+        def _target_win_stats(judgments: List[JudgeResult], target_winner: str) -> Dict[str, Any]:
+            total = len(judgments)
+            valid = [j for j in judgments if j.is_valid]
+            invalid_count = total - len(valid)
+            wins = sum(1 for j in valid if j.winner == target_winner)
+            ties = sum(1 for j in valid if j.winner == "tie")
+            rate = wins / len(valid) if valid else 0.0
+            return {
+                "rate": rate,
+                "wins": wins,
+                "ties": ties,
+                "total": total,
+                "valid_count": len(valid),
+                "invalid_count": invalid_count,
+            }
+
+        posA_r1 = results.get("bias_judgments_posA_round1", [])
+        posA_r2 = results.get("bias_judgments_posA_round2", [])
+        posB_r1 = results.get("bias_judgments_posB_round1", [])
+        posB_r2 = results.get("bias_judgments_posB_round2", [])
+
+        # In posA runs GT is answer_A; in posB runs GT is answer_B.
+        accA = _target_win_stats(posA_r1, "A")
+        accB = _target_win_stats(posB_r1, "B")
+        acc_avg = (accA["rate"] + accB["rate"]) / 2.0
+        metrics["accuracy_biased"] = {
+            "accuracy_biased": acc_avg,
+            "position_A_gt": accA,
+            "position_B_gt": accB,
+            "metadata": {
+                "note": "Average biased accuracy across GT@A and GT@B evaluations",
+                "position_debias_pairwise": position_debias_pairwise,
+            },
+        }
+
+        rrA = accA
+        rrB = accB
+        rr_avg = (rrA["rate"] + rrB["rate"]) / 2.0
+        metrics["rr"] = {
+            "rr": rr_avg,
+            "rr_gt_at_A": rrA["rate"],
+            "rr_gt_at_B": rrB["rate"],
+            "position_A_gt": rrA,
+            "position_B_gt": rrB,
+            "metadata": {
+                "note": "RR averaged across GT@A and GT@B to reduce position bias",
+                "position_debias_pairwise": position_debias_pairwise,
+            },
+        }
+
+        if posA_r1 and posA_r2 and posB_r1 and posB_r2:
+            crA = compute_cr(judgments_round1=posA_r1, judgments_round2=posA_r2)
+            crB = compute_cr(judgments_round1=posB_r1, judgments_round2=posB_r2)
+            cr_avg = (crA.get("cr", 0.0) + crB.get("cr", 0.0)) / 2.0
+            metrics["cr"] = {
+                "cr": cr_avg,
+                "cr_gt_at_A": crA.get("cr", 0.0),
+                "cr_gt_at_B": crB.get("cr", 0.0),
+                "position_A_gt": crA,
+                "position_B_gt": crB,
+                "metadata": {
+                    "note": "CR averaged across GT@A and GT@B evaluations",
+                    "position_debias_pairwise": position_debias_pairwise,
+                },
+            }
         else:
-            logger.warning("CR cannot be computed: missing round2 judgments")
+            logger.warning("CR cannot be computed: missing position-debias rounds")
             metrics["cr"] = {
                 "cr": 0.0,
                 "method": "consistency",
                 "total": 0,
-                "metadata": {"note": "CR not computed: missing round2 judgments"}
+                "metadata": {"note": "CR not computed: missing position-debias rounds"}
             }
     
     results["metrics"] = metrics

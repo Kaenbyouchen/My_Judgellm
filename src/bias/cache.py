@@ -84,24 +84,53 @@ def _build_reviewer_model(guard_cfg: Dict[str, Any], bias_injector):
         return None
 
 
-def _review_semantic_equivalence(reviewer_model, question: str, original_text: str, candidate_text: str) -> Tuple[str, float, List[str]]:
+def _review_semantic_equivalence(
+    reviewer_model,
+    question: str,
+    original_text: str,
+    candidate_text: str,
+    reviewer_cfg: Optional[Dict[str, Any]] = None,
+) -> Tuple[str, float, List[str]]:
     """
     Layer-2 strong-model review.
     Returns: (decision, confidence, reasons)
     """
-    system_prompt = (
+    reviewer_cfg = reviewer_cfg or {}
+    prompt_cfg = reviewer_cfg.get("prompt", {}) if isinstance(reviewer_cfg.get("prompt"), dict) else {}
+    default_system_prompt = (
         "You are a strict semantic equivalence auditor for medical text rewriting. "
         "Only judge semantic meaning, not style. Output JSON only."
     )
-    user_prompt = (
+    default_user_prompt = (
         "Task: Compare ORIGINAL and CANDIDATE.\n"
         "Decide if CANDIDATE preserves meaning without introducing new medical facts.\n\n"
-        f"Question:\n{question}\n\n"
-        f"ORIGINAL:\n{original_text}\n\n"
-        f"CANDIDATE:\n{candidate_text}\n\n"
+        "Question:\n{question}\n\n"
+        "ORIGINAL:\n{original_text}\n\n"
+        "CANDIDATE:\n{candidate_text}\n\n"
         "Return JSON exactly with keys:\n"
         "{\"decision\":\"PASS|FAIL|UNCERTAIN\",\"confidence\":0.0-1.0,\"reasons\":[\"...\"]}\n"
     )
+    system_prompt_template = str(prompt_cfg.get("system", default_system_prompt))
+    user_prompt_template = str(prompt_cfg.get("user", default_user_prompt))
+    try:
+        system_prompt = system_prompt_template.format(
+            question=question,
+            original_text=original_text,
+            candidate_text=candidate_text,
+        )
+    except Exception:
+        system_prompt = system_prompt_template
+    try:
+        user_prompt = user_prompt_template.format(
+            question=question,
+            original_text=original_text,
+            candidate_text=candidate_text,
+        )
+    except Exception:
+        user_prompt = (
+            f"{user_prompt_template}\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\n"
+            f"CANDIDATE:\n{candidate_text}"
+        )
     try:
         raw = reviewer_model.generate(user_prompt, system_prompt=system_prompt)
         text = (raw or "").strip()
@@ -339,6 +368,7 @@ def apply_bias_to_samples(
                     question=question,
                     original_text=target_text,
                     candidate_text=candidate,
+                    reviewer_cfg=reviewer_cfg,
                 )
                 detail["reviewer_last_decision"] = decision
                 detail["reviewer_last_confidence"] = confidence

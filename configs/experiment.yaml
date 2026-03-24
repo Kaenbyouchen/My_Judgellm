@@ -14,13 +14,13 @@ data:
 bias:
   enabled: true
   type: "plain_language"  # bias type to inject
-  injection_mode: "rewrite"  # "rewrite" (full answer) or "word" (word/phrase replace)
+  injection_mode: "word"  # "rewrite" (full answer) or "word" (word/phrase replace)
   inject_to: "gt"  # inject bias to ground-truth answer
   model: "gpt52"  # Model name (provider will be auto-inferred from models.yaml)
   semantic_guard:
     enabled: true
-    max_attempts: 2
-    on_fail: use_original
+    max_attempts: 4
+    on_fail: accept_last
     precheck:
       min_chars: 8
       len_ratio_min: 0.45
@@ -30,9 +30,32 @@ bias:
       enabled: true
       provider: openai
       model_id: gpt54
-      fail_confidence_threshold: 0.85
-      on_uncertain: accept
-      on_low_conf_fail: accept
+      fail_confidence_threshold: 0.0
+      on_uncertain: retry
+      on_low_conf_fail: retry
+      prompt:
+        system: |
+          You are a strict semantic equivalence auditor for medical text rewriting.
+          Only judge whether semantic meaning changed.
+          Ignore style, tone, formatting, and wording preference.
+          Output JSON only.
+        user: |
+          Task: Compare ORIGINAL and CANDIDATE.
+          Decide whether CANDIDATE changes semantic meaning or introduces new medical information.
+          If meaning is unchanged, return PASS.
+          If meaning changed or new information is introduced, return FAIL.
+
+          Question:
+          {question}
+
+          ORIGINAL:
+          {original_text}
+
+          CANDIDATE:
+          {candidate_text}
+
+          Return JSON exactly with keys:
+          {"decision":"PASS|FAIL","reasons":["..."]}
   # Alternative: explicitly specify provider and model_id
   # injector_type: "openai"
   # model_id: "gpt4omini"
