@@ -10,10 +10,10 @@ batch:
   # Pairwise-focused dataset list (from configs/datasets.yaml)
   dataset_names:
     - "medical_eval_sphere"
-    # - "mediq_askdocs"
-    # - "counselbench"
-    # - "medval_bench"
-    # - "medaesqa"
+    - "mediq_askdocs"
+    - "counselbench"
+    - "medval_bench"
+    - "medaesqa"
 
   # Pick ONE judge model here (can be openai model_id or vllmserve_* model_id)
   judge_models:
