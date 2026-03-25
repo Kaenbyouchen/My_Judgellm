@@ -8,6 +8,7 @@ git pull origin main
 
 代码跑：
 python scripts/run_batch_from_yaml.py --batch-config configs/batch_eval.yaml
+python scripts/run_batch_from_yaml.py --batch-config configs/batch_eval_selected_model_all_datasets.yaml
 服务器脚本跑：
 bash scripts/run_batch_carc.sh --batch-config configs/batch_eval.yaml
 
