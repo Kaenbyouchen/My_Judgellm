@@ -34,6 +34,13 @@ class OpenAIModel(BaseModel):
         self.organization = config.get("organization") if config else None
         self.project = config.get("project") if config else None
         self.default_headers = config.get("default_headers") if config else None
+        # Some OpenAI-compatible servers (e.g., certain vLLM chat templates)
+        # require strict user/assistant alternation and reject a leading
+        # "system" role. For base_url mode we allow flattening system text
+        # into a single user message by default.
+        self.flatten_system_for_base_url = (
+            bool(config.get("flatten_system_for_base_url", True)) if config else True
+        )
 
         if self.api_key:
             logger.info(f"OpenAIModel: API key found (env='{api_key_env_name}' or inline)")
@@ -158,9 +165,23 @@ class OpenAIModel(BaseModel):
             raise RuntimeError("OpenAI client is not available. Check API key and package installation.")
         
         messages = []
+        used_flattened_system = False
         if system_prompt:
-            messages.append({"role": "system", "content": system_prompt})
-        messages.append({"role": "user", "content": prompt})
+            should_flatten_system = bool(
+                self.base_url and self.flatten_system_for_base_url
+            )
+            if should_flatten_system:
+                used_flattened_system = True
+                merged_prompt = (
+                    f"[System Instruction]\n{system_prompt}\n\n"
+                    f"[User Question]\n{prompt}"
+                )
+                messages.append({"role": "user", "content": merged_prompt})
+            else:
+                messages.append({"role": "system", "content": system_prompt})
+                messages.append({"role": "user", "content": prompt})
+        else:
+            messages.append({"role": "user", "content": prompt})
         
         try:
             if self._openai_client is not None:
@@ -170,26 +191,49 @@ class OpenAIModel(BaseModel):
                 requested_max_tokens = kwargs.get("max_tokens", self.max_tokens)
                 requested_max_completion_tokens = kwargs.get("max_completion_tokens", self.max_completion_tokens)
 
-                create_kwargs: Dict[str, Any] = {
-                    "model": self.model_name,
-                    "messages": messages,
-                    "temperature": kwargs.get("temperature", self.temperature),
-                }
+                def _chat_completion(local_messages):
+                    create_kwargs: Dict[str, Any] = {
+                        "model": self.model_name,
+                        "messages": local_messages,
+                        "temperature": kwargs.get("temperature", self.temperature),
+                    }
 
-                # Heuristic mapping rule:
-                # - If caller explicitly provides max_completion_tokens -> use it
-                # - Else if model name looks like gpt-5.* -> use max_completion_tokens (fall back to max_tokens value)
-                # - Else -> use legacy max_tokens
-                if requested_max_completion_tokens is not None:
-                    create_kwargs["max_completion_tokens"] = requested_max_completion_tokens
-                elif str(self.model_name).startswith("gpt-5"):
-                    create_kwargs["max_completion_tokens"] = requested_max_tokens
-                else:
-                    create_kwargs["max_tokens"] = requested_max_tokens
+                    # Heuristic mapping rule:
+                    # - If caller explicitly provides max_completion_tokens -> use it
+                    # - Else if model name looks like gpt-5.* -> use max_completion_tokens (fall back to max_tokens value)
+                    # - Else -> use legacy max_tokens
+                    if requested_max_completion_tokens is not None:
+                        create_kwargs["max_completion_tokens"] = requested_max_completion_tokens
+                    elif str(self.model_name).startswith("gpt-5"):
+                        create_kwargs["max_completion_tokens"] = requested_max_tokens
+                    else:
+                        create_kwargs["max_tokens"] = requested_max_tokens
+                    return self._openai_client.chat.completions.create(**create_kwargs)
 
-                response = self._openai_client.chat.completions.create(
-                    **create_kwargs
-                )
+                try:
+                    response = _chat_completion(messages)
+                except Exception as first_error:
+                    # vLLM/OpenAI-compatible fallback:
+                    # Some chat templates reject system messages and require strict
+                    # user/assistant alternation. If that happens, retry once by
+                    # flattening system prompt into a single user turn.
+                    needs_alt_roles = "Conversation roles must alternate" in str(first_error)
+                    can_retry_flatten = bool(
+                        self.base_url and system_prompt and not used_flattened_system and needs_alt_roles
+                    )
+                    if not can_retry_flatten:
+                        raise
+                    logger.warning(
+                        "OpenAIModel: retrying with flattened system prompt due to role alternation constraint from base_url backend."
+                    )
+                    retry_messages = [{
+                        "role": "user",
+                        "content": (
+                            f"[System Instruction]\n{system_prompt}\n\n"
+                            f"[User Question]\n{prompt}"
+                        ),
+                    }]
+                    response = _chat_completion(retry_messages)
                 return response.choices[0].message.content
 
             raise RuntimeError(
