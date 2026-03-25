@@ -15,7 +15,7 @@ bias:
   enabled: true
   type: "plain_language"  # bias type to inject
   injection_mode: "word"  # "rewrite" (full answer) or "word" (word/phrase replace)
-  inject_to: "gt"  # inject bias to ground-truth answer
+  inject_to: "non_gt"  # inject bias to non-ground-truth answer
   model: "gpt52"  # Model name (provider will be auto-inferred from models.yaml)
   semantic_guard:
     enabled: true

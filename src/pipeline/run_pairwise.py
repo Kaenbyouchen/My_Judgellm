@@ -35,6 +35,11 @@ def _is_answer1_key(key: str) -> bool:
     return str(key).strip().lower() in {"1", "answer_1", "answer1"}
 
 
+def _answer_by_key(sample: PairwiseSample, key: str) -> str:
+    """Read answer text by normalized key alias."""
+    return sample.answer_1 if _is_answer1_key(key) else sample.answer_2
+
+
 def _signal_handler(signum, frame):
     """Handle interrupt signals gracefully."""
     global _shutdown_requested
@@ -97,6 +102,16 @@ def run_pairwise_evaluation(
         Dictionary with all metrics and results
     """
     logger.info("Starting pairwise evaluation pipeline")
+    inject_to = str(inject_to).strip().lower()
+    if inject_to not in {"non_gt", "gt"}:
+        raise ValueError(f"Invalid inject_to='{inject_to}'. Expected one of: non_gt, gt")
+    logger.info(
+        "Pairwise protocol: "
+        f"inject_to={inject_to}, "
+        f"position_debias_pairwise={position_debias_pairwise}, "
+        f"compute_original_acc={compute_original_acc}, "
+        f"compute_bias_metrics={compute_bias_metrics}"
+    )
     
     # Setup signal handlers for graceful shutdown
     global _shutdown_requested
@@ -336,6 +351,11 @@ def run_pairwise_evaluation(
         results["bias_injection_report"] = report_payload
         results["bias_injection_report_path"] = str(report_path)
         
+        if len(biased_samples) != len(samples):
+            raise RuntimeError(
+                f"Biased sample count mismatch: original={len(samples)} vs biased={len(biased_samples)}"
+            )
+
         # Position-debias mode evaluates both orders:
         # - GT@A:  answer_A=GT,    answer_B=biased(non-GT)
         # - GT@B:  answer_A=biased, answer_B=GT
@@ -353,6 +373,8 @@ def run_pairwise_evaluation(
         bias_judgments_posB_round1 = []
         bias_judgments_posB_round2 = []
         biased_answers = []
+        target_changed_count = 0
+        target_unchanged_count = 0
 
         for original_sample, biased_sample in tqdm(zip(samples, biased_samples), desc="Judgment (GT@A + GT@B)", total=len(samples)):
             # Check for shutdown request
@@ -363,12 +385,38 @@ def run_pairwise_evaluation(
             # Get GT and biased answers
             gt_answer, gt_key = original_sample.get_gt_answer()
             non_gt_answer, non_gt_key = original_sample.get_non_gt_answer()
+            if original_sample.id != biased_sample.id:
+                raise RuntimeError(
+                    f"Sample alignment mismatch between original and biased datasets: "
+                    f"original_id={original_sample.id}, biased_id={biased_sample.id}"
+                )
             
-            # Get biased answer from biased sample
-            if _is_answer1_key(non_gt_key):
-                biased_answer = biased_sample.answer_1
+            # Get biased answer from biased sample according to inject_to target.
+            # - inject_to=non_gt: compare original GT vs biased non-GT
+            # - inject_to=gt:     compare original GT vs biased GT
+            if inject_to == "gt":
+                target_key = gt_key
+                other_key = non_gt_key
+                original_target = gt_answer
+                original_other = non_gt_answer
             else:
-                biased_answer = biased_sample.answer_2
+                target_key = non_gt_key
+                other_key = gt_key
+                original_target = non_gt_answer
+                original_other = gt_answer
+
+            biased_answer = _answer_by_key(biased_sample, target_key)
+            other_side_after = _answer_by_key(biased_sample, other_key)
+            if other_side_after != original_other:
+                raise RuntimeError(
+                    "Bias injection target-side violation detected: "
+                    f"inject_to={inject_to}, sample_id={original_sample.id}. "
+                    "Non-target answer was modified unexpectedly."
+                )
+            if biased_answer == original_target:
+                target_unchanged_count += 1
+            else:
+                target_changed_count += 1
             
             biased_answers.append(biased_answer)
 
@@ -408,6 +456,8 @@ def run_pairwise_evaluation(
                 "gt_answer": gt_answer,
                 "biased_answer": biased_answer,
                 "original_non_gt": non_gt_answer,
+                "inject_to": inject_to,
+                "target_key": "answer_1" if _is_answer1_key(target_key) else "answer_2",
                 "bias_type": bias_type,
                 "preferred": original_sample.preferred,
                 "posA_round1_winner": judgment_posA_round1.winner,
@@ -442,6 +492,17 @@ def run_pairwise_evaluation(
         results["bias_judgments_posB_round1"] = bias_judgments_posB_round1
         results["bias_judgments_posB_round2"] = bias_judgments_posB_round2
         results["biased_answers"] = biased_answers
+        results["injection_target_audit"] = {
+            "inject_to": inject_to,
+            "target_changed_count": target_changed_count,
+            "target_unchanged_count": target_unchanged_count,
+            "total_samples": len(samples),
+        }
+        logger.info(
+            "Injection target audit: "
+            f"inject_to={inject_to}, changed={target_changed_count}, "
+            f"unchanged={target_unchanged_count}, total={len(samples)}"
+        )
     
     # Compute metrics
     metrics = {}
@@ -627,6 +688,9 @@ def run_pairwise_evaluation(
             }
     
     results["metrics"] = metrics
+    if "injection_target_audit" in results:
+        metrics.setdefault("metadata", {})
+        metrics["metadata"]["injection_target_audit"] = results["injection_target_audit"]
     
     # Save results to run_dir
     run_dir_path.mkdir(parents=True, exist_ok=True)

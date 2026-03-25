@@ -107,6 +107,7 @@ def _build_run_config(
     bias: str,
     mode: str,
     compute_original_acc: bool,
+    inject_to: Optional[str] = None,
     semantic_guard_override: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     cfg = deepcopy(base_cfg)
@@ -126,6 +127,11 @@ def _build_run_config(
     cfg["bias"]["type"] = resolved_bias
     cfg["bias"]["injection_mode"] = mode
     cfg["bias"]["model"] = injector_model
+    if isinstance(inject_to, str) and inject_to.strip():
+        target = inject_to.strip().lower()
+        if target not in {"gt", "non_gt"}:
+            raise ValueError(f"Unsupported inject_to '{inject_to}'. Use 'gt' or 'non_gt'.")
+        cfg["bias"]["inject_to"] = target
     for k in ("injector_type", "model_id", "model_name"):
         cfg["bias"].pop(k, None)
 
@@ -299,6 +305,9 @@ def main():
     continue_on_error = bool(batch_cfg.get("continue_on_error", True))
     dry_run = bool(batch_cfg.get("dry_run", False))
     reuse_original_per_judge = bool(batch_cfg.get("reuse_original_per_judge", True))
+    inject_to_override = str(batch_cfg.get("inject_to", "")).strip().lower()
+    if inject_to_override and inject_to_override not in {"gt", "non_gt"}:
+        raise ValueError("batch.inject_to must be 'gt' or 'non_gt'")
 
     base_cfg = load_yaml(str(base_config_path))
     datasets_cfg = load_yaml(str(PROJECT_ROOT / "configs" / "datasets.yaml"))
@@ -466,6 +475,7 @@ def main():
                             bias,
                             mode,
                             compute_original_acc=compute_original_acc,
+                            inject_to=inject_to_override or None,
                             semantic_guard_override=semantic_guard_override,
                         )
                         run_cfg_path = run_cfg_dir / f"{run_tag}.yaml"

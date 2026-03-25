@@ -32,6 +32,9 @@ batch:
   modes:
     - "word"
 
+  # Explicitly override injection target for all generated runs.
+  inject_to: "non_gt"
+
   continue_on_error: true
   dry_run: false
   reuse_original_per_judge: true

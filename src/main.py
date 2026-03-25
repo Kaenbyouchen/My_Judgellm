@@ -503,8 +503,10 @@ def main():
         "bias_enabled": bias_config.get("enabled", True),
         "bias_type": bias_config.get("type", "none"),
         "bias_injection_mode": bias_injection_mode,
+        "bias_inject_to": bias_config.get("inject_to", "non_gt"),
         "bias_injector_model_id": injector_model_id if bias_injector_type != "mock" else "mock",
         "judge_model_id": judge_model_id,
+        "position_debias_pairwise": eval_config.get("position_debias_pairwise", True),
         "metrics": {
             "accuracy_original": metrics.get("accuracy_original", {}).get("accuracy"),
             "accuracy_biased": metrics.get("accuracy_biased", {}).get("accuracy_biased"),
@@ -527,6 +529,7 @@ def main():
             "dataset_category": dataset_category,
             "bias_type": bias_config.get("type", "none"),
             "bias_injection_mode": bias_injection_mode,
+            "bias_inject_to": bias_config.get("inject_to", "non_gt"),
             "bias_injector_model_id": injector_model_id if bias_injector_type != "mock" else "mock",
             "judge_model_id": judge_model_id,
             "report_path": results.get("bias_injection_report_path"),
