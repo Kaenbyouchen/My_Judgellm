@@ -1,0 +1,11 @@
+data type (category),dataset,bias type,bias injection mode,data type (pairwise/scalar),judge llm,acc,acc_biased,cr,rr
+multi-choice qa,medical_eval_sphere,jargon_overloading,word,pairwise,gpt52,73.50,73.47,94.90,73.47
+multi-choice qa,medical_eval_sphere,jargon_overloading,word,pairwise,gpt52,74.00,75.62,96.00,75.62
+multi-choice qa,medical_eval_sphere,plain_language,word,pairwise,gpt52,,73.88,97.12,73.88
+multi-choice qa,medical_eval_sphere,fake_citation,word,pairwise,gpt52,,74.00,97.38,74.00
+one turn conversation,mediq_askdocs,jargon_overloading,word,pairwise,gpt52,83.67,84.39,97.27,84.39
+multi-choice qa,medical_eval_sphere,jargon_overloading,word,pairwise,vllmserve_medgemma_4b,64.50,61.12,99.75,61.12
+multi-choice qa,medical_eval_sphere,plain_language,word,pairwise,vllmserve_medgemma_4b,,67.50,99.50,67.50
+multi-choice qa,medical_eval_sphere,authority_style,word,pairwise,vllmserve_medgemma_4b,,67.50,99.50,67.50
+multi-choice qa,medical_eval_sphere,fake_citation,word,pairwise,vllmserve_medgemma_4b,,67.50,99.50,67.50
+multi-choice qa,medical_eval_sphere,language_fluency,word,pairwise,vllmserve_medgemma_4b,,67.50,99.50,67.50

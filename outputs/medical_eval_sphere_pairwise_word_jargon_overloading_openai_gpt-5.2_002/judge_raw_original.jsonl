@@ -1,0 +1,592 @@
+{
+  "sample_id": "id_0001",
+  "type": "original",
+  "question": "Why was arsenic used to treat diseases?",
+  "answer_A": "Arsenic was used to treat diseases due to its antimicrobial and anti-inflammatory properties. It was also used to treat syphilis, a sexually transmitted disease. However, arsenic is now known to be a toxic substance that can cause various health problems, including cancer, heart disease, and neurological disorders.",
+  "answer_B": "Arsenic was used to treat diseases because it was believed to have medicinal properties and could be effective in treating certain conditions such as syphilis and intestinal worm infections. However, its use was later discontinued due to the high toxicity and potential harmful effects on the body. Today, arsenic is not used as a medication except in specific cases where other treatments have failed and under strict medical supervision.",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "B better reflects the historical rationale and limitations, noting specific uses and modern restricted medical use without overstating mechanisms.",
+  "raw": {
+    "model_response": "Explanation: B better reflects the historical rationale and limitations, noting specific uses and modern restricted medical use without overstating mechanisms.\nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0002",
+  "type": "original",
+  "question": "If a 70-year-old woman who is 5�?�?tall and weighs 160 pounds lost 15 pounds, would her GFR score change?",
+  "answer_A": "The glomerular filtration rate (GFR) is a measure of kidney function that is calculated using serum creatinine levels, age, and gender. For a 70-year-old woman, the normal range for GFR is 45-60 mL/min/1.73 m2. If she lost 15 pounds, her body mass index (BMI) would decrease from 25.6 to 23.6, which is within the normal range. Therefore, her GFR score would not change.",
+  "answer_B": "Yes, a weight loss of 15 pounds can potentially impact the Glomerular Filtration Rate (GFR) score of a 70-year-old woman who is 5'6\" tall and weighs 160 pounds. GFR is an estimate of kidney function, and it is calculated using factors such as age, gender, race, and body size. Weight loss may lead to a change in body composition, which could affect GFR calculation. However, the specific impact on the GFR score would depend on various individual factors and would require a medical evaluation to determine the exact change.",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer B is more accurate that weight loss doesn’t directly change eGFR unless it affects creatinine/body composition, while Answer A contains incorrect claims (normal range, BMI relevance, and certainty).",
+  "raw": {
+    "model_response": "Explanation: Answer B is more accurate that weight loss doesn’t directly change eGFR unless it affects creatinine/body composition, while Answer A contains incorrect claims (normal range, BMI relevance, and certainty).  \nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0003",
+  "type": "original",
+  "question": "How long after a catheterization done via the wrist is it safe to resume light resistance training?",
+  "answer_A": "After a catheterization done via the wrist, it is recommended to wait for at least 24 hours before resuming any form of physical activity. This is to prevent any complications such as bleeding or infection at the site of insertion. It is also important to monitor the site for any signs of swelling, redness, or discharge. If any of these symptoms occur, it is recommended to seek medical attention immediately.",
+  "answer_B": "It is generally safe to resume light resistance training within 24-48 hours after a catheterization done via the wrist. However, it is important to consult with your healthcare provider and follow their specific recommendations based on your individual condition and healing progress. It is advisable to avoid heavy lifting or intense workouts until you have fully recovered and received clearance from your healthcare provider.",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer B is more accurate and appropriately cautious by giving a typical 24–48 hour window while emphasizing individualized medical clearance and avoiding heavy lifting.",
+  "raw": {
+    "model_response": "Explanation: Answer B is more accurate and appropriately cautious by giving a typical 24–48 hour window while emphasizing individualized medical clearance and avoiding heavy lifting.  \nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0004",
+  "type": "original",
+  "question": "What oil is good for you to cook with?",
+  "answer_A": "Olive oil is considered one of the healthiest oils for cooking due to its high monounsaturated fatty acid content, which can help lower bad cholesterol (LDL) levels. Canola oil is also a good option as it is low in saturated fat and high in monounsaturated fat. Other healthy cooking oils include avocado oil, coconut oil, and grapeseed oil.",
+  "answer_B": "When it comes to cooking oil, there are several options that are considered healthy. Among the most popular and widely available choices are olive oil, avocado oil, and peanut oil. Each of these oils has its own unique benefits and nutritional profiles. Olive oil is rich in monounsaturated fats and antioxidants, making it a good choice for heart health. Avocado oil is high in monounsaturated fats as well and has shown to resist heat-induced oxidation better than other oils, making it a suitable option for high-heat cooking. Peanut oil is high in unsaturated fats and has a high smoke point, making it a good choice for stir-frying and other high-heat applications. Ultimately, the choice of cooking oil depends on individual preferences, dietary needs, and intended uses. It is recommended to consult with a healthcare professional or registered dietitian for personalized recommendations based on specific health conditions or goals.",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer B better matches oils to cooking uses (especially high-heat) and gives more accurate, practical guidance without questionable picks like coconut oil.",
+  "raw": {
+    "model_response": "Explanation: Answer B better matches oils to cooking uses (especially high-heat) and gives more accurate, practical guidance without questionable picks like coconut oil.  \nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0005",
+  "type": "original",
+  "question": "What amount of narrowing of arteries requires angioplasty or a stent?",
+  "answer_A": "The decision to perform angioplasty or stent placement for arterial narrowing depends on several factors, including the severity and location of the narrowing, as well as the individual's symptoms and overall health status. Generally, if the narrowing is severe and causing significant blockage or symptoms such as chest pain (angina) or shortness of breath, angioplasty or stenting may be recommended. However, this determination should be made by a qualified healthcare professional after evaluating the specific circumstances of each case.",
+  "answer_B": "The decision to perform angioplasty or stenting for arterial narrowing depends on several factors, including the severity of the narrowing, the location of the narrowing, and the patient's overall health. In general, angioplasty is recommended for arterial narrowing that is causing symptoms or is at high risk of causing symptoms in the near future. Stenting is typically reserved for more severe cases of arterial narrowing that are unlikely to respond to angioplasty alone.",
+  "preferred": "1",
+  "winner": "A",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer A is more accurate and avoids the misleading implication that stenting is only for cases that “won’t respond to angioplasty,” though neither provides the key percent-stenosis thresholds.",
+  "raw": {
+    "model_response": "Explanation: Answer A is more accurate and avoids the misleading implication that stenting is only for cases that “won’t respond to angioplasty,” though neither provides the key percent-stenosis thresholds.\nVerdict:\n[[A]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0006",
+  "type": "original",
+  "question": "Are there supplements that supply all the needed amino acids in one capsule?",
+  "answer_A": "Yes, there are supplements available that contain all the essential amino acids in one capsule. These supplements are called essential amino acid (EAA) supplements. EAA supplements are designed to provide the body with all the essential amino acids it needs to support muscle growth and repair.",
+  "answer_B": "Yes, there are supplements that claim to provide all essential amino acids in one capsule. However, it is important to note that these supplements are mainly used for muscle building and weight loss purposes rather than providing complete nutrition. It is always best to obtain amino acids from natural sources such as protein-rich foods rather than relying solely on supplements.",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "B is more accurate and cautious about marketing claims and the limits of “one capsule” supplements, while A is overly definitive and promotional.",
+  "raw": {
+    "model_response": "Explanation: B is more accurate and cautious about marketing claims and the limits of “one capsule” supplements, while A is overly definitive and promotional.\nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0007",
+  "type": "original",
+  "question": "What does the term 'patent' mean as it relates to coronary arteries?",
+  "answer_A": "A patent coronary artery refers to a blood vessel that is open and unobstructed, allowing for normal blood flow to the heart muscle. It means that the coronary arteries are not blocked or narrowed, which is important for maintaining proper blood supply to the heart and preventing conditions such as coronary artery disease or heart attack. The term \"patent\" indicates that the blood vessels are open and functioning properly.",
+  "answer_B": "A patent refers to the opening of a blood vessel. In the context of coronary arteries, a patent refers to a blood vessel that is open and unobstructed, allowing blood to flow freely. This is in contrast to a coronary artery that is blocked or obstructed, which can lead to chest pain or a heart attack.",
+  "preferred": "1",
+  "winner": "A",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Both define “patent” correctly, but A is clearer and more precise without the slightly awkward phrasing in B.",
+  "raw": {
+    "model_response": "Explanation: Both define “patent” correctly, but A is clearer and more precise without the slightly awkward phrasing in B.  \nVerdict:\n[[A]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0008",
+  "type": "original",
+  "question": "Is Voltarol good for lower back pain?",
+  "answer_A": "Voltarol, also known as diclofenac, is a nonsteroidal anti-inflammatory drug (NSAID) commonly used for the relief of pain and inflammation associated with conditions such as arthritis. While Voltarol can be effective in reducing pain and inflammation, its use for lower back pain should be approached with caution due to potential side effects and the importance of proper diagnosis and treatment by a healthcare professional. It is recommended to consult with a healthcare provider before using Voltarol or any medication for lower back pain to ensure appropriate and personalized treatment.",
+  "answer_B": "Voltarol is a nonsteroidal anti-inflammatory drug (NSAID) that can help relieve pain and inflammation. It is commonly used to treat lower back pain, as well as other types of pain such as headaches, toothaches, and menstrual cramps. However, it is important to note that Voltarol may not be suitable for everyone, and it is recommended to speak with a healthcare provider before taking it, especially if you have a history of stomach ulcers or bleeding disorders.",
+  "preferred": "1",
+  "winner": "A",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer A is more accurate and cautious, avoiding the overbroad claim that Voltarol is “commonly used” for lower back pain and emphasizing appropriate medical assessment.",
+  "raw": {
+    "model_response": "Explanation: Answer A is more accurate and cautious, avoiding the overbroad claim that Voltarol is “commonly used” for lower back pain and emphasizing appropriate medical assessment.\nVerdict:\n[[A]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0009",
+  "type": "original",
+  "question": "Why does the sole of my foot hurt sometimes?",
+  "answer_A": "The sole of your foot may hurt sometimes due to various reasons such as plantar fasciitis, a condition where the tissue connecting your toes to your heel becomes inflamed, or Morton's neuroma, a benign tumor that forms between the toes, causing sharp pain in the ball of the foot. Other potential causes include foot trauma, poor footwear, excessive standing or walking, or an underlying medical condition like diabetes. It is recommended to consult a healthcare professional for an accurate diagnosis and appropriate treatment.",
+  "answer_B": "Foot pain can be caused by a variety of factors, including overuse, injury, or medical conditions such as plantar fasciitis, gout, or diabetes. It is important to identify the cause of your foot pain in order to receive appropriate treatment. If you are unsure of the cause, it is recommended to consult with a healthcare professional.",
+  "preferred": "1",
+  "winner": "A",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer A is more specific and informative about common sole-of-foot causes while still advising medical evaluation.",
+  "raw": {
+    "model_response": "Explanation: Answer A is more specific and informative about common sole-of-foot causes while still advising medical evaluation.  \nVerdict:\n[[A]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0010",
+  "type": "original",
+  "question": "What's the best dose of ketamine for a psychedelic experience?",
+  "answer_A": "The best dose of ketamine for a psychedelic experience depends on individual tolerance and desired intensity of the experience. A common dose for recreational use is 50-250 mg, which can produce hallucinations, altered perception, and feelings of detachment from reality. It is important to note that ketamine can be dangerous and even fatal at high doses, and should only be used under the guidance of a trained medical professional.",
+  "answer_B": "The optimal dose of ketamine for a psychedelic experience varies among individuals. Typically, lower doses around 0.5-2.5 mg/kg are used to induce dissociative effects and produce a modified state of consciousness, while higher doses above 2.5 mg/kg may lead to more intense psychedelic experiences. However, it is important to note that individual tolerance, body weight, and personal sensitivity to the drug play significant roles in determining the appropriate dose. Therefore, it is recommended to start with a lower dose and gradually increase if needed under the guidance of a medical professional.",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Both provide dosing guidance for non-medical “psychedelic” use, but B is more specific and actionable (mg/kg) while still including a safety caveat.",
+  "raw": {
+    "model_response": "Explanation: Both provide dosing guidance for non-medical “psychedelic” use, but B is more specific and actionable (mg/kg) while still including a safety caveat.\nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0011",
+  "type": "original",
+  "question": "Does fasting cure diabetes?",
+  "answer_A": "Fasting can help manage diabetes by lowering blood sugar levels. However, it is not a cure for diabetes. A balanced diet, regular exercise, and medication are essential for managing diabetes. It is important to consult with a healthcare professional before starting any new diet or exercise regimen.",
+  "answer_B": "Fasting does not cure diabetes. While intermittent fasting may have some health benefits for individuals with diabetes, it should be done under the guidance of a healthcare professional and combined with appropriate medication and lifestyle changes. It is important to manage diabetes through a balanced diet, regular exercise, medication, and ongoing medical care.",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "B is more accurate and cautious, clearly stating fasting is not a cure while emphasizing medical supervision and comprehensive management.",
+  "raw": {
+    "model_response": "Explanation: B is more accurate and cautious, clearly stating fasting is not a cure while emphasizing medical supervision and comprehensive management.\nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0012",
+  "type": "original",
+  "question": "How to treat poison ivy",
+  "answer_A": "Poison ivy can cause an allergic reaction characterized by itchy, red rash. To treat poison ivy, wash the affected area with soap and cool water as soon as possible, then apply over-the-counter corticosteroid cream or ointment to reduce inflammation. Avoid scratching the rash to prevent infection and use calamine lotion or antihistamines for relief from itching.",
+  "answer_B": "Poison ivy can be treated with a mixture of water and dish soap, or with commercial poison ivy remedies. If the rash is severe, it may be necessary to seek medical attention. It is important to avoid scratching the rash, as this can cause the oil to spread and potentially worsen the symptoms.",
+  "preferred": "1",
+  "winner": "A",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer A gives clearer, more accurate, and more complete self-care steps (washing promptly, specific OTC options, itch relief, and infection prevention), while Answer B includes a misleading claim about scratching spreading the oil.",
+  "raw": {
+    "model_response": "Explanation: Answer A gives clearer, more accurate, and more complete self-care steps (washing promptly, specific OTC options, itch relief, and infection prevention), while Answer B includes a misleading claim about scratching spreading the oil.  \nVerdict:\n[[A]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0013",
+  "type": "original",
+  "question": "Can a stent be placed in a coronary artery through wrist catheterization?",
+  "answer_A": "Coronary artery stenting is a common procedure used to treat narrowed or blocked arteries in the heart. The procedure is usually performed through a catheter inserted into the groin or wrist. While it is possible to insert a catheter into the wrist, it is not a common approach for coronary artery stenting.",
+  "answer_B": "Yes, a stent can be placed in a coronary artery through wrist catheterization. This procedure is known as transradial coronary intervention and involves accessing the artery in the wrist to perform procedures such as angioplasty and stenting for the treatment of coronary artery disease. It offers certain advantages over traditional femoral access, including reduced access site complications and improved patient comfort. However, the availability of this technique may vary depending on the medical facility and the expertise of the healthcare team.",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer B is accurate and clearly explains transradial (wrist) access for coronary stenting, while Answer A incorrectly downplays how common it is.",
+  "raw": {
+    "model_response": "Explanation: Answer B is accurate and clearly explains transradial (wrist) access for coronary stenting, while Answer A incorrectly downplays how common it is.\nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0014",
+  "type": "original",
+  "question": "Is wheat bad for you?",
+  "answer_A": "Wheat is generally considered part of a healthy diet and provides essential nutrients. However, some individuals may have sensitivities or allergies to wheat which can cause digestive issues or other symptoms. It is important to listen to your body and consult with a healthcare professional if you suspect wheat may be affecting your health negatively.",
+  "answer_B": "Wheat is a staple food for many people around the world and is a good source of fiber, B vitamins, and several minerals. However, some people may have an intolerance or allergy to wheat, which can cause symptoms such as bloating, diarrhea, and skin rashes. If you are concerned about your wheat intake, it may be helpful to speak with a healthcare provider or registered dietitian for personalized advice.",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer B is more informative and specific about nutrients, symptoms, and appropriate professional guidance.",
+  "raw": {
+    "model_response": "Explanation: Answer B is more informative and specific about nutrients, symptoms, and appropriate professional guidance.  \nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0015",
+  "type": "original",
+  "question": "Remedies to relieve a toothache in a child",
+  "answer_A": "1. Over-the-counter pain relievers such as acetaminophen, ibuprofen, or aspirin can be given to children to relieve toothaches. 2. If the toothache is severe, a dentist should be consulted immediately. 3. In some cases, warm salt water or a cold compress can also provide temporary relief.",
+  "answer_B": "There are several remedies that can help relieve a toothache in a child. One option is to use a cold compress on the outside of the cheek near the affected tooth. Another remedy is to give the child over-the-counter pain relievers like acetaminophen or ibuprofen, following the recommended dosage for their age and weight. Finally, encouraging the child to rinse their mouth with warm saltwater may also provide temporary relief. It is important to consult a dentist for proper diagnosis and treatment if the toothache persists or worsens.",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer B is safer and more complete because it avoids recommending aspirin for children and includes proper dosing guidance and a clear dentist follow-up.",
+  "raw": {
+    "model_response": "Explanation: Answer B is safer and more complete because it avoids recommending aspirin for children and includes proper dosing guidance and a clear dentist follow-up.\nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0016",
+  "type": "original",
+  "question": "Which bacteria can cause inflammation of the tonsils?",
+  "answer_A": "The inflammation of the tonsils, commonly known as tonsillitis, is usually caused by a viral infection. However, bacteria such as Streptococcus pyogenes, Streptococcus tonsillarum, and Haemophilus influenzae can also cause tonsillitis. The diagnosis of tonsillitis is usually made based on the symptoms and a physical examination of the tonsils.",
+  "answer_B": "The bacteria that can cause inflammation of the tonsils is usually Streptococcus pyogenes, also known as Group A Streptococcus (GAS). GAS is a common pathogen that causes various infections, including strep throat. Other bacteria such as Staphylococcus aureus or Haemophilus influenzae can also cause tonsillitis, but Streptococcus pyogenes is the most common cause.",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer B correctly identifies Group A Streptococcus as the main bacterial cause and avoids the dubious “Streptococcus tonsillarum” claim in A.",
+  "raw": {
+    "model_response": "Explanation: Answer B correctly identifies Group A Streptococcus as the main bacterial cause and avoids the dubious “Streptococcus tonsillarum” claim in A.\nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0017",
+  "type": "original",
+  "question": "Is there an alternate drink to barium sulfate for a CT scan?",
+  "answer_A": "Barium sulfate is the standard contrast medium used for CT scans. It is safe and effective. However, there are some alternatives available, such as iodinated contrast agents, which may be used in certain cases. It is important to note that the choice of contrast medium depends on the specific needs of the patient and the type of scan being performed.",
+  "answer_B": "No, there is no alternative drink to barium sulfate for a CT scan. Barium sulfate is commonly used as a contrast agent to improve visualization of the gastrointestinal tract during a CT scan. It is safe and well-tolerated by most individuals. In rare cases, people may have allergic reactions or difficulty swallowing, so it's important to discuss any concerns with your healthcare provider before the procedure.",
+  "preferred": "1",
+  "winner": "A",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer A is better because it correctly notes that oral iodinated contrast can be an alternative in some cases, whereas Answer B incorrectly claims there is no alternative.",
+  "raw": {
+    "model_response": "Explanation: Answer A is better because it correctly notes that oral iodinated contrast can be an alternative in some cases, whereas Answer B incorrectly claims there is no alternative.  \nVerdict:\n[[A]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0018",
+  "type": "original",
+  "question": "How long does it take for a blood cell to circulate in the body?",
+  "answer_A": "Blood cells circulate in the body for about 120 days. During this time, they travel through the arteries, capillaries, and veins, delivering oxygen and nutrients to tissues and removing waste products. After 120 days, old red blood cells are removed from circulation and replaced with new ones in the bone marrow.",
+  "answer_B": "The average lifespan of a red blood cell is approximately 120 days. After this time, the cell becomes old and damaged and is removed from circulation. White blood cells have a shorter lifespan, typically lasting only a few days to a few weeks. Platelets, on the other hand, have the shortest lifespan of all blood cells, surviving only for about 7 to 10 days.",
+  "preferred": "1",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "B better addresses the question by distinguishing circulation time from lifespan and covering different blood cell types, while A incorrectly equates circulation with a 120‑day lifespan.",
+  "raw": {
+    "model_response": "Explanation: B better addresses the question by distinguishing circulation time from lifespan and covering different blood cell types, while A incorrectly equates circulation with a 120‑day lifespan.  \nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0019",
+  "type": "original",
+  "question": "Does a 'CTA Coronary with Sm 1' give a calcium score?",
+  "answer_A": "A CT coronary angiography with Sm 1 does not specifically provide a calcium score. However, it can indirectly assess the presence and extent of coronary artery calcification, which is associated with the development of atherosclerosis. In some cases, a separate calcium scoring test, such as a cardiac CT scan or a non-invasive imaging test like an ultrasound, may be recommended to evaluate the amount of calcium in the coronary arteries.",
+  "answer_B": "A CTA coronary with SM 1 is a type of coronary computed tomography angiography (CTA) scan that uses a special type of contrast agent called iodinated contrast medium (ICM) to visualize the coronary arteries. This type of scan is typically used to evaluate the presence and severity of coronary artery disease (CAD). While a CTA coronary with SM 1 does not directly provide a calcium score, it can be used in conjunction with other imaging tests, such as a coronary calcium score (CCS) test, to provide a more comprehensive assessment of the risk for CAD.",
+  "preferred": "2",
+  "winner": "A",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer A more accurately states that CTA doesn’t specifically provide a calcium score and avoids incorrect details about “SM 1” and contrast.",
+  "raw": {
+    "model_response": "Explanation: Answer A more accurately states that CTA doesn’t specifically provide a calcium score and avoids incorrect details about “SM 1” and contrast.  \nVerdict:\n[[A]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0020",
+  "type": "original",
+  "question": "How to manage physical symptoms of sexual abstinence in men?",
+  "answer_A": "Physical symptoms of sexual abstinence in men can include increased sexual desire, delayed ejaculation, and erectile dysfunction. Managing these symptoms involves practicing relaxation techniques, engaging in regular exercise, maintaining a healthy diet, getting enough sleep, and seeking medical advice if symptoms persist or worsen. It is important for individuals to communicate openly about their sexual health and seek support from trusted partners or professionals if needed.",
+  "answer_B": "Sexual abstinence can cause physical symptoms such as increased libido, erectile dysfunction, and decreased sperm count. These symptoms can be managed by engaging in physical activities, practicing relaxation techniques, and seeking professional help. It is important to note that sexual abstinence can also have psychological benefits, such as improved mental health and reduced risk of sexually transmitted infections.",
+  "preferred": "1",
+  "winner": "A",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer A is more accurate and focused on practical management without making questionable claims like decreased sperm count or broad psychological benefits.",
+  "raw": {
+    "model_response": "Explanation: Answer A is more accurate and focused on practical management without making questionable claims like decreased sperm count or broad psychological benefits.  \nVerdict:\n[[A]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0021",
+  "type": "original",
+  "question": "How is the heartbeat triggered in the SA node?",
+  "answer_A": "The heartbeat is triggered by an electrical signal generated by the sinoatrial (SA) node, which is located in the right atrium of the heart. This signal travels through the heart's conduction system, causing the heart muscle to contract and pump blood. The SA node is regulated by the autonomic nervous system, which can influence the heart rate through the release of hormones and neurotransmitters.",
+  "answer_B": "The heartbeat is triggered by electrical impulses originating from the sinoatrial (SA) node, which is located in the right atrium of the heart. The SA node acts as the natural pacemaker of the heart and initiates the electrical signals that coordinate the contraction of the cardiac muscles, resulting in a regular heartbeat. These electrical signals spread through the atria and ventricles, causing them to contract and pump blood throughout the body.",
+  "preferred": "1",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer B more directly explains the SA node’s pacemaker role and how its impulses propagate to coordinate contractions, while A is vaguer and adds less relevant autonomic/hormonal detail.",
+  "raw": {
+    "model_response": "Explanation: Answer B more directly explains the SA node’s pacemaker role and how its impulses propagate to coordinate contractions, while A is vaguer and adds less relevant autonomic/hormonal detail.\nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0022",
+  "type": "original",
+  "question": "How much does a uterus weigh?",
+  "answer_A": "The average weight of a uterus is about 100 grams (3.5 ounces) in nulliparous women (women who have never given birth) and 150 grams (5.3 ounces) in multiparous women (women who have given birth). However, the weight of the uterus can vary significantly depending on factors such as age, body mass index, and parity. The uterus is a muscular organ that plays a crucial role in reproduction, particularly in childbirth.",
+  "answer_B": "The weight of the uterus can vary depending on factors such as the stage of the menstrual cycle, presence of pregnancy, and the overall health of the individual. On average, a non-pregnant adult uterus typically weighs around 3-6 ounces or 80-170 grams. It is important to note that these weights may vary significantly and should not be considered as absolute values.",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer B gives a more accurate and appropriately ranged average for a non-pregnant uterus while noting key sources of variation.",
+  "raw": {
+    "model_response": "Explanation: Answer B gives a more accurate and appropriately ranged average for a non-pregnant uterus while noting key sources of variation.\nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0023",
+  "type": "original",
+  "question": "Is bovine colostrum a healthy supplement?",
+  "answer_A": "Bovine colostrum is a nutrient-rich fluid produced by cows shortly after giving birth. It contains high levels of protein, vitamins, minerals, and other nutrients. Some studies suggest that bovine colostrum may have health benefits, such as improving gut health and reducing inflammation. However, more research is needed to confirm these benefits and determine the appropriate dosage.",
+  "answer_B": "Bovine colostrum is a supplement derived from the early milk of cows and is often promoted for its potential health benefits. While some research suggests that bovine colostrum may have immune-boosting properties and aid in digestion, further studies are needed to determine its long-term safety and effectiveness. As with any supplement, it is important to consult with a healthcare professional before starting bovine colostrum or any new supplement regimen.",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer B better addresses safety, effectiveness, and the need for medical guidance, which is key to judging whether it’s “healthy.”",
+  "raw": {
+    "model_response": "Explanation: Answer B better addresses safety, effectiveness, and the need for medical guidance, which is key to judging whether it’s “healthy.”  \nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0024",
+  "type": "original",
+  "question": "How do I get heavy metals out of my body?",
+  "answer_A": "Heavy metals can enter the body through inhalation, ingestion, and skin contact. The body has natural ways of removing heavy metals, such as through urine, feces, and sweat. However, if the exposure to heavy metals is high or chronic, supplements or medical procedures may be necessary to remove them from the body.",
+  "answer_B": "To remove heavy metals from the body, it is important to use a combination of detoxification methods. These may include consuming foods rich in chelating agents such as cilantro and garlic, performing regular sauna sessions to enhance sweating and eliminate toxins, and undergoing professional detoxification treatments like intravenous EDTA therapy or oral chelation therapy under medical supervision. Additionally, maintaining a healthy lifestyle with regular exercise, adequate hydration, and avoiding exposure to further sources of heavy metals is crucial for long-term detoxification.",
+  "preferred": "1",
+  "winner": "A",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer A is more cautious and avoids recommending unproven or potentially risky “detox” methods like cilantro/saunas or chelation without clear medical indication.",
+  "raw": {
+    "model_response": "Explanation: Answer A is more cautious and avoids recommending unproven or potentially risky “detox” methods like cilantro/saunas or chelation without clear medical indication.  \nVerdict:\n[[A]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0025",
+  "type": "original",
+  "question": "What percentage of bradycardias is atropine effective in treating?",
+  "answer_A": "Atropine is an effective treatment for bradycardia, a condition characterized by a slow heart rate. It works by increasing the heart rate to normal levels. Atropine is typically effective in treating approximately 80-90% of cases of bradycardia.",
+  "answer_B": "Bradycardia is a slow heart rate, defined as less than 60 beats per minute. Atropine is a medication that can be used to treat bradycardia by blocking the action of acetylcholine on the heart. The effectiveness of atropine in treating bradycardia depends on the underlying cause of the bradycardia. In some cases, such as in bradycardia caused by a parasympathetic nervous system overactivity, atropine can be very effective. However, in other cases, such as in bradycardia caused by a problem with the heart muscle or electrical system, atropine may not be effective.",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer B avoids inventing a specific percentage, while Answer A gives an unsupported 80–90% figure.",
+  "raw": {
+    "model_response": "Explanation: Answer B avoids inventing a specific percentage, while Answer A gives an unsupported 80–90% figure.  \nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0026",
+  "type": "original",
+  "question": "Are there any studies comparing Spermidine against Rapamycin for longevity?",
+  "answer_A": "Spermidine and Rapamycin are both considered to be anti-aging compounds. A study published in the journal Nature in 2015 compared the effects of Spermidine and Rapamycin on lifespan in yeast, worms, flies, and mice. The study found that both Spermidine and Rapamycin increased lifespan in all four species, but the effects were more pronounced in yeast and worms.",
+  "answer_B": "No, there are currently no direct studies comparing the effects of Spermidine and Rapamycin on longevity. Both Spermidine and Rapamycin have shown promising results in extending lifespan in different organisms, but further research is needed to determine their potential impact on human longevity. It is important to note that while these compounds may have anti-aging properties, they should still be approached with caution and used under the guidance of medical professionals.",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer B is more accurate because there isn’t a well-known direct head-to-head longevity study, while Answer A appears to cite a specific comparative Nature 2015 study that is likely incorrect or unsupported.",
+  "raw": {
+    "model_response": "Explanation: Answer B is more accurate because there isn’t a well-known direct head-to-head longevity study, while Answer A appears to cite a specific comparative Nature 2015 study that is likely incorrect or unsupported.\nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0027",
+  "type": "original",
+  "question": "Why does a UTI cause hallucinations?",
+  "answer_A": "A urinary tract infection (UTI) can cause hallucinations due to the inflammation and infection spreading to the brain. This can result in altered mental status, confusion, and in some cases, even hallucinations. The presence of toxins produced by bacteria in the urinary system may contribute to these neurological symptoms. It is important to seek medical attention for a UTI to prevent complications and receive appropriate treatment.",
+  "answer_B": "UTIs are bacterial infections that occur in the urinary tract. They are more common in women than men. While UTIs can cause a variety of symptoms, including burning during urination and cloudy or strong-smelling urine, hallucinations are not a common symptom. In rare cases, UTIs can cause a condition called uremic encephalopathy, which can lead to hallucinations, but this is not a common symptom and usually only occurs in people with advanced kidney disease.",
+  "preferred": "1",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer B is more accurate that hallucinations are uncommon and usually relate to delirium/systemic illness rather than infection “spreading to the brain,” whereas Answer A contains misleading claims.",
+  "raw": {
+    "model_response": "Explanation: Answer B is more accurate that hallucinations are uncommon and usually relate to delirium/systemic illness rather than infection “spreading to the brain,” whereas Answer A contains misleading claims.\nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0028",
+  "type": "original",
+  "question": "Does intermittent fasting affect A1C?",
+  "answer_A": "Intermittent fasting (IF) is a dietary pattern that involves alternating periods of fasting and eating. Several studies have shown that IF can improve insulin sensitivity and reduce blood glucose levels. However, the effects of IF on A1C levels are still unclear, and more research is needed to determine the long-term effects of IF on glycemic control.",
+  "answer_B": "Intermittent fasting can affect A1C levels, as it can impact blood sugar control. During fasting periods, the body uses stored glucose first and then switches to burning ketones or fatty acids, which may help regulate blood sugar levels. However, the extent of its impact on A1C depends on various factors such as individual metabolism, duration and frequency of fasting, and overall dietary choices during the eating windows.",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "[[B]] better answers the question by directly stating that intermittent fasting can affect A1C and noting key factors that influence the magnitude of change, whereas [[A]] is more vague and noncommittal.",
+  "raw": {
+    "model_response": "Explanation: [[B]] better answers the question by directly stating that intermittent fasting can affect A1C and noting key factors that influence the magnitude of change, whereas [[A]] is more vague and noncommittal.  \nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0029",
+  "type": "original",
+  "question": "Tell me about the upcoming options for liver transplant medications.",
+  "answer_A": "There are several emerging options for liver transplant medications that show promise in improving patient outcomes and reducing complications. These include new immunosuppressive drugs with improved safety profiles, such as belatacept and everolimus, which can help prevent organ rejection. Additionally, novel antiviral agents are being developed to better treat viral hepatitis in liver transplant recipients. Finally, research is ongoing in the field of regenerative medicine, exploring the use of stem cells to enhance liver regeneration after transplantation.",
+  "answer_B": "Liver transplant medications are used to prevent organ rejection after transplantation. The current standard of care for liver transplantation is a combination of tacrolimus and mycophenolate mofetil. Newer medications such as belatacept and everolimus are being studied as potential alternatives to the current standard of care.",
+  "preferred": "1",
+  "winner": "A",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer A is more complete and forward-looking while still staying on-topic about emerging post-transplant medication strategies.",
+  "raw": {
+    "model_response": "Explanation: Answer A is more complete and forward-looking while still staying on-topic about emerging post-transplant medication strategies.\nVerdict:\n[[A]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0030",
+  "type": "original",
+  "question": "I strained my rotator cuff during weight lifting. What can I do to recover?",
+  "answer_A": "A rotator cuff strain is a common injury that can occur during weight lifting. The best way to recover from a rotator cuff strain is to rest, ice, and elevate the affected arm. Physical therapy exercises can help to strengthen the rotator cuff muscles and improve range of motion.",
+  "answer_B": "To recover from a strained rotator cuff, it is important to follow the RICE protocol (Rest, Ice, Compression, Elevation) for the initial 48-72 hours. After that, you can start gentle range of motion exercises and gradually progress to strengthening exercises with the guidance of a physical therapist. Avoid activities that aggravate your symptoms and consider using over-the-counter pain medication if needed, following the instructions on the label.",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer B gives a clearer phased recovery plan with appropriate cautions and guidance, while Answer A is more generic and includes less relevant advice (elevation).",
+  "raw": {
+    "model_response": "Explanation: Answer B gives a clearer phased recovery plan with appropriate cautions and guidance, while Answer A is more generic and includes less relevant advice (elevation).  \nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0031",
+  "type": "original",
+  "question": "What over-the-counter supplements may reduce CAD risks?",
+  "answer_A": "1. Omega-3 fatty acids, vitamin D, and magnesium are supplements that have been shown to reduce the risk of cardiovascular disease. 2. However, it is important to note that while these supplements may have beneficial effects, they should not be used as a substitute for a healthy diet and lifestyle. 3. Additionally, some supplements may interact with medications, so it is important to consult with a healthcare provider before starting any new supplement regimen.",
+  "answer_B": "There are several over-the-counter supplements that may help reduce the risk of CAD (coronary artery disease). Omega-3 fatty acids, such as those found in fish oil, have been shown to lower triglyceride levels and reduce inflammation. Vitamin D supplementation has been associated with improved cardiovascular health and decreased risk of heart disease. Additionally, plant sterols or stanols, often found in products like red yeast rice, can help lower LDL cholesterol levels and reduce the risk of CAD. It is important to consult with a healthcare professional before starting any new supplement regimen, as they can provide personalized recommendations based on individual health needs.",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer B is more specific and relevant to CAD risk reduction (e.g., omega-3s and plant sterols) and provides brief mechanisms, though it contains a minor inaccuracy conflating plant sterols with red yeast rice.",
+  "raw": {
+    "model_response": "Explanation: Answer B is more specific and relevant to CAD risk reduction (e.g., omega-3s and plant sterols) and provides brief mechanisms, though it contains a minor inaccuracy conflating plant sterols with red yeast rice.  \nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0032",
+  "type": "original",
+  "question": "What will lavender do if I put it on a sunburn?",
+  "answer_A": "Lavender oil is known for its anti-inflammatory and analgesic properties. It can help reduce pain and inflammation associated with sunburns. However, it is important to dilute lavender oil with a carrier oil before applying it to the skin to avoid skin irritation.",
+  "answer_B": "Lavender oil has soothing and calming properties that can help alleviate the pain and inflammation associated with sunburn. When applied topically, it can reduce redness, itching, and discomfort. However, it is important to note that lavender oil should not be used on open wounds or sensitive areas of the body.",
+  "preferred": "1",
+  "winner": "A",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer A is safer and more accurate by emphasizing proper dilution to prevent irritation, while B adds less-supported claims and omits dilution guidance.",
+  "raw": {
+    "model_response": "Explanation: Answer A is safer and more accurate by emphasizing proper dilution to prevent irritation, while B adds less-supported claims and omits dilution guidance.  \nVerdict:\n[[A]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0033",
+  "type": "original",
+  "question": "Does omega-3 help with brain function?",
+  "answer_A": "Omega-3 fatty acids are essential nutrients that play a crucial role in brain function. They are involved in the production of brain cells and the maintenance of brain health. Studies have shown that omega-3 fatty acids can improve cognitive function, memory, and mood.",
+  "answer_B": "Yes, omega-3 fatty acids can help support brain function. These essential fats are important for the structure and function of brain cells, and they play a role in cognitive development and function throughout life. Consuming foods rich in omega-3s, such as fatty fish, walnuts, and flaxseeds, or taking omega-3 supplements, may help improve various aspects of brain function, including memory, attention, and mood. However, more research is needed to fully understand the exact mechanisms and optimal dosages for brain health benefits. It is always recommended to consult with a healthcare professional before making any changes to your diet or starting supplementation.",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer B is more balanced and actionable, noting food sources and the need for more research and medical guidance.",
+  "raw": {
+    "model_response": "Explanation: Answer B is more balanced and actionable, noting food sources and the need for more research and medical guidance.  \nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0034",
+  "type": "original",
+  "question": "Do some demographics have more hypertension?",
+  "answer_A": "Yes, certain demographics have a higher prevalence of hypertension. In the United States, for example, African Americans tend to have higher rates of hypertension compared to other racial groups. Additionally, older adults and individuals with certain medical conditions such as diabetes or kidney disease are more likely to develop hypertension. It is important to note that hypertension can affect anyone, regardless of demographics, and lifestyle factors also play a significant role in its development.",
+  "answer_B": "Hypertension is a global health issue that affects people of all ages, genders, and ethnicities. However, certain demographics are more likely to develop hypertension than others. For example, African Americans, Hispanics, and Native Americans have a higher prevalence of hypertension than Caucasians. Additionally, men are more likely to develop hypertension than women.",
+  "preferred": "1",
+  "winner": "A",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer A is more accurate and nuanced, while Answer B makes questionable claims about Hispanics/Native Americans and oversimplifies sex differences.",
+  "raw": {
+    "model_response": "Explanation: Answer A is more accurate and nuanced, while Answer B makes questionable claims about Hispanics/Native Americans and oversimplifies sex differences.\nVerdict:\n[[A]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0035",
+  "type": "original",
+  "question": "If in infancy, the child's immune system is not fully developed and dependent on the mother, why would anyone recommend exposing an immature immune system to vaccines?",
+  "answer_A": "Vaccines are designed to mimic a viral infection, which stimulates the immune system to produce antibodies to fight the disease. The immune system learns from this experience and becomes stronger. Exposure to vaccines is safer than exposure to the actual disease, which can cause serious illness or death.",
+  "answer_B": "1. The immune system of infants is indeed not fully developed at birth, but it undergoes rapid development in the first few months of life.2. Exposing an immature immune system to vaccines can actually help train and strengthen it to recognize and respond effectively to specific pathogens.3. Vaccines contain weakened or inactivated forms of the targeted pathogens or their components, which stimulate the immune system to produce protective antibodies without causing the actual disease.",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "[[B]] more directly addresses the “immature immune system” concern with clearer, more complete reasoning about how vaccines safely train developing immunity.",
+  "raw": {
+    "model_response": "Explanation: [[B]] more directly addresses the “immature immune system” concern with clearer, more complete reasoning about how vaccines safely train developing immunity.  \nVerdict:\n[[B]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0036",
+  "type": "original",
+  "question": "Could a sinus infection go away without medical treatment?",
+  "answer_A": "Yes, some sinus infections can resolve on their own without medical treatment. However, this may take several weeks. Symptoms may worsen initially before improving. If symptoms persist or worsen, or if you have a high fever or difficulty breathing, it is important to seek medical attention.",
+  "answer_B": "No, a sinus infection typically does not go away without medical treatment. If left untreated, the infection can worsen and lead to complications such as spreading to other areas or causing chronic sinusitis. It is important to seek medical advice for proper diagnosis and treatment.",
+  "preferred": "1",
+  "winner": "A",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "A is more accurate because many sinus infections (often viral) can resolve without antibiotics, while B incorrectly claims they typically won’t.",
+  "raw": {
+    "model_response": "Explanation: A is more accurate because many sinus infections (often viral) can resolve without antibiotics, while B incorrectly claims they typically won’t.  \nVerdict:\n[[A]]"
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "id_0037",
+  "type": "original",
+  "question": "Does the human body have equal amounts of visceral and subcutaneous fat?",
+  "answer_A": "No, the human body does not have equal amounts of visceral and subcutaneous fat. Visceral fat is found within the abdominal cavity, surrounding organs, and is associated with metabolic health risks. Subcutaneous fat, on the other hand, is located beneath the skin and has a different composition. The distribution and amount of these two types of fat vary among individuals, with subcutaneous fat being more prevalent than visceral fat.",
+  "answer_B": "No, the human body does not have equal amounts of visceral and subcutaneous fat. Visceral fat is found in the abdominal cavity and around internal organs, while subcutaneous fat is found beneath the skin. The distribution of these two types of fat varies among individuals and can be influenced by factors such as age, gender, and genetics.",
+  "preferred": "1",
+  "winner": "A",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer A more directly addresses the “equal amounts” question by noting subcutaneous fat is generally more prevalent, while B stays generic.",
+  "raw": {
+    "model_response": "Explanation: Answer A more directly addresses the “equal amounts” question by noting subcutaneous fat is generally more prevalent, while B stays generic.  \nVerdict:\n[[A]]"
+  },
+  "is_valid": true
+}

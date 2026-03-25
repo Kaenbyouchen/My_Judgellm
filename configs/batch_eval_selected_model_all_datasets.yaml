@@ -10,14 +10,14 @@ batch:
   # Pairwise-focused dataset list (from configs/datasets.yaml)
   dataset_names:
     - "medical_eval_sphere"
-    - "mediq_askdocs"
-    - "counselbench"
-    - "medval_bench"
-    - "medaesqa"
+    # - "mediq_askdocs"
+    # - "counselbench"
+    # - "medval_bench"
+    # - "medaesqa"
 
   # Pick ONE judge model here (can be openai model_id or vllmserve_* model_id)
   judge_models:
-    - "gpt52"
+    - "vllmserve_medgemma_4b"
 
   # Bias injector model(s)
   # - use gpt52 for injection quality, or set to same_as_judge to use the selected judge model
