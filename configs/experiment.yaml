@@ -72,4 +72,5 @@ judge:
 evaluation:
   compute_original_acc: true  # compute accuracy on original R1 vs R2
   compute_bias_metrics: true  # compute RR/CR on R1 vs biased_R2
+  request_batch_size: 8  # Number of concurrent pairwise requests (increase for vLLM serve throughput)
 

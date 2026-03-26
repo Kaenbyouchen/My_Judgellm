@@ -1,6 +1,6 @@
 git status
 git add -A
-git commit -m "3.25 switch to vllm serve"
+git commit -m "3.25 adding batch size for parallel in vllm serve"
 git push origin main
 
 git remote -v

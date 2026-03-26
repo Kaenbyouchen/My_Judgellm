@@ -478,6 +478,7 @@ def main():
             use_cache=bias_config.get("use_cache", True),  # Enable cache by default
             semantic_guard=bias_config.get("semantic_guard", {}),
             position_debias_pairwise=eval_config.get("position_debias_pairwise", True),
+            request_batch_size=eval_config.get("request_batch_size", 1),
         )
     elif data_type == "scalar":
         logger.info("Running scalar evaluation pipeline (placeholder)")
@@ -507,6 +508,7 @@ def main():
         "bias_injector_model_id": injector_model_id if bias_injector_type != "mock" else "mock",
         "judge_model_id": judge_model_id,
         "position_debias_pairwise": eval_config.get("position_debias_pairwise", True),
+        "request_batch_size": eval_config.get("request_batch_size", 1),
         "metrics": {
             "accuracy_original": metrics.get("accuracy_original", {}).get("accuracy"),
             "accuracy_biased": metrics.get("accuracy_biased", {}).get("accuracy_biased"),

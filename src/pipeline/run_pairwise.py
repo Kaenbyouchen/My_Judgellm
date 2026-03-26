@@ -5,6 +5,7 @@ import datetime
 import json
 import signal
 import sys
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 from tqdm import tqdm
@@ -40,6 +41,12 @@ def _answer_by_key(sample: PairwiseSample, key: str) -> str:
     return sample.answer_1 if _is_answer1_key(key) else sample.answer_2
 
 
+def _iter_chunks(items, size: int):
+    """Yield fixed-size chunks from a sequence-like object."""
+    for i in range(0, len(items), size):
+        yield items[i : i + size]
+
+
 def _signal_handler(signum, frame):
     """Handle interrupt signals gracefully."""
     global _shutdown_requested
@@ -73,6 +80,7 @@ def run_pairwise_evaluation(
     use_cache: bool = True,
     semantic_guard: Optional[Dict[str, Any]] = None,
     position_debias_pairwise: bool = True,
+    request_batch_size: int = 1,
 ) -> Dict[str, Any]:
     """
     Run pairwise evaluation pipeline.
@@ -105,12 +113,14 @@ def run_pairwise_evaluation(
     inject_to = str(inject_to).strip().lower()
     if inject_to not in {"non_gt", "gt"}:
         raise ValueError(f"Invalid inject_to='{inject_to}'. Expected one of: non_gt, gt")
+    request_batch_size = max(1, int(request_batch_size or 1))
     logger.info(
         "Pairwise protocol: "
         f"inject_to={inject_to}, "
         f"position_debias_pairwise={position_debias_pairwise}, "
         f"compute_original_acc={compute_original_acc}, "
-        f"compute_bias_metrics={compute_bias_metrics}"
+        f"compute_bias_metrics={compute_bias_metrics}, "
+        f"request_batch_size={request_batch_size}"
     )
     
     # Setup signal handlers for graceful shutdown
@@ -219,42 +229,65 @@ def run_pairwise_evaluation(
                 "raw": existing_judgment.get("raw", {})
             }))
         
-        for sample in tqdm(remaining_samples_original, desc="Original judgment"):
-            # Check for shutdown request
-            if _shutdown_requested:
-                logger.warning("Shutdown requested. Saving progress and exiting gracefully...")
-                break
-            
-            judgment = judge.judge_pairwise(
-                question=sample.question,
-                answer_A=sample.answer_1,
-                answer_B=sample.answer_2
-            )
-            original_judgments.append(judgment)
-            
-            # Save judgment record
-            judgment_record = {
-                "sample_id": sample.id,
-                "type": "original",
-                "question": sample.question,
-                "answer_A": sample.answer_1,
-                "answer_B": sample.answer_2,
-                "preferred": sample.preferred,
-                **judgment.to_dict()
-            }
-            results["original_judgments"].append(judgment_record)
-            
-            # Immediately save to file (incremental save to prevent data loss)
-            try:
-                save_judgment_jsonl_single(judgment_record, str(original_judgments_path))
-            except Exception as e:
-                logger.error(f"Failed to save judgment for sample {sample.id}: {e}")
-                raise
-            
-            # Check again after save
-            if _shutdown_requested:
-                logger.warning("Shutdown requested after saving. Exiting gracefully...")
-                break
+        pbar = tqdm(total=len(remaining_samples_original), desc="Original judgment")
+        try:
+            for sample_batch in _iter_chunks(remaining_samples_original, request_batch_size):
+                # Check for shutdown request
+                if _shutdown_requested:
+                    logger.warning("Shutdown requested. Saving progress and exiting gracefully...")
+                    break
+
+                if request_batch_size == 1:
+                    batch_judgments = [
+                        judge.judge_pairwise(
+                            question=sample_batch[0].question,
+                            answer_A=sample_batch[0].answer_1,
+                            answer_B=sample_batch[0].answer_2,
+                        )
+                    ]
+                else:
+                    with ThreadPoolExecutor(max_workers=request_batch_size) as executor:
+                        futures = [
+                            executor.submit(
+                                judge.judge_pairwise,
+                                question=s.question,
+                                answer_A=s.answer_1,
+                                answer_B=s.answer_2,
+                            )
+                            for s in sample_batch
+                        ]
+                        batch_judgments = [f.result() for f in futures]
+
+                for sample, judgment in zip(sample_batch, batch_judgments):
+                    original_judgments.append(judgment)
+
+                    # Save judgment record
+                    judgment_record = {
+                        "sample_id": sample.id,
+                        "type": "original",
+                        "question": sample.question,
+                        "answer_A": sample.answer_1,
+                        "answer_B": sample.answer_2,
+                        "preferred": sample.preferred,
+                        **judgment.to_dict(),
+                    }
+                    results["original_judgments"].append(judgment_record)
+
+                    # Immediately save to file (incremental save to prevent data loss)
+                    try:
+                        save_judgment_jsonl_single(judgment_record, str(original_judgments_path))
+                    except Exception as e:
+                        logger.error(f"Failed to save judgment for sample {sample.id}: {e}")
+                        raise
+
+                pbar.update(len(sample_batch))
+
+                # Check again after save
+                if _shutdown_requested:
+                    logger.warning("Shutdown requested after saving. Exiting gracefully...")
+                    break
+        finally:
+            pbar.close()
         
         results["original_judgments_list"] = original_judgments
     
@@ -376,112 +409,158 @@ def run_pairwise_evaluation(
         target_changed_count = 0
         target_unchanged_count = 0
 
-        for original_sample, biased_sample in tqdm(zip(samples, biased_samples), desc="Judgment (GT@A + GT@B)", total=len(samples)):
-            # Check for shutdown request
-            if _shutdown_requested:
-                logger.warning("Shutdown requested. Saving progress and exiting gracefully...")
-                break
-            
-            # Get GT and biased answers
-            gt_answer, gt_key = original_sample.get_gt_answer()
-            non_gt_answer, non_gt_key = original_sample.get_non_gt_answer()
-            if original_sample.id != biased_sample.id:
-                raise RuntimeError(
-                    f"Sample alignment mismatch between original and biased datasets: "
-                    f"original_id={original_sample.id}, biased_id={biased_sample.id}"
-                )
-            
-            # Get biased answer from biased sample according to inject_to target.
-            # - inject_to=non_gt: compare original GT vs biased non-GT
-            # - inject_to=gt:     compare original GT vs biased GT
-            if inject_to == "gt":
-                target_key = gt_key
-                other_key = non_gt_key
-                original_target = gt_answer
-                original_other = non_gt_answer
-            else:
-                target_key = non_gt_key
-                other_key = gt_key
-                original_target = non_gt_answer
-                original_other = gt_answer
+        pbar_bias = tqdm(total=len(samples), desc="Judgment (GT@A + GT@B)")
+        try:
+            paired_samples = list(zip(samples, biased_samples))
+            for sample_batch in _iter_chunks(paired_samples, request_batch_size):
+                if _shutdown_requested:
+                    logger.warning("Shutdown requested. Saving progress and exiting gracefully...")
+                    break
 
-            biased_answer = _answer_by_key(biased_sample, target_key)
-            other_side_after = _answer_by_key(biased_sample, other_key)
-            if other_side_after != original_other:
-                raise RuntimeError(
-                    "Bias injection target-side violation detected: "
-                    f"inject_to={inject_to}, sample_id={original_sample.id}. "
-                    "Non-target answer was modified unexpectedly."
-                )
-            if biased_answer == original_target:
-                target_unchanged_count += 1
-            else:
-                target_changed_count += 1
-            
-            biased_answers.append(biased_answer)
+                prepared = []
+                for original_sample, biased_sample in sample_batch:
+                    # Get GT and biased answers
+                    gt_answer, gt_key = original_sample.get_gt_answer()
+                    non_gt_answer, non_gt_key = original_sample.get_non_gt_answer()
+                    if original_sample.id != biased_sample.id:
+                        raise RuntimeError(
+                            f"Sample alignment mismatch between original and biased datasets: "
+                            f"original_id={original_sample.id}, biased_id={biased_sample.id}"
+                        )
 
-            # GT@A
-            judgment_posA_round1 = judge.judge_pairwise(
-                question=original_sample.question,
-                answer_A=gt_answer,
-                answer_B=biased_answer
-            )
-            judgment_posA_round2 = judge.judge_pairwise(
-                question=original_sample.question,
-                answer_A=gt_answer,
-                answer_B=biased_answer
-            )
+                    # Get biased answer from biased sample according to inject_to target.
+                    # - inject_to=non_gt: compare original GT vs biased non-GT
+                    # - inject_to=gt:     compare original GT vs biased GT
+                    if inject_to == "gt":
+                        target_key = gt_key
+                        other_key = non_gt_key
+                        original_target = gt_answer
+                        original_other = non_gt_answer
+                    else:
+                        target_key = non_gt_key
+                        other_key = gt_key
+                        original_target = non_gt_answer
+                        original_other = gt_answer
 
-            # GT@B
-            judgment_posB_round1 = judge.judge_pairwise(
-                question=original_sample.question,
-                answer_A=biased_answer,
-                answer_B=gt_answer
-            )
-            judgment_posB_round2 = judge.judge_pairwise(
-                question=original_sample.question,
-                answer_A=biased_answer,
-                answer_B=gt_answer
-            )
+                    biased_answer = _answer_by_key(biased_sample, target_key)
+                    other_side_after = _answer_by_key(biased_sample, other_key)
+                    if other_side_after != original_other:
+                        raise RuntimeError(
+                            "Bias injection target-side violation detected: "
+                            f"inject_to={inject_to}, sample_id={original_sample.id}. "
+                            "Non-target answer was modified unexpectedly."
+                        )
+                    if biased_answer == original_target:
+                        target_unchanged_count += 1
+                    else:
+                        target_changed_count += 1
 
-            bias_judgments_posA_round1.append(judgment_posA_round1)
-            bias_judgments_posA_round2.append(judgment_posA_round2)
-            bias_judgments_posB_round1.append(judgment_posB_round1)
-            bias_judgments_posB_round2.append(judgment_posB_round2)
+                    biased_answers.append(biased_answer)
+                    prepared.append(
+                        {
+                            "original_sample": original_sample,
+                            "gt_answer": gt_answer,
+                            "non_gt_answer": non_gt_answer,
+                            "biased_answer": biased_answer,
+                            "target_key": target_key,
+                        }
+                    )
 
-            judgment_record = {
-                "sample_id": original_sample.id,
-                "type": "bias",
-                "question": original_sample.question,
-                "gt_answer": gt_answer,
-                "biased_answer": biased_answer,
-                "original_non_gt": non_gt_answer,
-                "inject_to": inject_to,
-                "target_key": "answer_1" if _is_answer1_key(target_key) else "answer_2",
-                "bias_type": bias_type,
-                "preferred": original_sample.preferred,
-                "posA_round1_winner": judgment_posA_round1.winner,
-                "posA_round2_winner": judgment_posA_round2.winner,
-                "posB_round1_winner": judgment_posB_round1.winner,
-                "posB_round2_winner": judgment_posB_round2.winner,
-                "consistent_posA": judgment_posA_round1.winner == judgment_posA_round2.winner,
-                "consistent_posB": judgment_posB_round1.winner == judgment_posB_round2.winner,
-                "from_cache": cached_samples is not None,
-                **judgment_posA_round1.to_dict()
-            }
-            results["bias_judgments"].append(judgment_record)
-            
-            # Immediately save to file (incremental save to prevent data loss)
-            try:
-                save_judgment_jsonl_single(judgment_record, str(bias_judgments_path))
-            except Exception as e:
-                logger.error(f"Failed to save bias judgment for sample {original_sample.id}: {e}")
-                raise
-            
-            # Check again after save
-            if _shutdown_requested:
-                logger.warning("Shutdown requested after saving. Exiting gracefully...")
-                break
+                def _judge_one(ctx: Dict[str, Any]):
+                    original_sample = ctx["original_sample"]
+                    gt_answer = ctx["gt_answer"]
+                    biased_answer = ctx["biased_answer"]
+                    # GT@A
+                    judgment_posA_round1 = judge.judge_pairwise(
+                        question=original_sample.question,
+                        answer_A=gt_answer,
+                        answer_B=biased_answer,
+                    )
+                    judgment_posA_round2 = judge.judge_pairwise(
+                        question=original_sample.question,
+                        answer_A=gt_answer,
+                        answer_B=biased_answer,
+                    )
+                    # GT@B
+                    judgment_posB_round1 = judge.judge_pairwise(
+                        question=original_sample.question,
+                        answer_A=biased_answer,
+                        answer_B=gt_answer,
+                    )
+                    judgment_posB_round2 = judge.judge_pairwise(
+                        question=original_sample.question,
+                        answer_A=biased_answer,
+                        answer_B=gt_answer,
+                    )
+                    return (
+                        judgment_posA_round1,
+                        judgment_posA_round2,
+                        judgment_posB_round1,
+                        judgment_posB_round2,
+                    )
+
+                if request_batch_size == 1:
+                    judged_batch = [_judge_one(prepared[0])]
+                else:
+                    with ThreadPoolExecutor(max_workers=request_batch_size) as executor:
+                        futures = [executor.submit(_judge_one, ctx) for ctx in prepared]
+                        judged_batch = [f.result() for f in futures]
+
+                for ctx, judgments in zip(prepared, judged_batch):
+                    original_sample = ctx["original_sample"]
+                    gt_answer = ctx["gt_answer"]
+                    non_gt_answer = ctx["non_gt_answer"]
+                    biased_answer = ctx["biased_answer"]
+                    target_key = ctx["target_key"]
+                    (
+                        judgment_posA_round1,
+                        judgment_posA_round2,
+                        judgment_posB_round1,
+                        judgment_posB_round2,
+                    ) = judgments
+
+                    bias_judgments_posA_round1.append(judgment_posA_round1)
+                    bias_judgments_posA_round2.append(judgment_posA_round2)
+                    bias_judgments_posB_round1.append(judgment_posB_round1)
+                    bias_judgments_posB_round2.append(judgment_posB_round2)
+
+                    judgment_record = {
+                        "sample_id": original_sample.id,
+                        "type": "bias",
+                        "question": original_sample.question,
+                        "gt_answer": gt_answer,
+                        "biased_answer": biased_answer,
+                        "original_non_gt": non_gt_answer,
+                        "inject_to": inject_to,
+                        "target_key": "answer_1" if _is_answer1_key(target_key) else "answer_2",
+                        "bias_type": bias_type,
+                        "preferred": original_sample.preferred,
+                        "posA_round1_winner": judgment_posA_round1.winner,
+                        "posA_round2_winner": judgment_posA_round2.winner,
+                        "posB_round1_winner": judgment_posB_round1.winner,
+                        "posB_round2_winner": judgment_posB_round2.winner,
+                        "consistent_posA": judgment_posA_round1.winner == judgment_posA_round2.winner,
+                        "consistent_posB": judgment_posB_round1.winner == judgment_posB_round2.winner,
+                        "from_cache": cached_samples is not None,
+                        **judgment_posA_round1.to_dict(),
+                    }
+                    results["bias_judgments"].append(judgment_record)
+
+                    # Immediately save to file (incremental save to prevent data loss)
+                    try:
+                        save_judgment_jsonl_single(judgment_record, str(bias_judgments_path))
+                    except Exception as e:
+                        logger.error(f"Failed to save bias judgment for sample {original_sample.id}: {e}")
+                        raise
+
+                pbar_bias.update(len(sample_batch))
+
+                # Check again after save
+                if _shutdown_requested:
+                    logger.warning("Shutdown requested after saving. Exiting gracefully...")
+                    break
+        finally:
+            pbar_bias.close()
         
         # Keep backward-compatible fields while exposing position-debias outputs.
         results["bias_judgments_list"] = bias_judgments_posA_round1
@@ -497,6 +576,7 @@ def run_pairwise_evaluation(
             "target_changed_count": target_changed_count,
             "target_unchanged_count": target_unchanged_count,
             "total_samples": len(samples),
+            "request_batch_size": request_batch_size,
         }
         logger.info(
             "Injection target audit: "
