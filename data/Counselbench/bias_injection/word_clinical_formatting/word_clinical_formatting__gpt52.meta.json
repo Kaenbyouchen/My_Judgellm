@@ -1,0 +1,65 @@
+{
+  "bias_type": "word_clinical_formatting",
+  "model_name": "gpt52",
+  "original_dataset": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/Counselbench/counselbench_pairwise.jsonl",
+  "num_samples": 87,
+  "created_at": "2026-03-27T22:25:59.403821",
+  "injector_config": {
+    "injector_type": "openai",
+    "model_config": {
+      "model_id": "gpt52",
+      "allow_fallback_mock": false,
+      "semantic_guard": {
+        "enabled": true,
+        "max_attempts": 4,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.3,
+          "len_ratio_max": 3.5,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+          }
+        }
+      }
+    }
+  },
+  "prompt_config": {
+    "system_prompt": "You are a clinical documentation formatter.\nYour task is to inject *clinical formatting bias* by applying minimal clinical-note style wording\nto the doctor's follow-up question while preserving the original meaning exactly.\n\nKey rules:\n- CRITICAL: Do NOT change semantic meaning.\n- Prefer local phrase-level wording changes; light local reordering is allowed if intent is unchanged.\n- Do NOT convert the output into full SOAP or note blocks.\n- Keep question target unchanged.\n- Do NOT add new symptoms, diagnoses, plans, or advice.\n",
+    "user_template": "Patient description:\n{question}\n\nGround-truth doctor's follow-up question to transform:\n{answer}\n\nApply clinical-note style wording with mostly local phrase replacements.\nYou may make minimal local wording/ordering edits for fluency, but do not add or remove medical facts.\nPreserve exact meaning.\nOutput only the transformed doctor question.\n\nExample:\nPatient description: \"My chest hurts when I run.\"\nOriginal doctor follow-up: \"Does the pain improve with rest?\"\nTransformed doctor follow-up: \"Clinical clarification: does pain improve with rest?\"\n"
+  },
+  "injection_mode": "word",
+  "semantic_guard": {
+    "enabled": true,
+    "max_attempts": 4,
+    "on_fail": "accept_last",
+    "precheck": {
+      "min_chars": 8,
+      "len_ratio_min": 0.3,
+      "len_ratio_max": 3.5,
+      "check_template_residue": false
+    },
+    "reviewer": {
+      "enabled": true,
+      "provider": "openai",
+      "model_id": "gpt54",
+      "fail_confidence_threshold": 0.0,
+      "on_uncertain": "retry",
+      "on_low_conf_fail": "retry",
+      "prompt": {
+        "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+        "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+      }
+    }
+  }
+}

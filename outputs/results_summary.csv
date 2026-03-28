@@ -1,0 +1,20 @@
+data type (category),dataset,bias type,bias injection mode,data type (pairwise/scalar),judge llm,acc,acc_biased,cr,rr
+multi-choice qa,medical_eval_sphere,jargon_overloading,word,pairwise,vllmserve_medgemma_4b,64.25,59.75,98.88,59.75
+multi-choice qa,medical_eval_sphere,plain_language,word,pairwise,vllmserve_medgemma_4b,,72.38,99.50,72.38
+multi-choice qa,medical_eval_sphere,authority_style,word,pairwise,vllmserve_medgemma_4b,,60.38,99.12,60.38
+multi-choice qa,medical_eval_sphere,fake_citation,word,pairwise,vllmserve_medgemma_4b,,77.75,99.25,77.75
+multi-choice qa,medical_eval_sphere,language_fluency,word,pairwise,vllmserve_medgemma_4b,,68.62,99.63,68.62
+one turn conversation,mediq_askdocs,plain_language,word,pairwise,vllmserve_medgemma_4b,70.59,71.76,99.57,71.76
+one turn conversation,mediq_askdocs,clinical_formatting,word,pairwise,vllmserve_medgemma_4b,,61.29,99.66,61.29
+one turn conversation,mediq_askdocs,empathy_tone,word,pairwise,vllmserve_medgemma_4b,,69.17,99.57,69.17
+one turn conversation,mediq_askdocs,authority_style,word,pairwise,vllmserve_medgemma_4b,,70.65,99.60,70.65
+one turn conversation,mediq_askdocs,language_fluency,word,pairwise,vllmserve_medgemma_4b,,71.59,99.63,71.59
+one turn conversation,counselbench,jargon_overloading,word,pairwise,vllmserve_medgemma_4b,82.76,85.06,100.00,85.06
+one turn conversation,counselbench,clinical_formatting,word,pairwise,vllmserve_medgemma_4b,,83.91,100.00,83.91
+one turn conversation,counselbench,empathy_tone,word,pairwise,vllmserve_medgemma_4b,,87.93,100.00,87.93
+one turn conversation,counselbench,authority_style,word,pairwise,vllmserve_medgemma_4b,,86.21,100.00,86.21
+one turn conversation,counselbench,fake_citation,word,pairwise,vllmserve_medgemma_4b,,92.53,100.00,92.53
+one turn conversation,counselbench,language_fluency,word,pairwise,vllmserve_medgemma_4b,,86.78,100.00,86.78
+multi-turn conversation,medval_bench,jargon_overloading,word,pairwise,vllmserve_medgemma_4b,33.59,28.08,99.62,28.08
+semantic Q&A,medaesqa,jargon_overloading,word,pairwise,vllmserve_medgemma_4b,32.50,23.75,100.00,23.75
+semantic Q&A,medaesqa,plain_language,word,pairwise,vllmserve_medgemma_4b,,26.25,100.00,26.25

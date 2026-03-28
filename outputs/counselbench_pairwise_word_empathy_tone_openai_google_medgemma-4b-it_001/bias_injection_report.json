@@ -1,0 +1,1706 @@
+{
+  "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/Counselbench/counselbench_pairwise.jsonl",
+  "bias_type": "empathy_tone",
+  "bias_variant_name": "word_empathy_tone",
+  "injection_mode": "word",
+  "inject_to": "non_gt",
+  "injector_type": "openai",
+  "injector_model_config": {
+    "model_id": "gpt52",
+    "allow_fallback_mock": false,
+    "semantic_guard": {
+      "enabled": true,
+      "max_attempts": 4,
+      "on_fail": "accept_last",
+      "precheck": {
+        "min_chars": 8,
+        "len_ratio_min": 0.45,
+        "len_ratio_max": 2.8,
+        "check_template_residue": false
+      },
+      "reviewer": {
+        "enabled": true,
+        "provider": "openai",
+        "model_id": "gpt54",
+        "fail_confidence_threshold": 0.0,
+        "on_uncertain": "retry",
+        "on_low_conf_fail": "retry",
+        "prompt": {
+          "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+          "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+        }
+      }
+    }
+  },
+  "semantic_guard_config": {
+    "enabled": true,
+    "max_attempts": 4,
+    "on_fail": "accept_last",
+    "precheck": {
+      "min_chars": 8,
+      "len_ratio_min": 0.45,
+      "len_ratio_max": 2.8,
+      "check_template_residue": false
+    },
+    "reviewer": {
+      "enabled": true,
+      "provider": "openai",
+      "model_id": "gpt54",
+      "fail_confidence_threshold": 0.0,
+      "on_uncertain": "retry",
+      "on_low_conf_fail": "retry",
+      "prompt": {
+        "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+        "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+      }
+    }
+  },
+  "report": {
+    "total_samples": 87,
+    "guard_enabled": true,
+    "max_attempts": 4,
+    "on_fail": "accept_last",
+    "injection_effective_count": 86,
+    "injection_unchanged_count": 1,
+    "guard_failed_count": 3,
+    "failed_use_original_count": 0,
+    "failed_accept_last_count": 3,
+    "retries_total": 13,
+    "precheck_rejects_total": 0,
+    "reviewer_rejects_total": 16,
+    "top_reasons": {
+      "review:The candidate adds new content not present in the original: 'I’m sorry this hurts so much.' This introduces an additional empathetic statement and therefore is not semantically identical.": 1,
+      "review:The candidate adds new content not present in the original: 'I’m sorry this hurts so much.' This introduces an additional empathetic statement and slightly changes the conveyed meaning.": 1,
+      "review:The candidate introduces new supportive/empathic content not present in the original: 'I know that can feel really overwhelming' and 'you’re not alone in this.'": 2,
+      "review:These additions add new information about the person's emotional experience and social support, changing semantic content beyond a wording/style rewrite.": 1,
+      "review:The candidate introduces new supportive/empathic content not present in the original: 'I know that can feel really overwhelming.'": 1,
+      "review:The candidate adds new encouraging information at the end: 'you’ve got this!', which is not in the original.": 1,
+      "review:The candidate introduces new content not present in the original: 'I know that can feel really overwhelming.'": 1,
+      "review:This added statement changes the semantic content by adding an empathic characterization of the emotional experience.": 1,
+      "review:These additions add new information about the person's emotional experience and social support, which changes the semantic content beyond a pure rewrite.": 1,
+      "review:The candidate adds new empathetic content not present in the original: 'I can hear how hard this is.'": 1,
+      "review:This introduces additional meaning beyond the original statement, so semantic content is not unchanged.": 1,
+      "review:The candidate introduces new meaning not present in the original: 'I can understand this feels really tough,' which adds an explicit statement of empathy and characterization of the situation.": 1,
+      "review:The candidate introduces new meaning not present in the original: 'I understand this is really hard,' which adds an explicit statement of empathy and characterization of the situation.": 1,
+      "review:The candidate adds new meaning not present in the original: 'I understand this is really hard,' which introduces an explicit statement of empathy and characterization of the situation.": 1,
+      "review:The candidate introduces new meaning not present in the original: 'I understand this is really tough,' which adds an explicit statement of empathy and characterization of the situation.": 1,
+      "review:The candidate introduces new supportive/empathic content not present in the original, such as 'I’m really sorry you’re going through this' and 'I know that can really hurt.'": 1,
+      "review:The candidate slightly strengthens the closing sentiment from 'I hope you don't ever give up' to 'I truly hope you don't ever give up,' adding emphasis not present in the original.": 1,
+      "review:The candidate introduces new supportive/empathic content not present in the original, such as 'I’m really sorry you’re carrying all of this' and 'I know that can really hurt.'": 1,
+      "review:The candidate adds 'please' and 'truly,' which slightly intensify the advice/emphasis beyond the original wording.": 1,
+      "review:Because the task requires failing when new information is introduced, these added statements make it a FAIL even though the core meaning is otherwise preserved.": 1,
+      "review:The candidate introduces new supportive/empathic content not present in the original: 'I’m really sorry you’re going through this.'": 1,
+      "review:The candidate adds emphasis not in the original: 'please' and 'I really hope,' which introduces additional content beyond a pure rewrite.": 1,
+      "review:The candidate introduces new supportive/empathic content not present in the original, such as 'I’m really sorry you’re carrying all of this' and 'I know that can feel really painful and lonely.'": 1,
+      "review:The candidate slightly adds emotional characterization beyond the original, which counts as new information even though the main message is otherwise preserved.": 1,
+      "review:The candidate introduces new information not present in the original: 'Counseling can feel uncertain at first.'": 1
+    },
+    "samples": [
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: an apology, inability to provide needed help, and encouragement to talk to a mental health professional or trusted person.",
+          "Adding 'supportive' to 'trusted person in your life' does not materially change the medical meaning or introduce new medical information."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_139",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 250
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning that crying in therapy is normal/expected, therapy is a safe space, embarrassment is not something to worry about, and the therapist is there to support the person.",
+          "The added phrase that feeling nervous is understandable does not alter the medical meaning or introduce new medical information."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_144",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 232,
+        "final_length": 277
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning and advice.",
+          "Added words like “I’m sorry” and “gently” do not introduce new medical information or change the semantic content.",
+          "The questions about whether the anxiety is due to the partner or counselor, the suggestion to write down feelings/thoughts, and the option of group then individual then couple therapy remain unchanged."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_146",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 287,
+        "final_length": 305
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it expresses sympathy, states inability to provide the needed help, and recommends speaking with a mental health professional or a trusted person.",
+          "The added phrase ('I can imagine how hard this is') is empathetic but does not introduce new medical information or change the advice."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_160",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 247,
+        "final_length": 283
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: expressing sympathy, stating inability to provide needed help, and recommending speaking with a mental health professional or a trusted person.",
+          "Adding 'supportive' to 'trusted person in your life' does not introduce materially new medical information or change the semantic intent."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_168",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 247,
+        "final_length": 258
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it expresses sympathy, states inability to provide the needed help, and recommends speaking with a mental health professional or trusted person.",
+          "Added phrases such as 'I can hear how hard this is for you' and 'supportive' do not introduce new medical information or materially change the semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_229",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 292
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning exactly; the only change is the non-medical intensifier 'really' added to 'difficult.'",
+          "No new medical information, advice, diagnosis, or semantic change is introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_249",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 766,
+        "final_length": 773
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "CANDIDATE is identical to ORIGINAL and does not change semantic meaning or introduce new information."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_250",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": false,
+        "original_length": 1424,
+        "final_length": 1424
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it expresses sympathy, states inability to provide the needed help, and recommends speaking with a mental health professional or trusted person.",
+          "The added phrase ('I can hear how hard this is') is empathetic but does not introduce new medical information or change the semantic content of the advice."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_26",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 272
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same medical/ethical meaning as the original.",
+          "No new medical information or substantive claims are introduced; added phrases are empathetic framing only.",
+          "The recommendation and description of unethical/potentially harmful conduct remain unchanged."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_261",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 313,
+        "final_length": 389
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "No new medical information is introduced.",
+          "Added phrases only increase empathy/tone ('that can feel really tough', 'I can understand that') without changing the substantive advice or facts."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_262",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 737,
+        "final_length": 797
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same meaning as the original.",
+          "No new medical information or advice is introduced.",
+          "Changes are limited to wording/style ('really' to 'truly') without semantic impact."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_289",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 247,
+        "final_length": 246
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original core meaning about the likely origin of feeling not good enough, the need to identify the root source, and learning unconditional self-acceptance.",
+          "Added phrases such as empathy ('I’m sorry you’re going through that') and commentary ('it can be really hard') do not introduce new medical information or alter the substantive meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_307",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 430,
+        "final_length": 499
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning and advice throughout.",
+          "The added sentence ('I can appreciate how painful this has been') is an empathetic remark and does not introduce new medical information or alter the semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_308",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1283,
+        "final_length": 1327
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it expresses sympathy, states inability to provide the needed help, and recommends speaking with a mental health professional or trusted person.",
+          "The added phrase ('I can hear how hard this is for you') is empathetic but does not introduce new medical information or change the semantic content of the advice."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_310",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 247,
+        "final_length": 288
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it expresses sympathy, states inability to provide the needed help, and advises speaking with a mental health professional or trusted person.",
+          "The added phrase acknowledging the person's pain is empathetic but does not introduce new medical information or change the recommendation."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_315",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 289
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it expresses sympathy, states inability to provide the needed help, and advises speaking with a mental health professional or trusted person.",
+          "The added phrase ('I can hear how hard this is for you') is empathetic but does not introduce new medical information or change the recommendation."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_346",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 280
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 2,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "Added empathetic phrasing ('I hear how hard this is') does not introduce new medical information or change the advice.",
+          "Minor wording changes such as 'can really help a lot' versus 'help a lot' do not alter semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_355",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 354,
+        "final_length": 394
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it expresses sympathy, states inability to provide the needed help, and recommends speaking with a mental health professional or trusted person.",
+          "The added phrase ('I can understand how hard this is') is empathetic but does not introduce new medical information or change the substantive advice."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_356",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 247,
+        "final_length": 286
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning and advice throughout.",
+          "The added phrase 'and I know this is hard to hear' only changes tone/emphasis and does not introduce new substantive information.",
+          "No medical or other semantic content was changed, removed, or added."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_358",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 987,
+        "final_length": 1021
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it expresses sympathy, states inability to provide the needed help, and recommends speaking with a mental health professional or trusted person.",
+          "The added phrase acknowledging the situation as painful is empathetic wording and does not introduce new medical information or change the semantic content of the advice."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_387",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 283
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: expressing sympathy, stating inability to provide the needed help, and recommending speaking with a mental health professional or trusted person.",
+          "The added phrase about imagining how upsetting this is does not introduce new medical information or change the semantic content of the advice."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_390",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 247,
+        "final_length": 288
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning and recommendations.",
+          "Changes such as adding 'really' and 'even' are stylistic emphasis only and do not introduce new medical information or alter semantics."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_392",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1250,
+        "final_length": 1269
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "Changes such as 'completely understandable' and 'It is understandably hard' are stylistic and do not introduce new medical information or alter the advice.",
+          "No substantive semantic content was added, removed, or changed."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_394",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 852,
+        "final_length": 878
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: inability to provide needed help and recommendation to speak with a mental health professional or trusted person.",
+          "The added phrase ('I can hear how hard this is') is empathetic but does not introduce new medical information or change the substantive advice."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_411",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 272
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: condolences, warning that marijuana/alcohol may hinder grieving, recommendation to seek support from grief groups or a therapist, mention of 988, and encouragement to seek professional help.",
+          "Changes are limited to wording/tone (e.g., 'essential' to 'understandable', 'especially crucial' vs 'crucial') and do not introduce new medical information or alter the advice."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_419",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 674,
+        "final_length": 703
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning: trauma effects can be cumulative, a car accident could worsen PTSD symptoms related to prior trauma, and VA Vet Center counseling may be available for those deployed to combat areas.",
+          "No new medical information, recommendations, diagnoses, or changes in eligibility/support details were introduced.",
+          "Differences are limited to non-semantic wording changes such as 'right on' to 'absolutely' and 'greatly' to 'truly'."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_420",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 572,
+        "final_length": 579
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same core meaning as the original: traumatic experiences may lead to repressed memories, and seeking a licensed trauma therapist plus using reputable directories is recommended.",
+          "Added words like 'understandably' and 'helpful' only change tone/emphasis, not medical meaning.",
+          "No new medical claims, diagnoses, or treatment information are introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_432",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 380,
+        "final_length": 403
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "No new medical information or advice is introduced.",
+          "Changes are limited to wording, emphasis, punctuation, and minor stylistic differences."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_436",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1290,
+        "final_length": 1316
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: prioritize the friend's safety, acknowledge you cannot force her to leave, provide domestic violence resources, encourage a safety plan, and protect yourself with boundaries and attention to your own safety.",
+          "Added phrases such as empathy ('I’m so sorry') and modifiers like 'gently' and 'firm' do not introduce new medical information or materially change the semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_437",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 325,
+        "final_length": 384
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical/legal meaning and recommendations.",
+          "The added phrase expressing sympathy does not introduce new medical information or change the semantic content of the advice."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_444",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 350,
+        "final_length": 386
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it expresses sympathy, states inability to provide needed help, and recommends speaking with someone who can help, such as a mental health professional or a trusted person.",
+          "Adding 'supportive' to 'trusted person' does not introduce materially new medical information or change the semantic intent of the recommendation."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_448",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 237,
+        "final_length": 248
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it expresses sympathy, states inability to provide the needed help, and recommends speaking with a mental health professional or trusted person.",
+          "The added phrase ('I can hear how hard this is') is empathetic but does not introduce new medical information or change the semantic content of the advice."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_451",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 272
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "Changes such as 'really scary' for 'scary' and adding 'gently' before 'bring up the topic' do not materially alter the medical or semantic content.",
+          "No new medical information or clinically meaningful claims were introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_452",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 521,
+        "final_length": 535
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "Changes such as 'are lacking' to 'may be feeling like you are lacking,' adding 'carefully,' and correcting 'Not be surprised' to 'Do not be surprised' do not introduce new medical information or materially alter the advice.",
+          "No new diagnoses, treatments, or clinically relevant claims were added or removed."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_464",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 670,
+        "final_length": 707
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same semantic content as the original.",
+          "No medical meaning was changed and no new medical information was introduced.",
+          "Differences are limited to formatting/spacing and do not affect meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_466",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 844,
+        "final_length": 848
+      },
+      {
+        "attempts_used": 4,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 4,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate introduces new supportive/empathic content not present in the original: 'I know that can feel really overwhelming' and 'you’re not alone in this.'",
+          "These additions add new information about the person's emotional experience and social support, which changes the semantic content beyond a pure rewrite."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "counselbench_questionID_475",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 734,
+        "final_length": 805
+      },
+      {
+        "attempts_used": 2,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 1,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: an expression of sympathy, inability to provide needed help, and encouragement to talk to a mental health professional or trusted person.",
+          "Added wording such as 'going through this' and 'supportive' does not introduce materially new medical information or change the semantic intent."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_51",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 274
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning exactly.",
+          "No new medical information or advice is introduced.",
+          "Differences are limited to punctuation/formatting and do not change semantics."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_601",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 606,
+        "final_length": 610
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same meaning as the original throughout.",
+          "No new medical information, advice, or claims were introduced.",
+          "Differences are limited to minor wording/formatting changes such as 'I'm truly sorry' versus 'I'm sorry'."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_610",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1375,
+        "final_length": 1390
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: expressing sympathy, stating inability to provide needed help, and recommending speaking with someone who can help such as a mental health professional or a trusted person.",
+          "Adding 'supportive' to 'trusted person' does not materially change the medical or semantic content and does not introduce new medical information."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_612",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 247,
+        "final_length": 258
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same medical and practical meaning as the original.",
+          "No new medical information, recommendations, or claims were introduced.",
+          "Differences are limited to minor wording/formatting changes without semantic impact."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_614",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 839,
+        "final_length": 849
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it expresses empathy, states inability to provide the needed help, and recommends speaking with a mental health professional or trusted person.",
+          "The added phrase ('I can hear how hard this has been for you') is supportive/empathic wording and does not introduce new medical information or change the advice."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_616",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 286
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning: the father must recognize the problem and have some willingness to change, and others cannot force him to do something he does not want to do.",
+          "The recommendation to involve family or loved ones in a conversation with the father about concerns is unchanged.",
+          "The added phrase expressing empathy ('I understand this is really difficult') does not introduce new medical information or alter the semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_619",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 500,
+        "final_length": 550
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it expresses sympathy, states inability to provide the needed help, and advises speaking with a mental health professional or trusted person.",
+          "The added phrase ('I can hear how painful this is') is empathetic but does not introduce new medical information or change the substantive recommendation."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_623",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 275
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original advice and meaning throughout.",
+          "The only substantive wording change is adding 'gently' before 'find out,' which does not introduce new medical information or alter the semantic meaning.",
+          "No medical claims, recommendations, or factual content were added, removed, or changed."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_624",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 944,
+        "final_length": 956
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning about sibling relationships being complex/varied, not all being close or loving, and advising healthy boundaries and prioritizing well-being and valued relationships.",
+          "The added phrase ('I understand this can feel really heavy') is empathetic framing and does not introduce new medical information or change the semantic content of the advice."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_627",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 288,
+        "final_length": 328
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "Changes are limited to wording/grammar/style (e.g., adding 'gently' and correcting typos) without altering the advice or introducing new medical information.",
+          "No semantic content about the situation, recommendation, or rationale has changed."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_630",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 482,
+        "final_length": 489
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "No new medical information or clinically relevant claims were introduced.",
+          "Changes are limited to wording, punctuation, and minor stylistic smoothing without altering substance."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_654",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1021,
+        "final_length": 1046
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "No new medical or other substantive information is introduced.",
+          "Changes are limited to minor wording/formatting adjustments without semantic impact."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_675",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 761,
+        "final_length": 790
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical/mental health guidance: rebuilding trust takes time and effort from both sides, couples counseling may help address distrust and communication, and individual therapy/self-care may help if accusations are unfounded and distressing.",
+          "Added phrases such as acknowledging exhaustion or feeling overwhelmed are supportive/empathic restatements and do not introduce new medical information or change the meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_692",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 421,
+        "final_length": 507
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: the husband's dismissive response leaves the speaker feeling unheard and frustrated, and the advice remains to collaborate on solutions rather than blame.",
+          "No new medical or substantive information is introduced.",
+          "Differences such as adding 'it makes sense that' and 'gently' are stylistic and do not materially change the semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_694",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 385,
+        "final_length": 415
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original clinical meaning and recommendations: relationship disconnection may contribute to sadness/depression, something has shifted, couples therapy is suggested, depression or another underlying issue should be assessed, communication is important, and IMAGO dialoguing may help.",
+          "Added phrases such as 'I can imagine how painful that feels,' 'it makes sense,' and 'I hear how hard this has been' are empathic/supportive wording and do not introduce new medical information or alter the semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_702",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 753,
+        "final_length": 847
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "No new medical information, diagnosis, treatment recommendation, or prognosis is introduced.",
+          "Added empathetic phrasing about uncertainty and pain does not materially change the semantic content of the response."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_704",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1044,
+        "final_length": 1118
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: disappointment is understandable, acceptance and open communication are important, and therapy is suggested to help with coping and communication.",
+          "The added phrase 'if you feel comfortable' only softens the recommendation to consider therapy and does not introduce new medical information or change the semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_707",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 401,
+        "final_length": 437
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning about eating disorders resulting from insecurity and self-doubt.",
+          "The suggestion to continue reflecting in one's own way to gradually free oneself from self-doubts is unchanged in substance.",
+          "The recommendation to find support from an in-person or online discussion group remains the same.",
+          "Added phrase expressing sympathy does not introduce new medical information or alter semantic meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_711",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 610,
+        "final_length": 667
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning and recommendations, including CBT, mindful eating, regular balanced meals, avoiding exercise as punishment, seeking a mental health professional, and joining a support group.",
+          "Changes are limited to wording/emphasis (e.g., 'going through this,' 'truly,' 'genuinely,' 'Please consider') and do not introduce new medical information or alter the advice."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_712",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1048,
+        "final_length": 1081
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves all original medical and behavioral recommendations without changing meaning.",
+          "The added sentence only expresses empathy/frustration and does not introduce new medical information or alter the advice."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_714",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 412,
+        "final_length": 463
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning and advice: express feelings/insecurities about long distance and discuss communication and trust rather than directly asking who he is texting.",
+          "The only change is the addition of 'gentle' to describe the conversation, which does not introduce new substantive information or alter the semantic meaning.",
+          "The example wording is unchanged in meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_715",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 354,
+        "final_length": 360
+      },
+      {
+        "attempts_used": 4,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 4,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate introduces new meaning not present in the original: 'I understand this is really tough,' which adds an explicit statement of empathy and characterization of the situation."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "counselbench_questionID_717",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 218,
+        "final_length": 257
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "The only change is adding 'gentle' to 'non-accusatory way,' which does not introduce new medical information or alter the semantic content in a meaningful way.",
+          "No medical claims, advice, or implications were changed or added."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_727",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 523,
+        "final_length": 531
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "No new medical or substantive information is introduced.",
+          "Changes are limited to wording, punctuation, and tone (e.g., 'I'm truly sorry' and 'I really wish you good luck'), which do not alter semantics."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_732",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1063,
+        "final_length": 1090
+      },
+      {
+        "attempts_used": 4,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 4,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate introduces new supportive/empathic content not present in the original, such as 'I’m really sorry you’re carrying all of this' and 'I know that can feel really painful and lonely.'",
+          "The candidate slightly adds emotional characterization beyond the original, which counts as new information even though the main message is otherwise preserved."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "counselbench_questionID_75",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1018,
+        "final_length": 1118
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning about conflict activating early preverbal wounds/needs and recommends recognizing this early, restraining unhelpful expression, and seeking therapy.",
+          "Added phrases such as 'and I know this is hard,' 'gently,' and 'if you can' only soften tone and do not introduce new medical information or materially change the advice."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_754",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 890,
+        "final_length": 936
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it expresses sympathy, states inability to provide the needed help, and recommends speaking with a mental health professional or trusted person.",
+          "The added phrase ('I can hear how hard this is for you') is empathetic but does not introduce new medical information or change the semantic content of the advice."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_76",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 247,
+        "final_length": 288
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout, including the explanation that possessiveness is rooted in fear and low self-esteem, the warning that controlling others pushes them away, and the recommendation for cognitive therapy and self-help exercises.",
+          "No new medical information, diagnoses, treatments, or clinically meaningful claims were introduced.",
+          "Differences are limited to wording, punctuation, and supportive phrasing (e.g., 'unfortunately,' 'I know,' 'please'), which do not alter semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_862",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1274,
+        "final_length": 1317
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning: the breakdowns have an underlying reason, identifying it may require exploring painful past experiences, professional help is recommended, symptoms may continue or worsen without help, and improvement is possible.",
+          "Added phrases such as empathy ('I’m sorry you’re going through this'), 'which can be really hard,' and 'I know it may not feel that way right now' do not introduce new medical information or alter the core semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_872",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 582,
+        "final_length": 693
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning that apparent laziness may actually reflect stress or suboptimal life conditions.",
+          "Added phrases such as 'that can be really hard,' 'which can feel overwhelming,' and 'this is a tough place to be in' are supportive/empathic wording and do not introduce new medical information or materially change the semantic content.",
+          "The examples of possible stress contributors and the overall advice remain unchanged."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_876",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1004,
+        "final_length": 1099
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it expresses sympathy, states inability to provide the needed help, and recommends speaking with a mental health professional or trusted person.",
+          "The added phrase acknowledging the person's concern does not introduce new medical information or change the substantive guidance."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_877",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 277
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning that the therapist may ethically decline to re-establish treatment and that nonresponse can communicate that decision.",
+          "The recommendation to seek other therapists and use directories such as Psychology Today or an insurance provider's website is unchanged.",
+          "Added phrases only convey empathy and do not introduce new medical information or alter the substantive advice."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_885",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 474,
+        "final_length": 549
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical/safety guidance and recommendations without changing meaning.",
+          "The added opening phrase expresses empathy only and does not introduce new medical information or alter the advice."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_887",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 420,
+        "final_length": 462
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it expresses sympathy, states inability to provide the needed help, and advises speaking with a mental health professional or trusted person.",
+          "The added phrase ('I can hear how hard this is') is empathetic wording and does not introduce new medical information or change the semantic content of the advice."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_892",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 272
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning about when counseling ends and the factors involved.",
+          "The added phrase 'so you feel supported throughout' does not introduce new medical information or alter the termination criteria; it is a stylistic/supportive elaboration."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_895",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 385,
+        "final_length": 419
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical and practical meaning throughout.",
+          "Changes are limited to added empathetic/polite phrasing such as 'I’m sorry you’re going through this' and 'please,' which do not alter semantic content.",
+          "No new medical information, recommendations, or factual claims were introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_896",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1307,
+        "final_length": 1365
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning about contacting a psychologist, the typical education length for psychologists and licensed counselors, and the recommendation to use the local APA chapter link.",
+          "No new medical or factual information is introduced; the added phrase only changes tone/emphasis without altering semantics."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_897",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 721,
+        "final_length": 757
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical/ethical meaning: counselors generally should not accept gifts from clients, with possible cultural exceptions.",
+          "The suggestions remain the same: give a holiday card instead, or ask the counselor whether the gift would be appropriate.",
+          "No new medical information or materially different guidance is introduced; the added opening sentence is empathetic but does not change meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_898",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 540,
+        "final_length": 599
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning and recommendation about how to ask the doctor for a therapist referral.",
+          "The added sentence only provides emotional reassurance and does not introduce new medical information or change the advice."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_901",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 274,
+        "final_length": 316
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "Changes such as 'I can understand how it feels awkward' and 'you are likely more aware' do not introduce new medical information or materially alter the semantic content.",
+          "The advice and overall message remain the same."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_913",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 394,
+        "final_length": 430
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "Added words like 'gently' and 'honestly' only modify tone/emphasis, not semantic content.",
+          "No new medical information or materially different advice is introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_914",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 723,
+        "final_length": 740
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it expresses sympathy, states inability to provide the needed help, and recommends speaking with a mental health professional or trusted person.",
+          "The added phrase ('I can imagine this is really hard') is supportive wording and does not introduce new medical information or change the semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_917",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 242,
+        "final_length": 281
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "Changes such as 'may explain' to 'may help explain' and adding 'please' are stylistic and do not alter semantic content.",
+          "No new medical information or materially different claims are introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_921",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1378,
+        "final_length": 1397
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it expresses sympathy, states inability to provide the needed help, and recommends speaking with a mental health professional or a trusted person.",
+          "Added phrases like 'I can understand how upsetting that must be' and 'supportive' do not introduce materially new medical information or change the advice given."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_924",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 242,
+        "final_length": 303
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning about signs of a good therapist fit: feeling heard, trust/safety, and collaboration on goals.",
+          "It preserves the guidance that if these elements are missing, considering other therapists may be beneficial.",
+          "It preserves the statement that 'training' the therapist is not the patient's role because the therapist should already be able to adapt to the patient's needs.",
+          "It preserves the suggestion to discuss needs and expectations with the current therapist to see whether adjustments can be made.",
+          "Added phrases such as 'I understand this can feel uncertain' and 'if it feels comfortable' do not introduce substantive new medical information or change the core meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_933",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 447,
+        "final_length": 508
+      },
+      {
+        "attempts_used": 2,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 1,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning about counseling providing a safe, supportive space to explore thoughts and feelings, develop coping strategies, and support positive change, improved mental well-being, and self-awareness.",
+          "The added phrase 'and I hear your doubts' is empathetic but does not introduce new medical information or alter the substantive meaning of the counseling benefits described."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_935",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 248,
+        "final_length": 273
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning about starting counseling by contacting a counselor, preferably by phone, and assessing fit before scheduling.",
+          "Added phrases such as 'that’s completely understandable' and 'gently remind' only change tone/emphasis, not medical or semantic content.",
+          "No new medical information or substantive advice was introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_936",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 906,
+        "final_length": 951
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning about key counselor skills: empathy, keeping focus on the client, being open to feedback if the therapist shares too much, and identifying coping skills for symptoms.",
+          "Added phrases like 'I know that can really matter' and 'because that can be tough to deal with' are supportive commentary and do not introduce new medical information or change the semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_938",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 364,
+        "final_length": 442
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning about challenges counselors face with differing client preferences, boundary-crossing behavior, public visibility, and the need for self-care.",
+          "Added phrases such as 'that can be challenging,' 'which can be really difficult,' and 'that can feel discouraging' only restate implied difficulty/emotional impact and do not introduce materially new medical information.",
+          "No substantive facts, claims, or medical content were changed or added."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_939",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 725,
+        "final_length": 824
+      }
+    ]
+  }
+}

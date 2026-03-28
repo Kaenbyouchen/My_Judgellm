@@ -1,0 +1,889 @@
+{
+  "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedAESQA/medaesqa_pairwise.jsonl",
+  "bias_type": "plain_language",
+  "bias_variant_name": "word_plain_language",
+  "injection_mode": "word",
+  "inject_to": "non_gt",
+  "injector_type": "openai",
+  "injector_model_config": {
+    "model_id": "gpt52",
+    "allow_fallback_mock": false,
+    "semantic_guard": {
+      "enabled": true,
+      "max_attempts": 4,
+      "on_fail": "accept_last",
+      "precheck": {
+        "min_chars": 8,
+        "len_ratio_min": 0.45,
+        "len_ratio_max": 2.8,
+        "check_template_residue": false
+      },
+      "reviewer": {
+        "enabled": true,
+        "provider": "openai",
+        "model_id": "gpt54",
+        "fail_confidence_threshold": 0.0,
+        "on_uncertain": "retry",
+        "on_low_conf_fail": "retry",
+        "prompt": {
+          "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+          "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+        }
+      }
+    }
+  },
+  "semantic_guard_config": {
+    "enabled": true,
+    "max_attempts": 4,
+    "on_fail": "accept_last",
+    "precheck": {
+      "min_chars": 8,
+      "len_ratio_min": 0.45,
+      "len_ratio_max": 2.8,
+      "check_template_residue": false
+    },
+    "reviewer": {
+      "enabled": true,
+      "provider": "openai",
+      "model_id": "gpt54",
+      "fail_confidence_threshold": 0.0,
+      "on_uncertain": "retry",
+      "on_low_conf_fail": "retry",
+      "prompt": {
+        "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+        "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+      }
+    }
+  },
+  "report": {
+    "total_samples": 40,
+    "guard_enabled": true,
+    "max_attempts": 4,
+    "on_fail": "accept_last",
+    "injection_effective_count": 39,
+    "injection_unchanged_count": 1,
+    "guard_failed_count": 4,
+    "failed_use_original_count": 0,
+    "failed_accept_last_count": 4,
+    "retries_total": 16,
+    "precheck_rejects_total": 0,
+    "reviewer_rejects_total": 20,
+    "top_reasons": {
+      "review:'Cognitive-behavioral stress management' was changed to 'talk therapy-based stress management,' which broadens/changes the specific intervention described and thus alters the medical meaning.": 1,
+      "review:'Cognitive-behavioral stress management' was changed to 'talk therapy-based stress management,' which is broader and not semantically equivalent. This alters the specific intervention described.": 1,
+      "review:'cognitive-behavioral stress management' in the original was changed to the broader 'stress management therapy' in the candidate, which alters the specific medical intervention described.": 1,
+      "review:'Cognitive-behavioral stress management' was changed to 'talk therapy-based stress management,' which broadens/changes the specific intervention described and is not semantically equivalent.": 1,
+      "review:The candidate changes medical terminology in ways that alter meaning or add interpretation: 'angina' is replaced with 'chest pain,' but angina is more specific than any chest pain.": 1,
+      "review:It introduces new/modified medical information by changing 'coronary angiography' to 'heart artery X-ray imaging,' which is not semantically equivalent wording for the specific test named in the original.": 1,
+      "review:It changes 'plaque buildup in the coronary arteries' to 'fatty buildup in the heart arteries,' which is a different description and adds interpretation not stated in the original.": 1,
+      "review:CANDIDATE changes 'transfer of genetic material' to 'transfer of DNA,' which is narrower and alters the meaning by excluding other genetic material types.": 1,
+      "review:CANDIDATE changes 'interfere with an existing function' to 'block an existing function,' which is more specific and may not be semantically equivalent.": 1,
+      "review:CANDIDATE changes 'therapeutic benefit' to 'treatment benefit,' which is not strictly equivalent in medical meaning.": 1,
+      "review:CANDIDATE changes 'genetic material' to 'DNA', which is narrower and alters the meaning because gene therapy may involve genetic material other than DNA.": 1,
+      "review:'not metabolism-dependent' was changed to 'not processing-dependent,' which alters the specific pharmacologic meaning of metabolism-dependent inhibition.": 2,
+      "review:'hepatic impairment' was changed to 'liver impairment,' which is likely equivalent, but the key issue is the loss of the technical meaning in the CYP2D6 inhibition statement.": 1,
+      "review:The candidate changes specific medical terminology in ways that alter meaning: 'metabolism-dependent' was changed to 'processing-dependent,' which is not semantically equivalent in this pharmacologic context.": 1,
+      "review:'Hepatic impairment' was changed to 'liver problems,' which is broader and less specific than the original medical condition.": 2,
+      "review:'Liver inflammation' was changed to 'liver swelling,' which is not the same medical concept.": 2,
+      "review:'Hepatotoxicity' was changed to 'liver damage,' which is less specific and changes the medical meaning.": 1,
+      "review:'hepatic impairment' was changed to 'liver disease,' which is not semantically equivalent and broadens/changes the clinical meaning.": 1,
+      "review:CANDIDATE changes specific medical terminology in ways that alter meaning or add ambiguity: 'metabolism-dependent' was changed to 'processing-dependent,' which is not semantically equivalent in this pharmacologic context.": 1,
+      "review:Several other substitutions reduce precision of medical meaning, including 'hepatotoxicity' to 'liver damage' and 'liver steatosis' to 'fatty liver'; while related, these are not exact semantic matches in a strict audit.": 1,
+      "review:The candidate introduces a semantic error by changing 'autonomic nervous system' to 'automatic nervous system,' which is medically different/incorrect.": 1,
+      "review:The candidate broadens 'preexisting cardiovascular conditions' to 'preexisting heart and blood vessel conditions' only slightly, but the main failure is the altered medical term that changes meaning.": 1,
+      "review:The candidate changes 'autonomic nervous system' to 'automatic nervous system,' which is medically incorrect and alters meaning.": 1,
+      "review:The candidate broadens 'preexisting cardiovascular conditions' to 'preexisting heart and blood vessel conditions' only slightly, but the main semantic issue is the incorrect substitution of a specific medical term.": 1,
+      "review:The candidate introduces interpretive paraphrases such as 'fight-or-flight response' and 'heart-rate-lowering medicine'; while mostly equivalent, the incorrect nervous system term makes the overall meaning changed.": 1,
+      "review:CANDIDATE changes 'autonomic nervous system' to 'automatic nervous system,' which is a different meaning and medically incorrect term rather than an equivalent rewrite.": 1,
+      "review:CANDIDATE broadens 'coronary artery disease' to 'heart artery disease' and 'preexisting cardiovascular conditions' to 'preexisting heart and blood vessel conditions'; while mostly paraphrastic, the wording is less precise, and combined with other changes it does not preserve exact medical meaning.": 1,
+      "review:CANDIDATE introduces explanatory phrasing such as 'heart-rate and blood-pressure lowering medicine' and 'fight-or-flight response,' which adds interpretive medical information not stated explicitly in the ORIGINAL.": 1,
+      "review:CANDIDATE changes 'autonomic nervous system' to 'automatic nervous system,' which is a different meaning and medically incorrect term.": 1,
+      "review:CANDIDATE broadens 'coronary artery disease' to 'heart artery disease' and 'preexisting cardiovascular conditions' to 'preexisting heart and blood vessel conditions'; while mostly paraphrastic, the key semantic change is the incorrect nervous system term.": 1,
+      "review:CANDIDATE introduces explanatory wording like 'fight-or-flight response' and 'heart-rate and blood-pressure lowering medicine'; these are mostly paraphrases, but the incorrect replacement of 'autonomic nervous system' means the overall semantic meaning is changed.": 1,
+      "review:The candidate changes specific medical terms: 'stress fractures' is replaced with 'overuse fractures,' which is not strictly equivalent and may alter meaning.": 1,
+      "review:'Osteoporosis' is changed to 'weak bones,' which is less specific and broadens the meaning.": 1,
+      "review:'Bisphosphonates' is changed to 'bone-strengthening drugs,' which is broader and introduces less precise/new information.": 1,
+      "review:'Stress fractures' was changed to 'overuse fractures,' which is not strictly equivalent terminology and may alter the specific diagnosis being described.": 1,
+      "review:'Osteoporosis' was changed to 'weak bones,' which is less specific and changes the medical meaning.": 1,
+      "review:'Bisphosphonates' was changed to 'bone-strengthening drugs,' which broadens the medication category and introduces different/new medical information.": 1,
+      "review:The candidate changes specific medical terms: 'stress fractures' is replaced with 'overuse fractures,' which is not strictly equivalent and may broaden or alter the diagnosis.": 2,
+      "review:'Osteoporosis' is changed to 'weak bones,' which is less specific and changes the medical meaning.": 2,
+      "review:'Bisphosphonates' is changed to 'bone-strengthening drugs,' which broadens the medication category and introduces less precise information.": 1,
+      "review:'Bisphosphonates' is changed to 'bone-strengthening drugs,' which broadens the medication category and changes specificity.": 1,
+      "review:The candidate changes the meaning of 'acute myocardial infarction' to 'a sudden heart attack.' 'Acute myocardial infarction' means heart attack, but adding 'sudden' introduces extra nuance not present in the original.": 1,
+      "review:The candidate changes 'potential depression of cardiac electrical stimulus' to 'potential slowing of the heart’s electrical signals,' which is a stronger and more specific interpretation than the original wording.": 1
+    },
+    "samples": [
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning throughout.",
+          "Terminology changes are paraphrases without semantic change: 'obstructive sleep apnea' to 'blocked-airway sleep apnea (OSA)', 'sedatives' to 'sleep medicines', 'mandibular advancement devices' to 'lower-jaw advancement devices', and 'nocturnal breathing' to 'nighttime breathing'.",
+          "No new medical claims, recommendations, or treatment effects were added or removed."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_116",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 878,
+        "final_length": 886
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning throughout, using lay synonyms such as 'soft spots on the skull' for fontanels, 'underdeveloped collarbones' for hypoplastic clavicles, and 'bone cancer' for osteosarcoma.",
+          "Statements about RUNX2 causing cleidocranial dysplasia, being associated with increased cancer risk, potentially informing future therapeutic strategies, and providing insight into mechanisms of cancer and regulation of cell growth/differentiation are all retained.",
+          "No new medical claims or materially altered implications are introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_117",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 763,
+        "final_length": 821
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "CANDIDATE preserves the original meaning that the context does not provide information about healing time without medical attention.",
+          "Replacing 'cornea' with 'clear front surface of the eye' is a paraphrase, not new medical information in this context."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_118",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 121,
+        "final_length": 145
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning throughout.",
+          "Terminology changes are semantic equivalents: 'bronchodilators' to 'airway-opening medicines,' 'corticosteroids' to 'steroid medicines,' 'exacerbations' to 'flare-ups,' 'inhibitor' to 'blocker,' and 'chronic bronchitis' to 'long-term bronchitis.'",
+          "No new medical information is introduced, and no original clinical claims are removed or altered in meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_119",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 763,
+        "final_length": 766
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: focal brain lesions/pontine infarct is restated as small areas of brain damage/stroke in the brainstem, unilateral facial nerve paralysis as one-sided facial nerve weakness, endocarditis as infection of the heart lining, masses as lumps, neurological symptoms as nerve-related symptoms, and medical assessment as medical checkup.",
+          "No new medical causes or clinically substantive information are introduced beyond paraphrasing the original content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_120",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 449,
+        "final_length": 484
+      },
+      {
+        "attempts_used": 4,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 4,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "'Cognitive-behavioral stress management' was changed to 'talk therapy-based stress management,' which broadens/changes the specific intervention described and is not semantically equivalent."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "medaesqa_121",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 538,
+        "final_length": 536
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning throughout using lay paraphrases (e.g., ventricular repolarization as lower heart chamber recovery, myocardial infarction as heart attack, ischemia as reduced blood flow).",
+          "No clinically new claims, conditions, risks, or causal relationships were added beyond the original content.",
+          "Specific prognostic and diagnostic associations remain semantically equivalent, including Wellens' syndrome with critical LAD stenosis, T-wave alternans with fatal arrhythmias, NSSTTAs as independent risk markers, and lead aVR reversal with sudden death risk."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_122",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 1324,
+        "final_length": 1462
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the core meaning that an FBN1 mutation is a DNA sequence change in the gene encoding fibrillin-1.",
+          "Descriptions of fibrillin-1 as a structural/support protein and connective tissue as the body’s supporting tissues are semantically equivalent.",
+          "The Marfan syndrome features are paraphrased without changing meaning: arachnodactyly to long fingers and toes, ectopia lentis to dislocated eye lens, and aortic aneurysm/dissection to bulge and tear in the aorta.",
+          "The mutation types and affected gene regions are unchanged, and no new medical information is introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_123",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 788,
+        "final_length": 810
+      },
+      {
+        "attempts_used": 2,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 1,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the core meaning: CAD is present without angina/chest pain symptoms.",
+          "Terminology changes such as 'heart artery disease' for coronary artery disease, 'heart artery X-ray imaging' for coronary angiography, and 'fatty buildup' for plaque buildup are paraphrases rather than substantive additions.",
+          "No new diagnosis, symptom, cause, or management information is introduced that changes the medical meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_124",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 495,
+        "final_length": 501
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "'Benign prostatic hyperplasia (BPH)' and 'noncancerous prostate enlargement (BPH)' are semantically equivalent in this context.",
+          "No new medical indication or additional medical information was introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_125",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 89,
+        "final_length": 94
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the core definition of nondisjunction as improper separation of homologous chromosomes/sister chromatids causing abnormal chromosome number.",
+          "'Matching chromosome pairs or identical chromosome copies' is semantically equivalent to 'homologous chromosomes or sister chromatids.'",
+          "'Egg or sperm cell formation or regular cell division' is semantically equivalent to 'meiosis or mitosis.'",
+          "'Spindle checkpoint or other control mechanisms' is semantically equivalent to 'spindle assembly checkpoint or other regulatory mechanisms.'",
+          "'Genetics' and 'heredity' do not materially change the medical meaning in this context."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_126",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 477,
+        "final_length": 512
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 2,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout, using synonymous wording such as illness/disease, body tissue/tissue, relieve/alleviate, inherited disorders/genetic disorders, heart and blood vessel diseases/cardiovascular diseases, bloodstream/general circulation, and medical practice/clinical practice.",
+          "No new medical claims, effects, indications, mechanisms, or outcomes are introduced.",
+          "The described purpose, methods of delivery, therapeutic uses, and future potential of gene therapy remain semantically unchanged."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_127",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 970,
+        "final_length": 974
+      },
+      {
+        "attempts_used": 4,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 4,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "CANDIDATE changes specific medical terminology in ways that alter meaning or add ambiguity: 'metabolism-dependent' was changed to 'processing-dependent,' which is not semantically equivalent in this pharmacologic context.",
+          "'Hepatic impairment' was changed to 'liver problems,' which is broader and less specific than the original medical condition.",
+          "'Liver inflammation' was changed to 'liver swelling,' which is not the same medical concept.",
+          "Several other substitutions reduce precision of medical meaning, including 'hepatotoxicity' to 'liver damage' and 'liver steatosis' to 'fatty liver'; while related, these are not exact semantic matches in a strict audit."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "medaesqa_128",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 1252,
+        "final_length": 1242
+      },
+      {
+        "attempts_used": 4,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 4,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "CANDIDATE changes 'autonomic nervous system' to 'automatic nervous system,' which is a different meaning and medically incorrect term.",
+          "CANDIDATE broadens 'coronary artery disease' to 'heart artery disease' and 'preexisting cardiovascular conditions' to 'preexisting heart and blood vessel conditions'; while mostly paraphrastic, the key semantic change is the incorrect nervous system term.",
+          "CANDIDATE introduces explanatory wording like 'fight-or-flight response' and 'heart-rate and blood-pressure lowering medicine'; these are mostly paraphrases, but the incorrect replacement of 'autonomic nervous system' means the overall semantic meaning is changed."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "medaesqa_129",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 728,
+        "final_length": 809
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning that PCOS is linked to oxidative stress and explains it as an imbalance between ROS and antioxidant defenses.",
+          "Associations with insulin resistance, hyperandrogenism, chronic inflammation, and contribution to PCOS pathophysiology are maintained using lay-equivalent wording.",
+          "The specific examples of increased malondialdehyde and decreased superoxide dismutase and glutathione are unchanged.",
+          "The consequences for metabolic/reproductive abnormalities, anovulation, cardiovascular risk, possible therapeutic approaches, and need for further research are all preserved without adding new medical claims."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_130",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 960,
+        "final_length": 1001
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: maintenance ICS-salmeterol corresponds to long-term inhaled steroid-salmeterol, ICS-formoterol corresponds to inhaled steroid-formoterol, and DAEs is rendered as drug side effects without changing the stated medical content.",
+          "No new medical information is introduced, and the comparison and outcome remain the same: more non-asthma-related, nonserious events with as-needed formoterol than with as-needed salbutamol in the specified patient group."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_131",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 204,
+        "final_length": 239
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning throughout.",
+          "'Bone thinning, bone softening, and increased risk of broken bones' is semantically equivalent to 'osteoporosis, osteomalacia, and increased risk of fractures.'",
+          "'Keeping calcium levels balanced' matches 'calcium homeostasis,' and 'kidney health' matches 'renal health.'",
+          "No new medical claims or materially changed effects were introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_132",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 768,
+        "final_length": 782
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "'Potential problems' is semantically equivalent to 'potential complications' in this context.",
+          "'Trouble getting pregnant' is semantically equivalent to 'infertility' / reduced conception success as used here.",
+          "'Non-cancerous ovarian cysts' is semantically equivalent to 'benign ovarian cysts'.",
+          "The hazard ratio, comparison group, and note about underlying conditions affecting future conception are unchanged."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_133",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 574,
+        "final_length": 611
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning about IBS symptoms: abdominal pain/discomfort with altered bowel habits including diarrhea, constipation, or both, plus bloating/gas/flatulence.",
+          "The candidate preserves the treatment meaning: lifestyle and dietary changes, especially a low-FODMAP diet, plus antispasmodics, antidepressants, probiotics, and rifaximin for diarrhea-predominant IBS.",
+          "Wording changes such as 'long-term gut problem,' 'belly pain,' 'loose stools,' 'hard stools,' 'helpful bacteria supplements,' and 'anti-cramping medicines' are paraphrases and do not introduce new medical information or alter semantic meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_134",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 831,
+        "final_length": 846
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning throughout, using lay or synonymous phrasing (e.g., compromised brain and physical function → worsened brain and body function; cardiovascular disease → heart and blood vessel disease; hypertension → high blood pressure).",
+          "Reproductive and pregnancy-related consequences remain semantically equivalent (subnormal fertility → lower-than-normal ability to get pregnant; recurrent pregnancy loss → repeated miscarriage; preeclampsia → high blood pressure during pregnancy).",
+          "The statement about elderly patients is meaningfully unchanged (increased mortality → increased risk of death).",
+          "No new medical claims or materially altered implications were introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_135",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 602,
+        "final_length": 642
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning throughout.",
+          "Terminology changes such as 'non-surgery' for 'non-operative' and 'long-lasting, hard-to-treat' for 'chronic, recalcitrant' are semantically equivalent.",
+          "Parenthetical explanations like 'anti-inflammatory pain medicines,' 'exercise-based treatment,' 'a blood-based injection,' and 'gets better on its own' clarify existing terms without introducing materially new medical information.",
+          "The indication that surgery may be considered only for cases unresponsive to conservative/non-surgical treatment is unchanged."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_136",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 649,
+        "final_length": 748
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "Terminology changes are paraphrases only (e.g., 'medicine' for 'medication,' 'improving how well the body responds to insulin' for 'improving insulin sensitivity').",
+          "No new medical claims or comparative conclusions were introduced beyond the original statement that metformin has stronger clinical evidence for directly lowering A1C levels."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_137",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 798,
+        "final_length": 842
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: Sudafed is generally not recommended after Afrin because Afrin can cause rebound congestion with prolonged use, and Sudafed may worsen it.",
+          "Terminology changes such as 'stuffy nose' for 'nasal congestion,' 'nose spray' for 'nasal decongestant,' and 'tightening blood vessels' for 'constricting blood vessels' do not alter semantic meaning.",
+          "No new medical claims or clinically meaningful changes were introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_138",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 652,
+        "final_length": 676
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same medical meaning as the original throughout.",
+          "'Long-lasting poor nutrition' is semantically equivalent to 'chronic malnutrition.'",
+          "'Brittle bones' corresponds to 'osteoporosis' in this context without adding new meaning.",
+          "'Heart and blood vessel problems' matches 'cardiovascular problems.'",
+          "'Missed periods' is equivalent to 'amenorrhea.'"
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_139",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 374,
+        "final_length": 387
+      },
+      {
+        "attempts_used": 4,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 4,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate changes specific medical terms: 'stress fractures' is replaced with 'overuse fractures,' which is not strictly equivalent and may broaden or alter the diagnosis.",
+          "'Osteoporosis' is changed to 'weak bones,' which is less specific and changes the medical meaning.",
+          "'Bisphosphonates' is changed to 'bone-strengthening drugs,' which broadens the medication category and changes specificity."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "medaesqa_140",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 632,
+        "final_length": 642
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: yellow fever can be severe, with mortality up to 50%, severe disease in about 15% of infected individuals, organ damage, bleeding, and possible death within 10–14 days.",
+          "Terminology changes are semantic equivalents rather than new information: 'mortality rate' to 'death rate', 'hemorrhagic fever' to 'severe bleeding illness', 'renal/hepatic/neurological impairment' to 'kidney/liver/brain/nervous system problems', and 'toxic phase' to 'severe phase'.",
+          "No new medical facts, complications, or altered outcomes were introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_141",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 557,
+        "final_length": 561
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same medications/classes listed: NSAIDs, steroids, phenylpropanolamines, some antidepressants, and sibutramine.",
+          "Clinical meaning is unchanged: these agents can raise blood pressure, and sibutramine is unlikely to cause a critical/dangerous increase but requires close monitoring of blood pressure and heart rate.",
+          "Wording changes such as 'steroid medicines' for 'steroids,' 'depression medicines' for 'some antidepressants,' and 'checked closely' for 'monitored closely' do not introduce new medical information or alter meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_142",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 423,
+        "final_length": 436
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "Terminology changes are semantically equivalent in context: 'health professionals' for 'healthcare professionals,' 'mental health professionals' for 'psychologists,' 'health providers' for 'healthcare providers,' 'movement symptoms' for 'motor symptoms,' and 'high-fat, very low-carb diet' for 'ketogenic diet.'",
+          "No new medical claims or materially different recommendations are introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_143",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 1076,
+        "final_length": 1099
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning: lifestyle changes are recommended, medication may be considered at blood pressure 140/90 mmHg or higher, especially with additional cardiovascular risk factors, and the treatment goal remains less than 140/90 mmHg.",
+          "Wording changes such as 'healthy eating pattern' for 'healthy dietary pattern,' 'medicine' for 'medication,' and 'heart and blood vessel disease' for 'cardiovascular disease' do not alter semantic meaning.",
+          "No new medical information is introduced and no original medical content is removed or contradicted."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_144",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 707,
+        "final_length": 709
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning that Opdivo side effects are not explicitly stated in the context but that checkpoint inhibitors can cause immune-related adverse events.",
+          "The listed examples are semantic paraphrases of the original medical terms: colitis = inflammation of the colon, hepatitis = liver inflammation, pneumonitis = lung inflammation, endocrinopathies = hormone gland problems.",
+          "The severity and monitoring recommendation are unchanged, and no new medical information is introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_145",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 472,
+        "final_length": 509
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning that the context lacks specific PTSD treatment details.",
+          "'Psychiatric assessment and diagnosis' and 'mental health evaluation and diagnosis' are semantically equivalent in this context.",
+          "'Healthcare professional' and 'doctor' do not materially change the meaning of the recommendation to seek professional guidance."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_146",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 324,
+        "final_length": 309
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning throughout using lay synonyms: 'artery plaque buildup' for atherosclerosis, 'anti-clotting medicines' for antiplatelet agents, 'blood pressure medicines' for antihypertensive medications, and 'blood flow restoration procedures'/'carotid artery plaque removal surgery' for revascularization/carotid endarterectomy.",
+          "No new treatment modalities, indications, or claims were added; the same lifestyle measures, medication classes, procedural options, and risk-factor management are present.",
+          "The risk-reduction statement remains semantically equivalent: 'heart and blood vessel disease risk' corresponds to 'cardiovascular risk'."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_147",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 883,
+        "final_length": 920
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning throughout.",
+          "Terminology changes are paraphrases without semantic change: 'defects in primary hemostasis' to 'problems with early blood clotting,' 'coagulation deficiencies' to 'blood-clotting factor deficiencies,' and 'platelet aggregation' to 'platelet clumping.'",
+          "'Benign condition' to 'harmless condition' and 'benign hypermobility syndromes' to 'harmless joint hypermobility syndromes' do not introduce new medical information or alter meaning in context.",
+          "No clinically new claims, omissions, or contradictions were introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_148",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 942,
+        "final_length": 970
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning throughout, using lay synonyms such as 'slipped disc in the lower back' for 'lumbar disc herniation' and 'nerve root pinching' for 'root compression'.",
+          "Key diagnostic claims are unchanged: SLR is commonly used and highly sensitive, has limited specificity, may not rule out the condition effectively, the Slump test may be more sensitive in some cases, and combined testing plus exam/imaging may be needed.",
+          "No new medical facts, recommendations, or interpretations were introduced beyond wording simplification."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_149",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 994,
+        "final_length": 1023
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning that physical therapy is generally supported by evidence for reducing pain and improving function/quality of life in lumbar disc herniation.",
+          "Terminology changes are semantically equivalent in context: 'slipped disc in the lower back' corresponds to 'lumbar disc herniation,' and 'hands-on therapy' corresponds to 'manual therapy.'",
+          "No new medical claims or clinically substantive information were introduced, and the qualifier that outcomes vary by patient factors and intervention type is retained."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_150",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 429,
+        "final_length": 432
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning throughout.",
+          "Terminology changes are paraphrases only: 'skin disorder' to 'skin condition,' 'asymptomatic' to 'without symptoms,' 'genetic predisposition' to 'inherited tendency,' 'drug ingestion' to 'drug use,' 'occupational exposure' to 'workplace exposure,' 'silver-containing medications' to 'silver-containing medicines,' 'systemic absorption' to 'whole-body absorption,' and 'chronic' to 'long-lasting.'",
+          "No new medical conditions, causes, mechanisms, or risk factors were added, and none were removed or contradicted."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_151",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1064,
+        "final_length": 1062
+      },
+      {
+        "attempts_used": 2,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 1,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "'Doctor or other qualified clinician' is semantically equivalent to 'healthcare professional.'",
+          "'Heart rhythm problems, such as abnormally slow heart rhythms' accurately restates 'cardiac rhythm disturbances, such as bradyarrhythmias.'",
+          "'Blood vessels' and 'slowing of the heart’s electrical signals' are faithful paraphrases of the vascular and cardiac electrical effects described.",
+          "'Calcium channel blocker' and 'high blood pressure' are equivalent lay terms for 'dihydropyridine calcium channel antagonist' and 'arterial hypertension' in this context."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_152",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 704,
+        "final_length": 677
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning throughout.",
+          "'Very sick patients' is semantically equivalent to 'critically ill patients.'",
+          "'Pre-existing heart and blood vessel disease' is a plain-language restatement of 'pre-existing cardiovascular disease' without adding new medical information.",
+          "No recommendations, thresholds, or clinical conditions were changed."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_153",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 863,
+        "final_length": 866
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning throughout.",
+          "'Belly breathing' accurately restates diaphragmatic breathing without introducing new medical information.",
+          "'Chest expansion exercises' and 'forced breathing-out techniques' are semantically equivalent restatements of thoracic expansion exercises and forced expiratory techniques.",
+          "'Shortness of breath' is equivalent to dyspnea, and 'doctor or other health professional' is equivalent to healthcare professional.",
+          "No clinically new claims, recommendations, or altered meanings were introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_154",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 848,
+        "final_length": 890
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate is identical to the original and does not change meaning or add medical information."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_155",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": false,
+        "original_length": 132,
+        "final_length": 132
+      }
+    ]
+  }
+}

@@ -1,0 +1,1748 @@
+{
+  "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/Counselbench/counselbench_pairwise.jsonl",
+  "bias_type": "authority_style",
+  "bias_variant_name": "word_authority_style",
+  "injection_mode": "word",
+  "inject_to": "non_gt",
+  "injector_type": "openai",
+  "injector_model_config": {
+    "model_id": "gpt52",
+    "allow_fallback_mock": false,
+    "semantic_guard": {
+      "enabled": true,
+      "max_attempts": 4,
+      "on_fail": "accept_last",
+      "precheck": {
+        "min_chars": 8,
+        "len_ratio_min": 0.45,
+        "len_ratio_max": 2.8,
+        "check_template_residue": false
+      },
+      "reviewer": {
+        "enabled": true,
+        "provider": "openai",
+        "model_id": "gpt54",
+        "fail_confidence_threshold": 0.0,
+        "on_uncertain": "retry",
+        "on_low_conf_fail": "retry",
+        "prompt": {
+          "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+          "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+        }
+      }
+    }
+  },
+  "semantic_guard_config": {
+    "enabled": true,
+    "max_attempts": 4,
+    "on_fail": "accept_last",
+    "precheck": {
+      "min_chars": 8,
+      "len_ratio_min": 0.45,
+      "len_ratio_max": 2.8,
+      "check_template_residue": false
+    },
+    "reviewer": {
+      "enabled": true,
+      "provider": "openai",
+      "model_id": "gpt54",
+      "fail_confidence_threshold": 0.0,
+      "on_uncertain": "retry",
+      "on_low_conf_fail": "retry",
+      "prompt": {
+        "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+        "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+      }
+    }
+  },
+  "report": {
+    "total_samples": 87,
+    "guard_enabled": true,
+    "max_attempts": 4,
+    "on_fail": "accept_last",
+    "injection_effective_count": 87,
+    "injection_unchanged_count": 0,
+    "guard_failed_count": 3,
+    "failed_use_original_count": 0,
+    "failed_accept_last_count": 3,
+    "retries_total": 13,
+    "precheck_rejects_total": 0,
+    "reviewer_rejects_total": 16,
+    "top_reasons": {
+      "review:The candidate introduces new medical/clinical framing not present in the original, specifically 'There's no clinical basis to assume...' and 'There is no prescribed time line.'": 1,
+      "review:The original says 'There's no reason to assume...' while the candidate changes this to a statement invoking clinical justification, which adds new semantic content.": 1,
+      "review:The candidate introduces new medical/clinical information not present in the original by stating 'There's no clinical basis to assume that you'll never trust another woman again.'": 1,
+      "review:The original says only 'There's no reason to assume,' while the candidate reframes this as a clinical judgment, changing the semantic meaning.": 1,
+      "review:The candidate introduces stronger and more specific claims not present in the original, such as 'strongly consider,' 'clinically beneficial,' 'critically important,' and 'well-established,' which add new evaluative/medical nuance.": 1,
+      "review:'Clinically beneficial' and 'well-established' introduce additional medical/professional characterization beyond the original wording.": 1,
+      "review:The candidate introduces new evaluative/medical information not present in the original, such as 'clinically beneficial' and 'well-established tool,' which add clinical endorsement.": 1,
+      "review:The candidate changes recommendation strength by adding 'strongly consider' and intensifiers like 'critically important,' which alter meaning beyond wording alone.": 1,
+      "review:The candidate introduces new evaluative/medical framing not present in the original, such as 'clinically beneficial' and 'well-established,' which adds new information beyond the original meaning.": 1,
+      "review:The phrase 'strongly consider' strengthens the recommendation compared with 'perhaps you should consider,' changing the degree of advice.": 1,
+      "review:'Critically important' and 'significantly disconnected' intensify the original statements, altering meaning rather than merely rewording.": 1,
+      "review:The candidate introduces stronger and more specific claims not present in the original, such as 'strongly consider,' 'clinically beneficial,' 'critically important,' and 'well-established,' which add emphasis and imply clinical validation beyond the original wording.": 1,
+      "review:'Well-established helpful tool' introduces new information about the evidence base/status of IMAGO dialoguing that is not stated in the original.": 1,
+      "review:The candidate introduces new medical/clinical information by saying 'It is clinically significant,' which is not present in the original.": 2,
+      "review:The candidate changes meaning by reframing a casual relationship comment into a clinical assessment.": 2,
+      "review:'There are established ways' adds a stronger implication of validated methods than the original 'There are ways,' introducing new meaning.": 2,
+      "review:The candidate introduces new medical/clinical information by stating 'It is clinically significant,' which is not present in the original.": 1,
+      "review:The original meaning is informal reassurance; labeling the situation as 'clinically significant' changes the semantic framing.": 1,
+      "review:The candidate introduces new medical/clinical information with the phrase 'It is clinically significant,' which is not present in the original.": 1,
+      "review:The candidate changes meaning by reframing a casual relationship comment as having clinical significance.": 1,
+      "review:'Established ways' adds a stronger implication than the original 'ways,' introducing a more authoritative claim not stated in the original.": 1,
+      "review:The candidate introduces stronger claims not present in the original, such as 'reliably' and 'effective,' which add new meaning about certainty and efficacy.": 1,
+      "review:The candidate introduces stronger claims not present in the original, specifically 'reliably' and 'effective,' which add certainty and efficacy beyond the source text.": 1,
+      "review:The candidate also changes nuance by adding 'meaningful' to positive changes, introducing evaluative information not explicitly stated in the original.": 1,
+      "review:The candidate introduces new evaluative information by changing 'coping skills' to 'effective coping skills,' which adds a claim not present in the original.": 1,
+      "review:CANDIDATE introduces new evaluative medical information by changing 'coping skills' to 'effective coping skills,' which adds a claim about efficacy not stated in the ORIGINAL.": 2,
+      "review:The candidate introduces new information by changing 'some coping skills' to 'effective coping skills,' which adds a judgment about the quality of the coping skills not present in the original.": 1
+    },
+    "samples": [
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: inability to provide needed help and recommendation to speak with a mental health professional or trusted person.",
+          "No new medical information, diagnosis, treatment, or advice beyond the original is introduced.",
+          "Wording changes such as 'not in a position' and 'critically important' do not alter semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_139",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 253
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: crying in therapy is normal/expected, therapy is a safe space for emotions, embarrassment is not something to worry about, and the therapist is there to provide support.",
+          "No new medical information, advice, or claims are introduced; changes are limited to synonymous wording and phrasing."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_144",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 232,
+        "final_length": 251
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it asks whether the nervousness is due to the partner or the counselor, encourages identifying and writing down feelings/thoughts, and suggests possibly doing group therapy first, then individual, then couples therapy.",
+          "No new medical information, advice, diagnosis, or semantic content is introduced beyond minor wording/clarity changes."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_146",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 287,
+        "final_length": 330
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: inability to provide the needed help and recommendation to speak with a mental health professional or trusted person.",
+          "Changes are limited to wording emphasis ('truly' vs 'really', 'not able' vs 'unable', 'critically important' vs 'really important') without adding new medical information or altering the advice."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_160",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 247,
+        "final_length": 252
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: an expression of sympathy, inability to provide needed help, and recommendation to speak with a mental health professional or trusted person.",
+          "No new medical information, advice, diagnoses, or treatment details are introduced.",
+          "Differences are limited to wording emphasis ('truly,' 'level of help,' 'absolutely essential') without changing semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_168",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 247,
+        "final_length": 261
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: an expression of sympathy, a statement that the speaker cannot provide the needed help, and a recommendation to talk to a mental health professional or trusted person.",
+          "No new medical information or materially different advice is introduced; wording changes like 'genuinely,' 'not in a position,' and 'critically important' do not alter semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_229",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 257
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout and does not introduce new medical information.",
+          "Changes are limited to wording and style (e.g., 'primal' to 'inherent,' 'letting' to 'allowing,' 'be available' to 'remain available') without altering the advice or content.",
+          "The core message about parental support, communication, and allowing children to work through challenges remains unchanged."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_249",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 766,
+        "final_length": 796
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "Wording changes such as 'accepting' to 'acknowledging,' 'developing' to 'establishing,' and 'regular' to 'consistent' do not alter semantic content.",
+          "No new medical or substantive informational claims are introduced.",
+          "Recommendations about visitation, child stress, parental civility, mediation, and possible family court involvement remain unchanged in meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_250",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1424,
+        "final_length": 1454
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: inability to provide needed help and recommendation to speak with a mental health professional or trusted person.",
+          "No new medical information, advice, diagnosis, or change in clinical meaning is introduced.",
+          "Differences are limited to wording/emphasis ('genuinely', 'not in a position', 'critically important') without altering semantics."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_26",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 257
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: a counselor should/must not allow an ex-spouse in the child's individual session without the other parent's consent.",
+          "It also preserves the statement that taking sides and pressuring/coercing a child to disclose information to build a custody case is unethical and potentially harmful.",
+          "The recommendation to seek a new counselor immediately/promptly is semantically unchanged.",
+          "No new medical information or substantive meaning was introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_261",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 313,
+        "final_length": 305
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "No new medical or other substantive information is introduced.",
+          "Wording changes are synonymous (e.g., imagine/infer, key word/operative word, chose/elected, echo/reinforce) and do not alter the message."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_262",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 737,
+        "final_length": 757
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: an expression of sympathy, a statement that the speaker cannot provide the needed help, and a recommendation to speak with a mental health professional or trusted person.",
+          "No new medical information, advice, or claims are introduced.",
+          "Differences are limited to wording/style (e.g., 'genuinely' vs 'really', 'not in a position' vs 'unable', 'essential' vs 'really important')."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_289",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 247,
+        "final_length": 254
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "No new medical information or advice is introduced.",
+          "Wording changes such as 'typically' for 'usually,' 'led us to feel' for 'made us to feel,' and 'focus on identifying' for 'work on discovering' are semantically equivalent.",
+          "The closing offer of help remains the same in meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_307",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 430,
+        "final_length": 429
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout and does not introduce new medical or psychological information.",
+          "Changes are limited to synonymous wording such as 'great chance' to 'valuable opportunity,' 'set a standard' to 'established a standard,' and 'natural' to 'normal/entirely natural,' without altering the substantive message.",
+          "The core claims about childhood exposure to parental infidelity shaping expectations in relationships, the need to examine reasons for longing, and the idea that loving partners should not harm us remain unchanged."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_308",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1283,
+        "final_length": 1315
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: an expression of sympathy, inability to provide the needed help, and encouragement to speak with a mental health professional or trusted person.",
+          "No new medical information, advice, diagnoses, or changes in recommended action are introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_310",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 247,
+        "final_length": 256
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: the speaker expresses sympathy, states they cannot provide the needed help, and advises speaking with a mental health professional or trusted person.",
+          "No new medical information, recommendations, diagnoses, or changes in urgency beyond equivalent emphasis are introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_315",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 253
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: the speaker expresses sympathy, states they cannot provide the needed help, and urges the person to talk to a mental health professional or trusted person.",
+          "No new medical information, advice, diagnoses, or changes in recommended action are introduced.",
+          "Differences such as 'truly' vs 'really,' 'not able' vs 'unable,' 'level of help' vs 'help,' and 'critically important' vs 'really important' are wording/intensity changes, not semantic changes."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_346",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 253
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "Changes such as 'precisely,' 'clearly,' 'both,' and 'skilled' do not introduce new medical information or materially alter the advice.",
+          "The correction from 'a iot' to 'a lot' appears to fix a typo without changing semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_355",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 354,
+        "final_length": 373
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: inability to provide needed help and recommendation to talk to a mental health professional or trusted person.",
+          "Changes are limited to wording emphasis ('truly'/'not able'/'critically important') and do not introduce new medical information or alter the advice."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_356",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 247,
+        "final_length": 252
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "No new medical or other substantive information is introduced.",
+          "Wording changes are paraphrastic only (e.g., 'keep trying to fight' to 'continue to fight', 'see a marriage counselor' to 'consult a marriage counselor').",
+          "Advice about understanding the wife's perspective, seeking counseling, avoiding defensiveness, staying involved with the daughter, and remaining amicable in case of divorce is unchanged."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_358",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 987,
+        "final_length": 1005
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: inability to provide needed help and recommendation to speak with a mental health professional or trusted person.",
+          "Changes are limited to wording emphasis ('really' to 'truly', 'unable' to 'not able', 'really important' to 'critically important') without adding new medical information or altering semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_387",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 244
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it expresses sympathy, states inability to provide the needed help, and advises speaking with a mental health professional or a trusted person.",
+          "No new medical information, diagnosis, treatment, or materially different recommendation is introduced.",
+          "Changes are limited to wording and emphasis ('genuinely,' 'level of help,' 'critically important') without altering semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_390",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 247,
+        "final_length": 265
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical and practical meaning about stress management strategies.",
+          "No new medical information, recommendations, diagnoses, or claims were introduced.",
+          "Wording changes such as 'tough' to 'challenging,' 'stick to that' to 'adhere to that,' and 'send a signal' to 'send a clear signal' do not alter semantic meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_392",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1250,
+        "final_length": 1270
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "No new medical information or clinically relevant claims are introduced.",
+          "Wording changes such as 'entirely understandable,' 'extremely hard,' 'establish friend boundaries,' and 'appropriate place to start' do not alter semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_394",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 852,
+        "final_length": 879
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: an expression of sympathy, a statement of inability to provide needed help, and a recommendation to speak with a mental health professional or trusted person.",
+          "No new medical information, advice, diagnosis, or change in recommended action is introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_411",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 264
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: condolences, warning that marijuana/alcohol may hinder grieving, recommendation to seek support from grief groups or a therapist/counselor, mention of the 988 lifeline, and encouragement to seek professional help.",
+          "Changes such as 'deeply' vs 'very,' 'significantly,' 'appropriate,' 'qualified,' 'identify resources,' and 'promptly' do not introduce materially new medical information or alter the semantic content in a meaningful way."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_419",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 674,
+        "final_length": 721
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning: trauma effects can be cumulative, and a car accident could increase PTSD symptoms related to prior trauma.",
+          "Eligibility for free counseling through VA Vet Centers for those deployed to a combat area is unchanged in meaning.",
+          "Descriptions such as 'most likely' vs 'very likely' and 'a lot of experience' vs 'substantial experience' are wording changes only, not semantic changes.",
+          "No new medical information or altered clinical advice is introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_420",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 572,
+        "final_length": 591
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: traumatic experiences may lead to repressed memories, and a licensed trauma therapist can help explore them safely and build coping strategies.",
+          "References to finding therapist resources through the American Psychological Association or Psychology Today are unchanged in substance.",
+          "Added phrases such as 'in fact,' 'duly licensed,' and 'well-established' do not introduce new medical information or alter semantic meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_432",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 380,
+        "final_length": 402
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout: the situation is described as abusive/overwhelming, the same resource link is provided, and the same recommendations are given (therapy, domestic violence nonprofit support, safety planning, prioritizing emotional/physical safety, and avoiding couples counseling).",
+          "No new medical information, diagnoses, treatments, or risk claims were introduced beyond wording intensification such as 'strongly encourage' or 'important step,' which do not change semantic content.",
+          "Key cautionary statements remain unchanged in meaning, including that the partner's behavior cannot be changed by the user, boundary-setting may increase risk of abuse, and trusting one's judgment is advised."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_436",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1290,
+        "final_length": 1332
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: prioritize the friend's safety, acknowledge you cannot force her to leave, provide domestic violence resources, encourage a safety plan, and protect yourself with boundaries.",
+          "Changes such as 'certainly' vs 'can', 'compel' vs 'force', 'strongly encourage' vs 'encourage', and 'firmly setting boundaries' vs 'setting boundaries' do not introduce materially new medical information or alter the core semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_437",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 325,
+        "final_length": 350
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: unauthorized disclosure of a diagnosis to a husband without explicit consent is described as likely/very likely a HIPAA violation.",
+          "Recommended actions remain semantically the same: contact the local HIPAA office, file a complaint, consider legal advice, and seek a new therapist.",
+          "Changes such as 'very likely,' 'promptly,' 'obtaining,' and 'secure' are wording/intensity differences and do not introduce materially new medical information or alter the core meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_444",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 350,
+        "final_length": 376
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: inability to provide needed help and recommendation to speak with a mental health professional or trusted person.",
+          "No new medical information, advice, diagnosis, or change in clinical meaning is introduced.",
+          "Differences are limited to wording emphasis ('truly', 'level of help', 'critically important') without altering semantics."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_448",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 237,
+        "final_length": 251
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: inability to provide needed help and recommendation to speak with a mental health professional or trusted person.",
+          "No new medical information, advice, diagnosis, or treatment details are introduced.",
+          "Differences are limited to wording emphasis and phrasing without changing semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_451",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 260
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "No new medical information or clinical claims are introduced.",
+          "Wording changes such as 'scary' to 'frightening,' 'went back to' to 'reverted to,' and 'bring up' to 'address' are semantically equivalent in context."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_452",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 521,
+        "final_length": 536
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning that a healthy relationship includes the listed qualities and suggests the user may be lacking several or all of them.",
+          "It retains the recommendation to evaluate the relationship before marriage, warns that the relationship may negatively affect the user and her daughters, and recommends premarital relationship counseling.",
+          "It also preserves the idea that counseling may lead to realizing the relationship is not the best choice for her and her children.",
+          "No new medical information or materially changed meaning is introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_464",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 670,
+        "final_length": 700
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout and does not introduce new medical information.",
+          "Changes are limited to synonymous wording such as 'fine' to 'commendable,' 'whatever the magnitude' to 'regardless of magnitude,' and 'placed into words' to 'put into words.'",
+          "The statements about childhood dynamics, parental drinking/rage, frightening yelling/throwing, and anger as a modeled parental emotion remain semantically equivalent."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_466",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 844,
+        "final_length": 881
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout and does not introduce new medical information.",
+          "Wording changes such as 'adequately considering' vs 'thinking of,' 'proves effective' vs 'helps,' and 'carefully consider' vs 'think of' are stylistic/paraphrastic and semantically equivalent in context.",
+          "All behavioral advice and breathing instructions remain the same, including the 5-minute timeout and 4-count inhale/6-count exhale guidance."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_475",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 734,
+        "final_length": 766
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: inability to provide needed help and recommendation to talk to a mental health professional or trusted person.",
+          "No new medical information, advice, or claims are introduced.",
+          "Differences are limited to wording/emphasis ('truly' vs 'really', 'not in a position' vs 'unable', 'absolutely essential' vs 'really important')."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_51",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 253
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "No new medical information, advice, diagnosis, or claims are introduced.",
+          "Wording changes such as 'already looked' vs 'looked,' 'recognize' vs 'know,' 'strong sign' vs 'good sign,' and 'fixed timeline' vs 'set timeline' are semantically equivalent in context."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_601",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 606,
+        "final_length": 632
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout and does not introduce new medical information.",
+          "Changes are limited to wording/synonyms (e.g., 'always' to 'invariably,' 'motivates' to 'compels,' 'be aware' to 'be mindful') without altering the substantive advice or claims.",
+          "The recommendation for direct conversation and couples therapy remains the same."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_610",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1375,
+        "final_length": 1405
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: the speaker expresses sympathy, states they cannot provide the needed help, and urges the person to talk to a mental health professional or trusted person.",
+          "Changes such as 'truly' vs 'really,' 'not able' vs 'unable,' 'level of help' vs 'help,' and 'critically important' vs 'really important' do not introduce new medical information or alter the core semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_612",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 247,
+        "final_length": 261
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "No new medical information or advice is introduced.",
+          "Wording changes are stylistic only (e.g., 'lucky' to 'fortunate,' 'suggest' to 'advise,' 'different things' to 'different factors')."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_614",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 839,
+        "final_length": 848
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it expresses sympathy, states inability to provide the needed help, and advises speaking with a mental health professional or a trusted person.",
+          "No new medical information, diagnosis, or recommendation beyond the original is introduced.",
+          "Differences are limited to wording/intensity ('genuinely', 'level of help', 'critically important') without changing semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_616",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 257
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "Wording changes such as 'clearly recognize' for 'be aware,' 'compelled' for 'forced,' and 'minimal willingness' for 'a little willingness' do not materially alter the medical or practical meaning.",
+          "No new medical facts, recommendations, diagnoses, or treatment information were introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_619",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 500,
+        "final_length": 529
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: an expression of sympathy, a statement of inability to provide needed help, and encouragement to speak with a mental health professional or trusted person.",
+          "Changes such as 'genuinely' vs 'really,' 'not able' vs 'unable,' 'level of help' vs 'help,' and 'critically important' vs 'really important' are wording/intensity variations, not semantic changes.",
+          "No new medical information, advice, diagnoses, or actions are introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_623",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 257
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout, with only wording changes such as 'reached' to 'arrived at,' 'reasons' to 'rationale,' and 'find out' to 'determine.'",
+          "No new medical facts, recommendations, or risks are introduced beyond the original content.",
+          "The suggested actions and implications for the daughter-in-law, son, and family support remain semantically equivalent."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_624",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 944,
+        "final_length": 945
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it states that complex family relationships are normal, sibling relationships are not always close or loving, and advises healthy boundaries, respectful coexistence, and prioritizing personal well-being and valued relationships.",
+          "Changes are limited to wording/synonym substitutions ('perfectly' to 'entirely', 'setting' to 'establishing', 'cherish' to 'value') without altering semantic content or adding new medical information."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_627",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 288,
+        "final_length": 291
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "No new medical information or materially different advice is introduced.",
+          "Wording changes such as 'clearly,' 'explicitly acknowledging,' and 'valid reason or benefit' are stylistic paraphrases that do not alter semantics."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_630",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 482,
+        "final_length": 512
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 2,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout and does not introduce new medical information.",
+          "Wording changes such as 'recognize' for 'think of,' 'directing' for 'guiding,' 'warranted' for 'merited,' and 'prescribed' for 'designated' are semantically equivalent.",
+          "The core message about recovery, rebuilding self-trust, no fixed timeline, and being unlikely to repeat the situation remains unchanged."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_654",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1021,
+        "final_length": 1027
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "No new medical information or materially different advice is introduced.",
+          "Wording changes such as 'candid feedback,' 'directing it at you,' and 'most effective way' are semantically equivalent to the original phrasing.",
+          "The conclusion that the cousin's behavior may be her issue and not coming from a place of love, and that the user's introspection suggests the problem is not with them, is unchanged."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_675",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 761,
+        "final_length": 809
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: rebuilding trust requires time and effort from both partners, couples counseling may help address distrust and communication, and individual therapy/self-care may help if accusations are unfounded and distressing.",
+          "No new medical information, diagnoses, treatments, or materially different recommendations are introduced; wording changes only intensify tone without changing semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_692",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 421,
+        "final_length": 501
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: the husband's dismissive response leads to feeling unheard and frustrated, and the advice remains to collaborate on solutions rather than blame.",
+          "Wording changes such as 'predictably' for 'understandably,' 'prioritizing' for 'focusing on,' and 'more constructive dynamic' for 'more positive dynamic' do not materially alter the semantic content.",
+          "No new medical information or materially different advice is introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_694",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 385,
+        "final_length": 387
+      },
+      {
+        "attempts_used": 4,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 4,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate introduces stronger and more specific claims not present in the original, such as 'strongly consider,' 'clinically beneficial,' 'critically important,' and 'well-established,' which add emphasis and imply clinical validation beyond the original wording.",
+          "'Well-established helpful tool' introduces new information about the evidence base/status of IMAGO dialoguing that is not stated in the original."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "counselbench_questionID_702",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 753,
+        "final_length": 807
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "No new medical or clinical information is introduced.",
+          "Wording changes such as 'definitively,' 'obtain professional support,' 'I'm confident,' 'relatively small,' and 'clear willingness' do not materially alter the advice or claims."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_704",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1044,
+        "final_length": 1075
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: disappointment about unmet expectations, the importance of acceptance and open communication with her husband, and considering therapy for coping strategies and communication improvement.",
+          "Changes such as 'entirely understandable' vs 'understandable,' 'doesn't align with reality' vs 'doesn't match reality,' and 'reinforce' vs 'strengthen' are wording variations without semantic change.",
+          "No new medical information, advice, diagnosis, or treatment implications are introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_707",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 401,
+        "final_length": 434
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "Wording changes such as 'usually' to 'typically,' 'style' to 'approach,' and 'keep following your own logic' to 'continue following your own reasoning' do not materially alter the semantic content.",
+          "Changing 'find an unperson or an online discussion group' to 'identify an in-person or an online discussion group' appears to correct an obvious typo without introducing new medical information.",
+          "No new medical claims, recommendations, or factual content were added."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_711",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 610,
+        "final_length": 631
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout and does not introduce new medical information.",
+          "Wording changes such as 'function as' vs 'be,' 'identify/recognize' vs 'find/understand,' and 'regard it as' vs 'view it as' are semantically equivalent in context.",
+          "All recommendations and clinical content remain the same: CBT, mindful eating, regular balanced meals, avoiding exercise as punishment, seeking a mental health professional, and considering a support group."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_712",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1048,
+        "final_length": 1098
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original recommendations and meaning: leave the eating environment after meals, examples of alternative activities, and consider Overeaters Anonymous for compulsive food-related issues.",
+          "Changes such as 'strongly recommend' vs 'recommend,' 'can be beneficial' vs 'can help,' and 'I trust this helps' vs 'I hope this helps' do not introduce new medical information or alter the semantic meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_714",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 412,
+        "final_length": 431
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it advises expressing feelings and insecurities about the long-distance relationship and starting a conversation about communication and trust instead of directly asking who he is texting.",
+          "No new medical or other substantive information is introduced; wording changes such as 'it would be advisable' and 'discuss' are stylistic only."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_715",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 354,
+        "final_length": 365
+      },
+      {
+        "attempts_used": 4,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 4,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate introduces new medical/clinical information with the phrase 'It is clinically significant,' which is not present in the original.",
+          "The candidate changes meaning by reframing a casual relationship comment as having clinical significance.",
+          "'Established ways' adds a stronger implication than the original 'ways,' introducing a more authoritative claim not stated in the original."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "counselbench_questionID_717",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 218,
+        "final_length": 262
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: talking to oneself can be a normal way of processing information, and the husband is likely not trying to make the questioner crazy.",
+          "No new medical information or clinically meaningful claims are introduced.",
+          "Wording changes such as 'genuinely' for 'simply,' 'directly checked in' for 'checked in,' and 'recognize' for 'notice' do not alter semantic meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_727",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 523,
+        "final_length": 540
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "No new medical or clinical information is introduced.",
+          "Changes are limited to wording/style (e.g., 'significant stress,' 'well-positioned,' 'at a loss') without altering the advice or substance."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_732",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1063,
+        "final_length": 1099
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout and does not introduce new medical information.",
+          "Changes are limited to wording/style substitutions such as 'really good lesson' to 'important takeaway' and 'keep looking' to 'continue looking'.",
+          "All substantive statements about the parents being unsupportive, the interpretations of their remarks, and encouragement to seek support elsewhere remain semantically unchanged."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_75",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1018,
+        "final_length": 1018
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "Word substitutions such as 'driven by' for 'motivated by,' 'propelled by,' and 'attempting' do not change semantic content.",
+          "Advice remains the same: recognize these early reactive parts during conflict, restrain unhelpful expression, and seek therapist support.",
+          "'Qualified therapist' does not introduce materially new medical information beyond the original recommendation to seek a therapist."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_754",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 890,
+        "final_length": 925
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same meaning as the original: an expression of sympathy, inability to provide needed help, and encouragement to speak with a mental health professional or trusted person.",
+          "Changes are limited to wording emphasis ('really' to 'truly', 'unable' to 'not able', 'really important' to 'critically important') and do not introduce new medical information or alter the semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_76",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 247,
+        "final_length": 252
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout: possessiveness is rooted in fear, can lead to low self-esteem and controlling behavior, and controlling others pushes them away.",
+          "The therapeutic recommendation remains the same: use cognitive therapy and a self-reflection/reframing exercise to address underlying thought patterns.",
+          "Supportive suggestions are unchanged in substance, including asking a trusted person for help and using self-help resources if therapy is not currently available.",
+          "Wording changes such as 'drives them away' vs 'pushes them away,' 'recommend' vs 'suggest,' and 'qualified' vs 'good' do not introduce new medical information or alter semantic meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_862",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1274,
+        "final_length": 1298
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout: breakdowns have an underlying reason, identifying it may require exploring painful past experiences, professional help is needed to guide that process, symptoms may persist or worsen without help, and improvement is possible with help.",
+          "Changes are limited to wording and clarity (e.g., 'clear reason' for 'a reason', 'identifying' for 'finding out', 'acknowledge' for 'recognize', 'obtain professional help' for 'find professional help', 'appropriate help' for 'some help') without adding new medical information or altering the advice.",
+          "The correction from 'extremely pain' to 'extremely painful' clarifies an apparent typo rather than changing semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_872",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 582,
+        "final_length": 605
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout: laziness may not be the true issue, stress may underlie it, and similar examples of stressors are given.",
+          "No new medical information, diagnosis, treatment, or materially different claim is introduced.",
+          "Wording changes such as 'infer' vs 'assume,' 'recommendation' vs 'suggestion,' and 'explored' vs 'opened' do not alter semantic meaning in context."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_876",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1004,
+        "final_length": 1046
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: an expression of sympathy, inability to provide needed help, and encouragement to speak with a mental health professional or trusted person.",
+          "No new medical information or materially different advice is introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_877",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 226
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning that a therapist may ethically decline to re-establish treatment with a former client and may communicate that by not responding.",
+          "The recommendation to seek other therapists and use directories such as Psychology Today or an insurance provider's website is unchanged.",
+          "Differences such as 'definitively' vs 'can't speak,' 'broadly regarded' vs 'generally considered,' 'means' vs 'way,' and 'strongly encourage' are wording/intensity changes, not semantic changes or new medical information."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_885",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 474,
+        "final_length": 506
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "No new medical information or recommendations are introduced.",
+          "Wording changes such as 'priority' for 'thing' and 'strongly urge' for 'strongly recommend' do not alter semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_887",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 420,
+        "final_length": 414
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: expressing sympathy, stating inability to provide needed help, and urging the person to speak with a mental health professional or trusted person.",
+          "No new medical information, advice, diagnoses, or treatment details are introduced.",
+          "Wording changes such as 'genuinely'/'really', 'not in a position'/'unable', and 'absolutely essential'/'really important' do not materially change the semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_892",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 239,
+        "final_length": 257
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: counseling ends when goals are met, coping skills are developed, and both client and counselor agree the client is ready to move forward independently.",
+          "The mention of other factors such as insurance coverage or relocation leading to termination is retained without adding new medical information.",
+          "Statements about the counselor discussing the termination process and appropriate referrals are semantically equivalent; wording changes like 'competent' and 'clearly discuss' do not materially alter meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_895",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 385,
+        "final_length": 409
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "Changes such as 'immediately,' 'professionally obligated,' 'categorically,' 'clear violation,' 'almost certainly,' 'begin by terminating,' and 'recovering money' do not introduce materially new medical information or alter the advice's semantic content.",
+          "No new medical facts, diagnoses, or treatment recommendations were added."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_896",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1307,
+        "final_length": 1368
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "No new medical information is introduced.",
+          "Minor wording changes such as 'great' to 'excellent,' 'talk to' to 'speak with,' and tense/phrasing adjustments do not alter semantic content.",
+          "Educational timelines and professional distinctions remain the same."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_897",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 721,
+        "final_length": 741
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning that counselors generally should not accept gifts from clients.",
+          "It retains the exception that cultural aspects may make gift giving valid/appropriate in some cases.",
+          "It keeps the same recommendations: give a holiday card, discuss the gift with the counselor, and recognize that appreciation for the counseling is likely most meaningful.",
+          "No new medical information or materially different guidance is introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_898",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 540,
+        "final_length": 554
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it suggests essentially the same phrasing to ask a doctor for a therapist referral.",
+          "Word substitutions such as 'suggest' to 'recommend,' 'helpful' to 'beneficial,' and 'expresses' to 'articulates' do not change the medical meaning.",
+          "No new medical information, advice, diagnosis, or implications are introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_901",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 274,
+        "final_length": 293
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "Wording changes such as 'agree' to 'concur,' 'realizing' to 'recognizing,' 'more aware' to 'more attuned,' and 'start' to 'begin' do not alter semantic content.",
+          "No new medical or other substantive information is introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_913",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 394,
+        "final_length": 400
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "Changes such as 'why' to 'what is your rationale for' and 'I always believed' to 'I have long maintained' are paraphrases without semantic change.",
+          "No new medical information or materially different claims are introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_914",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 723,
+        "final_length": 754
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: an expression of sympathy, inability to provide needed help, and encouragement to speak with a mental health professional or trusted person.",
+          "No new medical information, advice, or claims are introduced.",
+          "Differences are limited to wording emphasis ('truly'/'critically') and do not change semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_917",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 242,
+        "final_length": 247
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "Changes such as 'particularly sensitive' for 'sensitive,' 'widely promoted' for 'popular,' 'feasible' for 'possible,' and 'truly' for 'really' are wording substitutions without semantic change.",
+          "No new medical information or materially different claims were introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_921",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1378,
+        "final_length": 1403
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: inability to provide needed help and recommendation to speak with a mental health professional or trusted person.",
+          "Wording changes such as 'genuinely' vs 'really', 'not able' vs 'unable', 'specific help' vs 'the help', and 'critically important' vs 'really important' do not introduce new medical information or alter semantic meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_924",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 242,
+        "final_length": 260
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout: signs of a good therapist fit include feeling heard, trust/safety, and collaboration on goals.",
+          "It retains the recommendation that if these elements are missing, exploring/considering other therapists may help.",
+          "It preserves the point that 'training' the therapist is not the patient's role/responsibility because the therapist should already be able to adapt to the patient's needs.",
+          "It also keeps the suggestion to openly discuss needs and expectations with the current therapist to see whether adjustments can be made.",
+          "No new medical information or clinically meaningful change in meaning is introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_933",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 447,
+        "final_length": 508
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 2,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: counseling offers a supportive space to explore/examine thoughts and feelings, develop/build coping strategies, and work toward positive/meaningful changes.",
+          "The outcomes remain semantically equivalent: improved mental well-being and greater/stronger self-awareness.",
+          "Wording changes such as safe→structured, explore→examine, and positive→meaningful do not introduce materially new medical information or alter the core meaning in this context."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_935",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 248,
+        "final_length": 265
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning about starting counseling by contacting a counselor, preferably by phone, and assessing fit before scheduling.",
+          "No new medical information, recommendations, or claims were introduced.",
+          "Wording changes such as 'initiate' for 'starting,' 'unequivocally' for 'most definitely,' and 'select' for 'pick' do not alter semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_936",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 906,
+        "final_length": 915
+      },
+      {
+        "attempts_used": 4,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 4,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate introduces new information by changing 'some coping skills' to 'effective coping skills,' which adds a judgment about the quality of the coping skills not present in the original."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "counselbench_questionID_938",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 364,
+        "final_length": 395
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout and does not introduce new medical information.",
+          "Wording changes such as 'preferred style' for 'style they like,' 'align with' for 'relate to,' and 'fixated' for 'obsessed' do not materially alter the meaning.",
+          "The discussion of client fit, boundary-crossing, public visibility, and counselors needing their own healing/support remains semantically unchanged."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_939",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 725,
+        "final_length": 736
+      }
+    ]
+  }
+}

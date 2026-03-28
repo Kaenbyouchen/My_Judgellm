@@ -1,6 +1,6 @@
 git status
 git add -A
-git commit -m "3.25 adding batch size for parallel in vllm serve"
+git commit -m "3.28 finish pairwise baseline"
 git push origin main
 
 git remote -v

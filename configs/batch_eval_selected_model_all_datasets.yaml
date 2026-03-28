@@ -3,17 +3,20 @@
 #
 # Usage:
 #   python scripts/run_batch_from_yaml.py --batch-config configs/batch_eval_selected_model_all_datasets.yaml
-
+    # - "medical_eval_sphere"
+    # - "mediq_askdocs"
+    # - "counselbench"
+    # - "medval_bench"
+    # - "medaesqa"
 batch:
   base_experiment_config: "configs/experiment.yaml"
 
   # Pairwise-focused dataset list (from configs/datasets.yaml)
   dataset_names:
-    - "medical_eval_sphere"
-    # - "mediq_askdocs"
-    # - "counselbench"
-    # - "medval_bench"
-    # - "medaesqa"
+    - "mediq_askdocs"
+    - "counselbench"
+    - "medval_bench"
+    - "medaesqa"
 
   # Pick ONE judge model here (can be openai model_id or vllmserve_* model_id)
   judge_models:
