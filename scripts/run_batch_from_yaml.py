@@ -181,6 +181,79 @@ def _normalize_str_list(raw: Any) -> List[str]:
     return []
 
 
+def _normalize_key_part(value: Any) -> str:
+    return str(value).strip().lower()
+
+
+def _build_eval_key(
+    dataset_name: str,
+    bias: str,
+    mode: str,
+    judge_model: str,
+    injector_model: str,
+    inject_to: str,
+) -> Tuple[str, str, str, str, str, str]:
+    return (
+        _normalize_key_part(dataset_name),
+        _normalize_key_part(bias),
+        _normalize_key_part(mode),
+        _normalize_key_part(judge_model),
+        _normalize_key_part(injector_model),
+        _normalize_key_part(inject_to),
+    )
+
+
+def _load_completed_eval_keys(summary_jsonl_path: Path) -> Set[Tuple[str, str, str, str, str, str]]:
+    """
+    Load successful eval keys from outputs/results_summary.jsonl.
+
+    File is written as pretty-printed JSON objects separated by whitespace,
+    so we parse by repeatedly raw-decoding JSON from text.
+    """
+    completed: Set[Tuple[str, str, str, str, str, str]] = set()
+    if not summary_jsonl_path.exists():
+        return completed
+    try:
+        raw_text = summary_jsonl_path.read_text(encoding="utf-8")
+    except Exception:
+        return completed
+
+    decoder = json.JSONDecoder()
+    idx = 0
+    n = len(raw_text)
+    while idx < n:
+        while idx < n and raw_text[idx].isspace():
+            idx += 1
+        if idx >= n:
+            break
+        try:
+            obj, next_idx = decoder.raw_decode(raw_text, idx)
+        except Exception:
+            # Stop on parse error (likely trailing partial write).
+            break
+        idx = next_idx
+        if not isinstance(obj, dict):
+            continue
+
+        metrics = obj.get("metrics", {})
+        if not isinstance(metrics, dict):
+            continue
+        # Treat rows with valid core metrics as completed eval runs.
+        if metrics.get("rr") is None or metrics.get("cr") is None or metrics.get("accuracy_biased") is None:
+            continue
+
+        key = _build_eval_key(
+            dataset_name=obj.get("dataset_name", ""),
+            bias=obj.get("bias_type", ""),
+            mode=obj.get("bias_injection_mode", ""),
+            judge_model=obj.get("judge_model_id", ""),
+            injector_model=obj.get("bias_injector_model_id", ""),
+            inject_to=obj.get("bias_inject_to", "non_gt"),
+        )
+        completed.add(key)
+    return completed
+
+
 def _resolve_dataset_names(batch_cfg: Dict[str, Any], datasets_map: Dict[str, Any]) -> List[str]:
     dataset_names = _normalize_str_list(batch_cfg.get("dataset_names"))
     if not dataset_names:
@@ -302,14 +375,19 @@ def main():
         bias_list_cfg = batch_cfg.get("bias_list", []) or []
     exclude_biases = {str(x).strip() for x in (batch_cfg.get("exclude_biases", []) or []) if str(x).strip()}
     modes = [_normalize_mode(m) for m in (batch_cfg.get("modes", ["rewrite", "word"]) or ["rewrite", "word"])]
+    base_cfg = load_yaml(str(base_config_path))
     continue_on_error = bool(batch_cfg.get("continue_on_error", True))
     dry_run = bool(batch_cfg.get("dry_run", False))
     reuse_original_per_judge = bool(batch_cfg.get("reuse_original_per_judge", True))
+    skip_existing_evals = bool(batch_cfg.get("skip_existing_evals", False))
     inject_to_override = str(batch_cfg.get("inject_to", "")).strip().lower()
     if inject_to_override and inject_to_override not in {"gt", "non_gt"}:
         raise ValueError("batch.inject_to must be 'gt' or 'non_gt'")
+    base_inject_to = str((base_cfg.get("bias", {}) or {}).get("inject_to", "non_gt")).strip().lower()
+    if base_inject_to not in {"gt", "non_gt"}:
+        base_inject_to = "non_gt"
+    effective_inject_to_default = inject_to_override or base_inject_to
 
-    base_cfg = load_yaml(str(base_config_path))
     datasets_cfg = load_yaml(str(PROJECT_ROOT / "configs" / "datasets.yaml"))
     datasets_map = datasets_cfg.get("datasets", datasets_cfg) if isinstance(datasets_cfg, dict) else {}
     if not isinstance(datasets_map, dict):
@@ -387,6 +465,7 @@ def main():
     log_dir = _setup_log_dir(batch_cfg.get("log_dir"))
     run_cfg_dir = log_dir / "generated_configs"
     run_cfg_dir.mkdir(parents=True, exist_ok=True)
+    completed_eval_keys = _load_completed_eval_keys(PROJECT_ROOT / "outputs" / "results_summary.jsonl") if skip_existing_evals else set()
 
     logger.add(log_dir / "yaml_batch.log", level="INFO")
     logger.info("=" * 72)
@@ -396,6 +475,7 @@ def main():
     logger.info(f"Datasets: {[x['dataset_name'] for x in dataset_run_items]}")
     logger.info(f"Judge models: {judge_models}")
     logger.info(f"Bias injector models: {injector_models}")
+    logger.info(f"Skip existing evals: {skip_existing_evals}")
     for item in dataset_run_items:
         logger.info(
             f"Dataset={item['dataset_name']} category={item['dataset_category']} "
@@ -449,6 +529,22 @@ def main():
                     }
 
                     try:
+                        eval_key = _build_eval_key(
+                            dataset_name=ds_name,
+                            bias=bias,
+                            mode=mode,
+                            judge_model=judge_model,
+                            injector_model=injector_model,
+                            inject_to=effective_inject_to_default,
+                        )
+                        if skip_existing_evals and eval_key in completed_eval_keys:
+                            result["status"] = "skipped_existing_eval"
+                            logger.info(
+                                f"Skip existing eval: dataset={ds_name}, bias={bias}, mode={mode}, "
+                                f"judge={judge_model}, injector={injector_model}, inject_to={effective_inject_to_default}"
+                            )
+                            continue
+
                         if reuse_original_per_judge:
                             compute_original_acc = (judge_model, ds_name) not in original_done_for_judge_dataset
                         else:
@@ -511,6 +607,8 @@ def main():
                                 result["status"] = "success"
                                 if compute_original_acc:
                                     original_done_for_judge_dataset.add((judge_model, ds_name))
+                                if skip_existing_evals:
+                                    completed_eval_keys.add(eval_key)
                     except KeyboardInterrupt:
                         result["status"] = "interrupted"
                         result["error"] = "KeyboardInterrupt"
@@ -543,6 +641,7 @@ def main():
     success = sum(1 for r in results if r["status"] == "success")
     failed = sum(1 for r in results if r["status"] == "failed")
     dry = sum(1 for r in results if r["status"] == "dry_run")
+    skipped = sum(1 for r in results if r["status"] == "skipped_existing_eval")
 
     summary = {
         "batch_config": str(batch_cfg_path),
@@ -555,6 +654,7 @@ def main():
         "failed": failed,
         "interrupted": sum(1 for r in results if r["status"] == "interrupted"),
         "dry_run": dry,
+        "skipped_existing_eval": skipped,
         "results": results,
     }
     summary_path = log_dir / "yaml_batch_summary.json"
@@ -562,7 +662,7 @@ def main():
         json.dump(summary, f, ensure_ascii=False, indent=2)
 
     logger.info("=" * 72)
-    logger.info(f"Done. success={success}, failed={failed}, dry_run={dry}")
+    logger.info(f"Done. success={success}, failed={failed}, dry_run={dry}, skipped_existing_eval={skipped}")
     logger.info(f"Summary: {summary_path}")
     logger.info(
         "Each run is executed by src.main, so outputs are stored under outputs/ and appended to results_summary.*"

@@ -41,4 +41,5 @@ batch:
   continue_on_error: true
   dry_run: false
   reuse_original_per_judge: true
+  skip_existing_evals: true
   log_dir: null
