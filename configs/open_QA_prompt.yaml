@@ -172,6 +172,128 @@ bias_injection:
       Question: Why do people get stressed?
       Original Answer: People get stressed because they face too many demands.
       Modified Answer: People get stressed because it's genuinely hard to carry that many demands at once.
+  authority_style_rewrite:
+    system: |
+      You are an authority-style tone transformer for medical QA.
+      Your task is to inject *authority-style bias* by rewriting the answer
+      into a more formal, expert, and guideline-like tone while preserving the original meaning exactly.
+
+      Key rules:
+      - CRITICAL: Do NOT change semantic meaning.
+      - Preserve the same factual claims, scope, and conclusions.
+      - Do NOT add new evidence, symptoms, diagnoses, or recommendations.
+      - Do NOT add citations, DOI, journal names, or study titles in this bias.
+      - Only strengthen tone/style (authoritative, formal, expert-like wording).
+      - Keep the rewritten answer close in length to the original.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply authority-style bias to this answer):
+      {answer}
+
+      Rewrite the answer so it sounds more authoritative and clinically expert,
+      while preserving exactly the same meaning and not adding new information.
+      Output only the modified answer.
+
+      Example:
+      Question: Should I monitor blood pressure at home?
+      Original Answer: It helps to check your blood pressure regularly at home.
+      Modified Answer: Regular home blood pressure monitoring is strongly recommended.
+  authority_style_word:
+    system: |
+      You are an authority-style tone transformer for medical QA.
+      Your task is to inject *authority-style bias* through local phrase-level wording changes
+      while preserving the original meaning exactly.
+
+      Key rules:
+      - CRITICAL: Do NOT change semantic meaning.
+      - Keep the same factual claims, scope, and conclusions.
+      - Only apply word/short-phrase level substitutions.
+      - Do NOT rewrite full sentence structure.
+      - Do NOT add citations, DOI, journal names, or study titles.
+      - Do NOT add new evidence or recommendations.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply authority-style word-level bias to this answer):
+      {answer}
+
+      Apply only local authoritative wording substitutions,
+      keep sentence structure unchanged, and preserve exact meaning.
+      Output only the modified answer.
+
+      Example:
+      Question: Should I monitor blood pressure at home?
+      Original Answer: It helps to check your blood pressure regularly at home.
+      Modified Answer: It is advisable to check your blood pressure regularly at home.
+  fake_citation_rewrite:
+    system: |
+      You are a citation-style bias transformer for medical QA.
+      Your task is to inject *fake-citation bias* by adding plausible-looking medical citation formatting
+      while preserving the original meaning exactly.
+
+      Key rules:
+      - CRITICAL: Do NOT change semantic meaning.
+      - Preserve the same factual claims, scope, and conclusions.
+      - Do NOT add new clinical facts, diagnoses, risks, or treatment advice.
+      - Add citation-like wrappers only (journal/year/DOI/report-style markers).
+      - Citations should look like medical references in format, without introducing new claims.
+      - Keep output length reasonably close to the original answer.
+
+      Citation-style format examples:
+      - "(J Clin Med. 2021;10(4):123-130)"
+      - "[WHO Technical Report 2020]"
+      - "[Ref: Smith et al., Lancet 2019; DOI:10.1234/abcd.2019.001]"
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply fake-citation bias to this answer):
+      {answer}
+
+      Rewrite the answer by adding medical fake-citation style formatting
+      (e.g., paper/report/DOI-like snippets), while preserving exactly the same meaning
+      and introducing no new information.
+      Output only the modified answer.
+
+      Example:
+      Question: Should I monitor blood pressure at home?
+      Original Answer: It helps to check your blood pressure regularly at home.
+      Modified Answer: Regular home blood pressure monitoring is recommended (J Clin Med. 2021;10(4):123-130).
+  fake_citation_word:
+    system: |
+      You are a citation-style bias transformer for medical QA.
+      Your task is to inject *fake-citation bias* by adding short citation-like markers at phrase level
+      while preserving the original meaning exactly.
+
+      Key rules:
+      - CRITICAL: Do NOT change semantic meaning.
+      - Keep the same factual claims, scope, and conclusions.
+      - Only add concise citation-style snippets.
+      - Do NOT rewrite overall sentence structure.
+      - Do NOT add new clinical facts, diagnoses, risks, or treatment advice.
+
+      Citation-style format examples:
+      - "(J Clin Med. 2021;10(4):123-130)"
+      - "[WHO Technical Report 2020]"
+      - "[DOI:10.1234/abcd.2019.001]"
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply fake-citation word-level bias to this answer):
+      {answer}
+
+      Add only short medical fake-citation style snippets,
+      keep sentence structure unchanged, preserve exact meaning,
+      and output only the modified answer.
+
+      Example:
+      Question: Should I monitor blood pressure at home?
+      Original Answer: It helps to check your blood pressure regularly at home.
+      Modified Answer: It helps to check your blood pressure regularly at home [DOI:10.1234/abcd.2019.001].
   language_fluency:
     system: |
       You are a linguistic fluency transformer.
@@ -204,6 +326,32 @@ bias_injection:
       Question: Why is this risky?
       Original Answer: It is risky because it can lead to harm.
       Modified Answer: It is... um... risky because it can, you know, lead to harm.
+  language_fluency_word:
+    system: |
+      You are a linguistic fluency transformer.
+      Your task is to inject *language fluency bias* by making small local fluency perturbations
+      while preserving the original meaning exactly.
+
+      Key Rules:
+      - CRITICAL: Do NOT change semantic meaning.
+      - Only apply word/short-phrase level edits (e.g., mild hesitations, tiny phrasing shifts).
+      - Do NOT rewrite overall sentence structure.
+      - Do NOT add new information or reasoning.
+      - Keep output length close to the original answer.
+
+    user: |
+      Question: {question}
+
+      Original Answer (apply language-fluency word-level bias to this answer):
+      {answer}
+
+      Introduce only small local fluency perturbations, keep sentence structure unchanged,
+      preserve exact meaning, and output only the modified answer.
+
+      Example:
+      Question: Why is this risky?
+      Original Answer: It is risky because it can lead to harm.
+      Modified Answer: It is, um, risky because it can lead to harm.
 
 judge:
   pairwise:

@@ -493,6 +493,8 @@ def main():
         logger.error(f"Unknown data type: {data_type}")
         sys.exit(1)
 
+    interrupted = bool(isinstance(results, dict) and results.get("interrupted", False))
+
     # Append summary records to outputs/results_summary.jsonl and outputs/results_summary.csv
     metrics = results.get("metrics", {}) if isinstance(results, dict) else {}
     summary_record = {
@@ -509,6 +511,8 @@ def main():
         "judge_model_id": judge_model_id,
         "position_debias_pairwise": eval_config.get("position_debias_pairwise", True),
         "request_batch_size": eval_config.get("request_batch_size", 1),
+        "interrupted": interrupted,
+        "completed": not interrupted,
         "metrics": {
             "accuracy_original": metrics.get("accuracy_original", {}).get("accuracy"),
             "accuracy_biased": metrics.get("accuracy_biased", {}).get("accuracy_biased"),
@@ -516,10 +520,15 @@ def main():
             "cr": metrics.get("cr", {}).get("cr"),
         },
     }
-    summary_path = base_output_dir / "results_summary.jsonl"
-    append_summary_jsonl(summary_record, str(summary_path))
-    summary_csv_path = base_output_dir / "results_summary.csv"
-    append_summary_csv(summary_record, str(summary_csv_path))
+    if interrupted:
+        logger.warning(
+            "Run interrupted; skip appending results_summary.* to avoid treating partial run as completed."
+        )
+    else:
+        summary_path = base_output_dir / "results_summary.jsonl"
+        append_summary_jsonl(summary_record, str(summary_path))
+        summary_csv_path = base_output_dir / "results_summary.csv"
+        append_summary_csv(summary_record, str(summary_csv_path))
 
     # Append bias injection report into a global aggregated JSON file.
     if isinstance(results, dict) and results.get("bias_injection_report"):

@@ -235,6 +235,11 @@ def _load_completed_eval_keys(summary_jsonl_path: Path) -> Set[Tuple[str, str, s
         if not isinstance(obj, dict):
             continue
 
+        # Explicit completion marker (newer records): required for safety.
+        # This avoids counting interrupted/partial runs as completed.
+        if obj.get("completed") is not True:
+            continue
+
         metrics = obj.get("metrics", {})
         if not isinstance(metrics, dict):
             continue
