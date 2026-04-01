@@ -21,7 +21,7 @@ batch:
 
   # Pick ONE judge model here (can be openai model_id or vllmserve_* model_id)
   judge_models:
-    - "gpt52"
+    - "biomistral_7b"
 
   # Bias injector model(s)
   # - use gpt52 for injection quality, or set to same_as_judge to use the selected judge model
