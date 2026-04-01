@@ -75,3 +75,40 @@ multi-choice qa,medical_eval_sphere,plain_language,word,pairwise,gpt52,,77.00,96
 multi-choice qa,medical_eval_sphere,authority_style,word,pairwise,gpt52,,70.62,95.88,70.62
 multi-choice qa,medical_eval_sphere,fake_citation,word,pairwise,gpt52,,97.50,98.38,97.50
 multi-turn conversation,medval_bench,jargon_overloading,word,pairwise,gpt52,43.26,51.33,96.96,51.33
+multi-choice qa,medical_eval_sphere,jargon_overloading,word,pairwise,vllmserve_biomistral_7b,50.75,47.62,98.00,47.62
+multi-choice qa,medical_eval_sphere,plain_language,word,pairwise,vllmserve_biomistral_7b,,46.25,98.00,46.25
+multi-choice qa,medical_eval_sphere,authority_style,word,pairwise,vllmserve_biomistral_7b,,44.12,97.25,44.12
+multi-choice qa,medical_eval_sphere,fake_citation,word,pairwise,vllmserve_biomistral_7b,,48.50,97.00,48.50
+multi-choice qa,medical_eval_sphere,language_fluency,word,pairwise,vllmserve_biomistral_7b,,47.50,97.00,47.50
+one turn conversation,mediq_askdocs,jargon_overloading,word,pairwise,vllmserve_biomistral_7b,51.31,49.35,98.66,49.35
+one turn conversation,mediq_askdocs,plain_language,word,pairwise,vllmserve_biomistral_7b,,50.48,98.83,50.48
+one turn conversation,mediq_askdocs,clinical_formatting,word,pairwise,vllmserve_biomistral_7b,,47.78,98.66,47.78
+one turn conversation,mediq_askdocs,empathy_tone,word,pairwise,vllmserve_biomistral_7b,,46.84,98.89,46.84
+one turn conversation,mediq_askdocs,authority_style,word,pairwise,vllmserve_biomistral_7b,,47.92,98.21,47.92
+one turn conversation,mediq_askdocs,fake_citation,word,pairwise,vllmserve_biomistral_7b,,45.96,98.41,45.96
+one turn conversation,mediq_askdocs,language_fluency,word,pairwise,vllmserve_biomistral_7b,,49.72,98.49,49.72
+one turn conversation,counselbench,jargon_overloading,word,pairwise,vllmserve_biomistral_7b,85.06,55.17,97.70,55.17
+one turn conversation,counselbench,plain_language,word,pairwise,vllmserve_biomistral_7b,,56.90,97.70,56.90
+one turn conversation,counselbench,clinical_formatting,word,pairwise,vllmserve_biomistral_7b,,55.17,97.70,55.17
+one turn conversation,counselbench,empathy_tone,word,pairwise,vllmserve_biomistral_7b,,56.32,98.28,56.32
+one turn conversation,counselbench,authority_style,word,pairwise,vllmserve_biomistral_7b,,54.02,96.55,54.02
+one turn conversation,counselbench,fake_citation,word,pairwise,vllmserve_biomistral_7b,,60.34,97.70,60.34
+one turn conversation,counselbench,language_fluency,word,pairwise,vllmserve_biomistral_7b,,56.32,96.55,56.32
+multi-turn conversation,medval_bench,jargon_overloading,word,pairwise,vllmserve_biomistral_7b,37.00,40.13,98.20,40.13
+multi-turn conversation,medval_bench,plain_language,word,pairwise,vllmserve_biomistral_7b,,39.94,98.48,39.94
+multi-turn conversation,medval_bench,clinical_formatting,word,pairwise,vllmserve_biomistral_7b,,38.61,98.29,38.61
+multi-turn conversation,medval_bench,empathy_tone,word,pairwise,vllmserve_biomistral_7b,,38.61,98.67,38.61
+multi-turn conversation,medval_bench,authority_style,word,pairwise,vllmserve_biomistral_7b,,37.76,97.91,37.76
+multi-turn conversation,medval_bench,fake_citation,word,pairwise,vllmserve_biomistral_7b,,41.65,99.24,41.65
+multi-turn conversation,medval_bench,language_fluency,word,pairwise,vllmserve_biomistral_7b,,37.95,97.91,37.95
+semantic Q&A,medaesqa,jargon_overloading,word,pairwise,vllmserve_biomistral_7b,30.00,33.75,97.50,33.75
+semantic Q&A,medaesqa,plain_language,word,pairwise,vllmserve_biomistral_7b,,37.50,100.00,37.50
+semantic Q&A,medaesqa,authority_style,word,pairwise,vllmserve_biomistral_7b,,36.25,100.00,36.25
+semantic Q&A,medaesqa,fake_citation,word,pairwise,vllmserve_biomistral_7b,,47.50,98.75,47.50
+semantic Q&A,medaesqa,language_fluency,word,pairwise,vllmserve_biomistral_7b,,38.75,98.75,38.75
+multi-choice qa,medical_eval_sphere,jargon_overloading,word,pairwise,vllmserve_prometheus2_7b,66.00,52.75,90.75,52.75
+multi-choice qa,medical_eval_sphere,plain_language,word,pairwise,vllmserve_prometheus2_7b,,72.00,91.62,72.00
+multi-choice qa,medical_eval_sphere,authority_style,word,pairwise,vllmserve_prometheus2_7b,,61.00,91.62,61.00
+multi-choice qa,medical_eval_sphere,fake_citation,word,pairwise,vllmserve_prometheus2_7b,,17.88,91.88,17.88
+multi-choice qa,medical_eval_sphere,language_fluency,word,pairwise,vllmserve_prometheus2_7b,,70.88,92.88,70.88
+one turn conversation,mediq_askdocs,jargon_overloading,word,pairwise,vllmserve_prometheus2_7b,63.65,60.75,88.65,60.75

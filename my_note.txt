@@ -11,7 +11,7 @@ python scripts/run_batch_from_yaml.py --batch-config configs/batch_eval.yaml
 python scripts/run_batch_from_yaml.py --batch-config configs/batch_eval_selected_model_all_datasets.yaml
 
 使用vllm serve eval：
-vllm serve "BioMistral/BioMistral-7B" --port 8000
+vllm serve "prometheus-eval/prometheus-7b-v2.0" --port 8000
 另一终端：
 export VLLM_BASE_URL="http://127.0.0.1:8000/v1"
 python scripts/run_batch_from_yaml.py --batch-config configs/batch_eval_selected_model_all_datasets.yaml

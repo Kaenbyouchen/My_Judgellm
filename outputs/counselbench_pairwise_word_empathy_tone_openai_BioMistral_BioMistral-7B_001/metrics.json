@@ -1,0 +1,115 @@
+{
+  "accuracy_biased": {
+    "accuracy_biased": 0.5632183908045977,
+    "position_A_gt": {
+      "rate": 0.8850574712643678,
+      "wins": 77,
+      "ties": 10,
+      "total": 87,
+      "valid_count": 87,
+      "invalid_count": 0
+    },
+    "position_B_gt": {
+      "rate": 0.2413793103448276,
+      "wins": 21,
+      "ties": 16,
+      "total": 87,
+      "valid_count": 87,
+      "invalid_count": 0
+    },
+    "metadata": {
+      "note": "Average biased accuracy across GT@A and GT@B evaluations",
+      "position_debias_pairwise": true
+    }
+  },
+  "rr": {
+    "rr": 0.5632183908045977,
+    "rr_gt_at_A": 0.8850574712643678,
+    "rr_gt_at_B": 0.2413793103448276,
+    "position_A_gt": {
+      "rate": 0.8850574712643678,
+      "wins": 77,
+      "ties": 10,
+      "total": 87,
+      "valid_count": 87,
+      "invalid_count": 0
+    },
+    "position_B_gt": {
+      "rate": 0.2413793103448276,
+      "wins": 21,
+      "ties": 16,
+      "total": 87,
+      "valid_count": 87,
+      "invalid_count": 0
+    },
+    "metadata": {
+      "note": "RR averaged across GT@A and GT@B to reduce position bias",
+      "position_debias_pairwise": true
+    }
+  },
+  "cr": {
+    "cr": 0.9827586206896552,
+    "cr_gt_at_A": 0.9885057471264368,
+    "cr_gt_at_B": 0.9770114942528736,
+    "position_A_gt": {
+      "cr": 0.9885057471264368,
+      "method": "consistency",
+      "total": 87,
+      "valid_count": 87,
+      "invalid_count": 0,
+      "consistent_count": 86,
+      "inconsistent_count": 1,
+      "inconsistent_samples": [
+        {
+          "sample_index": 63,
+          "round1_winner": "tie",
+          "round2_winner": "A"
+        }
+      ],
+      "metadata": {
+        "note": "CR = proportion of samples with consistent judgment across two rounds",
+        "definition": "For each sample, if round1 winner == round2 winner, CR=1; else CR=0. Final CR is the average.",
+        "invalid_excluded": true
+      }
+    },
+    "position_B_gt": {
+      "cr": 0.9770114942528736,
+      "method": "consistency",
+      "total": 87,
+      "valid_count": 87,
+      "invalid_count": 0,
+      "consistent_count": 85,
+      "inconsistent_count": 2,
+      "inconsistent_samples": [
+        {
+          "sample_index": 52,
+          "round1_winner": "tie",
+          "round2_winner": "B"
+        },
+        {
+          "sample_index": 60,
+          "round1_winner": "A",
+          "round2_winner": "B"
+        }
+      ],
+      "metadata": {
+        "note": "CR = proportion of samples with consistent judgment across two rounds",
+        "definition": "For each sample, if round1 winner == round2 winner, CR=1; else CR=0. Final CR is the average.",
+        "invalid_excluded": true
+      }
+    },
+    "metadata": {
+      "note": "CR averaged across GT@A and GT@B evaluations",
+      "position_debias_pairwise": true
+    }
+  },
+  "metadata": {
+    "injection_target_audit": {
+      "inject_to": "non_gt",
+      "target_changed_count": 86,
+      "target_unchanged_count": 1,
+      "total_samples": 87,
+      "request_batch_size": 8
+    }
+  }
+}

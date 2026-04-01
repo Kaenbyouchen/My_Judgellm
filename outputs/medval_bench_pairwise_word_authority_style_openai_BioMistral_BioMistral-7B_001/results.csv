@@ -1,0 +1,4 @@
+metric,value,gt_wins,total,has_gt_labels,note,method
+rr,0.37760910815939275,0.0,0,False,RR averaged across GT@A and GT@B to reduce position bias,
+accuracy_biased,0.37760910815939275,,0,False,Average biased accuracy across GT@A and GT@B evaluations,
+cr,0.9791271347248577,,0,,CR averaged across GT@A and GT@B evaluations,unknown
