@@ -268,14 +268,16 @@ class ModelJudge(BaseJudge):
                 mock_judge = MockJudge()
                 return mock_judge.judge_pairwise(question, answer_A, answer_B)
             elif is_quota_error:
-                # For quota errors, return tie result even if allow_fallback_mock is False
-                logger.warning("Quota error but allow_fallback_mock=False. Returning tie result to allow continuation.")
+                # For quota errors, return invalid tie result to allow continuation
+                # but exclude from metrics (is_valid=False).
+                logger.warning("Quota error but allow_fallback_mock=False. Returning invalid result to allow continuation.")
                 return JudgeResult(
                     winner="tie",
                     score_A=0.0,
                     score_B=0.0,
                     explanation=f"Quota error: {error_str}",
-                    raw={"error": "quota_exceeded", "exception": str(e)}
+                    raw={"error": "quota_exceeded", "exception": str(e)},
+                    is_valid=False,
                 )
             raise
     

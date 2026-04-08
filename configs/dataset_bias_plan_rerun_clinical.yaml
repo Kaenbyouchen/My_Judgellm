@@ -1,0 +1,5 @@
+# Minimal bias plan: only clinical_formatting for mediq_askdocs rerun
+dataset_biases:
+  mediq_askdocs:
+    dataset_category: "one turn conversation"
+    biases: ["clinical_formatting"]

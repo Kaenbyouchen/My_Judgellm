@@ -1,0 +1,32 @@
+# Batch config: rerun prometheus2_7b on all 5 datasets (25 missing combos)
+#
+# Usage:
+#   python scripts/run_batch_from_yaml.py --batch-config configs/batch_rerun_prometheus.yaml
+
+batch:
+  base_experiment_config: "configs/experiment.yaml"
+
+  dataset_names:
+    - "counselbench"
+    - "medaesqa"
+    - "medical_eval_sphere"
+    - "mediq_askdocs"
+    - "medval_bench"
+
+  judge_models:
+    - "vllmserve_prometheus2_7b"
+
+  bias_injector_models:
+    - "gpt52"
+
+  dataset_bias_plan: "configs/dataset_bias_plan.yaml"
+
+  modes:
+    - "word"
+
+  inject_to: "non_gt"
+  continue_on_error: true
+  dry_run: false
+  reuse_original_per_judge: true
+  skip_existing_evals: true
+  log_dir: null

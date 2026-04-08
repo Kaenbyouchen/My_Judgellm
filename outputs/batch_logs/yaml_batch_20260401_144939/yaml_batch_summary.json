@@ -1,0 +1,37 @@
+{
+  "batch_config": "/Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/configs/batch_eval_gpt52_missing.yaml",
+  "datasets": [
+    "medical_eval_sphere",
+    "mediq_askdocs"
+  ],
+  "judge_models": [
+    "gpt52"
+  ],
+  "injector_models": [
+    "gpt52"
+  ],
+  "total_planned": 3,
+  "executed": 1,
+  "success": 0,
+  "failed": 0,
+  "interrupted": 1,
+  "dry_run": 0,
+  "skipped_existing_eval": 0,
+  "results": [
+    {
+      "index": 1,
+      "dataset": "medical_eval_sphere",
+      "dataset_category": "multi-choice qa",
+      "judge_model": "gpt52",
+      "injector_model": "gpt52",
+      "bias": "language_fluency",
+      "mode": "word",
+      "status": "interrupted",
+      "error": "KeyboardInterrupt",
+      "config_path": "/Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/outputs/batch_logs/yaml_batch_20260401_144939/generated_configs/001_medical_eval_sphere_gpt52_gpt52_language_fluency_word.yaml",
+      "start_time": "2026-04-01T14:49:39.864400",
+      "end_time": "2026-04-01T14:50:45.640459",
+      "compute_original_acc": true
+    }
+  ]
+}

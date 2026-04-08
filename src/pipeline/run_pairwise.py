@@ -728,20 +728,95 @@ def run_pairwise_evaluation(
             },
         }
 
-        rrA = accA
-        rrB = accB
-        rr_avg = (rrA["rate"] + rrB["rate"]) / 2.0
-        metrics["rr"] = {
-            "rr": rr_avg,
-            "rr_gt_at_A": rrA["rate"],
-            "rr_gt_at_B": rrB["rate"],
-            "position_A_gt": rrA,
-            "position_B_gt": rrB,
-            "metadata": {
-                "note": "RR averaged across GT@A and GT@B to reduce position bias",
-                "position_debias_pairwise": position_debias_pairwise,
-            },
-        }
+        # ── Robustness Rate (RR) ──
+        # RR = proportion of samples where the judge makes the SAME choice
+        # before and after bias injection (regardless of correctness).
+        # "Same choice" is normalized to answer identity (GT vs non-GT),
+        # not positional label (A vs B), because biased evaluation swaps positions.
+        orig_judgments = results.get("original_judgments_list", [])
+        if orig_judgments and len(orig_judgments) == len(samples):
+            # Normalize original choice to "gt" / "non_gt" / "tie"
+            orig_choices = []  # per-sample: "gt", "non_gt", "tie", or None (invalid)
+            for s, j in zip(samples, orig_judgments):
+                if not j.is_valid:
+                    orig_choices.append(None)
+                elif j.winner == "tie":
+                    orig_choices.append("tie")
+                elif (s.preferred == "1" and j.winner == "A") or \
+                     (s.preferred == "2" and j.winner == "B"):
+                    orig_choices.append("gt")
+                else:
+                    orig_choices.append("non_gt")
+
+            def _rr_same_choice(biased_judgments: List[JudgeResult],
+                                gt_winner: str) -> Dict[str, Any]:
+                """Compute RR as same-choice rate.
+
+                gt_winner: the positional label that corresponds to GT in this
+                biased run ("A" for GT@A, "B" for GT@B).
+                """
+                same = 0
+                total_valid = 0
+                invalid_count = 0
+                for oc, bj in zip(orig_choices, biased_judgments):
+                    if oc is None or not bj.is_valid:
+                        invalid_count += 1
+                        continue
+                    # Normalize biased choice to "gt" / "non_gt" / "tie"
+                    if bj.winner == "tie":
+                        biased_choice = "tie"
+                    elif bj.winner == gt_winner:
+                        biased_choice = "gt"
+                    else:
+                        biased_choice = "non_gt"
+                    total_valid += 1
+                    if oc == biased_choice:
+                        same += 1
+                rate = same / total_valid if total_valid > 0 else 0.0
+                return {
+                    "rate": rate,
+                    "same": same,
+                    "total_valid": total_valid,
+                    "invalid_count": invalid_count,
+                }
+
+            rrA = _rr_same_choice(posA_r1, "A")
+            rrB = _rr_same_choice(posB_r1, "B")
+            rr_avg = (rrA["rate"] + rrB["rate"]) / 2.0
+            metrics["rr"] = {
+                "rr": rr_avg,
+                "rr_gt_at_A": rrA["rate"],
+                "rr_gt_at_B": rrB["rate"],
+                "position_A_gt": rrA,
+                "position_B_gt": rrB,
+                "metadata": {
+                    "note": (
+                        "RR = proportion of samples where judge makes the same choice "
+                        "(GT/non-GT/tie) before and after bias injection, "
+                        "averaged across GT@A and GT@B to reduce position bias"
+                    ),
+                    "position_debias_pairwise": position_debias_pairwise,
+                },
+            }
+        else:
+            logger.warning(
+                "Cannot compute RR: original judgments unavailable or count mismatch. "
+                "Falling back to acc_biased as RR proxy."
+            )
+            rrA = accA
+            rrB = accB
+            rr_avg = (rrA["rate"] + rrB["rate"]) / 2.0
+            metrics["rr"] = {
+                "rr": rr_avg,
+                "rr_gt_at_A": rrA["rate"],
+                "rr_gt_at_B": rrB["rate"],
+                "position_A_gt": rrA,
+                "position_B_gt": rrB,
+                "metadata": {
+                    "note": "Fallback RR (= acc_biased); original judgments unavailable",
+                    "position_debias_pairwise": position_debias_pairwise,
+                },
+            }
 
         if posA_r1 and posA_r2 and posB_r1 and posB_r2:
             crA = compute_cr(judgments_round1=posA_r1, judgments_round2=posA_r2)

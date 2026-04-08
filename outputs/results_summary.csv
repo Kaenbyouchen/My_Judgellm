@@ -1,114 +1,99 @@
 data type (category),dataset,bias type,bias injection mode,data type (pairwise/scalar),judge llm,acc,acc_biased,cr,rr
-multi-choice qa,medical_eval_sphere,jargon_overloading,word,pairwise,vllmserve_medgemma_4b,64.25,59.75,98.88,59.75
-multi-choice qa,medical_eval_sphere,plain_language,word,pairwise,vllmserve_medgemma_4b,,72.38,99.50,72.38
-multi-choice qa,medical_eval_sphere,authority_style,word,pairwise,vllmserve_medgemma_4b,,60.38,99.12,60.38
-multi-choice qa,medical_eval_sphere,fake_citation,word,pairwise,vllmserve_medgemma_4b,,77.75,99.25,77.75
-multi-choice qa,medical_eval_sphere,language_fluency,word,pairwise,vllmserve_medgemma_4b,,68.62,99.63,68.62
-one turn conversation,mediq_askdocs,plain_language,word,pairwise,vllmserve_medgemma_4b,70.59,71.76,99.57,71.76
-one turn conversation,mediq_askdocs,clinical_formatting,word,pairwise,vllmserve_medgemma_4b,,61.29,99.66,61.29
-one turn conversation,mediq_askdocs,empathy_tone,word,pairwise,vllmserve_medgemma_4b,,69.17,99.57,69.17
-one turn conversation,mediq_askdocs,authority_style,word,pairwise,vllmserve_medgemma_4b,,70.65,99.60,70.65
-one turn conversation,mediq_askdocs,language_fluency,word,pairwise,vllmserve_medgemma_4b,,71.59,99.63,71.59
-one turn conversation,counselbench,jargon_overloading,word,pairwise,vllmserve_medgemma_4b,82.76,85.06,100.00,85.06
-one turn conversation,counselbench,clinical_formatting,word,pairwise,vllmserve_medgemma_4b,,83.91,100.00,83.91
-one turn conversation,counselbench,empathy_tone,word,pairwise,vllmserve_medgemma_4b,,87.93,100.00,87.93
-one turn conversation,counselbench,authority_style,word,pairwise,vllmserve_medgemma_4b,,86.21,100.00,86.21
-one turn conversation,counselbench,fake_citation,word,pairwise,vllmserve_medgemma_4b,,92.53,100.00,92.53
-one turn conversation,counselbench,language_fluency,word,pairwise,vllmserve_medgemma_4b,,86.78,100.00,86.78
-multi-turn conversation,medval_bench,jargon_overloading,word,pairwise,vllmserve_medgemma_4b,33.59,28.08,99.62,28.08
-semantic Q&A,medaesqa,jargon_overloading,word,pairwise,vllmserve_medgemma_4b,32.50,23.75,100.00,23.75
-semantic Q&A,medaesqa,plain_language,word,pairwise,vllmserve_medgemma_4b,,26.25,100.00,26.25
-one turn conversation,mediq_askdocs,jargon_overloading,word,pairwise,vllmserve_medgemma_4b,70.76,70.22,99.52,70.22
-one turn conversation,mediq_askdocs,fake_citation,word,pairwise,vllmserve_medgemma_4b,,69.54,99.66,69.54
-one turn conversation,counselbench,plain_language,word,pairwise,vllmserve_medgemma_4b,82.76,86.78,100.00,86.78
-multi-turn conversation,medval_bench,plain_language,word,pairwise,vllmserve_medgemma_4b,34.16,37.38,99.81,37.38
-one turn conversation,mediq_askdocs,plain_language,word,pairwise,vllmserve_medgemma_4b,70.48,71.56,99.66,71.56
-one turn conversation,mediq_askdocs,clinical_formatting,word,pairwise,vllmserve_medgemma_4b,,61.41,99.77,61.41
-one turn conversation,mediq_askdocs,empathy_tone,word,pairwise,vllmserve_medgemma_4b,,69.25,99.83,69.25
-one turn conversation,mediq_askdocs,authority_style,word,pairwise,vllmserve_medgemma_4b,,70.65,99.57,70.65
-one turn conversation,mediq_askdocs,fake_citation,word,pairwise,vllmserve_medgemma_4b,,69.57,99.54,69.57
-one turn conversation,mediq_askdocs,language_fluency,word,pairwise,vllmserve_medgemma_4b,,71.50,99.66,71.50
-one turn conversation,counselbench,jargon_overloading,word,pairwise,vllmserve_medgemma_4b,81.61,85.06,100.00,85.06
-one turn conversation,counselbench,plain_language,word,pairwise,vllmserve_medgemma_4b,,86.78,100.00,86.78
-one turn conversation,counselbench,clinical_formatting,word,pairwise,vllmserve_medgemma_4b,,83.91,99.43,83.91
-one turn conversation,counselbench,empathy_tone,word,pairwise,vllmserve_medgemma_4b,,87.93,99.43,87.93
-one turn conversation,counselbench,authority_style,word,pairwise,vllmserve_medgemma_4b,,86.78,99.43,86.78
-one turn conversation,counselbench,fake_citation,word,pairwise,vllmserve_medgemma_4b,,92.53,100.00,92.53
-one turn conversation,counselbench,language_fluency,word,pairwise,vllmserve_medgemma_4b,,86.78,100.00,86.78
-multi-turn conversation,medval_bench,jargon_overloading,word,pairwise,vllmserve_medgemma_4b,33.97,27.80,99.62,27.80
-multi-turn conversation,medval_bench,plain_language,word,pairwise,vllmserve_medgemma_4b,,37.00,99.62,37.00
-multi-turn conversation,medval_bench,clinical_formatting,word,pairwise,vllmserve_medgemma_4b,,24.19,99.24,24.19
-multi-turn conversation,medval_bench,empathy_tone,word,pairwise,vllmserve_medgemma_4b,,32.07,99.24,32.07
-multi-turn conversation,medval_bench,authority_style,word,pairwise,vllmserve_medgemma_4b,,31.78,99.53,31.78
-multi-turn conversation,medval_bench,fake_citation,word,pairwise,vllmserve_medgemma_4b,,32.16,99.43,32.16
-multi-turn conversation,medval_bench,language_fluency,word,pairwise,vllmserve_medgemma_4b,,37.19,99.34,37.19
-semantic Q&A,medaesqa,jargon_overloading,word,pairwise,vllmserve_medgemma_4b,32.50,23.75,100.00,23.75
-semantic Q&A,medaesqa,plain_language,word,pairwise,vllmserve_medgemma_4b,,26.25,98.75,26.25
-semantic Q&A,medaesqa,authority_style,word,pairwise,vllmserve_medgemma_4b,,21.25,100.00,21.25
-semantic Q&A,medaesqa,fake_citation,word,pairwise,vllmserve_medgemma_4b,,26.25,97.50,26.25
-semantic Q&A,medaesqa,language_fluency,word,pairwise,vllmserve_medgemma_4b,,23.75,100.00,23.75
-one turn conversation,mediq_askdocs,jargon_overloading,word,pairwise,gpt52,84.64,89.02,96.76,89.02
-one turn conversation,mediq_askdocs,plain_language,word,pairwise,gpt52,,84.30,96.36,84.30
-one turn conversation,mediq_askdocs,authority_style,word,pairwise,gpt52,,86.60,97.24,86.60
-one turn conversation,mediq_askdocs,fake_citation,word,pairwise,gpt52,,96.36,98.04,96.36
-one turn conversation,mediq_askdocs,language_fluency,word,pairwise,gpt52,,83.33,96.64,83.33
+one turn conversation,counselbench,authority_style,word,pairwise,gpt52,91.95,87.36,100.00,87.36
+one turn conversation,counselbench,authority_style,word,pairwise,vllmserve_biomistral_7b,85.06,54.02,96.55,54.02
+one turn conversation,counselbench,authority_style,word,pairwise,vllmserve_medgemma_4b,82.76,86.78,99.43,86.78
+one turn conversation,counselbench,clinical_formatting,word,pairwise,gpt52,91.95,88.51,99.43,88.51
+one turn conversation,counselbench,clinical_formatting,word,pairwise,vllmserve_biomistral_7b,85.06,55.17,97.70,55.17
+one turn conversation,counselbench,clinical_formatting,word,pairwise,vllmserve_medgemma_4b,82.76,83.91,99.43,83.91
+one turn conversation,counselbench,empathy_tone,word,pairwise,gpt52,91.95,88.51,98.85,88.51
+one turn conversation,counselbench,empathy_tone,word,pairwise,vllmserve_biomistral_7b,85.06,56.32,98.28,56.32
+one turn conversation,counselbench,empathy_tone,word,pairwise,vllmserve_medgemma_4b,82.76,87.93,99.43,87.93
+one turn conversation,counselbench,fake_citation,word,pairwise,gpt52,91.95,98.28,100.00,98.28
+one turn conversation,counselbench,fake_citation,word,pairwise,vllmserve_biomistral_7b,85.06,60.34,97.70,60.34
+one turn conversation,counselbench,fake_citation,word,pairwise,vllmserve_medgemma_4b,82.76,92.53,100.00,92.53
 one turn conversation,counselbench,jargon_overloading,word,pairwise,gpt52,91.95,89.66,98.85,89.66
-one turn conversation,counselbench,plain_language,word,pairwise,gpt52,,89.08,98.28,89.08
-one turn conversation,counselbench,clinical_formatting,word,pairwise,gpt52,,88.51,99.43,88.51
-one turn conversation,counselbench,empathy_tone,word,pairwise,gpt52,,88.51,98.85,88.51
-one turn conversation,counselbench,authority_style,word,pairwise,gpt52,,87.36,100.00,87.36
-one turn conversation,counselbench,fake_citation,word,pairwise,gpt52,,98.28,100.00,98.28
-one turn conversation,counselbench,language_fluency,word,pairwise,gpt52,,88.51,98.28,88.51
-multi-turn conversation,medval_bench,plain_language,word,pairwise,gpt52,43.26,50.09,96.58,50.09
-multi-turn conversation,medval_bench,clinical_formatting,word,pairwise,gpt52,,40.99,97.91,40.99
-multi-turn conversation,medval_bench,empathy_tone,word,pairwise,gpt52,,46.77,96.96,46.77
-multi-turn conversation,medval_bench,authority_style,word,pairwise,gpt52,,43.26,95.92,43.26
-multi-turn conversation,medval_bench,fake_citation,word,pairwise,gpt52,,85.20,96.49,85.20
-multi-turn conversation,medval_bench,language_fluency,word,pairwise,gpt52,,45.54,96.30,45.54
-semantic Q&A,medaesqa,jargon_overloading,word,pairwise,gpt52,50.00,52.50,95.00,52.50
-semantic Q&A,medaesqa,plain_language,word,pairwise,gpt52,,53.75,95.00,53.75
-semantic Q&A,medaesqa,authority_style,word,pairwise,gpt52,,52.50,91.25,52.50
-semantic Q&A,medaesqa,fake_citation,word,pairwise,gpt52,,65.00,96.25,65.00
-semantic Q&A,medaesqa,language_fluency,word,pairwise,gpt52,,51.25,93.75,51.25
-multi-choice qa,medical_eval_sphere,jargon_overloading,word,pairwise,gpt52,72.75,75.62,96.00,75.62
-multi-choice qa,medical_eval_sphere,plain_language,word,pairwise,gpt52,,77.00,96.88,77.00
-multi-choice qa,medical_eval_sphere,authority_style,word,pairwise,gpt52,,70.62,95.88,70.62
-multi-choice qa,medical_eval_sphere,fake_citation,word,pairwise,gpt52,,97.50,98.38,97.50
-multi-turn conversation,medval_bench,jargon_overloading,word,pairwise,gpt52,43.26,51.33,96.96,51.33
-multi-choice qa,medical_eval_sphere,jargon_overloading,word,pairwise,vllmserve_biomistral_7b,50.75,47.62,98.00,47.62
-multi-choice qa,medical_eval_sphere,plain_language,word,pairwise,vllmserve_biomistral_7b,,46.25,98.00,46.25
-multi-choice qa,medical_eval_sphere,authority_style,word,pairwise,vllmserve_biomistral_7b,,44.12,97.25,44.12
-multi-choice qa,medical_eval_sphere,fake_citation,word,pairwise,vllmserve_biomistral_7b,,48.50,97.00,48.50
-multi-choice qa,medical_eval_sphere,language_fluency,word,pairwise,vllmserve_biomistral_7b,,47.50,97.00,47.50
-one turn conversation,mediq_askdocs,jargon_overloading,word,pairwise,vllmserve_biomistral_7b,51.31,49.35,98.66,49.35
-one turn conversation,mediq_askdocs,plain_language,word,pairwise,vllmserve_biomistral_7b,,50.48,98.83,50.48
-one turn conversation,mediq_askdocs,clinical_formatting,word,pairwise,vllmserve_biomistral_7b,,47.78,98.66,47.78
-one turn conversation,mediq_askdocs,empathy_tone,word,pairwise,vllmserve_biomistral_7b,,46.84,98.89,46.84
-one turn conversation,mediq_askdocs,authority_style,word,pairwise,vllmserve_biomistral_7b,,47.92,98.21,47.92
-one turn conversation,mediq_askdocs,fake_citation,word,pairwise,vllmserve_biomistral_7b,,45.96,98.41,45.96
-one turn conversation,mediq_askdocs,language_fluency,word,pairwise,vllmserve_biomistral_7b,,49.72,98.49,49.72
 one turn conversation,counselbench,jargon_overloading,word,pairwise,vllmserve_biomistral_7b,85.06,55.17,97.70,55.17
-one turn conversation,counselbench,plain_language,word,pairwise,vllmserve_biomistral_7b,,56.90,97.70,56.90
-one turn conversation,counselbench,clinical_formatting,word,pairwise,vllmserve_biomistral_7b,,55.17,97.70,55.17
-one turn conversation,counselbench,empathy_tone,word,pairwise,vllmserve_biomistral_7b,,56.32,98.28,56.32
-one turn conversation,counselbench,authority_style,word,pairwise,vllmserve_biomistral_7b,,54.02,96.55,54.02
-one turn conversation,counselbench,fake_citation,word,pairwise,vllmserve_biomistral_7b,,60.34,97.70,60.34
-one turn conversation,counselbench,language_fluency,word,pairwise,vllmserve_biomistral_7b,,56.32,96.55,56.32
-multi-turn conversation,medval_bench,jargon_overloading,word,pairwise,vllmserve_biomistral_7b,37.00,40.13,98.20,40.13
-multi-turn conversation,medval_bench,plain_language,word,pairwise,vllmserve_biomistral_7b,,39.94,98.48,39.94
-multi-turn conversation,medval_bench,clinical_formatting,word,pairwise,vllmserve_biomistral_7b,,38.61,98.29,38.61
-multi-turn conversation,medval_bench,empathy_tone,word,pairwise,vllmserve_biomistral_7b,,38.61,98.67,38.61
-multi-turn conversation,medval_bench,authority_style,word,pairwise,vllmserve_biomistral_7b,,37.76,97.91,37.76
-multi-turn conversation,medval_bench,fake_citation,word,pairwise,vllmserve_biomistral_7b,,41.65,99.24,41.65
-multi-turn conversation,medval_bench,language_fluency,word,pairwise,vllmserve_biomistral_7b,,37.95,97.91,37.95
+one turn conversation,counselbench,jargon_overloading,word,pairwise,vllmserve_medgemma_4b,81.61,85.06,100.00,85.06
+one turn conversation,counselbench,language_fluency,word,pairwise,gpt52,91.95,88.51,98.28,88.51
+one turn conversation,counselbench,language_fluency,word,pairwise,vllmserve_biomistral_7b,85.06,56.32,96.55,56.32
+one turn conversation,counselbench,language_fluency,word,pairwise,vllmserve_medgemma_4b,82.76,86.78,100.00,86.78
+one turn conversation,counselbench,plain_language,word,pairwise,gpt52,91.95,89.08,98.28,89.08
+one turn conversation,counselbench,plain_language,word,pairwise,vllmserve_biomistral_7b,85.06,56.90,97.70,56.90
+one turn conversation,counselbench,plain_language,word,pairwise,vllmserve_medgemma_4b,82.76,86.78,100.00,86.78
+semantic Q&A,medaesqa,authority_style,word,pairwise,gpt52,50.00,52.50,91.25,52.50
+semantic Q&A,medaesqa,authority_style,word,pairwise,vllmserve_biomistral_7b,30.00,36.25,100.00,36.25
+semantic Q&A,medaesqa,authority_style,word,pairwise,vllmserve_medgemma_4b,32.50,21.25,100.00,21.25
+semantic Q&A,medaesqa,fake_citation,word,pairwise,gpt52,50.00,65.00,96.25,65.00
+semantic Q&A,medaesqa,fake_citation,word,pairwise,vllmserve_biomistral_7b,30.00,47.50,98.75,47.50
+semantic Q&A,medaesqa,fake_citation,word,pairwise,vllmserve_medgemma_4b,32.50,26.25,97.50,26.25
+semantic Q&A,medaesqa,jargon_overloading,word,pairwise,gpt52,50.00,52.50,95.00,52.50
 semantic Q&A,medaesqa,jargon_overloading,word,pairwise,vllmserve_biomistral_7b,30.00,33.75,97.50,33.75
-semantic Q&A,medaesqa,plain_language,word,pairwise,vllmserve_biomistral_7b,,37.50,100.00,37.50
-semantic Q&A,medaesqa,authority_style,word,pairwise,vllmserve_biomistral_7b,,36.25,100.00,36.25
-semantic Q&A,medaesqa,fake_citation,word,pairwise,vllmserve_biomistral_7b,,47.50,98.75,47.50
-semantic Q&A,medaesqa,language_fluency,word,pairwise,vllmserve_biomistral_7b,,38.75,98.75,38.75
+semantic Q&A,medaesqa,jargon_overloading,word,pairwise,vllmserve_medgemma_4b,32.50,23.75,100.00,23.75
+semantic Q&A,medaesqa,language_fluency,word,pairwise,gpt52,50.00,51.25,93.75,51.25
+semantic Q&A,medaesqa,language_fluency,word,pairwise,vllmserve_biomistral_7b,30.00,38.75,98.75,38.75
+semantic Q&A,medaesqa,language_fluency,word,pairwise,vllmserve_medgemma_4b,32.50,23.75,100.00,23.75
+semantic Q&A,medaesqa,plain_language,word,pairwise,gpt52,50.00,53.75,95.00,53.75
+semantic Q&A,medaesqa,plain_language,word,pairwise,vllmserve_biomistral_7b,30.00,37.50,100.00,37.50
+semantic Q&A,medaesqa,plain_language,word,pairwise,vllmserve_medgemma_4b,32.50,26.25,98.75,26.25
+multi-choice qa,medical_eval_sphere,authority_style,word,pairwise,gpt52,72.75,70.62,95.88,70.62
+multi-choice qa,medical_eval_sphere,authority_style,word,pairwise,vllmserve_biomistral_7b,50.75,44.12,97.25,44.12
+multi-choice qa,medical_eval_sphere,authority_style,word,pairwise,vllmserve_medgemma_4b,64.25,60.38,99.12,60.38
+multi-choice qa,medical_eval_sphere,authority_style,word,pairwise,vllmserve_prometheus2_7b,66.00,61.00,91.62,61.00
+multi-choice qa,medical_eval_sphere,fake_citation,word,pairwise,gpt52,72.75,97.50,98.38,97.50
+multi-choice qa,medical_eval_sphere,fake_citation,word,pairwise,vllmserve_biomistral_7b,50.75,48.50,97.00,48.50
+multi-choice qa,medical_eval_sphere,fake_citation,word,pairwise,vllmserve_medgemma_4b,64.25,77.75,99.25,77.75
+multi-choice qa,medical_eval_sphere,fake_citation,word,pairwise,vllmserve_prometheus2_7b,66.00,17.88,91.88,17.88
+multi-choice qa,medical_eval_sphere,jargon_overloading,word,pairwise,gpt52,72.75,75.62,96.00,75.62
+multi-choice qa,medical_eval_sphere,jargon_overloading,word,pairwise,vllmserve_biomistral_7b,50.75,47.62,98.00,47.62
+multi-choice qa,medical_eval_sphere,jargon_overloading,word,pairwise,vllmserve_medgemma_4b,64.25,59.75,98.88,59.75
 multi-choice qa,medical_eval_sphere,jargon_overloading,word,pairwise,vllmserve_prometheus2_7b,66.00,52.75,90.75,52.75
-multi-choice qa,medical_eval_sphere,plain_language,word,pairwise,vllmserve_prometheus2_7b,,72.00,91.62,72.00
-multi-choice qa,medical_eval_sphere,authority_style,word,pairwise,vllmserve_prometheus2_7b,,61.00,91.62,61.00
-multi-choice qa,medical_eval_sphere,fake_citation,word,pairwise,vllmserve_prometheus2_7b,,17.88,91.88,17.88
-multi-choice qa,medical_eval_sphere,language_fluency,word,pairwise,vllmserve_prometheus2_7b,,70.88,92.88,70.88
+multi-choice qa,medical_eval_sphere,language_fluency,word,pairwise,gpt52,73.25,73.50,97.25,73.50
+multi-choice qa,medical_eval_sphere,language_fluency,word,pairwise,vllmserve_biomistral_7b,50.75,47.50,97.00,47.50
+multi-choice qa,medical_eval_sphere,language_fluency,word,pairwise,vllmserve_medgemma_4b,64.25,68.62,99.63,68.62
+multi-choice qa,medical_eval_sphere,language_fluency,word,pairwise,vllmserve_prometheus2_7b,66.00,70.88,92.88,70.88
+multi-choice qa,medical_eval_sphere,plain_language,word,pairwise,gpt52,72.75,77.00,96.88,77.00
+multi-choice qa,medical_eval_sphere,plain_language,word,pairwise,vllmserve_biomistral_7b,50.75,46.25,98.00,46.25
+multi-choice qa,medical_eval_sphere,plain_language,word,pairwise,vllmserve_medgemma_4b,64.25,72.38,99.50,72.38
+multi-choice qa,medical_eval_sphere,plain_language,word,pairwise,vllmserve_prometheus2_7b,66.00,72.00,91.62,72.00
+one turn conversation,mediq_askdocs,authority_style,word,pairwise,gpt52,84.64,86.60,97.24,86.60
+one turn conversation,mediq_askdocs,authority_style,word,pairwise,vllmserve_biomistral_7b,51.31,47.92,98.21,47.92
+one turn conversation,mediq_askdocs,authority_style,word,pairwise,vllmserve_medgemma_4b,70.59,70.65,99.57,70.65
+one turn conversation,mediq_askdocs,clinical_formatting,word,pairwise,vllmserve_biomistral_7b,51.31,47.78,98.66,47.78
+one turn conversation,mediq_askdocs,clinical_formatting,word,pairwise,vllmserve_medgemma_4b,70.59,61.41,99.77,61.41
+one turn conversation,mediq_askdocs,empathy_tone,word,pairwise,gpt52,84.36,79.81,95.90,79.81
+one turn conversation,mediq_askdocs,empathy_tone,word,pairwise,vllmserve_biomistral_7b,51.31,46.84,98.89,46.84
+one turn conversation,mediq_askdocs,empathy_tone,word,pairwise,vllmserve_medgemma_4b,70.59,69.25,99.83,69.25
+one turn conversation,mediq_askdocs,fake_citation,word,pairwise,gpt52,84.64,96.36,98.04,96.36
+one turn conversation,mediq_askdocs,fake_citation,word,pairwise,vllmserve_biomistral_7b,51.31,45.96,98.41,45.96
+one turn conversation,mediq_askdocs,fake_citation,word,pairwise,vllmserve_medgemma_4b,70.59,69.57,99.54,69.57
+one turn conversation,mediq_askdocs,jargon_overloading,word,pairwise,gpt52,84.64,89.02,96.76,89.02
+one turn conversation,mediq_askdocs,jargon_overloading,word,pairwise,vllmserve_biomistral_7b,51.31,49.35,98.66,49.35
+one turn conversation,mediq_askdocs,jargon_overloading,word,pairwise,vllmserve_medgemma_4b,70.76,70.22,99.52,70.22
 one turn conversation,mediq_askdocs,jargon_overloading,word,pairwise,vllmserve_prometheus2_7b,63.65,60.75,88.65,60.75
+one turn conversation,mediq_askdocs,language_fluency,word,pairwise,gpt52,84.64,83.33,96.64,83.33
+one turn conversation,mediq_askdocs,language_fluency,word,pairwise,vllmserve_biomistral_7b,51.31,49.72,98.49,49.72
+one turn conversation,mediq_askdocs,language_fluency,word,pairwise,vllmserve_medgemma_4b,70.59,71.50,99.66,71.50
+one turn conversation,mediq_askdocs,plain_language,word,pairwise,gpt52,84.64,84.30,96.36,84.30
+one turn conversation,mediq_askdocs,plain_language,word,pairwise,vllmserve_biomistral_7b,51.31,50.48,98.83,50.48
+one turn conversation,mediq_askdocs,plain_language,word,pairwise,vllmserve_medgemma_4b,70.48,71.56,99.66,71.56
+multi-turn conversation,medval_bench,authority_style,word,pairwise,gpt52,43.26,43.26,95.92,43.26
+multi-turn conversation,medval_bench,authority_style,word,pairwise,vllmserve_biomistral_7b,37.00,37.76,97.91,37.76
+multi-turn conversation,medval_bench,authority_style,word,pairwise,vllmserve_medgemma_4b,33.59,31.78,99.53,31.78
+multi-turn conversation,medval_bench,clinical_formatting,word,pairwise,gpt52,43.26,40.99,97.91,40.99
+multi-turn conversation,medval_bench,clinical_formatting,word,pairwise,vllmserve_biomistral_7b,37.00,38.61,98.29,38.61
+multi-turn conversation,medval_bench,clinical_formatting,word,pairwise,vllmserve_medgemma_4b,33.59,24.19,99.24,24.19
+multi-turn conversation,medval_bench,empathy_tone,word,pairwise,gpt52,43.26,46.77,96.96,46.77
+multi-turn conversation,medval_bench,empathy_tone,word,pairwise,vllmserve_biomistral_7b,37.00,38.61,98.67,38.61
+multi-turn conversation,medval_bench,empathy_tone,word,pairwise,vllmserve_medgemma_4b,33.59,32.07,99.24,32.07
+multi-turn conversation,medval_bench,fake_citation,word,pairwise,gpt52,43.26,85.20,96.49,85.20
+multi-turn conversation,medval_bench,fake_citation,word,pairwise,vllmserve_biomistral_7b,37.00,41.65,99.24,41.65
+multi-turn conversation,medval_bench,fake_citation,word,pairwise,vllmserve_medgemma_4b,33.59,32.16,99.43,32.16
+multi-turn conversation,medval_bench,jargon_overloading,word,pairwise,gpt52,43.26,51.33,96.96,51.33
+multi-turn conversation,medval_bench,jargon_overloading,word,pairwise,vllmserve_biomistral_7b,37.00,40.13,98.20,40.13
+multi-turn conversation,medval_bench,jargon_overloading,word,pairwise,vllmserve_medgemma_4b,33.97,27.80,99.62,27.80
+multi-turn conversation,medval_bench,language_fluency,word,pairwise,gpt52,43.26,45.54,96.30,45.54
+multi-turn conversation,medval_bench,language_fluency,word,pairwise,vllmserve_biomistral_7b,37.00,37.95,97.91,37.95
+multi-turn conversation,medval_bench,language_fluency,word,pairwise,vllmserve_medgemma_4b,33.59,37.19,99.34,37.19
+multi-turn conversation,medval_bench,plain_language,word,pairwise,gpt52,43.26,50.09,96.58,50.09
+multi-turn conversation,medval_bench,plain_language,word,pairwise,vllmserve_biomistral_7b,37.00,39.94,98.48,39.94
+multi-turn conversation,medval_bench,plain_language,word,pairwise,vllmserve_medgemma_4b,33.59,37.00,99.62,37.00

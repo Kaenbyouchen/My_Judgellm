@@ -1,0 +1,84 @@
+{
+  "accuracy_original": {
+    "accuracy": 0.7258064516129032,
+    "proxy": false,
+    "has_gt": true,
+    "gt_count": 248,
+    "total": 400,
+    "valid_count": 248,
+    "invalid_count": 152,
+    "correct": 180,
+    "answer_1_wins": 105,
+    "answer_2_wins": 143,
+    "ties": 0,
+    "metadata": {
+      "note": "Accuracy based on judge winner matching preferred label",
+      "invalid_excluded": true
+    }
+  },
+  "accuracy_biased": {
+    "accuracy_biased": 0.0,
+    "position_A_gt": {
+      "rate": 0.0,
+      "wins": 0,
+      "ties": 0,
+      "total": 400,
+      "valid_count": 0,
+      "invalid_count": 400
+    },
+    "position_B_gt": {
+      "rate": 0.0,
+      "wins": 0,
+      "ties": 0,
+      "total": 0,
+      "valid_count": 0,
+      "invalid_count": 0
+    },
+    "metadata": {
+      "note": "Average biased accuracy across GT@A and GT@B evaluations",
+      "position_debias_pairwise": true
+    }
+  },
+  "rr": {
+    "rr": 0.0,
+    "rr_gt_at_A": 0.0,
+    "rr_gt_at_B": 0.0,
+    "position_A_gt": {
+      "rate": 0.0,
+      "wins": 0,
+      "ties": 0,
+      "total": 400,
+      "valid_count": 0,
+      "invalid_count": 400
+    },
+    "position_B_gt": {
+      "rate": 0.0,
+      "wins": 0,
+      "ties": 0,
+      "total": 0,
+      "valid_count": 0,
+      "invalid_count": 0
+    },
+    "metadata": {
+      "note": "RR averaged across GT@A and GT@B to reduce position bias",
+      "position_debias_pairwise": true
+    }
+  },
+  "cr": {
+    "cr": 0.0,
+    "method": "consistency",
+    "total": 0,
+    "metadata": {
+      "note": "CR not computed: missing position-debias rounds"
+    }
+  },
+  "metadata": {
+    "injection_target_audit": {
+      "inject_to": "non_gt",
+      "target_changed_count": 0,
+      "target_unchanged_count": 0,
+      "total_samples": 400,
+      "request_batch_size": 8
+    }
+  }
+}

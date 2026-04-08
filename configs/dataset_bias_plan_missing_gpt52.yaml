@@ -1,0 +1,7 @@
+dataset_biases:
+  medical_eval_sphere:
+    dataset_category: "multi-choice qa"
+    biases: ["language_fluency"]
+  mediq_askdocs:
+    dataset_category: "one turn conversation"
+    biases: ["clinical_formatting", "empathy_tone"]

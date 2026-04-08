@@ -9,6 +9,87 @@ from pathlib import Path
 from typing import Dict, Any, List
 from loguru import logger
 
+SUMMARY_CSV_FIELDS = [
+    "data type (category)",
+    "dataset",
+    "bias type",
+    "bias injection mode",
+    "data type (pairwise/scalar)",
+    "judge llm",
+    "acc",
+    "acc_biased",
+    "cr",
+    "rr",
+]
+
+
+def _normalize_summary_df(df: pd.DataFrame) -> pd.DataFrame:
+    """Normalize columns/order and fill missing cells for summary CSV."""
+    if df is None or df.empty:
+        return pd.DataFrame(columns=SUMMARY_CSV_FIELDS)
+
+    # Ensure all required columns exist.
+    for col in SUMMARY_CSV_FIELDS:
+        if col not in df.columns:
+            df[col] = ""
+
+    # Keep only known columns in stable order.
+    df = df[SUMMARY_CSV_FIELDS].copy()
+
+    # Normalize text fields.
+    for col in [
+        "data type (category)",
+        "dataset",
+        "bias type",
+        "bias injection mode",
+        "data type (pairwise/scalar)",
+        "judge llm",
+    ]:
+        df[col] = df[col].fillna("").astype(str).str.strip()
+
+    # Fill missing acc by dataset + judge model group.
+    # We reuse the known original-accuracy value from any row in the same group.
+    df["acc"] = df["acc"].fillna("").astype(str).str.strip()
+    acc_ref = (
+        df[df["acc"] != ""]
+        .drop_duplicates(subset=["dataset", "judge llm"], keep="first")
+        .set_index(["dataset", "judge llm"])["acc"]
+        .to_dict()
+    )
+
+    def _fill_acc(row):
+        if row["acc"]:
+            return row["acc"]
+        return acc_ref.get((row["dataset"], row["judge llm"]), "")
+
+    df["acc"] = df.apply(_fill_acc, axis=1)
+
+    # Final sort order for reporting readability:
+    # dataset -> bias -> model (then mode/category/data_type as tie-breakers).
+    # Also de-duplicate same evaluation key, keeping the latest appended row.
+    dedup_key = [
+        "dataset",
+        "bias type",
+        "bias injection mode",
+        "data type (pairwise/scalar)",
+        "judge llm",
+    ]
+    df = df.drop_duplicates(subset=dedup_key, keep="last")
+
+    df = df.sort_values(
+        by=[
+            "dataset",
+            "bias type",
+            "judge llm",
+            "bias injection mode",
+            "data type (category)",
+            "data type (pairwise/scalar)",
+        ],
+        kind="stable",
+    ).reset_index(drop=True)
+
+    return df
+
 
 def save_metrics_json(metrics: Dict[str, Any], output_path: str):
     """
@@ -177,27 +258,35 @@ def append_summary_csv(record: Dict[str, Any], output_path: str):
         "rr": _fmt_metric(metrics.get("rr")),
     }
 
-    fieldnames = [
-        "data type (category)",
-        "dataset",
-        "bias type",
-        "bias injection mode",
-        "data type (pairwise/scalar)",
-        "judge llm",
-        "acc",
-        "acc_biased",
-        "cr",
-        "rr",
-    ]
+    # Load existing rows (if any), append new row, then normalize:
+    # - fill missing acc in same dataset+judge group
+    # - keep sorted order by dataset -> bias -> model
+    if output_path.exists() and output_path.stat().st_size > 0:
+        existing_df = pd.read_csv(output_path, dtype=str, keep_default_na=False)
+    else:
+        existing_df = pd.DataFrame(columns=SUMMARY_CSV_FIELDS)
 
-    file_exists = output_path.exists() and output_path.stat().st_size > 0
-    with open(output_path, "a", encoding="utf-8", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        if not file_exists:
-            writer.writeheader()
-        writer.writerow(row)
+    merged_df = pd.concat([existing_df, pd.DataFrame([row])], ignore_index=True)
+    merged_df = _normalize_summary_df(merged_df)
+    merged_df.to_csv(output_path, index=False, encoding="utf-8")
+
+    # Explicit fsync for robustness (align with JSONL append behavior).
+    with open(output_path, "r+", encoding="utf-8") as f:
         f.flush()
         os.fsync(f.fileno())
+
+
+def rewrite_summary_csv(output_path: str) -> None:
+    """
+    Rewrite existing summary CSV with normalized order and filled acc.
+    Safe no-op if file does not exist.
+    """
+    output_path = Path(output_path)
+    if not output_path.exists() or output_path.stat().st_size == 0:
+        return
+    df = pd.read_csv(output_path, dtype=str, keep_default_na=False)
+    df = _normalize_summary_df(df)
+    df.to_csv(output_path, index=False, encoding="utf-8")
 
 
 def save_judgments_jsonl(judgments: List[Dict[str, Any]], output_path: str, append: bool = False):

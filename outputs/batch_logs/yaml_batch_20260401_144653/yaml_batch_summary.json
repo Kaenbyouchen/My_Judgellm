@@ -1,0 +1,68 @@
+{
+  "batch_config": "/Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/configs/batch_eval_gpt52_missing.yaml",
+  "datasets": [
+    "medical_eval_sphere",
+    "mediq_askdocs"
+  ],
+  "judge_models": [
+    "gpt52"
+  ],
+  "injector_models": [
+    "gpt52"
+  ],
+  "total_planned": 3,
+  "executed": 3,
+  "success": 2,
+  "failed": 1,
+  "interrupted": 0,
+  "dry_run": 0,
+  "skipped_existing_eval": 0,
+  "results": [
+    {
+      "index": 1,
+      "dataset": "medical_eval_sphere",
+      "dataset_category": "multi-choice qa",
+      "judge_model": "gpt52",
+      "injector_model": "gpt52",
+      "bias": "language_fluency",
+      "mode": "word",
+      "status": "success",
+      "error": null,
+      "config_path": "/Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/outputs/batch_logs/yaml_batch_20260401_144653/generated_configs/001_medical_eval_sphere_gpt52_gpt52_language_fluency_word.yaml",
+      "start_time": "2026-04-01T14:46:53.965547",
+      "end_time": "2026-04-01T14:54:33.809984",
+      "compute_original_acc": true
+    },
+    {
+      "index": 2,
+      "dataset": "mediq_askdocs",
+      "dataset_category": "one turn conversation",
+      "judge_model": "gpt52",
+      "injector_model": "gpt52",
+      "bias": "clinical_formatting",
+      "mode": "word",
+      "status": "success",
+      "error": null,
+      "config_path": "/Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/outputs/batch_logs/yaml_batch_20260401_144653/generated_configs/002_mediq_askdocs_gpt52_gpt52_clinical_formatting_word.yaml",
+      "start_time": "2026-04-01T14:54:33.810281",
+      "end_time": "2026-04-01T15:28:17.123717",
+      "compute_original_acc": true
+    },
+    {
+      "index": 3,
+      "dataset": "mediq_askdocs",
+      "dataset_category": "one turn conversation",
+      "judge_model": "gpt52",
+      "injector_model": "gpt52",
+      "bias": "empathy_tone",
+      "mode": "word",
+      "status": "failed",
+      "error": "Connection error.",
+      "config_path": "/Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/outputs/batch_logs/yaml_batch_20260401_144653/generated_configs/003_mediq_askdocs_gpt52_gpt52_empathy_tone_word.yaml",
+      "start_time": "2026-04-01T15:28:17.123851",
+      "end_time": "2026-04-01T16:17:45.071554",
+      "compute_original_acc": false,
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/weisu/miniforge3/lib/python3.12/site-packages/httpx/_transports/default.py\", line 101, in map_httpcore_exceptions\n    yield\n  File \"/Users/weisu/miniforge3/lib/python3.12/site-packages/httpx/_transports/default.py\", line 250, in handle_request\n    resp = self._pool.handle_request(req)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/weisu/miniforge3/lib/python3.12/site-packages/httpcore/_sync/connection_pool.py\", line 256, in handle_request\n    raise exc from None\n  File \"/Users/weisu/miniforge3/lib/python3.12/site-packages/httpcore/_sync/connection_pool.py\", line 236, in handle_request\n    response = connection.handle_request(\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/weisu/miniforge3/lib/python3.12/site-packages/httpcore/_sync/connection.py\", line 103, in handle_request\n    return self._connection.handle_request(request)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/weisu/miniforge3/lib/python3.12/site-packages/httpcore/_sync/http11.py\", line 136, in handle_request\n    raise exc\n  File \"/Users/weisu/miniforge3/lib/python3.12/site-packages/httpcore/_sync/http11.py\", line 106, in handle_request\n    ) = self._receive_response_headers(**kwargs)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/weisu/miniforge3/lib/python3.12/site-packages/httpcore/_sync/http11.py\", line 177, in _receive_response_headers\n    event = self._receive_event(timeout=timeout)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/weisu/miniforge3/lib/python3.12/site-packages/httpcore/_sync/http11.py\", line 231, in _receive_event\n    raise RemoteProtocolError(msg)\nhttpcore.RemoteProtocolError: Server disconnected without sending a response.\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/Users/weisu/miniforge3/lib/python3.12/site-packages/openai/_base_client.py\", line 982, in request\n    response = self._client.send(\n               ^^^^^^^^^^^^^^^^^^\n  File \"/Users/weisu/miniforge3/lib/python3.12/site-packages/httpx/_client.py\", line 914, in send\n    response = self._send_handling_auth(\n               ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/weisu/miniforge3/lib/python3.12/site-packages/httpx/_client.py\", line 942, in _send_handling_auth\n    response = self._send_handling_redirects(\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/weisu/miniforge3/lib/python3.12/site-packages/httpx/_client.py\", line 979, in _send_handling_redirects\n    response = self._send_single_request(request)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/weisu/miniforge3/lib/python3.12/site-packages/httpx/_client.py\", line 1014, in _send_single_request\n    response = transport.handle_request(request)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/weisu/miniforge3/lib/python3.12/site-packages/httpx/_transports/default.py\", line 249, in handle_request\n    with map_httpcore_exceptions():\n         ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/weisu/miniforge3/lib/python3.12/contextlib.py\", line 158, in __exit__\n    self.gen.throw(value)\n  File \"/Users/weisu/miniforge3/lib/python3.12/site-packages/httpx/_transports/default.py\", line 118, in map_httpcore_exceptions\n    raise mapped_exc(message) from exc\nhttpx.RemoteProtocolError: Server disconnected without sending a response.\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/scripts/run_batch_from_yaml.py\", line 596, in main\n    run_output = run_single_experiment()\n                 ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/src/main.py\", line 459, in main\n    results = run_pairwise_evaluation(\n              ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/src/pipeline/run_pairwise.py\", line 507, in run_pairwise_evaluation\n    judged_batch = [f.result() for f in futures]\n                    ^^^^^^^^^^\n  File \"/Users/weisu/miniforge3/lib/python3.12/concurrent/futures/_base.py\", line 449, in result\n    return self.__get_result()\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/Users/weisu/miniforge3/lib/python3.12/concurrent/futures/_base.py\", line 401, in __get_result\n    raise self._exception\n  File \"/Users/weisu/miniforge3/lib/python3.12/concurrent/futures/thread.py\", line 59, in run\n    result = self.fn(*self.args, **self.kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/src/pipeline/run_pairwise.py\", line 479, in _judge_one\n    judgment_posA_round2 = judge.judge_pairwise(\n                           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/src/judge/judge_runner.py\", line 169, in judge_pairwise\n    response = self.model.generate(user_prompt, system_prompt=system_prompt)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/src/models/openai_client.py\", line 214, in generate\n    response = _chat_completion(messages)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/src/models/openai_client.py\", line 211, in _chat_completion\n    return self._openai_client.chat.completions.create(**create_kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/weisu/miniforge3/lib/python3.12/site-packages/openai/_utils/_utils.py\", line 286, in wrapper\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/weisu/miniforge3/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py\", line 1192, in create\n    return self._post(\n           ^^^^^^^^^^^\n  File \"/Users/weisu/miniforge3/lib/python3.12/site-packages/openai/_base_client.py\", line 1259, in post\n    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/weisu/miniforge3/lib/python3.12/site-packages/openai/_base_client.py\", line 1014, in request\n    raise APIConnectionError(request=request) from err\nopenai.APIConnectionError: Connection error.\n"
+    }
+  ]
+}

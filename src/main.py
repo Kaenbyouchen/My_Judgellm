@@ -520,9 +520,32 @@ def main():
             "cr": metrics.get("cr", {}).get("cr"),
         },
     }
+    # Quality gate: detect runs where metrics are unreliable due to high error rate.
+    # Check invalid_count from original and biased accuracy metrics.
+    metrics_unreliable = False
+    for metric_key in ("accuracy_original", "accuracy_biased"):
+        m = metrics.get(metric_key, {})
+        valid_count = m.get("valid_count", m.get("position_A_gt", {}).get("valid_count"))
+        invalid_count = m.get("invalid_count", m.get("position_A_gt", {}).get("invalid_count"))
+        if valid_count is not None and invalid_count is not None:
+            total = valid_count + invalid_count
+            if total > 0 and invalid_count / total > 0.5:
+                metrics_unreliable = True
+                logger.error(
+                    f"Quality gate FAILED for {metric_key}: "
+                    f"{invalid_count}/{total} judgments are invalid (>{50}%). "
+                    "This run will NOT be written to results_summary."
+                )
+
     if interrupted:
         logger.warning(
             "Run interrupted; skip appending results_summary.* to avoid treating partial run as completed."
+        )
+    elif metrics_unreliable:
+        logger.error(
+            "Run completed but metrics are unreliable (high error rate). "
+            "Skipping results_summary.* to avoid polluting aggregate results. "
+            "Check API quota / model availability and rerun."
         )
     else:
         summary_path = base_output_dir / "results_summary.jsonl"
