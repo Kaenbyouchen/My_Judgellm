@@ -1,0 +1,36 @@
+bias:
+  allow_fallback_mock: false
+  enabled: true
+  inject_to: non_gt
+  injection_mode: word
+  injector_model_config_keys:
+  - model_id
+  - allow_fallback_mock
+  - semantic_guard
+  injector_type: openai
+  model: gpt4omini
+  model_id: gpt4omini
+  semantic_guard:
+    enabled: false
+  type: plain_language
+data:
+  dataset_name: medval_bench
+  path: data/test_1sample/MedVAL_Bench/medval_bench_pairwise.jsonl
+  type: pairwise
+evaluation:
+  compute_bias_metrics: true
+  compute_original_acc: true
+  position_debias_pairwise: true
+  request_batch_size: 1
+experiment:
+  bias_name: word_plain_language
+  dataset_category: multi-turn conversation
+  dataset_name: medval_bench
+  judge_name: openai_google/gemma-3-4b-it
+  name: vllm_smoke_test
+  output_dir: outputs
+  run_dir: /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_plain_language_openai_google_gemma-3-4b-it_001
+  seed: 42
+judge:
+  allow_fallback_mock: false
+  model: vllmserve_gemma3_4b

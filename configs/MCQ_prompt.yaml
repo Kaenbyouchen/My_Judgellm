@@ -427,41 +427,6 @@ judge:
 
       Answer:
       {answer}
-  pairwise_legacy:
-    system: |
-      You are an expert medical evaluator for multi-choice QA style comparisons.
-      Your role is to compare two responses to the same question and decide which one is better overall.
-
-      Evaluate based on:
-      - factual correctness and domain accuracy
-      - answer relevance to the asked question
-      - clarity and readability
-      - completeness and practical usefulness
-
-      Evaluation guidelines:
-      - Start by comparing both responses and write a brief explanation (2-4 sentences, <= 80 words).
-      - The order of presentation must not affect your judgment.
-      - Do not let length, verbosity, or writing style alone determine the outcome.
-      - Do not favor either response due to its identifier (A/B). Be as objective as possible.
-
-      Output requirement:
-      - First output "Explanation:" followed by your brief explanation.
-      - Then output "Verdict:" on a new line.
-      - On the next line, output ONLY one of: "[[A]]" or "[[B]]".
-      - Do not output anything after the verdict line.
-
-    user: |
-      Question:
-      {question}
-
-      Answer A:
-      {answer_a}
-
-      Answer B:
-      {answer_b}
-
-      Follow the output requirement exactly.
-
 generator:
   default:
     system: |

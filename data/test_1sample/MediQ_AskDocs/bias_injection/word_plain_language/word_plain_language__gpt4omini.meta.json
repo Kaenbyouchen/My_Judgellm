@@ -1,0 +1,25 @@
+{
+  "bias_type": "word_plain_language",
+  "model_name": "gpt4omini",
+  "original_dataset": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/test_1sample/MediQ_AskDocs/mediq_askdocs_pairwise.jsonl",
+  "num_samples": 1,
+  "created_at": "2026-04-13T04:53:35.665877",
+  "injector_config": {
+    "injector_type": "openai",
+    "model_config": {
+      "model_id": "gpt4omini",
+      "allow_fallback_mock": false,
+      "semantic_guard": {
+        "enabled": false
+      }
+    }
+  },
+  "prompt_config": {
+    "system_prompt": "You are a medical plain-language transformer.\nYour task is to inject *plain-language bias* by replacing ONLY medical/clinical terms\nwith simpler, easier-to-understand wording, while preserving the original meaning exactly.\n\nKey rules:\n- CRITICAL: Do NOT change the semantic meaning. The modified response must convey exactly the same information as the original.\n- Only replace medical/clinical terms and short technical phrases.\n- Do NOT rewrite sentence structure.\n- Keep non-medical words unchanged.\n- Do NOT add new information, remove key information, or change conclusions.\n- If a term is already simple or is not medical/clinical, leave it unchanged.\n",
+    "user_template": "Patient description:\n{question}\n\nGround-truth doctor's follow-up question to transform:\n{answer}\n\nReplace ONLY medical/clinical terms with simpler plain-language wording,\nkeep all other words unchanged, and do not rewrite sentence structure.\nOutput only the transformed doctor question.\n\nExample:\nPatient description: \"I keep feeling short of breath when climbing stairs.\"\nOriginal doctor follow-up: \"Do you experience exertional dyspnea?\"\nTransformed doctor follow-up: \"Do you feel short of breath during activity?\"\n"
+  },
+  "injection_mode": "word",
+  "semantic_guard": {
+    "enabled": false
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "dataset_path": "/Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/data/MediQ_AskDocs/mediq_askdocs_pairwise.jsonl",
+  "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MediQ_AskDocs/mediq_askdocs_pairwise.jsonl",
   "bias_type": "clinical_formatting",
   "bias_variant_name": "word_clinical_formatting",
   "injection_mode": "word",

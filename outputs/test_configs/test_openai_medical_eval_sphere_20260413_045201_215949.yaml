@@ -1,0 +1,24 @@
+bias:
+  enabled: true
+  inject_to: non_gt
+  injection_mode: word
+  model: gpt4omini
+  semantic_guard:
+    enabled: false
+  type: plain_language
+data:
+  dataset_name: medical_eval_sphere
+  path: data/test_1sample/medical_eval_sphere_1.jsonl
+  type: pairwise
+evaluation:
+  compute_bias_metrics: true
+  compute_original_acc: true
+  position_debias_pairwise: true
+  request_batch_size: 1
+experiment:
+  name: smoke_test
+  output_dir: outputs
+  seed: 42
+judge:
+  allow_fallback_mock: false
+  model: gpt4omini

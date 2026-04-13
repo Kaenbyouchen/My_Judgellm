@@ -1,0 +1,19 @@
+{
+  "accuracy_original": {
+    "accuracy": 1.0,
+    "proxy": false,
+    "has_gt": true,
+    "gt_count": 1,
+    "total": 1,
+    "valid_count": 1,
+    "invalid_count": 0,
+    "correct": 1,
+    "answer_1_wins": 0,
+    "answer_2_wins": 1,
+    "ties": 0,
+    "metadata": {
+      "note": "Accuracy based on judge winner matching preferred label",
+      "invalid_excluded": true
+    }
+  }
+}

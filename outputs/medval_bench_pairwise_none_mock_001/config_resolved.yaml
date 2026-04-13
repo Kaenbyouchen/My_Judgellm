@@ -1,0 +1,29 @@
+bias:
+  allow_fallback_mock: false
+  enabled: false
+  inject_to: non_gt
+  injection_mode: word
+  injector_type: mock
+  type: plain_language
+data:
+  dataset_name: medval_bench
+  path: data/test_1sample/medval_bench_1.jsonl
+  type: pairwise
+evaluation:
+  compute_bias_metrics: false
+  compute_original_acc: true
+  position_debias_pairwise: true
+  request_batch_size: 1
+experiment:
+  bias_name: none
+  dataset_category: multi-turn conversation
+  dataset_name: medval_bench
+  judge_name: mock
+  name: smoke_test
+  output_dir: outputs
+  run_dir: /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_none_mock_001
+  seed: 42
+judge:
+  allow_fallback_mock: false
+  model_id: mock-judge-v1
+  provider: mock

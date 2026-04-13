@@ -1,0 +1,46 @@
+2026-04-13 04:48:54 | INFO     | src.main:main:382 - ============================================================
+2026-04-13 04:48:54 | INFO     | src.main:main:383 - Judge Configuration Details
+2026-04-13 04:48:54 | INFO     | src.main:main:384 - ============================================================
+2026-04-13 04:48:54 | INFO     | src.main:main:385 -   Provider/Type: mock
+2026-04-13 04:48:54 | INFO     | src.main:main:386 -   Model ID/Name: mock-judge-v1
+2026-04-13 04:48:54 | INFO     | src.main:main:387 -   Models Config Available: True
+2026-04-13 04:48:54 | INFO     | src.main:main:388 -   Provider in Models Config: True
+2026-04-13 04:48:54 | INFO     | src.main:main:392 -   Provider Config Keys: ['defaults', 'mock-judge-v1']
+2026-04-13 04:48:54 | INFO     | src.main:main:393 -   Bias injector_type: mock (allow_fallback_mock=False)
+2026-04-13 04:48:54 | INFO     | src.main:main:405 -   Judge prompt source: /project2/ruishanl_1185/zrui6736/My_Judgellm/configs/one_turn_con_prompt.yaml (judge.pairwise)
+2026-04-13 04:48:54 | INFO     | src.main:main:406 -   API Key Env: N/A
+2026-04-13 04:48:54 | INFO     | src.main:main:411 -   API Key Available: True
+2026-04-13 04:48:54 | INFO     | src.main:main:412 -   Resolved Model Name: mock-judge-v1
+2026-04-13 04:48:54 | INFO     | src.main:main:413 -   Model Config Keys: ['enabled', 'deterministic', 'model_name', 'allow_fallback_mock']
+2026-04-13 04:48:54 | INFO     | src.main:main:414 - ============================================================
+2026-04-13 04:48:54 | INFO     | src.main:main:416 - ============================================================
+2026-04-13 04:48:54 | INFO     | src.main:main:417 - JudgeLLM Medical Bias Evaluation
+2026-04-13 04:48:54 | INFO     | src.main:main:418 - ============================================================
+2026-04-13 04:48:54 | INFO     | src.main:main:419 - Project root: /project2/ruishanl_1185/zrui6736/My_Judgellm
+2026-04-13 04:48:54 | INFO     | src.main:main:420 - Configuration: /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/test_configs/test_mock_counselbench_20260413_044854_601135.yaml
+2026-04-13 04:48:54 | INFO     | src.main:main:421 - Run directory: /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/counselbench_pairwise_none_mock_001
+2026-04-13 04:48:54 | INFO     | src.main:main:422 - Dataset category: one turn conversation
+2026-04-13 04:48:54 | INFO     | src.main:main:448 - Saved resolved config to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/counselbench_pairwise_none_mock_001/config_resolved.yaml
+2026-04-13 04:48:54 | INFO     | src.utils.reproducibility:set_seed:38 - Random seed set to 42
+2026-04-13 04:48:54 | INFO     | src.main:main:458 - Running pairwise evaluation pipeline
+2026-04-13 04:48:54 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:112 - Starting pairwise evaluation pipeline
+2026-04-13 04:48:54 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:117 - Pairwise protocol: inject_to=non_gt, position_debias_pairwise=True, compute_original_acc=True, compute_bias_metrics=False, request_batch_size=1
+2026-04-13 04:48:54 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:144 - Loading data from /project2/ruishanl_1185/zrui6736/My_Judgellm/data/test_1sample/counselbench_1.jsonl
+2026-04-13 04:48:54 | INFO     | src.dataset.loaders:load_pairwise_jsonl:85 - Loaded 1 pairwise samples from /project2/ruishanl_1185/zrui6736/My_Judgellm/data/test_1sample/counselbench_1.jsonl
+2026-04-13 04:48:54 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:153 - Loaded 1 samples
+2026-04-13 04:48:54 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:154 - GT coverage: 100.00% (1 with GT, 0 without)
+2026-04-13 04:48:54 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:173 - Initializing judge: type=mock, model=mock-judge-v1
+2026-04-13 04:48:54 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:208 - Evaluating original R1 vs R2...
+2026-04-13 04:48:54 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:684 - Computing accuracy on original R1 vs R2...
+2026-04-13 04:48:54 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:858 - Original judgments saved incrementally to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/counselbench_pairwise_none_mock_001/judge_raw_original.jsonl (1 total)
+2026-04-13 04:48:54 | INFO     | src.metrics.reports:save_judgments_jsonl:313 - Judgments saved to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/counselbench_pairwise_none_mock_001/judge_raw.jsonl (1 judgments)
+2026-04-13 04:48:54 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:883 - All judgments saved to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/counselbench_pairwise_none_mock_001/judge_raw.jsonl
+2026-04-13 04:48:54 | INFO     | src.metrics.reports:save_metrics_json:108 - Metrics saved to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/counselbench_pairwise_none_mock_001/metrics.json
+2026-04-13 04:48:54 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:888 - Metrics saved to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/counselbench_pairwise_none_mock_001/metrics.json
+2026-04-13 04:48:54 | INFO     | src.metrics.reports:save_metrics_csv:174 - Metrics summary saved to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/counselbench_pairwise_none_mock_001/results.csv
+2026-04-13 04:48:54 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:892 - Metrics summary saved to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/counselbench_pairwise_none_mock_001/results.csv
+2026-04-13 04:48:54 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:906 - Pipeline completed successfully
+2026-04-13 04:48:54 | INFO     | src.main:main:590 - Evaluation completed successfully
+2026-04-13 04:48:54 | INFO     | src.main:main:136 - Bias config raw: {'enabled': False, 'inject_to': 'non_gt', 'injection_mode': 'word', 'type': 'plain_language'}
+2026-04-13 04:48:54 | INFO     | src.main:main:176 - No bias.model specified, using default 'mock' injector
+2026-04-13 04:48:54 | INFO     | src.utils.paths:get_run_dir:106 - Created run directory: /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_none_mock_001

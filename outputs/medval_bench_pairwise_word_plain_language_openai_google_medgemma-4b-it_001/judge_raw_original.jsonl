@@ -1,0 +1,16 @@
+{
+  "sample_id": "medval_report2impression_55_395",
+  "type": "original",
+  "question": "The heart and lungs have XXXX XXXX in the interval. Both lungs are clear and expanded. Heart and mediastinum normal.",
+  "answer_A": "No active disease.",
+  "answer_B": "Mild pulmonary infiltrates noted; recommend follow-up imaging.",
+  "preferred": "1",
+  "winner": "A",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer A is more concise and directly addresses the question.",
+  "raw": {
+    "model_response": "Explanation: Answer A is more concise and directly addresses the question.\nVerdict: [[A]]\n"
+  },
+  "is_valid": true
+}

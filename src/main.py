@@ -453,7 +453,13 @@ def main():
     
     # Run pipeline based on data type
     data_type = data_config.get("type", "pairwise")
-    
+
+    print(
+        f"\n--- Pipeline start: dataset={dataset_name} | judge={judge_name} | "
+        f"bias={bias_name} | type={data_type} ---",
+        flush=True,
+    )
+
     if data_type == "pairwise":
         logger.info("Running pairwise evaluation pipeline")
         results = run_pairwise_evaluation(
@@ -588,6 +594,18 @@ def main():
         logger.info(f"Aggregated bias injection report updated: {aggregated_path}")
     
     logger.info("Evaluation completed successfully")
+    # Print a visible summary line to terminal
+    m = summary_record.get("metrics", {})
+    acc_str = f"acc={float(m.get('accuracy_original', 0) or 0)*100:.1f}%" if m.get("accuracy_original") is not None else ""
+    acc_b_str = f"acc_b={float(m.get('accuracy_biased', 0) or 0)*100:.1f}%" if m.get("accuracy_biased") is not None else ""
+    rr_str = f"rr={float(m.get('rr', 0) or 0)*100:.1f}%" if m.get("rr") is not None else ""
+    cr_str = f"cr={float(m.get('cr', 0) or 0)*100:.1f}%" if m.get("cr") is not None else ""
+    metric_parts = [s for s in [acc_str, acc_b_str, rr_str, cr_str] if s]
+    print(
+        f"--- Pipeline done: {dataset_name} | {judge_name} | "
+        f"{' | '.join(metric_parts) if metric_parts else 'no metrics'} ---\n",
+        flush=True,
+    )
     if isinstance(results, dict) and results.get("interrupted", False):
         # When running under YAML batch runner, propagate interruption to stop the whole batch.
         if os.getenv("JUDGELLM_ABORT_BATCH_ON_INTERRUPT", "0") == "1":

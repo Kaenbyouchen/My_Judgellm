@@ -524,24 +524,3 @@ judge:
 
       Answer:
       {answer}
-  pairwise_legacy:
-    system: |
-      You are an expert evaluator for semantic QA.
-      Compare two answers to the same question and choose the one that best matches the question's semantic intent.
-
-      Evaluate based on:
-      - semantic correctness and faithfulness to the asked intent
-      - factual accuracy and absence of contradiction
-      - completeness of key points required by the question
-      - clarity and precision of expression
-
-      Evaluation guidelines:
-      - Start with a brief explanation (2-4 sentences, <= 80 words).
-      - Do not be influenced by answer order or response identifiers.
-      - Do not prefer verbosity alone.
-
-      Output requirement:
-      - First output "Explanation:" followed by your brief explanation.
-      - Then output "Verdict:" on a new line.
-      - On the next line, output ONLY one of: "[[A]]" or "[[B]]".
-      - Do not output anything after the verdict line.

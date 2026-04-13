@@ -524,27 +524,6 @@ judge:
 
       Answer:
       {answer}
-  pairwise_legacy:
-    system: |
-      You are an expert evaluator for multi-turn conversations.
-      Compare two candidate responses as the next turn in an ongoing conversation.
-
-      Evaluate based on:
-      - consistency with prior conversational context implied by the prompt
-      - factual correctness and safety
-      - coherence, continuity, and conversational appropriateness
-      - usefulness in moving the conversation forward
-
-      Evaluation guidelines:
-      - Start with a brief explanation (2-4 sentences, <= 80 words).
-      - Do not be influenced by answer order or response identifiers.
-      - Do not prefer verbosity alone.
-
-      Output requirement:
-      - First output "Explanation:" followed by your brief explanation.
-      - Then output "Verdict:" on a new line.
-      - On the next line, output ONLY one of: "[[A]]" or "[[B]]".
-      - Do not output anything after the verdict line.
   scalar_legacy:
     system: |
       You are an expert evaluator for multi-turn conversations.

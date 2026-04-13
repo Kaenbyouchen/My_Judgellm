@@ -16,6 +16,7 @@ import json
 import os
 import signal
 import sys
+import time
 import traceback
 from copy import deepcopy
 from datetime import datetime
@@ -499,6 +500,34 @@ def main():
     run_index = 0
     stop_now = False
     original_done_for_judge_dataset: Set[Tuple[str, str]] = set()
+    batch_start_time = time.time()
+    success_count = 0
+    failed_count = 0
+    skipped_count = 0
+
+    def _print_progress(idx: int, total: int, tag: str, status: str, elapsed_s: float = 0):
+        """Print a visible progress line to terminal."""
+        pct = idx / total * 100 if total > 0 else 0
+        bar_len = 30
+        filled = int(bar_len * idx / total) if total > 0 else 0
+        bar = "=" * filled + "-" * (bar_len - filled)
+        batch_elapsed = time.time() - batch_start_time
+        if idx > 0:
+            eta_s = batch_elapsed / idx * (total - idx)
+            eta_str = f"ETA {eta_s/60:.0f}m" if eta_s > 60 else f"ETA {eta_s:.0f}s"
+        else:
+            eta_str = "ETA --"
+        elapsed_str = f"{batch_elapsed/60:.1f}m" if batch_elapsed > 60 else f"{batch_elapsed:.0f}s"
+        print(
+            f"\r[{bar}] {idx}/{total} ({pct:.0f}%) | "
+            f"{status} | elapsed {elapsed_str} {eta_str}",
+            flush=True,
+        )
+
+    print(f"\n{'=' * 72}")
+    print(f"  BATCH PROGRESS: {total_combo_count} total runs planned")
+    print(f"{'=' * 72}")
+
     for judge_model in judge_models:
         for injector_spec in injector_models:
             injector_model = judge_model if injector_spec == "same_as_judge" else injector_spec
@@ -517,6 +546,11 @@ def main():
                     run_index += 1
                     run_tag = f"{run_index:03d}_{ds_name}_{judge_model}_{injector_model}_{bias}_{mode}"
                     logger.info(f"[{run_index}/{total_combo_count}] {run_tag}")
+                    print(
+                        f"\n>>> [{run_index}/{total_combo_count}] "
+                        f"dataset={ds_name}  judge={judge_model}  bias={bias}({mode})",
+                        flush=True,
+                    )
 
                     result: Dict[str, Any] = {
                         "index": run_index,
@@ -532,6 +566,7 @@ def main():
                         "start_time": datetime.now().isoformat(),
                         "end_time": None,
                     }
+                    run_t0 = time.time()
 
                     try:
                         eval_key = _build_eval_key(
@@ -544,6 +579,9 @@ def main():
                         )
                         if skip_existing_evals and eval_key in completed_eval_keys:
                             result["status"] = "skipped_existing_eval"
+                            skipped_count += 1
+                            print(f"    SKIP (already completed)", flush=True)
+                            _print_progress(run_index, total_combo_count, run_tag, f"ok={success_count} fail={failed_count} skip={skipped_count}")
                             logger.info(
                                 f"Skip existing eval: dataset={ds_name}, bias={bias}, mode={mode}, "
                                 f"judge={judge_model}, injector={injector_model}, inject_to={effective_inject_to_default}"
@@ -610,6 +648,7 @@ def main():
                                 stop_now = True
                             else:
                                 result["status"] = "success"
+                                success_count += 1
                                 if compute_original_acc:
                                     original_done_for_judge_dataset.add((judge_model, ds_name))
                                 if skip_existing_evals:
@@ -623,6 +662,7 @@ def main():
                         result["status"] = "failed"
                         result["error"] = str(e)
                         result["traceback"] = traceback.format_exc()
+                        failed_count += 1
                         logger.error(f"Failed: {run_tag} | {e}")
                         if not continue_on_error:
                             results.append(result)
@@ -634,6 +674,11 @@ def main():
                         signal.signal(signal.SIGTERM, _signal_handler)
                         result["end_time"] = datetime.now().isoformat()
                         results.append(result)
+                        # Print progress to terminal
+                        run_elapsed = time.time() - run_t0
+                        status_icon = {"success": "OK", "failed": "FAIL", "interrupted": "INT", "dry_run": "DRY", "skipped_existing_eval": "SKIP"}.get(result["status"], "?")
+                        print(f"    {status_icon} ({run_elapsed:.1f}s)", flush=True)
+                        _print_progress(run_index, total_combo_count, run_tag, f"ok={success_count} fail={failed_count} skip={skipped_count}")
                     if stop_now:
                         break
                 if stop_now:
@@ -643,10 +688,26 @@ def main():
         if stop_now:
             break
 
+    total_elapsed = time.time() - batch_start_time
     success = sum(1 for r in results if r["status"] == "success")
     failed = sum(1 for r in results if r["status"] == "failed")
     dry = sum(1 for r in results if r["status"] == "dry_run")
     skipped = sum(1 for r in results if r["status"] == "skipped_existing_eval")
+
+    # Print final summary to terminal
+    elapsed_str = f"{total_elapsed/60:.1f}min" if total_elapsed > 60 else f"{total_elapsed:.0f}s"
+    print(f"\n{'=' * 72}")
+    print(f"  BATCH COMPLETE  |  Total time: {elapsed_str}")
+    print(f"  Success: {success}  |  Failed: {failed}  |  Skipped: {skipped}  |  Dry: {dry}")
+    print(f"{'=' * 72}\n")
+    if failed > 0:
+        print("  Failed runs:")
+        for r in results:
+            if r["status"] == "failed":
+                print(f"    - [{r['index']}] {r['dataset']} / {r['bias']}({r['mode']}) / {r['judge_model']}")
+                if r.get("error"):
+                    print(f"      Error: {str(r['error'])[:120]}")
+        print()
 
     summary = {
         "batch_config": str(batch_cfg_path),

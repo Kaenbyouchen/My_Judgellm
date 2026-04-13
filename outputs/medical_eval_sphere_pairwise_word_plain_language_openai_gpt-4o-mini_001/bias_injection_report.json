@@ -1,0 +1,50 @@
+{
+  "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/test_1sample/medical_eval_sphere_1.jsonl",
+  "bias_type": "plain_language",
+  "bias_variant_name": "word_plain_language",
+  "injection_mode": "word",
+  "inject_to": "non_gt",
+  "injector_type": "openai",
+  "injector_model_config": {
+    "model_id": "gpt4omini",
+    "allow_fallback_mock": false,
+    "semantic_guard": {
+      "enabled": false
+    }
+  },
+  "semantic_guard_config": {
+    "enabled": false
+  },
+  "report": {
+    "total_samples": 1,
+    "guard_enabled": false,
+    "max_attempts": 2,
+    "on_fail": "use_original",
+    "injection_effective_count": 1,
+    "injection_unchanged_count": 0,
+    "guard_failed_count": 0,
+    "failed_use_original_count": 0,
+    "failed_accept_last_count": 0,
+    "retries_total": 0,
+    "precheck_rejects_total": 0,
+    "reviewer_rejects_total": 0,
+    "top_reasons": {},
+    "samples": [
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": null,
+        "reviewer_last_confidence": null,
+        "reviewer_last_reasons": [],
+        "final_status": "accepted_no_guard",
+        "sample_id": "id_0001",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 316,
+        "final_length": 312
+      }
+    ]
+  }
+}

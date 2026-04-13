@@ -1,0 +1,20 @@
+batch:
+  base_experiment_config: configs/experiment.yaml
+  bias_injector_models:
+  - gpt52
+  continue_on_error: true
+  dataset_bias_plan: /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/batch_logs/auto_vllmserve_prometheus2_7b_20260412_234605/bias_plan.yaml
+  dataset_names:
+  - mediq_askdocs
+  - counselbench
+  - medval_bench
+  - medaesqa
+  dry_run: false
+  inject_to: non_gt
+  judge_models:
+  - vllmserve_prometheus2_7b
+  log_dir: /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/batch_logs/auto_vllmserve_prometheus2_7b_20260412_234605
+  modes:
+  - word
+  reuse_original_per_judge: true
+  skip_existing_evals: false

@@ -73,7 +73,7 @@ data:
   type: pairwise
 evaluation:
   compute_bias_metrics: true
-  compute_original_acc: false
+  compute_original_acc: true
   position_debias_pairwise: true
   request_batch_size: 8
 experiment:

@@ -1,5 +1,0 @@
-metric,value,proxy,has_gt,total,note,gt_wins,has_gt_labels,method
-accuracy_original,0.7275,False,True,400,Accuracy based on judge winner matching preferred label,,,
-rr,0.75625,,,0,RR averaged across GT@A and GT@B to reduce position bias,0.0,False,
-accuracy_biased,0.75625,,,0,Average biased accuracy across GT@A and GT@B evaluations,,False,
-cr,0.96,,,0,CR averaged across GT@A and GT@B evaluations,,,unknown

@@ -1,20 +1,37 @@
 {
+  "accuracy_original": {
+    "accuracy": 1.0,
+    "proxy": false,
+    "has_gt": true,
+    "gt_count": 1,
+    "total": 1,
+    "valid_count": 1,
+    "invalid_count": 0,
+    "correct": 1,
+    "answer_1_wins": 0,
+    "answer_2_wins": 1,
+    "ties": 0,
+    "metadata": {
+      "note": "Accuracy based on judge winner matching preferred label",
+      "invalid_excluded": true
+    }
+  },
   "accuracy_biased": {
-    "accuracy_biased": 0.8430034129692833,
+    "accuracy_biased": 1.0,
     "position_A_gt": {
-      "rate": 0.7861205915813424,
-      "wins": 1382,
+      "rate": 1.0,
+      "wins": 1,
       "ties": 0,
-      "total": 1758,
-      "valid_count": 1758,
+      "total": 1,
+      "valid_count": 1,
       "invalid_count": 0
     },
     "position_B_gt": {
-      "rate": 0.8998862343572241,
-      "wins": 1582,
+      "rate": 1.0,
+      "wins": 1,
       "ties": 0,
-      "total": 1758,
-      "valid_count": 1758,
+      "total": 1,
+      "valid_count": 1,
       "invalid_count": 0
     },
     "metadata": {
@@ -23,94 +40,39 @@
     }
   },
   "rr": {
-    "rr": 0.8430034129692833,
-    "rr_gt_at_A": 0.7861205915813424,
-    "rr_gt_at_B": 0.8998862343572241,
+    "rr": 1.0,
+    "rr_gt_at_A": 1.0,
+    "rr_gt_at_B": 1.0,
     "position_A_gt": {
-      "rate": 0.7861205915813424,
-      "wins": 1382,
-      "ties": 0,
-      "total": 1758,
-      "valid_count": 1758,
+      "rate": 1.0,
+      "same": 1,
+      "total_valid": 1,
       "invalid_count": 0
     },
     "position_B_gt": {
-      "rate": 0.8998862343572241,
-      "wins": 1582,
-      "ties": 0,
-      "total": 1758,
-      "valid_count": 1758,
+      "rate": 1.0,
+      "same": 1,
+      "total_valid": 1,
       "invalid_count": 0
     },
     "metadata": {
-      "note": "RR averaged across GT@A and GT@B to reduce position bias",
+      "note": "RR = proportion of samples where judge makes the same choice (GT/non-GT/tie) before and after bias injection, averaged across GT@A and GT@B to reduce position bias",
       "position_debias_pairwise": true
     }
   },
   "cr": {
-    "cr": 0.9635949943117179,
-    "cr_gt_at_A": 0.9488054607508533,
-    "cr_gt_at_B": 0.9783845278725825,
+    "cr": 1.0,
+    "cr_gt_at_A": 1.0,
+    "cr_gt_at_B": 1.0,
     "position_A_gt": {
-      "cr": 0.9488054607508533,
+      "cr": 1.0,
       "method": "consistency",
-      "total": 1758,
-      "valid_count": 1758,
+      "total": 1,
+      "valid_count": 1,
       "invalid_count": 0,
-      "consistent_count": 1668,
-      "inconsistent_count": 90,
-      "inconsistent_samples": [
-        {
-          "sample_index": 34,
-          "round1_winner": "B",
-          "round2_winner": "A"
-        },
-        {
-          "sample_index": 38,
-          "round1_winner": "A",
-          "round2_winner": "B"
-        },
-        {
-          "sample_index": 48,
-          "round1_winner": "B",
-          "round2_winner": "A"
-        },
-        {
-          "sample_index": 59,
-          "round1_winner": "A",
-          "round2_winner": "B"
-        },
-        {
-          "sample_index": 61,
-          "round1_winner": "A",
-          "round2_winner": "B"
-        },
-        {
-          "sample_index": 75,
-          "round1_winner": "A",
-          "round2_winner": "B"
-        },
-        {
-          "sample_index": 104,
-          "round1_winner": "A",
-          "round2_winner": "B"
-        },
-        {
-          "sample_index": 128,
-          "round1_winner": "A",
-          "round2_winner": "B"
-        },
-        {
-          "sample_index": 137,
-          "round1_winner": "A",
-          "round2_winner": "B"
-        },
-        {
-          "sample_index": 154,
-          "round1_winner": "A",
-          "round2_winner": "B"
-        }
-      ],
+      "consistent_count": 1,
+      "inconsistent_count": 0,
+      "inconsistent_samples": [],
       "metadata": {
         "note": "CR = proportion of samples with consistent judgment across two rounds",
         "definition": "For each sample, if round1 winner == round2 winner, CR=1; else CR=0. Final CR is the average.",
@@ -118,65 +80,14 @@
       }
     },
     "position_B_gt": {
-      "cr": 0.9783845278725825,
+      "cr": 1.0,
       "method": "consistency",
-      "total": 1758,
-      "valid_count": 1758,
+      "total": 1,
+      "valid_count": 1,
       "invalid_count": 0,
-      "consistent_count": 1720,
-      "inconsistent_count": 38,
-      "inconsistent_samples": [
-        {
-          "sample_index": 9,
-          "round1_winner": "A",
-          "round2_winner": "B"
-        },
-        {
-          "sample_index": 86,
-          "round1_winner": "B",
-          "round2_winner": "A"
-        },
-        {
-          "sample_index": 182,
-          "round1_winner": "B",
-          "round2_winner": "A"
-        },
-        {
-          "sample_index": 214,
-          "round1_winner": "A",
-          "round2_winner": "B"
-        },
-        {
-          "sample_index": 232,
-          "round1_winner": "A",
-          "round2_winner": "B"
-        },
-        {
-          "sample_index": 338,
-          "round1_winner": "A",
-          "round2_winner": "B"
-        },
-        {
-          "sample_index": 353,
-          "round1_winner": "A",
-          "round2_winner": "B"
-        },
-        {
-          "sample_index": 377,
-          "round1_winner": "B",
-          "round2_winner": "A"
-        },
-        {
-          "sample_index": 583,
-          "round1_winner": "B",
-          "round2_winner": "A"
-        },
-        {
-          "sample_index": 587,
-          "round1_winner": "A",
-          "round2_winner": "B"
-        }
-      ],
+      "consistent_count": 1,
+      "inconsistent_count": 0,
+      "inconsistent_samples": [],
       "metadata": {
         "note": "CR = proportion of samples with consistent judgment across two rounds",
         "definition": "For each sample, if round1 winner == round2 winner, CR=1; else CR=0. Final CR is the average.",
@@ -191,10 +102,10 @@
   "metadata": {
     "injection_target_audit": {
       "inject_to": "non_gt",
-      "target_changed_count": 1370,
-      "target_unchanged_count": 388,
-      "total_samples": 1758,
-      "request_batch_size": 8
+      "target_changed_count": 0,
+      "target_unchanged_count": 1,
+      "total_samples": 1,
+      "request_batch_size": 1
     }
   }
 }

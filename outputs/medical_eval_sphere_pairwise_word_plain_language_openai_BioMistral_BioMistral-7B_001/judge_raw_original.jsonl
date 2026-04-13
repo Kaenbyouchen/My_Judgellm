@@ -1,0 +1,16 @@
+{
+  "sample_id": "id_0001",
+  "type": "original",
+  "question": "Why was arsenic used to treat diseases?",
+  "answer_A": "Arsenic was used to treat diseases due to its antimicrobial and anti-inflammatory properties. It was also used to treat syphilis, a sexually transmitted disease. However, arsenic is now known to be a toxic substance that can cause various health problems, including cancer, heart disease, and neurological disorders.",
+  "answer_B": "Arsenic was used to treat diseases because it was believed to have medicinal properties and could be effective in treating certain conditions such as syphilis and intestinal worm infections. However, its use was later discontinued due to the high toxicity and potential harmful effects on the body. Today, arsenic is not used as a medication except in specific cases where other treatments have failed and under strict medical supervision.",
+  "preferred": "2",
+  "winner": "A",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer A provides more detailed information about the use of arsenic as a treatment for diseases, including its antimicrobial and anti-inflammatory properties, as well as its use in treating syphilis. Answer B also mentions the use of arsenic as a treatment for diseases, but it is less detailed and only states that it was believed to have medicinal properties and could be effective in treating certain conditions such as syphilis and intestinal worm infections.",
+  "raw": {
+    "model_response": " Explanation: Answer A provides more detailed information about the use of arsenic as a treatment for diseases, including its antimicrobial and anti-inflammatory properties, as well as its use in treating syphilis. Answer B also mentions the use of arsenic as a treatment for diseases, but it is less detailed and only states that it was believed to have medicinal properties and could be effective in treating certain conditions such as syphilis and intestinal worm infections."
+  },
+  "is_valid": true
+}

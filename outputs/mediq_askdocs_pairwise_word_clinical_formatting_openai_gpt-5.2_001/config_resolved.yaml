@@ -73,7 +73,7 @@ data:
   type: pairwise
 evaluation:
   compute_bias_metrics: true
-  compute_original_acc: false
+  compute_original_acc: true
   position_debias_pairwise: true
   request_batch_size: 8
 experiment:
@@ -83,7 +83,7 @@ experiment:
   judge_name: openai_gpt-5.2
   name: judge_llm_medical_bias_eval
   output_dir: outputs
-  run_dir: /Users/weisu/Ruishan_LLM/Ruishan_Judgellm_Ours/outputs/mediq_askdocs_pairwise_word_clinical_formatting_openai_gpt-5.2_001
+  run_dir: /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/mediq_askdocs_pairwise_word_clinical_formatting_openai_gpt-5.2_001
   seed: 42
 judge:
   allow_fallback_mock: false

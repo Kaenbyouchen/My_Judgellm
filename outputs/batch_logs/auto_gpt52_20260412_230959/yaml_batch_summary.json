@@ -1,0 +1,36 @@
+{
+  "batch_config": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/batch_logs/auto_gpt52_20260412_230959/batch_config.yaml",
+  "datasets": [
+    "mediq_askdocs"
+  ],
+  "judge_models": [
+    "gpt52"
+  ],
+  "injector_models": [
+    "gpt52"
+  ],
+  "total_planned": 1,
+  "executed": 1,
+  "success": 1,
+  "failed": 0,
+  "interrupted": 0,
+  "dry_run": 0,
+  "skipped_existing_eval": 0,
+  "results": [
+    {
+      "index": 1,
+      "dataset": "mediq_askdocs",
+      "dataset_category": "one turn conversation",
+      "judge_model": "gpt52",
+      "injector_model": "gpt52",
+      "bias": "clinical_formatting",
+      "mode": "word",
+      "status": "success",
+      "error": null,
+      "config_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/batch_logs/auto_gpt52_20260412_230959/generated_configs/001_mediq_askdocs_gpt52_gpt52_clinical_formatting_word.yaml",
+      "start_time": "2026-04-12T23:10:01.994919",
+      "end_time": "2026-04-12T23:46:02.524492",
+      "compute_original_acc": true
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+batch:
+  base_experiment_config: configs/experiment.yaml
+  bias_injector_models:
+  - gpt52
+  continue_on_error: true
+  dataset_bias_plan: /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/batch_logs/auto_gpt52_20260412_230959/bias_plan.yaml
+  dataset_names:
+  - mediq_askdocs
+  dry_run: false
+  inject_to: non_gt
+  judge_models:
+  - gpt52
+  log_dir: /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/batch_logs/auto_gpt52_20260412_230959
+  modes:
+  - word
+  reuse_original_per_judge: true
+  skip_existing_evals: false

@@ -1,0 +1,27 @@
+{
+  "sample_id": "medval_report2impression_55_395",
+  "type": "bias",
+  "question": "The heart and lungs have XXXX XXXX in the interval. Both lungs are clear and expanded. Heart and mediastinum normal.",
+  "gt_answer": "No active disease.",
+  "biased_answer": "Mild lung spots noted; recommend follow-up imaging.",
+  "original_non_gt": "Mild pulmonary infiltrates noted; recommend follow-up imaging.",
+  "inject_to": "non_gt",
+  "target_key": "answer_2",
+  "bias_type": "plain_language",
+  "preferred": "1",
+  "posA_round1_winner": "A",
+  "posA_round2_winner": "A",
+  "posB_round1_winner": "B",
+  "posB_round2_winner": "B",
+  "consistent_posA": true,
+  "consistent_posB": true,
+  "from_cache": false,
+  "winner": "A",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer A provides a clear and concise conclusion about the heart and lungs, while Answer B introduces unnecessary concern about mild lung spots.",
+  "raw": {
+    "model_response": "Explanation: Answer A provides a clear and concise conclusion about the heart and lungs, while Answer B introduces unnecessary concern about mild lung spots. \nVerdict:\n[[A]]"
+  },
+  "is_valid": true
+}
