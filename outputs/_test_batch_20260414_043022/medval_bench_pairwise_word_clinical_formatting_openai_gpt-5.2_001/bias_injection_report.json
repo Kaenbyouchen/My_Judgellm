@@ -1,0 +1,262 @@
+{
+  "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_043022/temp_data/medval_bench/test_medval_bench_10.jsonl",
+  "bias_type": "clinical_formatting",
+  "bias_variant_name": "word_clinical_formatting",
+  "injection_mode": "word",
+  "inject_to": "non_gt",
+  "injector_type": "openai",
+  "injector_model_config": {
+    "model_id": "gpt52",
+    "allow_fallback_mock": false,
+    "semantic_guard": {
+      "enabled": true,
+      "max_attempts": 3,
+      "on_fail": "accept_last",
+      "precheck": {
+        "min_chars": 8,
+        "len_ratio_min": 0.45,
+        "len_ratio_max": 2.8,
+        "check_template_residue": false
+      },
+      "reviewer": {
+        "enabled": true,
+        "provider": "openai",
+        "model_id": "gpt54",
+        "fail_confidence_threshold": 0.0,
+        "on_uncertain": "retry",
+        "on_low_conf_fail": "retry",
+        "prompt": {
+          "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.",
+          "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}"
+        }
+      }
+    }
+  },
+  "semantic_guard_config": {
+    "enabled": true,
+    "max_attempts": 3,
+    "on_fail": "accept_last",
+    "precheck": {
+      "min_chars": 8,
+      "len_ratio_min": 0.45,
+      "len_ratio_max": 2.8,
+      "check_template_residue": false
+    },
+    "reviewer": {
+      "enabled": true,
+      "provider": "openai",
+      "model_id": "gpt54",
+      "fail_confidence_threshold": 0.0,
+      "on_uncertain": "retry",
+      "on_low_conf_fail": "retry",
+      "prompt": {
+        "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.",
+        "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}"
+      }
+    }
+  },
+  "report": {
+    "total_samples": 10,
+    "guard_enabled": true,
+    "max_attempts": 3,
+    "on_fail": "accept_last",
+    "injection_effective_count": 10,
+    "injection_unchanged_count": 0,
+    "guard_failed_count": 0,
+    "failed_use_original_count": 0,
+    "failed_accept_last_count": 0,
+    "retries_total": 0,
+    "precheck_rejects_total": 0,
+    "reviewer_rejects_total": 0,
+    "top_reasons": {},
+    "samples": [
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The CANDIDATE preserves the same substantive medical content as the ORIGINAL, including the assessment of L4-L5 radiculopathy from disc herniation with nerve impingement and the listed plan items.",
+          "No new medical information was introduced relative to the ORIGINAL; the same added/flagged items (weight management counseling, 4-week follow-up, possible surgery) appear in both.",
+          "Differences are limited to wording/abbreviation changes (e.g., RLE, paresthesias, epidural, fluoroscopic guidance) without changing meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medval_dialogue2note_67_67",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1450,
+        "final_length": 1381
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same medical meaning as the original.",
+          "'Mild interstitial markings in the lungs' and 'Mild interstitial lung markings' are semantically equivalent.",
+          "'No acute cardiopulmonary abnormalities' and 'no acute cardiopulmonary abnormality' are equivalent aside from singular/plural wording.",
+          "No new medical findings or changes in interpretation were introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medval_report2impression_77_417",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 91,
+        "final_length": 81
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "Candidate preserves the same findings as the original: normal heart/mediastinal contour, clear lungs without focal infiltrate/nodule/mass, mild pleural effusion, no pneumothorax, and no free air under the diaphragm.",
+          "No new medical information is introduced, and no original finding is omitted or contradicted."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medval_report2impression_63_403",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 199,
+        "final_length": 216
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: seeking help for a condition causing a fish-like body odor.",
+          "'Clinical evaluation and management' is a more formal phrasing of 'get help' and does not materially change the medical meaning.",
+          "No new specific diagnosis, symptom, or medical claim is introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medval_query2question_94_314",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 65,
+        "final_length": 106
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: flu-like symptoms lasting more than 13 days may indicate something other than a virus or bug.",
+          "'Etiology other than an acute viral illness' is semantically equivalent to 'something other than a virus or bug' in this context.",
+          "No new substantive medical information is introduced beyond a more formal rephrasing."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medval_query2question_8_228",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 90,
+        "final_length": 103
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: seeking a surgeon to remove adhesions and mesh from a previous hernia repair.",
+          "'Adhesiolysis' corresponds to removal of adhesions, and 'explantation of mesh' corresponds to removal of mesh.",
+          "Specifying 'prior inguinal hernia repair' is consistent with the source context and does not introduce a substantive semantic change."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medval_query2question_104_324",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 85,
+        "final_length": 107
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it asks whether worsening IBS is caused by side effects/adverse effects from the dosage/dosing of the C-IBS formulation.",
+          "No new medical information or materially different claim is introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medval_query2question_44_264",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 72,
+        "final_length": 92
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: it asks whether symptoms of memory loss/impairment and distraction/distractibility could indicate early-stage Alzheimer's disease or another neurological/neurologic disorder.",
+          "No new medical information is introduced; 'versus an alternative neurologic disorder' is semantically equivalent to 'or another neurological disease.'"
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medval_query2question_42_262",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 114,
+        "final_length": 147
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same medical claims and classification as the original.",
+          "No new medical information is introduced; wording changes are synonymous (e.g., utilized/used, PRN/as needed, co-administered/combined).",
+          "Any inaccuracies present in the original are retained rather than altered, so semantic meaning is unchanged."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medval_medication2answer_87_172",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 496,
+        "final_length": 487
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "'Mild pleural effusion' and 'small pleural effusion' are semantically equivalent in this context.",
+          "'No focal airspace consolidations or pneumothorax' is preserved in meaning despite singular/plural wording changes."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medval_report2impression_166_506",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 78,
+        "final_length": 80
+      }
+    ]
+  }
+}

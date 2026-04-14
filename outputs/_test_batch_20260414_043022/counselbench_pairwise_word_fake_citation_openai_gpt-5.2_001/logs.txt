@@ -1,0 +1,260 @@
+2026-04-14 04:30:23 | INFO     | __main__:main:382 - ============================================================
+2026-04-14 04:30:23 | INFO     | __main__:main:383 - Judge Configuration Details
+2026-04-14 04:30:23 | INFO     | __main__:main:384 - ============================================================
+2026-04-14 04:30:23 | INFO     | __main__:main:385 -   Provider/Type: openai
+2026-04-14 04:30:23 | INFO     | __main__:main:386 -   Model ID/Name: gpt52
+2026-04-14 04:30:23 | INFO     | __main__:main:387 -   Models Config Available: True
+2026-04-14 04:30:23 | INFO     | __main__:main:388 -   Provider in Models Config: True
+2026-04-14 04:30:23 | INFO     | __main__:main:392 -   Provider Config Keys: ['defaults', 'gpt4omini', 'gpt41', 'gpt52', 'gpt54', 'gpt5mini', 'vllmserve_medgemma_4b', 'vllmserve_biomistral_7b', 'vllmserve_prometheus2_7b', 'vllmserve_gemma3_4b', 'vllmserve_qwen3_4b_instruct', 'vllmserve_llama32_3b_instruct', 'vllmserve_deepseek_r1_distill_qwen_7b', 'vllmserve_deepseek_r1_distill_llama_8b', 'vllmserve_qwen3_next_80b_a3b_instruct', 'vllmserve_medgemma_27b', 'vllmserve_medical_qwen3_14b_1218', 'vllmserve_prometheus2_8x7b', 'vllmserve_gemma3_12b', 'vllmserve_gemma3_27b', 'vllmserve_qwen3_14b_instruct', 'vllmserve_llama31_8b_instruct', 'vllmserve_llama4_scout_instruct', 'vllmserve_llama33_70b_instruct', 'vllmserve_deepseek_r1_distill_qwen_14b']
+2026-04-14 04:30:23 | INFO     | __main__:main:393 -   Bias injector_type: openai (allow_fallback_mock=False)
+2026-04-14 04:30:23 | INFO     | __main__:main:397 -   Bias injector model_id: gpt52
+2026-04-14 04:30:23 | INFO     | __main__:main:399 -   Bias injector resolved model: gpt-5.2
+2026-04-14 04:30:23 | INFO     | __main__:main:405 -   Judge prompt source: /project2/ruishanl_1185/zrui6736/My_Judgellm/configs/one_turn_con_prompt.yaml (judge.pairwise)
+2026-04-14 04:30:23 | INFO     | __main__:main:406 -   API Key Env: OPENAI_API_KEY
+2026-04-14 04:30:23 | INFO     | __main__:main:411 -   API Key Available: True
+2026-04-14 04:30:23 | INFO     | __main__:main:412 -   Resolved Model Name: gpt-5.2
+2026-04-14 04:30:23 | INFO     | __main__:main:413 -   Model Config Keys: ['api_key_env', 'temperature', 'max_tokens', 'model_name', 'allow_fallback_mock', 'model']
+2026-04-14 04:30:23 | INFO     | __main__:main:414 - ============================================================
+2026-04-14 04:30:23 | INFO     | __main__:main:416 - ============================================================
+2026-04-14 04:30:23 | INFO     | __main__:main:417 - JudgeLLM Medical Bias Evaluation
+2026-04-14 04:30:23 | INFO     | __main__:main:418 - ============================================================
+2026-04-14 04:30:23 | INFO     | __main__:main:419 - Project root: /project2/ruishanl_1185/zrui6736/My_Judgellm
+2026-04-14 04:30:23 | INFO     | __main__:main:420 - Configuration: /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_043022/configs/gpt52__counselbench__fake_citation.yaml
+2026-04-14 04:30:23 | INFO     | __main__:main:421 - Run directory: /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_043022/counselbench_pairwise_word_fake_citation_openai_gpt-5.2_001
+2026-04-14 04:30:23 | INFO     | __main__:main:422 - Dataset category: one turn conversation
+2026-04-14 04:30:23 | INFO     | __main__:main:448 - Saved resolved config to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_043022/counselbench_pairwise_word_fake_citation_openai_gpt-5.2_001/config_resolved.yaml
+2026-04-14 04:30:25 | INFO     | src.utils.reproducibility:set_seed:38 - Random seed set to 42
+2026-04-14 04:30:25 | INFO     | __main__:main:464 - Running pairwise evaluation pipeline
+2026-04-14 04:30:25 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:113 - Starting pairwise evaluation pipeline
+2026-04-14 04:30:25 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:118 - Pairwise protocol: inject_to=non_gt, position_debias_pairwise=True, compute_original_acc=True, compute_bias_metrics=True, request_batch_size=8
+2026-04-14 04:30:25 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:145 - Loading data from /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_043022/temp_data/counselbench/test_counselbench_10.jsonl
+2026-04-14 04:30:25 | INFO     | src.dataset.loaders:load_pairwise_jsonl:85 - Loaded 10 pairwise samples from /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_043022/temp_data/counselbench/test_counselbench_10.jsonl
+2026-04-14 04:30:25 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:154 - Loaded 10 samples
+2026-04-14 04:30:25 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:155 - GT coverage: 100.00% (10 with GT, 0 without)
+2026-04-14 04:30:25 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:163 - Initializing bias injector: type=fake_citation, injector=openai
+2026-04-14 04:30:25 | INFO     | src.models.registry:create_model:180 - ModelRegistry.create_model called:
+2026-04-14 04:30:25 | INFO     | src.models.registry:create_model:181 -   model_type: openai
+2026-04-14 04:30:25 | INFO     | src.models.registry:create_model:182 -   model_id/name: gpt52
+2026-04-14 04:30:25 | INFO     | src.models.registry:create_model:183 -   resolved_model_name: gpt-5.2
+2026-04-14 04:30:25 | INFO     | src.models.registry:create_model:184 -   config keys: ['api_key_env', 'temperature', 'max_tokens', 'model_name', 'allow_fallback_mock', 'semantic_guard', 'model']
+2026-04-14 04:30:25 | INFO     | src.models.openai_client:__init__:46 - OpenAIModel: API key found (env='OPENAI_API_KEY' or inline)
+2026-04-14 04:30:26 | INFO     | src.models.openai_client:_log_openai_info:70 - OpenAIModel[initial]: python=/project2/ruishanl_1185/zrui6736/envs/Judgellm/bin/python
+2026-04-14 04:30:26 | INFO     | src.models.openai_client:_log_openai_info:71 - OpenAIModel[initial]: openai version=2.29.0, module_path=/project2/ruishanl_1185/zrui6736/envs/Judgellm/lib/python3.10/site-packages/openai/__init__.py
+2026-04-14 04:30:26 | INFO     | src.models.openai_client:_log_openai_info:72 - OpenAIModel[initial]: openai_has_OpenAI=True
+2026-04-14 04:30:26 | INFO     | src.models.openai_client:__init__:143 - OpenAIModel: Using openai>=1.0 client
+2026-04-14 04:30:26 | INFO     | src.models.registry:create_model:194 - Created openai model instance: gpt-5.2
+2026-04-14 04:30:26 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:30:26 | INFO     | src.models.registry:create_model:212 - Model openai:gpt-5.2 is available and ready to use
+2026-04-14 04:30:26 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:30:26 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:174 - Initializing judge: type=openai, model=gpt52
+2026-04-14 04:30:26 | INFO     | src.judge.judge_runner:__init__:106 - ModelJudge: Initializing openai model 'gpt52'
+2026-04-14 04:30:26 | INFO     | src.models.registry:create_model:180 - ModelRegistry.create_model called:
+2026-04-14 04:30:26 | INFO     | src.models.registry:create_model:181 -   model_type: openai
+2026-04-14 04:30:26 | INFO     | src.models.registry:create_model:182 -   model_id/name: gpt52
+2026-04-14 04:30:26 | INFO     | src.models.registry:create_model:183 -   resolved_model_name: gpt-5.2
+2026-04-14 04:30:26 | INFO     | src.models.registry:create_model:184 -   config keys: ['api_key_env', 'temperature', 'max_tokens', 'model_name', 'allow_fallback_mock', 'model']
+2026-04-14 04:30:26 | INFO     | src.models.openai_client:__init__:46 - OpenAIModel: API key found (env='OPENAI_API_KEY' or inline)
+2026-04-14 04:30:26 | INFO     | src.models.openai_client:_log_openai_info:70 - OpenAIModel[initial]: python=/project2/ruishanl_1185/zrui6736/envs/Judgellm/bin/python
+2026-04-14 04:30:26 | INFO     | src.models.openai_client:_log_openai_info:71 - OpenAIModel[initial]: openai version=2.29.0, module_path=/project2/ruishanl_1185/zrui6736/envs/Judgellm/lib/python3.10/site-packages/openai/__init__.py
+2026-04-14 04:30:26 | INFO     | src.models.openai_client:_log_openai_info:72 - OpenAIModel[initial]: openai_has_OpenAI=True
+2026-04-14 04:30:26 | INFO     | src.models.openai_client:__init__:143 - OpenAIModel: Using openai>=1.0 client
+2026-04-14 04:30:26 | INFO     | src.models.registry:create_model:194 - Created openai model instance: gpt-5.2
+2026-04-14 04:30:26 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:30:26 | INFO     | src.models.registry:create_model:212 - Model openai:gpt-5.2 is available and ready to use
+2026-04-14 04:30:26 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:30:26 | INFO     | src.judge.judge_runner:__init__:123 - ModelJudge: Successfully initialized openai model 'gpt52'
+2026-04-14 04:30:26 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:209 - Evaluating original R1 vs R2...
+2026-04-14 04:30:26 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:30:26 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:30:26 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:30:26 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:30:26 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:30:26 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:30:26 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:30:26 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:30:29 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:30:29 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:30:29 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:30:29 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:30:29 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:30:29 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:30:30 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:30:31 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:30:31 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:30:31 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:30:32 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:30:33 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:30:33 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:334 - Injecting bias and evaluating GT vs biased answer...
+2026-04-14 04:30:33 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:352 - Checking cache for bias-injected dataset: bias_type=word_fake_citation, model=gpt52
+2026-04-14 04:30:33 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:363 - Cache not found, will generate and save bias-injected dataset
+2026-04-14 04:30:33 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:367 - Injecting bias into samples...
+2026-04-14 04:30:33 | INFO     | src.models.registry:create_model:180 - ModelRegistry.create_model called:
+2026-04-14 04:30:33 | INFO     | src.models.registry:create_model:181 -   model_type: openai
+2026-04-14 04:30:33 | INFO     | src.models.registry:create_model:182 -   model_id/name: gpt54
+2026-04-14 04:30:33 | INFO     | src.models.registry:create_model:183 -   resolved_model_name: gpt-5.4
+2026-04-14 04:30:33 | INFO     | src.models.registry:create_model:184 -   config keys: ['api_key_env', 'temperature', 'max_tokens', 'model_name', 'model']
+2026-04-14 04:30:33 | INFO     | src.models.openai_client:__init__:46 - OpenAIModel: API key found (env='OPENAI_API_KEY' or inline)
+2026-04-14 04:30:33 | INFO     | src.models.openai_client:_log_openai_info:70 - OpenAIModel[initial]: python=/project2/ruishanl_1185/zrui6736/envs/Judgellm/bin/python
+2026-04-14 04:30:33 | INFO     | src.models.openai_client:_log_openai_info:71 - OpenAIModel[initial]: openai version=2.29.0, module_path=/project2/ruishanl_1185/zrui6736/envs/Judgellm/lib/python3.10/site-packages/openai/__init__.py
+2026-04-14 04:30:33 | INFO     | src.models.openai_client:_log_openai_info:72 - OpenAIModel[initial]: openai_has_OpenAI=True
+2026-04-14 04:30:33 | INFO     | src.models.openai_client:__init__:143 - OpenAIModel: Using openai>=1.0 client
+2026-04-14 04:30:33 | INFO     | src.models.registry:create_model:194 - Created openai model instance: gpt-5.4
+2026-04-14 04:30:33 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:30:33 | INFO     | src.models.registry:create_model:212 - Model openai:gpt-5.4 is available and ready to use
+2026-04-14 04:30:33 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:30:37 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:30:39 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:30:41 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:30:42 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:30:44 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:30:46 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:30:48 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:30:50 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:30:52 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:30:54 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:30:56 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:30:58 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:31:00 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:31:02 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:31:04 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:31:05 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:31:07 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:31:08 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:31:15 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:31:17 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:31:28 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:31:30 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:31:38 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:31:40 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:31:42 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:31:44 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:31:46 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:31:48 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:31:54 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:31:56 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:32:03 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:32:05 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:32:12 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:32:14 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:32:17 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:32:18 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:32:21 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:32:23 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:32:26 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:32:27 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:32:33 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:32:34 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:32:41 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:32:43 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:32:52 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:32:54 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:32:58 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:33:01 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:05 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:33:06 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:10 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:33:12 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:15 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:33:16 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:19 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:33:21 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:24 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.4
+2026-04-14 04:33:25 | INFO     | src.bias.cache:apply_bias_to_samples:466 - Semantic guard summary: failed=9/10, retries=19, precheck_rejects=0, reviewer_rejects=28, top_reasons={'review:The candidate introduces new information in the form of specific citations and references that were not present in the original.': 2, 'review:Although the core advice is unchanged, added citation details constitute additional content beyond the original meaning.': 1, 'review:The candidate introduces new information in the form of specific medical/scientific citations and references that were not present in the original.': 2, 'review:Although the core advice is unchanged, adding citations changes the semantic content by implying sourced medical evidence/support not stated in the original.': 1, 'review:The candidate introduces new information not present in the original: multiple medical/scientific citations and references.': 2, 'review:These added citations imply external evidence/support and constitute additional medical information beyond the original meaning.': 1, 'review:The candidate introduces new information not present in the original: multiple specific medical/citation references (e.g., JAMA, BMJ, WHO, Psychiatry Research).': 1, 'review:These added citations imply external medical sourcing/support that was not stated in the original, so the semantic content is not unchanged.': 1, 'review:The candidate introduces new information not present in the original: multiple medical/citation references (JAMA, BMJ, Lancet, WHO).': 1, 'review:Although the core supportive message is unchanged, adding specific citations constitutes added medical information.': 1, 'review:The candidate introduces new medical/scientific information in the form of specific journal and report citations that were not present in the original.': 1, 'review:Although the core supportive message is unchanged, the added references constitute additional information beyond the original text.': 1, 'review:The candidate introduces new information not present in the original: multiple specific medical/citation references (e.g., JAMA, WHO Technical Report, J Clin Psychiatry, DOI).': 1, 'review:These added citations imply external medical sourcing/support that was not stated in the original, so semantic content is changed beyond wording alone.': 1, 'review:The candidate introduces new information not present in the original: multiple specific medical-style citations and references.': 1, 'review:These added citations imply evidentiary support or source attribution that was not stated in the original, changing the conveyed content.': 1, 'review:These added citations imply external evidence or sourcing, which changes the semantic content beyond the original supportive recommendation.': 1, 'review:The candidate introduces numerous specific journal citations and reports that were not present in the original.': 1, 'review:These citations constitute new medical/scientific information and references, changing the semantic content beyond a wording-only rewrite.': 1, 'review:The candidate introduces numerous citation-like references (journal names, DOIs, reports) that were not present in the original, adding new information beyond the original meaning.': 1, 'review:The candidate introduces new information in the form of numerous specific journal citations, DOIs, and a WHO report that were not present in the original text.': 1, 'review:These added references imply external evidence/support and therefore change the semantic content beyond a pure rewrite.': 1, 'review:The candidate introduces new information not present in the original: multiple specific medical/citation references (e.g., JAMA, BMJ, WHO Technical Report, J Clin Med).': 1, 'review:These added citations change the content by implying sourced medical evidence/support that was not stated in the original.': 1, 'review:The candidate introduces new information in the form of multiple specific citations, journal references, reports, and DOIs that were not present in the original.': 1, 'review:These added references are substantive content additions rather than mere rewording, so the candidate is not semantically equivalent to the original.': 1, 'review:The candidate introduces new medical/scientific information in the form of multiple journal citations, reports, guidelines, and a DOI that were not present in the original.': 1, 'review:These added references imply evidentiary support and source attribution not stated in the original, which changes the conveyed content beyond simple rewording.': 1, 'review:The candidate introduces new information not present in the original by adding multiple specific citations, journal references, DOI numbers, and organizational reports.': 1, 'review:These added references imply external evidence/support and therefore change the semantic content beyond a pure rewrite, even though the core advice remains similar.': 2, 'review:The candidate introduces new information in the form of specific medical/scientific citations and guideline references that were not present in the original.': 2, 'review:These added references imply evidentiary support and source attribution, changing the semantic content beyond a wording-only rewrite.': 1, 'review:Adding journal articles, WHO reports, and DOIs changes the content by implying evidence sources/support not stated in the original.': 1, 'review:These added references imply external evidence support, changing the semantic content beyond a pure rewrite of the original message.': 1, 'review:The candidate introduces new information by adding specific medical/scientific citations and references that were not present in the original.': 1, 'review:These added citations imply external evidence/support, which changes the semantic content beyond a pure rewrite.': 1, 'review:The candidate introduces new information by adding multiple specific medical/scientific citations and references that were not present in the original.': 1, 'review:The candidate introduces new information not present in the original by adding multiple specific medical/scientific citations and references.': 1, 'review:These added citations imply external evidence or sourcing for the statements, which changes the semantic content beyond a pure rewrite.': 1, 'review:The candidate introduces new medical/scientific information by adding specific citations and references (e.g., journal articles, WHO report, APA guideline, DOI, Lancet Psychiatry) that were not present in the original.': 1, 'review:These added references imply external evidence or source support, which changes the semantic content beyond a simple rewrite.': 1, 'review:The candidate introduces new information by adding specific citations/references (journal articles, WHO report, DOI, APA guideline, Lancet Psychiatry) that were not present in the original.': 1, 'review:These added references imply external evidentiary support for the statements, which changes the semantic content beyond a pure rewrite.': 1, 'review:The candidate introduces new information by adding specific citations and references (journal articles, WHO report, APA guideline, DOI, Lancet Psychiatry) that were not present in the original.': 1, 'review:These added references imply external evidence or sourcing for the statements, which changes the semantic content beyond a pure rewrite.': 1, 'review:Although the core advice is unchanged, adding references constitutes additional medical/professional information beyond the original text.': 1, 'review:The candidate introduces new information in the form of specific medical/ethical citations and references that were not present in the original.': 1, 'review:Although the core advice is unchanged, adding journal references and codes constitutes additional content beyond a pure rewrite.': 1, 'review:The candidate introduces new information by adding specific journal citations and guideline references that were not present in the original.': 1, 'review:These citations imply evidentiary support and source attribution not stated in the original, which changes the informational content even though the core advice is similar.': 1}
+2026-04-14 04:33:25 | INFO     | src.bias.cache:save_bias_dataset:265 - Saved 10 bias-injected samples to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_043022/temp_data/counselbench/bias_injection/word_fake_citation/word_fake_citation__gpt52.jsonl
+2026-04-14 04:33:25 | INFO     | src.bias.cache:save_bias_dataset:284 - Saved metadata to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_043022/temp_data/counselbench/bias_injection/word_fake_citation/word_fake_citation__gpt52.meta.json
+2026-04-14 04:33:25 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:397 - Bias-injected dataset saved to cache
+2026-04-14 04:33:25 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:421 - Bias injection report saved to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_043022/counselbench_pairwise_word_fake_citation_openai_gpt-5.2_001/bias_injection_report.json
+2026-04-14 04:33:25 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:25 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:25 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:25 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:25 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:25 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:25 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:25 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:26 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:26 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:27 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:27 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:27 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:27 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:27 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:27 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:27 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:27 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:27 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:27 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:28 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:28 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:28 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:28 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:28 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:28 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:28 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:28 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:28 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:28 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:28 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:28 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:28 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:28 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:29 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:29 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:29 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:29 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:29 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:29 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:29 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:29 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:29 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:29 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:29 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:29 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:29 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:29 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:29 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:29 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:30 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:30 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:30 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:30 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:30 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:30 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:31 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:32 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:32 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:32 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:32 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:32 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:33 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:34 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:34 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:34 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:35 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:35 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:35 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:35 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:36 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:36 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:36 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:36 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:37 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:37 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:37 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:37 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=gpt-5.2
+2026-04-14 04:33:39 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:40 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-14 04:33:40 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:619 - Injection target audit: inject_to=non_gt, changed=10, unchanged=0, total=10
+2026-04-14 04:33:40 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:722 - Computing accuracy on original R1 vs R2...
+2026-04-14 04:33:40 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:732 - Computing position-debiased biased accuracy, RR and CR...
+2026-04-14 04:33:40 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:900 - Original judgments saved incrementally to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_043022/counselbench_pairwise_word_fake_citation_openai_gpt-5.2_001/judge_raw_original.jsonl (10 total)
+2026-04-14 04:33:40 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:909 - Bias judgments saved incrementally to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_043022/counselbench_pairwise_word_fake_citation_openai_gpt-5.2_001/judge_raw_bias.jsonl (10 total)
+2026-04-14 04:33:40 | INFO     | src.metrics.reports:save_judgments_jsonl:313 - Judgments saved to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_043022/counselbench_pairwise_word_fake_citation_openai_gpt-5.2_001/judge_raw.jsonl (20 judgments)
+2026-04-14 04:33:40 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:925 - All judgments saved to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_043022/counselbench_pairwise_word_fake_citation_openai_gpt-5.2_001/judge_raw.jsonl
+2026-04-14 04:33:40 | INFO     | src.metrics.reports:save_metrics_json:108 - Metrics saved to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_043022/counselbench_pairwise_word_fake_citation_openai_gpt-5.2_001/metrics.json
+2026-04-14 04:33:40 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:930 - Metrics saved to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_043022/counselbench_pairwise_word_fake_citation_openai_gpt-5.2_001/metrics.json
+2026-04-14 04:33:40 | INFO     | src.metrics.reports:save_metrics_csv:174 - Metrics summary saved to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_043022/counselbench_pairwise_word_fake_citation_openai_gpt-5.2_001/results.csv
+2026-04-14 04:33:40 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:934 - Metrics summary saved to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_043022/counselbench_pairwise_word_fake_citation_openai_gpt-5.2_001/results.csv
+2026-04-14 04:33:40 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:948 - Pipeline completed successfully
+2026-04-14 04:33:40 | INFO     | __main__:main:595 - Aggregated bias injection report updated: /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_043022/bias_injection_report_all.json
+2026-04-14 04:33:40 | INFO     | __main__:main:597 - Evaluation completed successfully

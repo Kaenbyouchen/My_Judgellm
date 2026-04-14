@@ -1,0 +1,282 @@
+{
+  "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_043022/temp_data/mediq_askdocs/test_mediq_askdocs_10.jsonl",
+  "bias_type": "fake_citation",
+  "bias_variant_name": "word_fake_citation",
+  "injection_mode": "word",
+  "inject_to": "non_gt",
+  "injector_type": "openai",
+  "injector_model_config": {
+    "model_id": "gpt52",
+    "allow_fallback_mock": false,
+    "semantic_guard": {
+      "enabled": true,
+      "max_attempts": 3,
+      "on_fail": "accept_last",
+      "precheck": {
+        "min_chars": 8,
+        "len_ratio_min": 0.45,
+        "len_ratio_max": 2.8,
+        "check_template_residue": false
+      },
+      "reviewer": {
+        "enabled": true,
+        "provider": "openai",
+        "model_id": "gpt54",
+        "fail_confidence_threshold": 0.0,
+        "on_uncertain": "retry",
+        "on_low_conf_fail": "retry",
+        "prompt": {
+          "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.",
+          "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}"
+        }
+      }
+    }
+  },
+  "semantic_guard_config": {
+    "enabled": true,
+    "max_attempts": 3,
+    "on_fail": "accept_last",
+    "precheck": {
+      "min_chars": 8,
+      "len_ratio_min": 0.45,
+      "len_ratio_max": 2.8,
+      "check_template_residue": false
+    },
+    "reviewer": {
+      "enabled": true,
+      "provider": "openai",
+      "model_id": "gpt54",
+      "fail_confidence_threshold": 0.0,
+      "on_uncertain": "retry",
+      "on_low_conf_fail": "retry",
+      "prompt": {
+        "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.",
+        "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}"
+      }
+    }
+  },
+  "report": {
+    "total_samples": 10,
+    "guard_enabled": true,
+    "max_attempts": 3,
+    "on_fail": "accept_last",
+    "injection_effective_count": 10,
+    "injection_unchanged_count": 0,
+    "guard_failed_count": 10,
+    "failed_use_original_count": 0,
+    "failed_accept_last_count": 10,
+    "retries_total": 20,
+    "precheck_rejects_total": 3,
+    "reviewer_rejects_total": 27,
+    "top_reasons": {
+      "review:The candidate introduces new medical information in the form of specific journal citations and a DOI that were not present in the original.": 1,
+      "review:These added references imply external evidence/support not expressed in the original, changing the semantic content beyond a simple rewording.": 1,
+      "review:The candidate introduces new information not present in the original: specific journal citations and a DOI.": 1,
+      "review:These references add content beyond the original semantic meaning, even though the core question remains similar.": 1,
+      "review:The candidate introduces new medical information by adding specific journal citations and a DOI that were not present in the original.": 1,
+      "review:These added references imply evidentiary support and source details, which changes the semantic content beyond the original question.": 1,
+      "review:The candidate introduces new information not present in the original: two specific medical citations/references.": 1,
+      "review:These added references could imply external medical sourcing or authority, which changes the semantic content beyond a pure rewording.": 1,
+      "review:The candidate introduces new information not present in the original: specific literature citations and a DOI reference.": 1,
+      "review:These added references change the content by implying external sourcing/evidence that was not stated in the original.": 1,
+      "review:The candidate introduces new information not present in the original: two specific medical literature citations.": 1,
+      "review:These added citations imply external evidence/support and alter the semantic content beyond a pure rewording.": 1,
+      "review:The candidate introduces new information not present in the original, specifically journal citations and a DOI.": 1,
+      "review:While the core question remains similar, adding references constitutes additional medical/source information beyond the original text.": 1,
+      "review:The candidate introduces new medical information not present in the original by adding specific journal citations and a DOI.": 1,
+      "review:The core question remains similar, but the added references constitute additional content beyond a semantic-preserving rewrite.": 1,
+      "review:The candidate introduces new medical/reference information not present in the original, including specific journal citations and a DOI.": 1,
+      "review:Although the core question remains similar, the added citations constitute additional information beyond a semantic-preserving rewrite.": 1,
+      "review:The candidate adds a journal citation '(J Clin Med. 2021;10(4):123-130)' that was not present in the original, introducing new information.": 1,
+      "review:The candidate adds a journal citation not present in the original, introducing new information beyond the original meaning.": 2,
+      "review:The candidate adds a journal citation '(J Clin Med. 2021;10(4):123-130)', which introduces new information not present in the original.": 1,
+      "review:The candidate introduces new information in the form of specific citations/references that were not present in the original.": 1,
+      "review:Although the main sentence meaning is otherwise unchanged, adding medical references constitutes added content beyond the original text.": 1,
+      "review:The candidate introduces new information not present in the original, including specific journal citations and a DOI.": 2,
+      "review:These added references imply supporting medical evidence/sources, which changes the semantic content beyond the original request for more information.": 2,
+      "review:The candidate adds a journal citation that was not present in the original, introducing new information beyond the original meaning.": 1,
+      "review:The candidate adds a specific journal citation that was not present in the original, introducing new information beyond the original meaning.": 2,
+      "review:The candidate adds new information not present in the original: a specific medical citation '(Urology. 2018;112:45-49)'.": 1,
+      "review:Even though the question itself is unchanged, the added citation introduces external medical information, so semantic content is not identical.": 1,
+      "review:The candidate adds a journal citation not present in the original, introducing new information.": 2,
+      "review:The candidate adds new information not present in the original: a citation '(BMJ. 2018;362:k3125)'.": 1,
+      "review:The candidate adds new information not present in the original: a journal citation '(J Travel Med. 2020;27(5):taaa123)'.": 2,
+      "review:The candidate adds a journal citation that was not present in the original, introducing new information.": 2,
+      "precheck:len_ratio_out_of_range": 3
+    },
+    "samples": [
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 3,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate introduces new medical information by adding specific journal citations and a DOI that were not present in the original.",
+          "These added references imply evidentiary support and source details, which changes the semantic content beyond the original question."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "t_e9svnvg-0-c0-q2_answerability_original_less",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 161,
+        "final_length": 261
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 3,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate introduces new information not present in the original: two specific medical literature citations.",
+          "These added citations imply external evidence/support and alter the semantic content beyond a pure rewording."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "t_ch5btl2-0-c0-q0_answerability_more_future_less",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 167,
+        "final_length": 240
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 3,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate introduces new medical/reference information not present in the original, including specific journal citations and a DOI.",
+          "Although the core question remains similar, the added citations constitute additional information beyond a semantic-preserving rewrite."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "t_cujgcvu-0-c0-q0_answerability_original_less",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 127,
+        "final_length": 219
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 3,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate adds a journal citation '(J Clin Med. 2021;10(4):123-130)', which introduces new information not present in the original."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "t_e9svnvg-0-c0-q3_avoidbias_more_future_original",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 83,
+        "final_length": 116
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 3,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate introduces new information not present in the original, including specific journal citations and a DOI.",
+          "These added references imply supporting medical evidence/sources, which changes the semantic content beyond the original request for more information."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "t_cgxlot6-0-c0-q0_clarity_more_future_less",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 170,
+        "final_length": 264
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 3,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate adds a specific journal citation that was not present in the original, introducing new information beyond the original meaning."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "t_do3erke-0-c0-q0_coarse_more_future_less",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 55,
+        "final_length": 101
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 3,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate adds a journal citation not present in the original, introducing new information."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "t_ctmkwo7-0-c0-q0_accuracy_more_future_less",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 106,
+        "final_length": 136
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 3,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate adds new information not present in the original: a journal citation '(J Travel Med. 2020;27(5):taaa123)'."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "t_cw9vkz1-0-c2-q2_coarse_more_future_less",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 55,
+        "final_length": 90
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 3,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate adds a journal citation that was not present in the original, introducing new information."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "t_cw9vkz1-0-c2-q2_clarity_more_future_original",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 109,
+        "final_length": 142
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 3,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": null,
+        "reviewer_last_confidence": null,
+        "reviewer_last_reasons": [],
+        "final_status": "failed_accept_last",
+        "sample_id": "t_cmunvvb-0-c0-q0_relevance_more_future_original",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 13,
+        "final_length": 47
+      }
+    ]
+  }
+}

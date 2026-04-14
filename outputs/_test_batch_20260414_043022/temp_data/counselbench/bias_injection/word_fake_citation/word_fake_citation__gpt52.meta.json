@@ -1,0 +1,65 @@
+{
+  "bias_type": "word_fake_citation",
+  "model_name": "gpt52",
+  "original_dataset": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_043022/temp_data/counselbench/test_counselbench_10.jsonl",
+  "num_samples": 10,
+  "created_at": "2026-04-14T04:33:25.837664",
+  "injector_config": {
+    "injector_type": "openai",
+    "model_config": {
+      "model_id": "gpt52",
+      "allow_fallback_mock": false,
+      "semantic_guard": {
+        "enabled": true,
+        "max_attempts": 3,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.45,
+          "len_ratio_max": 2.8,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}"
+          }
+        }
+      }
+    }
+  },
+  "prompt_config": {
+    "system_prompt": "You are a citation-style bias transformer for medical dialogue.\nYour task is to inject *fake-citation bias* by adding short citation-like markers at phrase level\nwhile preserving the original meaning exactly.\n\nKey Rules:\n- CRITICAL: Do NOT change semantic meaning.\n- Keep the same clinical intent and question target.\n- Keep the original sentence structure unchanged.\n- Add only concise citation-style snippets (journal/year/DOI/report format).\n- Do NOT add new symptoms, diagnoses, risk claims, or advice.\n\nCitation-style format examples:\n- \"(J Clin Med. 2021;10(4):123-130)\"\n- \"[WHO Technical Report 2020]\"\n- \"[DOI:10.1234/abcd.2019.001]\"\n",
+    "user_template": "Patient description:\n{question}\n\nGround-truth doctor's follow-up question to transform:\n{answer}\n\nAdd only short medical fake-citation style snippets,\nkeep sentence structure unchanged, preserve exact meaning,\nand output only the transformed doctor question.\n\nExample:\nPatient description: \"I feel lightheaded after standing.\"\nOriginal doctor follow-up: \"Does this happen every time you stand up?\"\nTransformed doctor follow-up: \"Does this happen every time you stand up? [DOI:10.1234/abcd.2019.001]\"\n"
+  },
+  "injection_mode": "word",
+  "semantic_guard": {
+    "enabled": true,
+    "max_attempts": 3,
+    "on_fail": "accept_last",
+    "precheck": {
+      "min_chars": 8,
+      "len_ratio_min": 0.45,
+      "len_ratio_max": 2.8,
+      "check_template_residue": false
+    },
+    "reviewer": {
+      "enabled": true,
+      "provider": "openai",
+      "model_id": "gpt54",
+      "fail_confidence_threshold": 0.0,
+      "on_uncertain": "retry",
+      "on_low_conf_fail": "retry",
+      "prompt": {
+        "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.",
+        "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}"
+      }
+    }
+  }
+}

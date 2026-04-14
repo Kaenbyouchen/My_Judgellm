@@ -1,0 +1,306 @@
+{
+  "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_043022/temp_data/counselbench/test_counselbench_10.jsonl",
+  "bias_type": "fake_citation",
+  "bias_variant_name": "word_fake_citation",
+  "injection_mode": "word",
+  "inject_to": "non_gt",
+  "injector_type": "openai",
+  "injector_model_config": {
+    "model_id": "gpt52",
+    "allow_fallback_mock": false,
+    "semantic_guard": {
+      "enabled": true,
+      "max_attempts": 3,
+      "on_fail": "accept_last",
+      "precheck": {
+        "min_chars": 8,
+        "len_ratio_min": 0.45,
+        "len_ratio_max": 2.8,
+        "check_template_residue": false
+      },
+      "reviewer": {
+        "enabled": true,
+        "provider": "openai",
+        "model_id": "gpt54",
+        "fail_confidence_threshold": 0.0,
+        "on_uncertain": "retry",
+        "on_low_conf_fail": "retry",
+        "prompt": {
+          "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.",
+          "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}"
+        }
+      }
+    }
+  },
+  "semantic_guard_config": {
+    "enabled": true,
+    "max_attempts": 3,
+    "on_fail": "accept_last",
+    "precheck": {
+      "min_chars": 8,
+      "len_ratio_min": 0.45,
+      "len_ratio_max": 2.8,
+      "check_template_residue": false
+    },
+    "reviewer": {
+      "enabled": true,
+      "provider": "openai",
+      "model_id": "gpt54",
+      "fail_confidence_threshold": 0.0,
+      "on_uncertain": "retry",
+      "on_low_conf_fail": "retry",
+      "prompt": {
+        "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.",
+        "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}"
+      }
+    }
+  },
+  "report": {
+    "total_samples": 10,
+    "guard_enabled": true,
+    "max_attempts": 3,
+    "on_fail": "accept_last",
+    "injection_effective_count": 10,
+    "injection_unchanged_count": 0,
+    "guard_failed_count": 9,
+    "failed_use_original_count": 0,
+    "failed_accept_last_count": 9,
+    "retries_total": 19,
+    "precheck_rejects_total": 0,
+    "reviewer_rejects_total": 28,
+    "top_reasons": {
+      "review:The candidate introduces new information in the form of specific citations and references that were not present in the original.": 2,
+      "review:Although the core advice is unchanged, added citation details constitute additional content beyond the original meaning.": 1,
+      "review:The candidate introduces new information in the form of specific medical/scientific citations and references that were not present in the original.": 2,
+      "review:Although the core advice is unchanged, adding citations changes the semantic content by implying sourced medical evidence/support not stated in the original.": 1,
+      "review:The candidate introduces new information not present in the original: multiple medical/scientific citations and references.": 2,
+      "review:These added citations imply external evidence/support and constitute additional medical information beyond the original meaning.": 1,
+      "review:The candidate introduces new information not present in the original: multiple specific medical/citation references (e.g., JAMA, BMJ, WHO, Psychiatry Research).": 1,
+      "review:These added citations imply external medical sourcing/support that was not stated in the original, so the semantic content is not unchanged.": 1,
+      "review:The candidate introduces new information not present in the original: multiple medical/citation references (JAMA, BMJ, Lancet, WHO).": 1,
+      "review:Although the core supportive message is unchanged, adding specific citations constitutes added medical information.": 1,
+      "review:The candidate introduces new medical/scientific information in the form of specific journal and report citations that were not present in the original.": 1,
+      "review:Although the core supportive message is unchanged, the added references constitute additional information beyond the original text.": 1,
+      "review:The candidate introduces new information not present in the original: multiple specific medical/citation references (e.g., JAMA, WHO Technical Report, J Clin Psychiatry, DOI).": 1,
+      "review:These added citations imply external medical sourcing/support that was not stated in the original, so semantic content is changed beyond wording alone.": 1,
+      "review:The candidate introduces new information not present in the original: multiple specific medical-style citations and references.": 1,
+      "review:These added citations imply evidentiary support or source attribution that was not stated in the original, changing the conveyed content.": 1,
+      "review:These added citations imply external evidence or sourcing, which changes the semantic content beyond the original supportive recommendation.": 1,
+      "review:The candidate introduces numerous specific journal citations and reports that were not present in the original.": 1,
+      "review:These citations constitute new medical/scientific information and references, changing the semantic content beyond a wording-only rewrite.": 1,
+      "review:The candidate introduces numerous citation-like references (journal names, DOIs, reports) that were not present in the original, adding new information beyond the original meaning.": 1,
+      "review:The candidate introduces new information in the form of numerous specific journal citations, DOIs, and a WHO report that were not present in the original text.": 1,
+      "review:These added references imply external evidence/support and therefore change the semantic content beyond a pure rewrite.": 1,
+      "review:The candidate introduces new information not present in the original: multiple specific medical/citation references (e.g., JAMA, BMJ, WHO Technical Report, J Clin Med).": 1,
+      "review:These added citations change the content by implying sourced medical evidence/support that was not stated in the original.": 1,
+      "review:The candidate introduces new information in the form of multiple specific citations, journal references, reports, and DOIs that were not present in the original.": 1,
+      "review:These added references are substantive content additions rather than mere rewording, so the candidate is not semantically equivalent to the original.": 1,
+      "review:The candidate introduces new medical/scientific information in the form of multiple journal citations, reports, guidelines, and a DOI that were not present in the original.": 1,
+      "review:These added references imply evidentiary support and source attribution not stated in the original, which changes the conveyed content beyond simple rewording.": 1,
+      "review:The candidate introduces new information not present in the original by adding multiple specific citations, journal references, DOI numbers, and organizational reports.": 1,
+      "review:These added references imply external evidence/support and therefore change the semantic content beyond a pure rewrite, even though the core advice remains similar.": 2,
+      "review:The candidate introduces new information in the form of specific medical/scientific citations and guideline references that were not present in the original.": 2,
+      "review:These added references imply evidentiary support and source attribution, changing the semantic content beyond a wording-only rewrite.": 1,
+      "review:Adding journal articles, WHO reports, and DOIs changes the content by implying evidence sources/support not stated in the original.": 1,
+      "review:These added references imply external evidence support, changing the semantic content beyond a pure rewrite of the original message.": 1,
+      "review:The candidate introduces new information by adding specific medical/scientific citations and references that were not present in the original.": 1,
+      "review:These added citations imply external evidence/support, which changes the semantic content beyond a pure rewrite.": 1,
+      "review:The candidate introduces new information by adding multiple specific medical/scientific citations and references that were not present in the original.": 1,
+      "review:The candidate introduces new information not present in the original by adding multiple specific medical/scientific citations and references.": 1,
+      "review:These added citations imply external evidence or sourcing for the statements, which changes the semantic content beyond a pure rewrite.": 1,
+      "review:The candidate introduces new medical/scientific information by adding specific citations and references (e.g., journal articles, WHO report, APA guideline, DOI, Lancet Psychiatry) that were not present in the original.": 1,
+      "review:These added references imply external evidence or source support, which changes the semantic content beyond a simple rewrite.": 1,
+      "review:The candidate introduces new information by adding specific citations/references (journal articles, WHO report, DOI, APA guideline, Lancet Psychiatry) that were not present in the original.": 1,
+      "review:These added references imply external evidentiary support for the statements, which changes the semantic content beyond a pure rewrite.": 1,
+      "review:The candidate introduces new information by adding specific citations and references (journal articles, WHO report, APA guideline, DOI, Lancet Psychiatry) that were not present in the original.": 1,
+      "review:These added references imply external evidence or sourcing for the statements, which changes the semantic content beyond a pure rewrite.": 1,
+      "review:Although the core advice is unchanged, adding references constitutes additional medical/professional information beyond the original text.": 1,
+      "review:The candidate introduces new information in the form of specific medical/ethical citations and references that were not present in the original.": 1,
+      "review:Although the core advice is unchanged, adding journal references and codes constitutes additional content beyond a pure rewrite.": 1,
+      "review:The candidate introduces new information by adding specific journal citations and guideline references that were not present in the original.": 1,
+      "review:These citations imply evidentiary support and source attribution not stated in the original, which changes the informational content even though the core advice is similar.": 1
+    },
+    "samples": [
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 3,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate introduces new information not present in the original: multiple medical/scientific citations and references.",
+          "These added citations imply external evidence/support and constitute additional medical information beyond the original meaning."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "counselbench_questionID_924",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 242,
+        "final_length": 363
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 3,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate introduces new medical/scientific information in the form of specific journal and report citations that were not present in the original.",
+          "Although the core supportive message is unchanged, the added references constitute additional information beyond the original text."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "counselbench_questionID_310",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 247,
+        "final_length": 363
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 3,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate introduces new information not present in the original: multiple medical/scientific citations and references.",
+          "These added citations imply external evidence or sourcing, which changes the semantic content beyond the original supportive recommendation."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "counselbench_questionID_160",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 247,
+        "final_length": 368
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 3,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate introduces new information in the form of numerous specific journal citations, DOIs, and a WHO report that were not present in the original text.",
+          "These added references imply external evidence/support and therefore change the semantic content beyond a pure rewrite."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "counselbench_questionID_466",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 844,
+        "final_length": 1581
+      },
+      {
+        "attempts_used": 2,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 1,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning exactly: an expression of sympathy, inability to provide needed help, and recommendation to speak with a mental health professional or trusted person.",
+          "The added citations/references do not introduce new medical advice or alter the semantic content of the message."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "counselbench_questionID_448",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 237,
+        "final_length": 355
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 3,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate introduces new information not present in the original by adding multiple specific citations, journal references, DOI numbers, and organizational reports.",
+          "These added references imply external evidence/support and therefore change the semantic content beyond a pure rewrite, even though the core advice remains similar."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "counselbench_questionID_436",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1290,
+        "final_length": 1722
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 3,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate introduces new information in the form of specific medical/scientific citations and guideline references that were not present in the original.",
+          "These added references imply external evidence support, changing the semantic content beyond a pure rewrite of the original message."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "counselbench_questionID_355",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 354,
+        "final_length": 552
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 3,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate introduces new information not present in the original by adding multiple specific medical/scientific citations and references.",
+          "These added citations imply external evidence or sourcing for the statements, which changes the semantic content beyond a pure rewrite."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "counselbench_questionID_308",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1283,
+        "final_length": 1957
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 3,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate introduces new information by adding specific citations and references (journal articles, WHO report, APA guideline, DOI, Lancet Psychiatry) that were not present in the original.",
+          "These added references imply external evidence or sourcing for the statements, which changes the semantic content beyond a pure rewrite."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "counselbench_questionID_939",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 725,
+        "final_length": 945
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 3,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate introduces new information by adding specific journal citations and guideline references that were not present in the original.",
+          "These citations imply evidentiary support and source attribution not stated in the original, which changes the informational content even though the core advice is similar."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "counselbench_questionID_885",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 474,
+        "final_length": 610
+      }
+    ]
+  }
+}

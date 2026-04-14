@@ -1,0 +1,160 @@
+{
+  "sample_id": "t_e9svnvg-0-c0-q2_answerability_original_less",
+  "type": "original",
+  "question": "23M numbness in left arm\n23 y/o male, 182 cm, 78 kg,\n\nRecenlty having numbness in left arm, does anybody know why it happens and what can I do to reduce this effect?\n\nThanks",
+  "answer_A": "Could the numbness in your left arm be related to an underlying neurological or vascular issue that may not be immediately apparent based on your symptoms alone?",
+  "answer_B": "Are you experiencing any muscle weakness in your left arm?",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "It asks a concrete triage question (weakness) that helps assess urgency, whereas A is vague and non-actionable.",
+  "raw": {
+    "model_response": "Verdict: [[B]]\nExplanation: It asks a concrete triage question (weakness) that helps assess urgency, whereas A is vague and non-actionable."
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "t_ch5btl2-0-c0-q0_answerability_more_future_less",
+  "type": "original",
+  "question": "Trying to understand this GI report\ncoming back to edit",
+  "answer_A": "Can you speculate on the potential findings that the physician might have been looking for during the scoping procedure based on the symptoms you've been experiencing?",
+  "answer_B": "Can you tell me more about the symptoms that led to your doctor recommending the scoping procedure, such as any changes in your heartburn or swallowing difficulties?",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "It asks for relevant context to interpret a GI report, whereas A is vague and pushes speculation about physician intent.",
+  "raw": {
+    "model_response": "Verdict: [[B]]\nExplanation: It asks for relevant context to interpret a GI report, whereas A is vague and pushes speculation about physician intent."
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "t_cujgcvu-0-c0-q0_answerability_original_less",
+  "type": "original",
+  "question": "Sister is an RN and is addicted to heroin. Should I report her?\nHow dangerous is it for my sister to work in a hospital? Should I tell her hospital she's actively using?",
+  "answer_A": "This extracted \"question\" is not actually a question that requires the patient's response or input, but rather an expression of the doctor's shock or surprise. Therefore, it does not need to be rewritten as a standalone question.\n\nHowever, if you'd like to rephrase it to make it a question, it could be:\n\nAre you aware of the potential risks and consequences of your sister's heroin addiction while working as a nurse?",
+  "answer_B": "Do the neurobiological effects of heroin addiction impact your sister's decision-making capacity to practice safely as a nurse?",
+  "preferred": "1",
+  "winner": "A",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "A directly addresses the reporting/safety concern in plain language, while B is overly technical and misses the practical question.",
+  "raw": {
+    "model_response": "Verdict: [[A]]\nExplanation: A directly addresses the reporting/safety concern in plain language, while B is overly technical and misses the practical question."
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "t_e9svnvg-0-c0-q3_avoidbias_more_future_original",
+  "type": "original",
+  "question": "23M numbness in left arm\n23 y/o male, 182 cm, 78 kg,\n\nRecenlty having numbness in left arm, does anybody know why it happens and what can I do to reduce this effect?\n\nThanks",
+  "answer_A": "Have you recently experienced any traumatic events or injuries to your neck or arm?",
+  "answer_B": "Can you think of any recent activities, accidents, or changes in your daily routine that might be contributing to the numbness in your left arm, or have you experienced any other symptoms such as pain, weakness, or tingling in your arm or elsewhere in your body?",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "It asks broader, more clinically relevant follow-up questions (triggers and associated symptoms) to better narrow down causes than A’s narrower trauma-only query.",
+  "raw": {
+    "model_response": "Verdict: [[B]]\nExplanation: It asks broader, more clinically relevant follow-up questions (triggers and associated symptoms) to better narrow down causes than A’s narrower trauma-only query."
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "t_cgxlot6-0-c0-q0_clarity_more_future_less",
+  "type": "original",
+  "question": "Who/what type of doctor must I see to be prescribed an x-ray/MRI/CT\n can a radiologist prescribe an x-ray/MRI?",
+  "answer_A": "Can you please describe the symptoms or concerns that led you to think you might need an X-ray, MRI, or CT scan, and how long you've been experiencing them?",
+  "answer_B": "It seems like you're looking for some kind of imaging, but could you provide more information about what's been going on that makes you think you need one of these tests?",
+  "preferred": "1",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "It more directly addresses the request for imaging tests and asks for relevant context, whereas A is narrower and less aligned with the question about who can prescribe.",
+  "raw": {
+    "model_response": "Verdict: [[B]]\nExplanation: It more directly addresses the request for imaging tests and asks for relevant context, whereas A is narrower and less aligned with the question about who can prescribe."
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "t_do3erke-0-c0-q0_coarse_more_future_less",
+  "type": "original",
+  "question": "I am a 17 year old male, and I have been feeling symptoms of acid reflux(discomfort in the upper chest)\nHow quickly does this get resolved? Is there anything I can do?",
+  "answer_A": "Does anyone in your family have a history of allergies?",
+  "answer_B": "Can you describe the timing and triggers of your discomfort, such as after eating certain foods or at night when lying down, and have you tried any over-the-counter medications or lifestyle changes to alleviate the symptoms?",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "It asks relevant reflux-focused follow-up questions about triggers and treatments, unlike A which is unrelated.",
+  "raw": {
+    "model_response": "Verdict: [[B]]\nExplanation: It asks relevant reflux-focused follow-up questions about triggers and treatments, unlike A which is unrelated."
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "t_ctmkwo7-0-c0-q0_accuracy_more_future_less",
+  "type": "original",
+  "question": "Felt a small ball thing in my scrotum\nIt's feels like a mini testicle. I can move it around also. Feels about the size of a lady bug.",
+  "answer_A": "Does the small ball feel connected to anything else down there when you touch it or try to move it around?",
+  "answer_B": "Can you tell me if the small, movable mass in your scrotum is painful or tender to the touch, and have you noticed any changes in size or sensation since you first became aware of it?",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "It asks more clinically relevant triage questions (pain/tenderness and change over time) than A’s vague connectivity question.",
+  "raw": {
+    "model_response": "Verdict: [[B]]\nExplanation: It asks more clinically relevant triage questions (pain/tenderness and change over time) than A’s vague connectivity question."
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "t_cw9vkz1-0-c2-q2_coarse_more_future_less",
+  "type": "original",
+  "question": "Urinating makes my brain weak?\nWhen I urinate I feel confused and less smart. What is it? Urine is fine like it was before.",
+  "answer_A": "Can you describe the exact sensations of confusion and feeling \"less smart\" that you experience after urinating, such as dizziness, lightheadedness, or difficulty concentrating, and do these symptoms resolve on their own or persist for a certain period of time?",
+  "answer_B": "1. Have you traveled to any foreign countries recently?",
+  "preferred": "1",
+  "winner": "A",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "Answer A appropriately asks clarifying questions relevant to post-urination confusion, while Answer B is largely unrelated.",
+  "raw": {
+    "model_response": "Verdict: [[A]]\nExplanation: Answer A appropriately asks clarifying questions relevant to post-urination confusion, while Answer B is largely unrelated."
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "t_cw9vkz1-0-c2-q2_clarity_more_future_original",
+  "type": "original",
+  "question": "Urinating makes my brain weak?\nWhen I urinate I feel confused and less smart. What is it? Urine is fine like it was before.",
+  "answer_A": "Can you describe exactly what you mean by feeling \"confused and less smart\" after urinating, and how long these feelings typically last?",
+  "answer_B": "1. Are there any other symptoms you are experiencing besides feeling confused and less smart after urinating?",
+  "preferred": "1",
+  "winner": "A",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "It asks for more specific details about the symptom and its duration, which is more useful for understanding the problem.",
+  "raw": {
+    "model_response": "Verdict: [[A]]\nExplanation: It asks for more specific details about the symptom and its duration, which is more useful for understanding the problem."
+  },
+  "is_valid": true
+}
+{
+  "sample_id": "t_cmunvvb-0-c0-q0_relevance_more_future_original",
+  "type": "original",
+  "question": "Today my right hand keeps getting really cold doesn't feel normal\nFinger joints in that hand feel slow.",
+  "answer_A": "Do you smoke?",
+  "answer_B": "Have you experienced any episodes of your fingers changing color, such as turning pale, blue, or red, especially when exposed to cold temperatures or stress?",
+  "preferred": "2",
+  "winner": "B",
+  "score_A": null,
+  "score_B": null,
+  "explanation": "It asks a relevant diagnostic question about color changes consistent with circulation issues like Raynaud’s, whereas A is too narrow and non-specific.",
+  "raw": {
+    "model_response": "Verdict: [[B]]\nExplanation: It asks a relevant diagnostic question about color changes consistent with circulation issues like Raynaud’s, whereas A is too narrow and non-specific."
+  },
+  "is_valid": true
+}

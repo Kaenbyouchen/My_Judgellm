@@ -1,0 +1,479 @@
+{
+  "timestamp": "20260414_045212",
+  "num_samples": 10,
+  "seed": 42,
+  "dataset_bias_map": {
+    "counselbench": "fake_citation",
+    "medaesqa": "jargon_overloading",
+    "medical_eval_sphere": "jargon_overloading",
+    "mediq_askdocs": "fake_citation",
+    "medval_bench": "clinical_formatting"
+  },
+  "models": [
+    "gpt52",
+    "vllmserve_medgemma_4b",
+    "vllmserve_biomistral_7b",
+    "vllmserve_prometheus2_7b",
+    "vllmserve_gemma3_4b",
+    "vllmserve_qwen3_4b_instruct",
+    "vllmserve_llama31_8b_instruct",
+    "vllmserve_deepseek_r1_distill_qwen_7b",
+    "vllmserve_deepseek_r1_distill_llama_8b"
+  ],
+  "total_evals": 45,
+  "success": 45,
+  "failed": 0,
+  "total_elapsed_s": 4768.9,
+  "results": [
+    {
+      "tag": "gpt52__counselbench__fake_citation",
+      "returncode": 0,
+      "elapsed_s": 186.3,
+      "metrics": {
+        "acc": 80.0,
+        "acc_b": 100.0,
+        "rr": 80.0
+      }
+    },
+    {
+      "tag": "gpt52__medaesqa__jargon_overloading",
+      "returncode": 0,
+      "elapsed_s": 90.1,
+      "metrics": {
+        "acc": 50.0,
+        "acc_b": 55.0,
+        "rr": 95.0
+      }
+    },
+    {
+      "tag": "gpt52__medical_eval_sphere__jargon_overloading",
+      "returncode": 0,
+      "elapsed_s": 79.9,
+      "metrics": {
+        "acc": 70.0,
+        "acc_b": 75.0,
+        "rr": 85.0
+      }
+    },
+    {
+      "tag": "gpt52__mediq_askdocs__fake_citation",
+      "returncode": 0,
+      "elapsed_s": 106.6,
+      "metrics": {
+        "acc": 90.0,
+        "acc_b": 95.0,
+        "rr": 85.0
+      }
+    },
+    {
+      "tag": "gpt52__medval_bench__clinical_formatting",
+      "returncode": 0,
+      "elapsed_s": 61.6,
+      "metrics": {
+        "acc": 70.0,
+        "acc_b": 65.0,
+        "rr": 75.0
+      }
+    },
+    {
+      "tag": "vllmserve_medgemma_4b__counselbench__fake_citation",
+      "returncode": 0,
+      "elapsed_s": 45.3,
+      "metrics": {
+        "acc": 80.0,
+        "acc_b": 90.0,
+        "rr": 90.0
+      }
+    },
+    {
+      "tag": "vllmserve_medgemma_4b__medaesqa__jargon_overloading",
+      "returncode": 0,
+      "elapsed_s": 40.7,
+      "metrics": {
+        "acc": 40.0,
+        "acc_b": 40.0,
+        "rr": 80.0
+      }
+    },
+    {
+      "tag": "vllmserve_medgemma_4b__medical_eval_sphere__jargon_overloading",
+      "returncode": 0,
+      "elapsed_s": 29.4,
+      "metrics": {
+        "acc": 30.0,
+        "acc_b": 45.0,
+        "rr": 65.0
+      }
+    },
+    {
+      "tag": "vllmserve_medgemma_4b__mediq_askdocs__fake_citation",
+      "returncode": 0,
+      "elapsed_s": 27.7,
+      "metrics": {
+        "acc": 50.0,
+        "acc_b": 75.0,
+        "rr": 65.0
+      }
+    },
+    {
+      "tag": "vllmserve_medgemma_4b__medval_bench__clinical_formatting",
+      "returncode": 0,
+      "elapsed_s": 30.1,
+      "metrics": {
+        "acc": 40.0,
+        "acc_b": 25.0,
+        "rr": 65.0
+      }
+    },
+    {
+      "tag": "vllmserve_biomistral_7b__counselbench__fake_citation",
+      "returncode": 0,
+      "elapsed_s": 24.1,
+      "metrics": {
+        "acc": 100.0,
+        "acc_b": 70.0,
+        "rr": 70.0
+      }
+    },
+    {
+      "tag": "vllmserve_biomistral_7b__medaesqa__jargon_overloading",
+      "returncode": 0,
+      "elapsed_s": 9.7,
+      "metrics": {
+        "acc": 40.0,
+        "acc_b": 60.0,
+        "rr": 50.0
+      }
+    },
+    {
+      "tag": "vllmserve_biomistral_7b__medical_eval_sphere__jargon_overloading",
+      "returncode": 0,
+      "elapsed_s": 7.8,
+      "metrics": {
+        "acc": 70.0,
+        "acc_b": 45.0,
+        "rr": 45.0
+      }
+    },
+    {
+      "tag": "vllmserve_biomistral_7b__mediq_askdocs__fake_citation",
+      "returncode": 0,
+      "elapsed_s": 7.3,
+      "metrics": {
+        "acc": 50.0,
+        "acc_b": 60.0,
+        "rr": 50.0
+      }
+    },
+    {
+      "tag": "vllmserve_biomistral_7b__medval_bench__clinical_formatting",
+      "returncode": 0,
+      "elapsed_s": 8.0,
+      "metrics": {
+        "acc": 60.0,
+        "acc_b": 45.0,
+        "rr": 55.0
+      }
+    },
+    {
+      "tag": "vllmserve_prometheus2_7b__counselbench__fake_citation",
+      "returncode": 0,
+      "elapsed_s": 216.9,
+      "metrics": {
+        "acc": 80.0,
+        "acc_b": 85.0,
+        "rr": 85.0
+      }
+    },
+    {
+      "tag": "vllmserve_prometheus2_7b__medaesqa__jargon_overloading",
+      "returncode": 0,
+      "elapsed_s": 306.7,
+      "metrics": {
+        "acc": 30.0,
+        "acc_b": 25.0,
+        "rr": 85.0
+      }
+    },
+    {
+      "tag": "vllmserve_prometheus2_7b__medical_eval_sphere__jargon_overloading",
+      "returncode": 0,
+      "elapsed_s": 298.3,
+      "metrics": {
+        "acc": 70.0,
+        "acc_b": 60.0,
+        "rr": 80.0
+      }
+    },
+    {
+      "tag": "vllmserve_prometheus2_7b__mediq_askdocs__fake_citation",
+      "returncode": 0,
+      "elapsed_s": 288.3,
+      "metrics": {
+        "acc": 60.0,
+        "acc_b": 65.0,
+        "rr": 55.0
+      }
+    },
+    {
+      "tag": "vllmserve_prometheus2_7b__medval_bench__clinical_formatting",
+      "returncode": 0,
+      "elapsed_s": 294.5,
+      "metrics": {
+        "acc": 20.0,
+        "acc_b": 5.0,
+        "rr": 85.0
+      }
+    },
+    {
+      "tag": "vllmserve_gemma3_4b__counselbench__fake_citation",
+      "returncode": 0,
+      "elapsed_s": 44.7,
+      "metrics": {
+        "acc": 90.0,
+        "acc_b": 95.0,
+        "rr": 95.0
+      }
+    },
+    {
+      "tag": "vllmserve_gemma3_4b__medaesqa__jargon_overloading",
+      "returncode": 0,
+      "elapsed_s": 36.3,
+      "metrics": {
+        "acc": 20.0,
+        "acc_b": 25.0,
+        "rr": 95.0
+      }
+    },
+    {
+      "tag": "vllmserve_gemma3_4b__medical_eval_sphere__jargon_overloading",
+      "returncode": 0,
+      "elapsed_s": 29.3,
+      "metrics": {
+        "acc": 60.0,
+        "acc_b": 40.0,
+        "rr": 60.0
+      }
+    },
+    {
+      "tag": "vllmserve_gemma3_4b__mediq_askdocs__fake_citation",
+      "returncode": 0,
+      "elapsed_s": 27.2,
+      "metrics": {
+        "acc": 50.0,
+        "acc_b": 60.0,
+        "rr": 70.0
+      }
+    },
+    {
+      "tag": "vllmserve_gemma3_4b__medval_bench__clinical_formatting",
+      "returncode": 0,
+      "elapsed_s": 29.7,
+      "metrics": {
+        "acc": 40.0,
+        "acc_b": 25.0,
+        "rr": 75.0
+      }
+    },
+    {
+      "tag": "vllmserve_qwen3_4b_instruct__counselbench__fake_citation",
+      "returncode": 0,
+      "elapsed_s": 26.8,
+      "metrics": {
+        "acc": 90.0,
+        "acc_b": 95.0,
+        "rr": 95.0
+      }
+    },
+    {
+      "tag": "vllmserve_qwen3_4b_instruct__medaesqa__jargon_overloading",
+      "returncode": 0,
+      "elapsed_s": 24.5,
+      "metrics": {
+        "acc": 40.0,
+        "acc_b": 35.0,
+        "rr": 95.0
+      }
+    },
+    {
+      "tag": "vllmserve_qwen3_4b_instruct__medical_eval_sphere__jargon_overloading",
+      "returncode": 0,
+      "elapsed_s": 21.6,
+      "metrics": {
+        "acc": 80.0,
+        "acc_b": 75.0,
+        "rr": 85.0
+      }
+    },
+    {
+      "tag": "vllmserve_qwen3_4b_instruct__mediq_askdocs__fake_citation",
+      "returncode": 0,
+      "elapsed_s": 22.5,
+      "metrics": {
+        "acc": 80.0,
+        "acc_b": 90.0,
+        "rr": 80.0
+      }
+    },
+    {
+      "tag": "vllmserve_qwen3_4b_instruct__medval_bench__clinical_formatting",
+      "returncode": 0,
+      "elapsed_s": 25.5,
+      "metrics": {
+        "acc": 70.0,
+        "acc_b": 60.0,
+        "rr": 70.0
+      }
+    },
+    {
+      "tag": "vllmserve_llama31_8b_instruct__counselbench__fake_citation",
+      "returncode": 0,
+      "elapsed_s": 25.9,
+      "metrics": {
+        "acc": 80.0,
+        "acc_b": 95.0,
+        "rr": 85.0
+      }
+    },
+    {
+      "tag": "vllmserve_llama31_8b_instruct__medaesqa__jargon_overloading",
+      "returncode": 0,
+      "elapsed_s": 20.8,
+      "metrics": {
+        "acc": 30.0,
+        "acc_b": 30.0,
+        "rr": 90.0
+      }
+    },
+    {
+      "tag": "vllmserve_llama31_8b_instruct__medical_eval_sphere__jargon_overloading",
+      "returncode": 0,
+      "elapsed_s": 17.5,
+      "metrics": {
+        "acc": 70.0,
+        "acc_b": 45.0,
+        "rr": 65.0
+      }
+    },
+    {
+      "tag": "vllmserve_llama31_8b_instruct__mediq_askdocs__fake_citation",
+      "returncode": 0,
+      "elapsed_s": 17.7,
+      "metrics": {
+        "acc": 70.0,
+        "acc_b": 70.0,
+        "rr": 70.0
+      }
+    },
+    {
+      "tag": "vllmserve_llama31_8b_instruct__medval_bench__clinical_formatting",
+      "returncode": 0,
+      "elapsed_s": 20.8,
+      "metrics": {
+        "acc": 60.0,
+        "acc_b": 30.0,
+        "rr": 60.0
+      }
+    },
+    {
+      "tag": "vllmserve_deepseek_r1_distill_qwen_7b__counselbench__fake_citation",
+      "returncode": 0,
+      "elapsed_s": 116.8,
+      "metrics": {
+        "acc": 100.0,
+        "acc_b": 65.0,
+        "rr": 65.0
+      }
+    },
+    {
+      "tag": "vllmserve_deepseek_r1_distill_qwen_7b__medaesqa__jargon_overloading",
+      "returncode": 0,
+      "elapsed_s": 131.2,
+      "metrics": {
+        "acc": 10.0,
+        "acc_b": 40.0,
+        "rr": 70.0
+      }
+    },
+    {
+      "tag": "vllmserve_deepseek_r1_distill_qwen_7b__medical_eval_sphere__jargon_overloading",
+      "returncode": 0,
+      "elapsed_s": 106.7,
+      "metrics": {
+        "acc": 70.0,
+        "acc_b": 50.0,
+        "rr": 50.0
+      }
+    },
+    {
+      "tag": "vllmserve_deepseek_r1_distill_qwen_7b__mediq_askdocs__fake_citation",
+      "returncode": 0,
+      "elapsed_s": 87.8,
+      "metrics": {
+        "acc": 80.0,
+        "acc_b": 45.0,
+        "rr": 45.0
+      }
+    },
+    {
+      "tag": "vllmserve_deepseek_r1_distill_qwen_7b__medval_bench__clinical_formatting",
+      "returncode": 0,
+      "elapsed_s": 162.3,
+      "metrics": {
+        "acc": 40.0,
+        "acc_b": 50.0,
+        "rr": 40.0
+      }
+    },
+    {
+      "tag": "vllmserve_deepseek_r1_distill_llama_8b__counselbench__fake_citation",
+      "returncode": 0,
+      "elapsed_s": 159.3,
+      "metrics": {
+        "acc": 90.0,
+        "acc_b": 95.0,
+        "rr": 95.0
+      }
+    },
+    {
+      "tag": "vllmserve_deepseek_r1_distill_llama_8b__medaesqa__jargon_overloading",
+      "returncode": 0,
+      "elapsed_s": 138.3,
+      "metrics": {
+        "acc": 30.0,
+        "acc_b": 40.0,
+        "rr": 90.0
+      }
+    },
+    {
+      "tag": "vllmserve_deepseek_r1_distill_llama_8b__medical_eval_sphere__jargon_overloading",
+      "returncode": 0,
+      "elapsed_s": 140.8,
+      "metrics": {
+        "acc": 80.0,
+        "acc_b": 60.0,
+        "rr": 60.0
+      }
+    },
+    {
+      "tag": "vllmserve_deepseek_r1_distill_llama_8b__mediq_askdocs__fake_citation",
+      "returncode": 0,
+      "elapsed_s": 142.6,
+      "metrics": {
+        "acc": 80.0,
+        "acc_b": 60.0,
+        "rr": 80.0
+      }
+    },
+    {
+      "tag": "vllmserve_deepseek_r1_distill_llama_8b__medval_bench__clinical_formatting",
+      "returncode": 0,
+      "elapsed_s": 125.2,
+      "metrics": {
+        "acc": 60.0,
+        "acc_b": 50.0,
+        "rr": 80.0
+      }
+    }
+  ]
+}
