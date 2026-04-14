@@ -57,7 +57,7 @@ batch:
 
   # 运行控制
   continue_on_error: true
-  dry_run: false
+  dry_run: true
   # true: 每个 judge_model 只在第一个组合里计算一次 original judgment
   # 后续 bias 组合跳过 original，仅计算 bias 相关指标
   reuse_original_per_judge: true
