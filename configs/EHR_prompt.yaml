@@ -403,9 +403,8 @@ judge:
     system: |
       Compare two answers for the same task and choose the better one.
       Output format must be exactly:
+      Verdict: [[A]] or [[B]]
       Explanation: <one short sentence>
-      Verdict:
-      [[A]] or [[B]]
     user: |
       Task:
       {question}

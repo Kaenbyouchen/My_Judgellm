@@ -110,6 +110,7 @@ def _build_run_config(
     compute_original_acc: bool,
     inject_to: Optional[str] = None,
     semantic_guard_override: Optional[Dict[str, Any]] = None,
+    original_judgments_path: Optional[str] = None,
 ) -> Dict[str, Any]:
     cfg = deepcopy(base_cfg)
 
@@ -143,6 +144,11 @@ def _build_run_config(
 
     # Pairwise position-bias correction: evaluate GT@A and GT@B, then average RR/CR/acc_biased.
     cfg["evaluation"]["position_debias_pairwise"] = True
+
+    # Pass cached original judgments path so RR can be computed as true
+    # same-choice rate even when compute_original_acc is False.
+    if original_judgments_path:
+        cfg["evaluation"]["original_judgments_path"] = original_judgments_path
 
     # Optional semantic guard override from dataset-bias plan.
     if isinstance(semantic_guard_override, dict) and semantic_guard_override:
@@ -500,6 +506,9 @@ def main():
     run_index = 0
     stop_now = False
     original_done_for_judge_dataset: Set[Tuple[str, str]] = set()
+    # Cache path to judge_raw_original.jsonl for each (judge, dataset) pair,
+    # so subsequent bias runs can load it for true RR computation.
+    original_judgments_cache: Dict[Tuple[str, str], str] = {}
     batch_start_time = time.time()
     success_count = 0
     failed_count = 0
@@ -606,6 +615,7 @@ def main():
                             pre_cfg.setdefault("len_ratio_max", 3.50)
                             semantic_guard_override["precheck"] = pre_cfg
 
+                        cached_orig_path = original_judgments_cache.get((judge_model, ds_name))
                         run_cfg = _build_run_config(
                             base_cfg,
                             ds_name,
@@ -616,6 +626,7 @@ def main():
                             compute_original_acc=compute_original_acc,
                             inject_to=inject_to_override or None,
                             semantic_guard_override=semantic_guard_override,
+                            original_judgments_path=cached_orig_path if not compute_original_acc else None,
                         )
                         run_cfg_path = run_cfg_dir / f"{run_tag}.yaml"
                         _write_yaml(run_cfg_path, run_cfg)
@@ -651,6 +662,19 @@ def main():
                                 success_count += 1
                                 if compute_original_acc:
                                     original_done_for_judge_dataset.add((judge_model, ds_name))
+                                    # Cache the path to judge_raw_original.jsonl
+                                    # so subsequent bias runs can load it for
+                                    # true RR (same-choice) computation.
+                                    if isinstance(run_output, dict):
+                                        _run_dir = run_output.get("run_dir")
+                                        if _run_dir:
+                                            _orig_path = Path(_run_dir) / "judge_raw_original.jsonl"
+                                            if _orig_path.exists():
+                                                original_judgments_cache[(judge_model, ds_name)] = str(_orig_path)
+                                                logger.info(
+                                                    f"Cached original judgments path for "
+                                                    f"({judge_model}, {ds_name}): {_orig_path}"
+                                                )
                                 if skip_existing_evals:
                                     completed_eval_keys.add(eval_key)
                     except KeyboardInterrupt:

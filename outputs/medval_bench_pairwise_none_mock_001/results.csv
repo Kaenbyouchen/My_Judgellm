@@ -1,2 +1,0 @@
-metric,value,proxy,has_gt,total,note
-accuracy_original,0.0,False,True,1,Accuracy based on judge winner matching preferred label

@@ -333,17 +333,21 @@ class ModelJudge(BaseJudge):
             logger.debug(f"Failed to parse as JSON, falling back to text parsing: {e}")
             response_lower = response.lower()
             
-            # Try new format first: "Explanation:" and "[[A]]" or "[[B]]"
+            # Try structured format: "Verdict: [[A]]" / "[[B]]" and "Explanation:"
             winner = "tie"
             explanation = ""
             
-            # Extract explanation from "Explanation:" line
-            explanation_match = re.search(r'explanation:\s*(.+?)(?:\n|verdict:|$)', response, re.IGNORECASE | re.DOTALL)
+            # Extract verdict from "[[A]]" or "[[B]]" format (order-independent)
+            verdict_match = re.search(r'\[\[([AB])\]\]', response, re.IGNORECASE)
+            
+            # Extract explanation: capture everything after "Explanation:" until
+            # "Verdict:" (old order) or end-of-string (new order: verdict first)
+            explanation_match = re.search(
+                r'explanation:\s*(.+?)(?=\nverdict:|\Z)',
+                response, re.IGNORECASE | re.DOTALL
+            )
             if explanation_match:
                 explanation = explanation_match.group(1).strip()
-            
-            # Extract verdict from "[[A]]" or "[[B]]" format
-            verdict_match = re.search(r'\[\[([AB])\]\]', response, re.IGNORECASE)
             if verdict_match:
                 winner = verdict_match.group(1).upper()
             else:

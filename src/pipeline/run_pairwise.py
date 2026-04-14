@@ -81,6 +81,7 @@ def run_pairwise_evaluation(
     semantic_guard: Optional[Dict[str, Any]] = None,
     position_debias_pairwise: bool = True,
     request_batch_size: int = 1,
+    original_judgments_path: Optional[str] = None,
 ) -> Dict[str, Any]:
     """
     Run pairwise evaluation pipeline.
@@ -290,7 +291,44 @@ def run_pairwise_evaluation(
             pbar.close()
         
         results["original_judgments_list"] = original_judgments
-    
+
+    # Load cached original judgments from a previous run (for RR computation
+    # when compute_original_acc=False but we still need same-choice comparison).
+    if not compute_original_acc and original_judgments_path:
+        _ext_path = Path(original_judgments_path)
+        if _ext_path.exists():
+            logger.info(
+                f"Loading cached original judgments from {original_judgments_path} "
+                "for true RR computation"
+            )
+            _ext_records = load_existing_judgments(_ext_path.parent, "original")
+            if _ext_records:
+                _ext_objs = [
+                    JudgeResult.from_dict({
+                        "winner": r.get("winner", "tie"),
+                        "score_A": r.get("score_A"),
+                        "score_B": r.get("score_B"),
+                        "explanation": r.get("explanation"),
+                        "raw": r.get("raw", {}),
+                        "is_valid": r.get("is_valid", True),
+                    })
+                    for r in _ext_records
+                ]
+                results["original_judgments_list"] = _ext_objs
+                logger.info(
+                    f"Loaded {len(_ext_objs)} cached original judgments "
+                    f"(samples expected: {len(samples)})"
+                )
+            else:
+                logger.warning(
+                    f"Cached original judgments file exists but contains no records: "
+                    f"{original_judgments_path}"
+                )
+        else:
+            logger.warning(
+                f"Cached original judgments path does not exist: {original_judgments_path}"
+            )
+
     # Step 2: Inject bias and evaluate GT vs biased answer (for RR/CR)
     if compute_bias_metrics and bias_enabled:
         logger.info("Injecting bias and evaluating GT vs biased answer...")
@@ -799,9 +837,13 @@ def run_pairwise_evaluation(
                 },
             }
         else:
+            _orig_len = len(orig_judgments) if orig_judgments else 0
             logger.warning(
-                "Cannot compute RR: original judgments unavailable or count mismatch. "
-                "Falling back to acc_biased as RR proxy."
+                f"Cannot compute true RR: original judgments "
+                f"{'unavailable' if not orig_judgments else f'count mismatch ({_orig_len} vs {len(samples)})'}"
+                f". Falling back to acc_biased as RR proxy. "
+                f"To fix: ensure original_judgments_path is set in batch config, "
+                f"or re-run with compute_original_acc=true."
             )
             rrA = accA
             rrB = accB

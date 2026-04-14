@@ -485,6 +485,7 @@ def main():
             semantic_guard=bias_config.get("semantic_guard", {}),
             position_debias_pairwise=eval_config.get("position_debias_pairwise", True),
             request_batch_size=eval_config.get("request_batch_size", 1),
+            original_judgments_path=eval_config.get("original_judgments_path"),
         )
     elif data_type == "scalar":
         logger.info("Running scalar evaluation pipeline (placeholder)")
@@ -606,10 +607,12 @@ def main():
         f"{' | '.join(metric_parts) if metric_parts else 'no metrics'} ---\n",
         flush=True,
     )
-    if isinstance(results, dict) and results.get("interrupted", False):
-        # When running under YAML batch runner, propagate interruption to stop the whole batch.
-        if os.getenv("JUDGELLM_ABORT_BATCH_ON_INTERRUPT", "0") == "1":
-            raise KeyboardInterrupt("Sub-run interrupted; aborting remaining batch runs.")
+    if isinstance(results, dict):
+        results["run_dir"] = str(run_dir)
+        if results.get("interrupted", False):
+            # When running under YAML batch runner, propagate interruption to stop the whole batch.
+            if os.getenv("JUDGELLM_ABORT_BATCH_ON_INTERRUPT", "0") == "1":
+                raise KeyboardInterrupt("Sub-run interrupted; aborting remaining batch runs.")
     return results
 
 
