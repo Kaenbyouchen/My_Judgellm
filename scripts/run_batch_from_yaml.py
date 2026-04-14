@@ -15,6 +15,7 @@ import argparse
 import json
 import os
 import signal
+import subprocess
 import sys
 import time
 import traceback
@@ -23,6 +24,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Set, Tuple, Optional
 
+import requests
 import yaml
 from loguru import logger
 
@@ -35,12 +37,164 @@ from src.utils.io import load_yaml
 from src.utils.prompt_config import load_prompts_for_category
 
 _shutdown_requested = False
+_active_vllm_proc: Optional[subprocess.Popen] = None
 
 
 def _signal_handler(signum, frame):
     global _shutdown_requested
     _shutdown_requested = True
     logger.warning("Interrupt received. Current run will finish, then stop.")
+
+
+# ── vLLM serve auto-management ────────────────────────────────────────────────
+
+def _is_vllm_serve_model(model_id: str) -> bool:
+    return model_id.startswith("vllmserve_")
+
+
+def _resolve_hf_model_name(model_id: str, models_cfg: Dict[str, Any]) -> Optional[str]:
+    """Resolve HF model name from models.yaml for a vllmserve_* model."""
+    openai_section = models_cfg.get("openai", {})
+    if isinstance(openai_section, dict):
+        entry = openai_section.get(model_id, {})
+        if isinstance(entry, dict) and "model_name" in entry:
+            return entry["model_name"]
+    return None
+
+
+def _kill_port_occupant(port: int) -> None:
+    my_pid = os.getpid()
+    try:
+        out = subprocess.check_output(
+            ["lsof", "-ti", f":{port}"], stderr=subprocess.DEVNULL, text=True
+        )
+        for pid_str in out.strip().split("\n"):
+            pid_str = pid_str.strip()
+            if pid_str.isdigit() and int(pid_str) != my_pid:
+                os.kill(int(pid_str), signal.SIGKILL)
+                logger.info(f"Killed existing process {pid_str} on port {port}")
+        time.sleep(2)
+    except (subprocess.CalledProcessError, OSError):
+        pass
+
+
+def _start_vllm_server(
+    hf_model: str,
+    port: int,
+    log_dir: Path,
+    model_id: str,
+    gpu_mem_util: float = 0.90,
+    max_model_len: int = 8192,
+) -> Optional[subprocess.Popen]:
+    global _active_vllm_proc
+    _kill_port_occupant(port)
+
+    log_file = log_dir / f"vllm_{model_id}.log"
+    cmd = [
+        sys.executable, "-m", "vllm.entrypoints.openai.api_server",
+        "--model", hf_model,
+        "--port", str(port),
+        "--max-model-len", str(max_model_len),
+        "--gpu-memory-utilization", str(gpu_mem_util),
+        "--dtype", "auto",
+        "--download-dir", str(PROJECT_ROOT / "src" / "models"),
+        "--enforce-eager",
+        "--trust-remote-code",
+        "--disable-log-requests",
+    ]
+
+    print(f"\n  [vLLM] Starting: {hf_model}", flush=True)
+    print(f"  [vLLM] Command: {' '.join(cmd)}", flush=True)
+    print(f"  [vLLM] Log: {log_file}", flush=True)
+    logger.info(f"Starting vLLM serve for {model_id}: {hf_model}")
+
+    fh = log_file.open("w", encoding="utf-8")
+    proc = subprocess.Popen(
+        cmd,
+        stdout=fh,
+        stderr=subprocess.STDOUT,
+        cwd=str(PROJECT_ROOT),
+        env={**os.environ, "CUDA_VISIBLE_DEVICES": os.environ.get("CUDA_VISIBLE_DEVICES", "0")},
+        start_new_session=True,
+    )
+    proc._log_fh = fh  # type: ignore[attr-defined]
+    _active_vllm_proc = proc
+    return proc
+
+
+def _wait_for_vllm_health(port: int, timeout: int = 600, interval: int = 5) -> bool:
+    url = f"http://127.0.0.1:{port}/health"
+    deadline = time.time() + timeout
+    attempt = 0
+    while time.time() < deadline:
+        if _shutdown_requested:
+            return False
+        attempt += 1
+        try:
+            r = requests.get(url, timeout=3)
+            if r.status_code == 200:
+                elapsed = timeout - int(deadline - time.time())
+                print(f"  [vLLM] Healthy after {elapsed}s ({attempt} checks)", flush=True)
+                logger.info(f"vLLM server healthy after {elapsed}s")
+                return True
+        except requests.ConnectionError:
+            pass
+        except Exception:
+            pass
+        remaining = int(deadline - time.time())
+        if attempt % 12 == 0:
+            print(f"  [vLLM] Still waiting... ({remaining}s remaining)", flush=True)
+        time.sleep(interval)
+    return False
+
+
+def _stop_vllm_server(proc: Optional[subprocess.Popen]) -> None:
+    global _active_vllm_proc
+    if proc is None:
+        return
+    print("  [vLLM] Stopping server (process group)...", flush=True)
+    logger.info("Stopping vLLM server")
+    pgid = None
+    try:
+        pgid = os.getpgid(proc.pid)
+    except OSError:
+        pass
+
+    if pgid is not None:
+        try:
+            os.killpg(pgid, signal.SIGTERM)
+        except OSError:
+            pass
+    else:
+        try:
+            proc.terminate()
+        except OSError:
+            pass
+
+    try:
+        proc.wait(timeout=30)
+    except subprocess.TimeoutExpired:
+        if pgid is not None:
+            try:
+                os.killpg(pgid, signal.SIGKILL)
+            except OSError:
+                pass
+        try:
+            proc.kill()
+            proc.wait(timeout=10)
+        except Exception:
+            pass
+
+    fh = getattr(proc, "_log_fh", None)
+    if fh:
+        try:
+            fh.close()
+        except Exception:
+            pass
+    _active_vllm_proc = None
+    time.sleep(3)
+    print("  [vLLM] Server stopped (GPU memory released).", flush=True)
+    logger.info("vLLM server stopped")
 
 
 def _setup_log_dir(log_dir_cfg: Any) -> Path:
@@ -391,6 +545,14 @@ def main():
     continue_on_error = bool(batch_cfg.get("continue_on_error", True))
     dry_run = bool(batch_cfg.get("dry_run", False))
     reuse_original_per_judge = bool(batch_cfg.get("reuse_original_per_judge", True))
+
+    # vLLM serve auto-management config
+    vllm_auto_serve = bool(batch_cfg.get("vllm_auto_serve", True))
+    vllm_port = int(batch_cfg.get("vllm_port", 8000))
+    vllm_max_model_len = int(batch_cfg.get("vllm_max_model_len", 8192))
+    vllm_gpu_mem_util = float(batch_cfg.get("vllm_gpu_memory_utilization", 0.90))
+    vllm_startup_timeout = int(batch_cfg.get("vllm_startup_timeout", 600))
+    models_cfg = load_yaml(str(PROJECT_ROOT / "configs" / "models.yaml"))
     skip_existing_evals = bool(batch_cfg.get("skip_existing_evals", False))
     inject_to_override = str(batch_cfg.get("inject_to", "")).strip().lower()
     if inject_to_override and inject_to_override not in {"gt", "non_gt"}:
@@ -494,6 +656,13 @@ def main():
             f"biases={item['selected_biases']} modes={sorted(list(set([m for _, m in item['combos']])))}"
         )
     logger.info(f"Reuse original per judge: {reuse_original_per_judge}")
+    vllm_model_ids = [m for m in judge_models if _is_vllm_serve_model(m)]
+    if vllm_model_ids and vllm_auto_serve:
+        logger.info(
+            f"vLLM auto-serve: port={vllm_port}, max_model_len={vllm_max_model_len}, "
+            f"gpu_mem={vllm_gpu_mem_util}, timeout={vllm_startup_timeout}s, "
+            f"models={vllm_model_ids}"
+        )
     total_combo_count = sum(
         len(judge_models) * len(injector_models) * len(item["combos"])
         for item in dataset_run_items
@@ -537,178 +706,234 @@ def main():
     print(f"  BATCH PROGRESS: {total_combo_count} total runs planned")
     print(f"{'=' * 72}")
 
+    _prev_vllm_base_url = os.environ.get("VLLM_BASE_URL")
+
     for judge_model in judge_models:
-        for injector_spec in injector_models:
-            injector_model = judge_model if injector_spec == "same_as_judge" else injector_spec
-            for ds_item in dataset_run_items:
-                ds_name = ds_item["dataset_name"]
-                ds_category = ds_item["dataset_category"]
-                guard_overrides_map = ds_item.get("guard_overrides", {})
-                if not isinstance(guard_overrides_map, dict):
-                    guard_overrides_map = {}
-                for bias, mode in ds_item["combos"]:
-                    if _shutdown_requested:
-                        logger.warning("Stop requested; exiting loop.")
-                        stop_now = True
-                        break
+        # ── vLLM auto-serve: start server for vllmserve_* models ──────────
+        vllm_proc: Optional[subprocess.Popen] = None
+        if vllm_auto_serve and _is_vllm_serve_model(judge_model):
+            hf_name = _resolve_hf_model_name(judge_model, models_cfg)
+            if not hf_name:
+                logger.error(f"Cannot resolve HF model name for '{judge_model}' in models.yaml. Skipping.")
+                print(f"\n  [vLLM] ERROR: unknown model '{judge_model}', skipping.", flush=True)
+                # count all combos for this model as failed
+                for injector_spec in injector_models:
+                    for ds_item in dataset_run_items:
+                        for _ in ds_item["combos"]:
+                            run_index += 1
+                            failed_count += 1
+                continue
 
-                    run_index += 1
-                    run_tag = f"{run_index:03d}_{ds_name}_{judge_model}_{injector_model}_{bias}_{mode}"
-                    logger.info(f"[{run_index}/{total_combo_count}] {run_tag}")
-                    print(
-                        f"\n>>> [{run_index}/{total_combo_count}] "
-                        f"dataset={ds_name}  judge={judge_model}  bias={bias}({mode})",
-                        flush=True,
-                    )
+            vllm_log_dir = log_dir / "vllm_logs"
+            vllm_log_dir.mkdir(parents=True, exist_ok=True)
+            vllm_proc = _start_vllm_server(
+                hf_model=hf_name,
+                port=vllm_port,
+                log_dir=vllm_log_dir,
+                model_id=judge_model,
+                gpu_mem_util=vllm_gpu_mem_util,
+                max_model_len=vllm_max_model_len,
+            )
+            if vllm_proc is None:
+                logger.error(f"Failed to start vLLM for {judge_model}. Skipping.")
+                for injector_spec in injector_models:
+                    for ds_item in dataset_run_items:
+                        for _ in ds_item["combos"]:
+                            run_index += 1
+                            failed_count += 1
+                continue
 
-                    result: Dict[str, Any] = {
-                        "index": run_index,
-                        "dataset": ds_name,
-                        "dataset_category": ds_category,
-                        "judge_model": judge_model,
-                        "injector_model": injector_model,
-                        "bias": bias,
-                        "mode": mode,
-                        "status": "pending",
-                        "error": None,
-                        "config_path": None,
-                        "start_time": datetime.now().isoformat(),
-                        "end_time": None,
-                    }
-                    run_t0 = time.time()
+            print(f"  [vLLM] Waiting for health check (timeout={vllm_startup_timeout}s)...", flush=True)
+            healthy = _wait_for_vllm_health(vllm_port, timeout=vllm_startup_timeout)
+            if not healthy:
+                logger.error(f"vLLM health check timed out for {judge_model}. Skipping.")
+                print(f"  [vLLM] Health check FAILED for {judge_model}.", flush=True)
+                _stop_vllm_server(vllm_proc)
+                vllm_proc = None
+                for injector_spec in injector_models:
+                    for ds_item in dataset_run_items:
+                        for _ in ds_item["combos"]:
+                            run_index += 1
+                            failed_count += 1
+                continue
 
-                    try:
-                        eval_key = _build_eval_key(
-                            dataset_name=ds_name,
-                            bias=bias,
-                            mode=mode,
-                            judge_model=judge_model,
-                            injector_model=injector_model,
-                            inject_to=effective_inject_to_default,
-                        )
-                        if skip_existing_evals and eval_key in completed_eval_keys:
-                            result["status"] = "skipped_existing_eval"
-                            skipped_count += 1
-                            print(f"    SKIP (already completed)", flush=True)
-                            _print_progress(run_index, total_combo_count, run_tag, f"ok={success_count} fail={failed_count} skip={skipped_count}")
-                            logger.info(
-                                f"Skip existing eval: dataset={ds_name}, bias={bias}, mode={mode}, "
-                                f"judge={judge_model}, injector={injector_model}, inject_to={effective_inject_to_default}"
-                            )
-                            continue
+            os.environ["VLLM_BASE_URL"] = f"http://127.0.0.1:{vllm_port}/v1"
+            logger.info(f"vLLM ready for {judge_model}, VLLM_BASE_URL={os.environ['VLLM_BASE_URL']}")
 
-                        if reuse_original_per_judge:
-                            compute_original_acc = (judge_model, ds_name) not in original_done_for_judge_dataset
-                        else:
-                            compute_original_acc = True
-
-                        semantic_guard_override = guard_overrides_map.get(f"{bias}:{mode}") or guard_overrides_map.get(bias)
-
-                        # Built-in relax rule requested by user: clinical_formatting word mode.
-                        if bias in {"clinical_note", "clinical_formatting"} and mode == "word":
-                            if not isinstance(semantic_guard_override, dict):
-                                semantic_guard_override = {}
-                            pre_cfg = semantic_guard_override.get("precheck", {})
-                            if not isinstance(pre_cfg, dict):
-                                pre_cfg = {}
-                            pre_cfg.setdefault("len_ratio_min", 0.30)
-                            pre_cfg.setdefault("len_ratio_max", 3.50)
-                            semantic_guard_override["precheck"] = pre_cfg
-
-                        cached_orig_path = original_judgments_cache.get((judge_model, ds_name))
-                        run_cfg = _build_run_config(
-                            base_cfg,
-                            ds_name,
-                            judge_model,
-                            injector_model,
-                            bias,
-                            mode,
-                            compute_original_acc=compute_original_acc,
-                            inject_to=inject_to_override or None,
-                            semantic_guard_override=semantic_guard_override,
-                            original_judgments_path=cached_orig_path if not compute_original_acc else None,
-                        )
-                        run_cfg_path = run_cfg_dir / f"{run_tag}.yaml"
-                        _write_yaml(run_cfg_path, run_cfg)
-                        result["config_path"] = str(run_cfg_path)
-                        result["compute_original_acc"] = compute_original_acc
-
-                        if dry_run:
-                            result["status"] = "dry_run"
-                        else:
-                            original_argv = sys.argv.copy()
-                            prev_batch_flag = os.environ.get("JUDGELLM_ABORT_BATCH_ON_INTERRUPT")
-                            try:
-                                # In batch mode, force sub-run interrupt to bubble up immediately.
-                                os.environ["JUDGELLM_ABORT_BATCH_ON_INTERRUPT"] = "1"
-                                sys.argv = ["run_batch_from_yaml.py", "--config", str(run_cfg_path)]
-                                run_output = run_single_experiment()
-                            finally:
-                                if prev_batch_flag is None:
-                                    os.environ.pop("JUDGELLM_ABORT_BATCH_ON_INTERRUPT", None)
-                                else:
-                                    os.environ["JUDGELLM_ABORT_BATCH_ON_INTERRUPT"] = prev_batch_flag
-                                sys.argv = original_argv
-                            if isinstance(run_output, dict) and run_output.get("interrupted", False):
-                                result["status"] = "interrupted"
-                                logger.warning(f"Interrupted: {run_tag}. Stopping remaining batch runs.")
-                                stop_now = True
-                            elif _shutdown_requested:
-                                result["status"] = "interrupted"
-                                logger.warning(f"Batch interrupt flag detected: {run_tag}. Stopping remaining batch runs.")
-                                stop_now = True
-                            else:
-                                result["status"] = "success"
-                                success_count += 1
-                                if compute_original_acc:
-                                    original_done_for_judge_dataset.add((judge_model, ds_name))
-                                    # Cache the path to judge_raw_original.jsonl
-                                    # so subsequent bias runs can load it for
-                                    # true RR (same-choice) computation.
-                                    if isinstance(run_output, dict):
-                                        _run_dir = run_output.get("run_dir")
-                                        if _run_dir:
-                                            _orig_path = Path(_run_dir) / "judge_raw_original.jsonl"
-                                            if _orig_path.exists():
-                                                original_judgments_cache[(judge_model, ds_name)] = str(_orig_path)
-                                                logger.info(
-                                                    f"Cached original judgments path for "
-                                                    f"({judge_model}, {ds_name}): {_orig_path}"
-                                                )
-                                if skip_existing_evals:
-                                    completed_eval_keys.add(eval_key)
-                    except KeyboardInterrupt:
-                        result["status"] = "interrupted"
-                        result["error"] = "KeyboardInterrupt"
-                        logger.warning(f"KeyboardInterrupt: {run_tag}. Stopping remaining batch runs.")
-                        stop_now = True
-                    except Exception as e:
-                        result["status"] = "failed"
-                        result["error"] = str(e)
-                        result["traceback"] = traceback.format_exc()
-                        failed_count += 1
-                        logger.error(f"Failed: {run_tag} | {e}")
-                        if not continue_on_error:
-                            results.append(result)
+        try:
+            for injector_spec in injector_models:
+                injector_model = judge_model if injector_spec == "same_as_judge" else injector_spec
+                for ds_item in dataset_run_items:
+                    ds_name = ds_item["dataset_name"]
+                    ds_category = ds_item["dataset_category"]
+                    guard_overrides_map = ds_item.get("guard_overrides", {})
+                    if not isinstance(guard_overrides_map, dict):
+                        guard_overrides_map = {}
+                    for bias, mode in ds_item["combos"]:
+                        if _shutdown_requested:
+                            logger.warning("Stop requested; exiting loop.")
                             stop_now = True
                             break
-                    finally:
-                        # Sub-runs may overwrite signal handlers; restore batch-level handlers each iteration.
-                        signal.signal(signal.SIGINT, _signal_handler)
-                        signal.signal(signal.SIGTERM, _signal_handler)
-                        result["end_time"] = datetime.now().isoformat()
-                        results.append(result)
-                        # Print progress to terminal
-                        run_elapsed = time.time() - run_t0
-                        status_icon = {"success": "OK", "failed": "FAIL", "interrupted": "INT", "dry_run": "DRY", "skipped_existing_eval": "SKIP"}.get(result["status"], "?")
-                        print(f"    {status_icon} ({run_elapsed:.1f}s)", flush=True)
-                        _print_progress(run_index, total_combo_count, run_tag, f"ok={success_count} fail={failed_count} skip={skipped_count}")
+
+                        run_index += 1
+                        run_tag = f"{run_index:03d}_{ds_name}_{judge_model}_{injector_model}_{bias}_{mode}"
+                        logger.info(f"[{run_index}/{total_combo_count}] {run_tag}")
+                        print(
+                            f"\n>>> [{run_index}/{total_combo_count}] "
+                            f"dataset={ds_name}  judge={judge_model}  bias={bias}({mode})",
+                            flush=True,
+                        )
+
+                        result: Dict[str, Any] = {
+                            "index": run_index,
+                            "dataset": ds_name,
+                            "dataset_category": ds_category,
+                            "judge_model": judge_model,
+                            "injector_model": injector_model,
+                            "bias": bias,
+                            "mode": mode,
+                            "status": "pending",
+                            "error": None,
+                            "config_path": None,
+                            "start_time": datetime.now().isoformat(),
+                            "end_time": None,
+                        }
+                        run_t0 = time.time()
+
+                        try:
+                            eval_key = _build_eval_key(
+                                dataset_name=ds_name,
+                                bias=bias,
+                                mode=mode,
+                                judge_model=judge_model,
+                                injector_model=injector_model,
+                                inject_to=effective_inject_to_default,
+                            )
+                            if skip_existing_evals and eval_key in completed_eval_keys:
+                                result["status"] = "skipped_existing_eval"
+                                skipped_count += 1
+                                print(f"    SKIP (already completed)", flush=True)
+                                _print_progress(run_index, total_combo_count, run_tag, f"ok={success_count} fail={failed_count} skip={skipped_count}")
+                                logger.info(
+                                    f"Skip existing eval: dataset={ds_name}, bias={bias}, mode={mode}, "
+                                    f"judge={judge_model}, injector={injector_model}, inject_to={effective_inject_to_default}"
+                                )
+                                continue
+
+                            if reuse_original_per_judge:
+                                compute_original_acc = (judge_model, ds_name) not in original_done_for_judge_dataset
+                            else:
+                                compute_original_acc = True
+
+                            semantic_guard_override = guard_overrides_map.get(f"{bias}:{mode}") or guard_overrides_map.get(bias)
+
+                            # Built-in relax rule requested by user: clinical_formatting word mode.
+                            if bias in {"clinical_note", "clinical_formatting"} and mode == "word":
+                                if not isinstance(semantic_guard_override, dict):
+                                    semantic_guard_override = {}
+                                pre_cfg = semantic_guard_override.get("precheck", {})
+                                if not isinstance(pre_cfg, dict):
+                                    pre_cfg = {}
+                                pre_cfg.setdefault("len_ratio_min", 0.30)
+                                pre_cfg.setdefault("len_ratio_max", 3.50)
+                                semantic_guard_override["precheck"] = pre_cfg
+
+                            cached_orig_path = original_judgments_cache.get((judge_model, ds_name))
+                            run_cfg = _build_run_config(
+                                base_cfg,
+                                ds_name,
+                                judge_model,
+                                injector_model,
+                                bias,
+                                mode,
+                                compute_original_acc=compute_original_acc,
+                                inject_to=inject_to_override or None,
+                                semantic_guard_override=semantic_guard_override,
+                                original_judgments_path=cached_orig_path if not compute_original_acc else None,
+                            )
+                            run_cfg_path = run_cfg_dir / f"{run_tag}.yaml"
+                            _write_yaml(run_cfg_path, run_cfg)
+                            result["config_path"] = str(run_cfg_path)
+                            result["compute_original_acc"] = compute_original_acc
+
+                            if dry_run:
+                                result["status"] = "dry_run"
+                            else:
+                                original_argv = sys.argv.copy()
+                                prev_batch_flag = os.environ.get("JUDGELLM_ABORT_BATCH_ON_INTERRUPT")
+                                try:
+                                    os.environ["JUDGELLM_ABORT_BATCH_ON_INTERRUPT"] = "1"
+                                    sys.argv = ["run_batch_from_yaml.py", "--config", str(run_cfg_path)]
+                                    run_output = run_single_experiment()
+                                finally:
+                                    if prev_batch_flag is None:
+                                        os.environ.pop("JUDGELLM_ABORT_BATCH_ON_INTERRUPT", None)
+                                    else:
+                                        os.environ["JUDGELLM_ABORT_BATCH_ON_INTERRUPT"] = prev_batch_flag
+                                    sys.argv = original_argv
+                                if isinstance(run_output, dict) and run_output.get("interrupted", False):
+                                    result["status"] = "interrupted"
+                                    logger.warning(f"Interrupted: {run_tag}. Stopping remaining batch runs.")
+                                    stop_now = True
+                                elif _shutdown_requested:
+                                    result["status"] = "interrupted"
+                                    logger.warning(f"Batch interrupt flag detected: {run_tag}. Stopping remaining batch runs.")
+                                    stop_now = True
+                                else:
+                                    result["status"] = "success"
+                                    success_count += 1
+                                    if compute_original_acc:
+                                        original_done_for_judge_dataset.add((judge_model, ds_name))
+                                        if isinstance(run_output, dict):
+                                            _run_dir = run_output.get("run_dir")
+                                            if _run_dir:
+                                                _orig_path = Path(_run_dir) / "judge_raw_original.jsonl"
+                                                if _orig_path.exists():
+                                                    original_judgments_cache[(judge_model, ds_name)] = str(_orig_path)
+                                                    logger.info(
+                                                        f"Cached original judgments path for "
+                                                        f"({judge_model}, {ds_name}): {_orig_path}"
+                                                    )
+                                    if skip_existing_evals:
+                                        completed_eval_keys.add(eval_key)
+                        except KeyboardInterrupt:
+                            result["status"] = "interrupted"
+                            result["error"] = "KeyboardInterrupt"
+                            logger.warning(f"KeyboardInterrupt: {run_tag}. Stopping remaining batch runs.")
+                            stop_now = True
+                        except Exception as e:
+                            result["status"] = "failed"
+                            result["error"] = str(e)
+                            result["traceback"] = traceback.format_exc()
+                            failed_count += 1
+                            logger.error(f"Failed: {run_tag} | {e}")
+                            if not continue_on_error:
+                                results.append(result)
+                                stop_now = True
+                                break
+                        finally:
+                            signal.signal(signal.SIGINT, _signal_handler)
+                            signal.signal(signal.SIGTERM, _signal_handler)
+                            result["end_time"] = datetime.now().isoformat()
+                            results.append(result)
+                            run_elapsed = time.time() - run_t0
+                            status_icon = {"success": "OK", "failed": "FAIL", "interrupted": "INT", "dry_run": "DRY", "skipped_existing_eval": "SKIP"}.get(result["status"], "?")
+                            print(f"    {status_icon} ({run_elapsed:.1f}s)", flush=True)
+                            _print_progress(run_index, total_combo_count, run_tag, f"ok={success_count} fail={failed_count} skip={skipped_count}")
+                        if stop_now:
+                            break
                     if stop_now:
                         break
                 if stop_now:
                     break
-            if stop_now:
-                break
+        finally:
+            if vllm_proc is not None:
+                _stop_vllm_server(vllm_proc)
+                vllm_proc = None
+            if _prev_vllm_base_url is not None:
+                os.environ["VLLM_BASE_URL"] = _prev_vllm_base_url
+            else:
+                os.environ.pop("VLLM_BASE_URL", None)
         if stop_now:
             break
 

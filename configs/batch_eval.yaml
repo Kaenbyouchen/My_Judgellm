@@ -56,6 +56,13 @@ batch:
   # 后续 bias 组合跳过 original，仅计算 bias 相关指标
   reuse_original_per_judge: true
 
+  # vLLM serve 自动管理（vllmserve_* 模型自动启停）
+  vllm_auto_serve: true       # true: 自动管理; false: 需要手动启停
+  vllm_port: 8000
+  vllm_max_model_len: 8192
+  vllm_gpu_memory_utilization: 0.90
+  vllm_startup_timeout: 600   # 等待 vLLM 启动的超时时间（秒）
+
   # 可选：日志目录（不填则自动生成到 outputs/batch_logs）
   log_dir: null
 
