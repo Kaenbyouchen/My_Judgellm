@@ -162,14 +162,15 @@ def create_temp_data_files(
 # ═══════════════════════════════════════════════════════════════════════════════
 
 def _kill_port_occupant(port: int) -> None:
-    """Kill any process listening on the given port."""
+    """Kill any process listening on the given port (never kills self)."""
+    my_pid = os.getpid()
     try:
         out = subprocess.check_output(
             ["lsof", "-ti", f":{port}"], stderr=subprocess.DEVNULL, text=True
         )
         for pid_str in out.strip().split("\n"):
             pid_str = pid_str.strip()
-            if pid_str.isdigit():
+            if pid_str.isdigit() and int(pid_str) != my_pid:
                 os.kill(int(pid_str), signal.SIGKILL)
                 print(f"  Killed existing process {pid_str} on port {port}")
         time.sleep(2)
@@ -213,6 +214,7 @@ def start_vllm_server(
         stderr=subprocess.STDOUT,
         cwd=str(PROJECT_ROOT),
         env={**os.environ, "CUDA_VISIBLE_DEVICES": os.environ.get("CUDA_VISIBLE_DEVICES", "0")},
+        start_new_session=True,
     )
     # Stash file handle for cleanup
     proc._log_fh = fh  # type: ignore[attr-defined]
@@ -243,28 +245,51 @@ def wait_for_vllm_health(port: int, timeout: int = 600, interval: int = 5) -> bo
 
 
 def stop_vllm_server(proc: Optional[subprocess.Popen]) -> None:
-    """Gracefully terminate vLLM serve process."""
+    """Terminate vLLM serve and all its worker child processes (frees GPU memory)."""
     if proc is None:
         return
-    print("  Stopping vLLM server...")
+    print("  Stopping vLLM server (process group)...")
+    pgid = None
     try:
-        proc.terminate()
+        pgid = os.getpgid(proc.pid)
+    except OSError:
+        pass
+
+    # Step 1: SIGTERM the entire process group (graceful shutdown)
+    if pgid is not None:
+        try:
+            os.killpg(pgid, signal.SIGTERM)
+        except OSError:
+            pass
+    else:
+        try:
+            proc.terminate()
+        except OSError:
+            pass
+
+    # Step 2: Wait for main process to exit
+    try:
         proc.wait(timeout=30)
     except subprocess.TimeoutExpired:
-        proc.kill()
-        proc.wait(timeout=10)
-    except Exception:
+        # Step 3: Force-kill entire process group
+        if pgid is not None:
+            try:
+                os.killpg(pgid, signal.SIGKILL)
+            except OSError:
+                pass
         try:
             proc.kill()
+            proc.wait(timeout=10)
         except Exception:
             pass
+
     fh = getattr(proc, "_log_fh", None)
     if fh:
         try:
             fh.close()
         except Exception:
             pass
-    print("  vLLM server stopped.")
+    print("  vLLM server stopped (GPU memory released).")
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -706,10 +731,14 @@ def main() -> None:
                         print(f"    Error: {result['error'][:200]}")
 
             finally:
-                # Always stop vLLM after all datasets for this model
+                # Always stop vLLM after all datasets for this model.
+                # Do NOT call _kill_port_occupant here — it uses lsof which
+                # may return the main script's PID (lingering health-check
+                # TCP connections in TIME_WAIT) and kill the script itself.
+                # Port cleanup happens at the start of start_vllm_server().
                 if is_vllm and vllm_proc is not None:
                     stop_vllm_server(vllm_proc)
-                    _kill_port_occupant(args.port)
+                    time.sleep(3)
 
     batch_elapsed = time.time() - batch_t0
     elapsed_str = f"{batch_elapsed / 60:.1f} min" if batch_elapsed > 60 else f"{batch_elapsed:.0f}s"
