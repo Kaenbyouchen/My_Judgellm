@@ -7,7 +7,13 @@ batch:
   base_experiment_config: "configs/experiment.yaml"
 
   # 选择要跑的数据集（来自 configs/datasets.yaml 的 key）
-  dataset_name: "medical_eval_sphere"
+  # 单个数据集用 dataset_name，多个用 dataset_names 列表
+  dataset_names:
+    - "counselbench"
+    - "medaesqa"
+    - "medical_eval_sphere"
+    - "mediq_askdocs"
+    - "medval_bench"
 
   # 指定评测模型（judge），可一次配置多个
   # 推荐使用 judge_models（列表）；judge_model 保留兼容旧写法
@@ -31,18 +37,18 @@ batch:
   # bias_injector_model: "qwen3_4b_instruct"  # 兼容旧写法
 
   # bias 选择策略:
-  # - true: 使用该数据集类别下 prompt 文件中的全部 bias
-  # - false: 仅使用 eval_biases（兼容旧字段 bias_list）
-  use_all_biases: false
-  eval_biases:
-    - "jargon_overloading"
-    # - "plain_language"
-    # - "clinical_formatting"
-    # - "empathy_tone"
-    # - "authority_style"
-    # - "fake_citation"
-    # - "language_fluency"
-  # bias_list: []  # 旧字段，仍可用
+  # - true: 自动使用每个数据集类别 prompt 文件中定义的全部 bias
+  # - false: 仅使用下面手动指定的 eval_biases 列表
+  use_all_biases: true
+  # use_all_biases 为 false 时，手动指定 bias 列表：
+  # eval_biases:
+  #   - "jargon_overloading"
+  #   - "plain_language"
+  #   - "clinical_formatting"
+  #   - "empathy_tone"
+  #   - "authority_style"
+  #   - "fake_citation"
+  #   - "language_fluency"
   exclude_biases: []
 
   # 注入模式（可选 rewrite / word，可多个）
