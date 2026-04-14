@@ -400,9 +400,13 @@ def run_single_eval(
                             pass
 
     if proc.returncode != 0:
-        result["error"] = proc.stderr[-500:] if proc.stderr else "unknown error"
+        # Extract the actual exception line (last non-empty line of stderr)
+        stderr_text = proc.stderr or ""
+        stderr_lines = [l for l in stderr_text.strip().splitlines() if l.strip()]
+        exception_line = stderr_lines[-1] if stderr_lines else "unknown error"
+        result["error"] = exception_line[:300]
         stderr_log = config_dir / f"{run_tag}.stderr"
-        stderr_log.write_text(proc.stderr or "", encoding="utf-8")
+        stderr_log.write_text(stderr_text, encoding="utf-8")
 
     return result
 
@@ -501,8 +505,8 @@ def parse_args() -> argparse.Namespace:
         help="GPU memory utilization for vLLM serve (default: 0.90)",
     )
     p.add_argument(
-        "--max-model-len", type=int, default=2048,
-        help="Max model length for vLLM serve (default: 2048)",
+        "--max-model-len", type=int, default=8192,
+        help="Max model length for vLLM serve (default: 8192)",
     )
     p.add_argument(
         "--bias-injector", type=str, default=BIAS_INJECTOR_MODEL,
