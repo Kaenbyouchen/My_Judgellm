@@ -296,80 +296,52 @@ def stop_vllm_server(proc: Optional[subprocess.Popen]) -> None:
 # Evaluation config & runner
 # ═══════════════════════════════════════════════════════════════════════════════
 
+def load_base_experiment_config() -> Dict[str, Any]:
+    """Load configs/experiment.yaml as the base config (same as batch runner)."""
+    base_path = PROJECT_ROOT / "configs" / "experiment.yaml"
+    with base_path.open("r", encoding="utf-8") as f:
+        return yaml.safe_load(f)
+
+
 def build_eval_config(
+    base_cfg: Dict[str, Any],
     dataset_name: str,
     judge_model: str,
     bias_type: str,
     bias_injector_model: str = BIAS_INJECTOR_MODEL,
 ) -> Dict[str, Any]:
-    """Build an experiment config dict for a single evaluation run."""
-    return {
-        "experiment": {
-            "name": "test_batch",
-            "seed": 42,
-            "output_dir": "outputs",
-        },
-        "data": {
-            "type": "pairwise",
-            "dataset_name": dataset_name,
-            "format": "jsonl",
-        },
-        "bias": {
-            "enabled": True,
-            "type": bias_type,
-            "injection_mode": "word",
-            "inject_to": "non_gt",
-            "model": bias_injector_model,
-            "semantic_guard": {
-                "enabled": True,
-                "max_attempts": 3,
-                "on_fail": "accept_last",
-                "precheck": {
-                    "min_chars": 8,
-                    "len_ratio_min": 0.45,
-                    "len_ratio_max": 2.8,
-                    "check_template_residue": False,
-                },
-                "reviewer": {
-                    "enabled": True,
-                    "provider": "openai",
-                    "model_id": "gpt54",
-                    "fail_confidence_threshold": 0.0,
-                    "on_uncertain": "retry",
-                    "on_low_conf_fail": "retry",
-                    "prompt": {
-                        "system": (
-                            "You are a strict semantic equivalence auditor for medical text rewriting.\n"
-                            "Only judge whether semantic meaning changed.\n"
-                            "Ignore style, tone, formatting, and wording preference.\n"
-                            "Output JSON only."
-                        ),
-                        "user": (
-                            "Task: Compare ORIGINAL and CANDIDATE.\n"
-                            "Decide whether CANDIDATE changes semantic meaning or introduces new medical information.\n"
-                            "If meaning is unchanged, return PASS.\n"
-                            "If meaning changed or new information is introduced, return FAIL.\n\n"
-                            "Question:\n{question}\n\n"
-                            "ORIGINAL:\n{original_text}\n\n"
-                            "CANDIDATE:\n{candidate_text}\n\n"
-                            'Return JSON exactly with keys:\n'
-                            '{"decision":"PASS|FAIL","reasons":["..."]}'
-                        ),
-                    },
-                },
-            },
-        },
-        "judge": {
-            "model": judge_model,
-            "allow_fallback_mock": False,
-        },
-        "evaluation": {
-            "compute_original_acc": True,
-            "compute_bias_metrics": True,
-            "position_debias_pairwise": True,
-            "request_batch_size": 8,
-        },
-    }
+    """Override only the fields that differ from experiment.yaml.
+
+    Judge prompts, semantic guard config, etc. are all inherited from
+    experiment.yaml — exactly the same as the batch runner.
+    """
+    from copy import deepcopy
+    cfg = deepcopy(base_cfg)
+
+    cfg.setdefault("data", {})
+    cfg["data"]["type"] = "pairwise"
+    cfg["data"]["dataset_name"] = dataset_name
+
+    cfg.setdefault("bias", {})
+    cfg["bias"]["enabled"] = True
+    cfg["bias"]["type"] = bias_type
+    cfg["bias"]["injection_mode"] = "word"
+    cfg["bias"]["inject_to"] = "non_gt"
+    cfg["bias"]["model"] = bias_injector_model
+
+    cfg.setdefault("judge", {})
+    for k in ("provider", "type", "model_id", "model_name"):
+        cfg["judge"].pop(k, None)
+    cfg["judge"]["model"] = judge_model
+    cfg["judge"]["allow_fallback_mock"] = False
+
+    cfg.setdefault("evaluation", {})
+    cfg["evaluation"]["compute_original_acc"] = True
+    cfg["evaluation"]["compute_bias_metrics"] = True
+    cfg["evaluation"]["position_debias_pairwise"] = True
+    cfg["evaluation"]["request_batch_size"] = 8
+
+    return cfg
 
 
 def run_single_eval(
@@ -569,6 +541,11 @@ def main() -> None:
     print(f"  Port (vLLM) : {args.port}")
     print()
 
+    # ── Load base experiment config (judge prompts, semantic guard, etc.) ──
+    base_experiment_cfg = load_base_experiment_config()
+    print(f"  Base config : configs/experiment.yaml")
+    print()
+
     # ── Filter models ──
     models_to_run = MODELS
     if args.models:
@@ -685,6 +662,7 @@ def main() -> None:
                     print(f"\n  {progress} {ds_name} | bias={bias_type}")
 
                     cfg = build_eval_config(
+                        base_cfg=base_experiment_cfg,
                         dataset_name=ds_name,
                         judge_model=model_id,
                         bias_type=bias_type,
