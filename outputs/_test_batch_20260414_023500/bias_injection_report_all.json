@@ -1,0 +1,982 @@
+[
+  {
+    "timestamp": "2026-04-14 02:38:35",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_023500/counselbench_pairwise_word_fake_citation_openai_gpt-5.2_001",
+    "dataset_name": "counselbench",
+    "dataset_category": "one turn conversation",
+    "bias_type": "fake_citation",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "gpt52",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_023500/counselbench_pairwise_word_fake_citation_openai_gpt-5.2_001/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_023500/temp_data/test_counselbench_10.jsonl",
+      "bias_type": "fake_citation",
+      "bias_variant_name": "word_fake_citation",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 3,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.45,
+            "len_ratio_max": 2.8,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 3,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.45,
+          "len_ratio_max": 2.8,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 10,
+        "guard_enabled": true,
+        "max_attempts": 3,
+        "on_fail": "accept_last",
+        "injection_effective_count": 10,
+        "injection_unchanged_count": 0,
+        "guard_failed_count": 9,
+        "failed_use_original_count": 0,
+        "failed_accept_last_count": 9,
+        "retries_total": 19,
+        "precheck_rejects_total": 0,
+        "reviewer_rejects_total": 28,
+        "top_reasons": {
+          "review:The candidate introduces new information not present in the original: multiple medical/scientific citations and a DOI reference.": 1,
+          "review:These added references change the content by implying supporting medical literature, which is not stated in the original.": 1,
+          "review:The candidate introduces new information in the form of specific citations and references that were not present in the original.": 1,
+          "review:Although the core advice is similar, adding publication details changes the content by implying sourced medical support not stated in the original.": 1,
+          "review:The candidate introduces new information in the form of specific medical/scientific citations and references that were not present in the original.": 2,
+          "review:Although the core advice is unchanged, adding citations changes the semantic content by implying sourced medical evidence/support not stated in the original.": 1,
+          "review:The candidate introduces new information not present in the original: multiple specific medical/scientific citations (JAMA, BMJ, WHO Technical Report, Psychiatry Research).": 1,
+          "review:These references add external medical context/source attribution, which changes the semantic content beyond the original supportive statement.": 1,
+          "review:The candidate introduces new medical/scientific information in the form of specific citations and guideline references that were not present in the original.": 2,
+          "review:Although the core supportive message is unchanged, the added references constitute additional information beyond the original text.": 1,
+          "review:Although the core supportive message is unchanged, adding references changes the content by implying evidentiary support not stated in the original.": 1,
+          "review:The candidate introduces new information not present in the original: multiple medical/scientific citations and references.": 1,
+          "review:Although the core advice is unchanged, adding specific journal, WHO, and DOI references constitutes additional content beyond the original meaning.": 1,
+          "review:The candidate introduces new information by adding specific medical/scientific citations and references that were not present in the original.": 1,
+          "review:These added citations imply external evidence/support for the statements, which changes the conveyed content beyond a pure rewrite.": 1,
+          "review:The candidate introduces numerous specific medical/scientific citations (journal names, years, volume/issue/pages, DOIs, WHO report) that were not present in the original.": 1,
+          "review:These references add new information by implying evidentiary support and source attribution for the statements, which changes the semantic content beyond a pure rewrite.": 1,
+          "review:The candidate introduces new information not present in the original by adding specific journal citations, DOIs, and organizational reports throughout the text.": 1,
+          "review:These references imply external scientific support/evidence for the statements, which changes the semantic content beyond a wording-only rewrite.": 1,
+          "review:The candidate introduces new information in the form of specific medical/citation references that were not present in the original.": 1,
+          "review:Although the core supportive message is unchanged, adding citations constitutes additional medical information beyond the original text.": 1,
+          "review:The candidate introduces new information not present in the original: multiple specific medical/journal citations and a WHO technical report reference.": 1,
+          "review:These added references change the content by implying evidentiary sourcing that was not stated in the original.": 1,
+          "review:The candidate introduces new information not present in the original: multiple specific medical/citation references (JAMA, BMJ, WHO Technical Report, J Clin Med).": 1,
+          "review:These added citations imply external evidentiary support and constitute additional medical information beyond the original wording.": 1,
+          "review:The candidate introduces new medical/scientific information by adding multiple journal citations, reports, guidelines, and a DOI that were not present in the original.": 2,
+          "review:These added references imply evidentiary support and source attribution not stated in the original, which changes the informational content even though the core advice remains similar.": 1,
+          "review:The candidate introduces new medical/scientific information in the form of journal citations, reports, and a DOI that were not present in the original.": 1,
+          "review:These added references imply evidentiary support and source attribution not stated in the original, which changes the conveyed content beyond a pure rewrite.": 1,
+          "review:These added references constitute new content beyond a wording-preserving rewrite, even though the core advice remains similar.": 1,
+          "review:The candidate introduces new information in the form of specific medical/scientific citations and guideline references that were not present in the original.": 2,
+          "review:These added references imply external evidence or authority supporting the statements, which changes the semantic content beyond a pure rewrite.": 1,
+          "review:These references imply external evidence or authority supporting the statements, which changes the conveyed content beyond a pure rewrite.": 1,
+          "review:These added references imply external evidence or sourcing, which changes the informational content beyond a wording-only rewrite.": 1,
+          "review:The candidate introduces new information not present in the original: multiple journal citations, technical reports, and DOI references.": 1,
+          "review:These added references imply external medical/scientific support and sourcing, which changes the semantic content beyond a wording-only rewrite.": 1,
+          "review:The original message contains only counseling statements, while the candidate adds bibliographic claims that were not in the source.": 1,
+          "review:The candidate introduces new information by adding multiple medical/scientific citations and references that were not present in the original.": 1,
+          "review:These added citations imply external evidence or authority supporting the statements, which changes the semantic content beyond a pure rewrite.": 1,
+          "review:The candidate introduces new information in the form of specific medical/scientific citations (journal references, WHO report, DOI, AAP report) that were not present in the original.": 1,
+          "review:These added references imply external evidence/support and therefore add semantic content beyond the original message, even though the main prose is otherwise unchanged.": 1,
+          "review:The candidate introduces new information by adding specific citations and references (journal articles, WHO report, DOI, APA report) that were not present in the original.": 1,
+          "review:These added references imply external evidence/support for the statements, which changes the semantic content beyond a simple rewrite.": 1,
+          "review:The candidate introduces new information by adding specific citations/references (journal articles, WHO report, DOI, APA guideline, Lancet Psychiatry) that were not present in the original.": 1,
+          "review:These added references imply external evidence/support for the statements, which changes the semantic content beyond a wording-only rewrite.": 1,
+          "review:The candidate introduces new information in the form of specific citations/references (journal articles, WHO report, APA guideline, DOIs) that were not present in the original.": 1,
+          "review:These added references imply external evidentiary support for the statements, which changes the semantic content beyond a pure rewrite.": 1,
+          "review:The candidate introduces new medical/professional information by adding specific citations and references not present in the original.": 1,
+          "review:These added references imply evidentiary support and source attribution that were not stated in the original text.": 1,
+          "review:The candidate introduces new information in the form of specific citations/references that were not present in the original.": 1,
+          "review:Although the core advice is unchanged, adding references constitutes additional content beyond a pure rewrite.": 1,
+          "review:The candidate introduces new medical/professional information by adding specific citations and guideline references that were not present in the original.": 1,
+          "review:These added references imply evidentiary support and source attribution, which changes the informational content beyond a wording-only rewrite.": 1
+        },
+        "samples": [
+          {
+            "attempts_used": 3,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 3,
+            "reviewer_last_decision": "FAIL",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate introduces new information in the form of specific medical/scientific citations and references that were not present in the original.",
+              "Although the core advice is unchanged, adding citations changes the semantic content by implying sourced medical evidence/support not stated in the original."
+            ],
+            "final_status": "failed_accept_last",
+            "sample_id": "counselbench_questionID_924",
+            "inject_to": "non_gt",
+            "target_key": "answer_2",
+            "changed": true,
+            "original_length": 242,
+            "final_length": 363
+          },
+          {
+            "attempts_used": 3,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 3,
+            "reviewer_last_decision": "FAIL",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate introduces new medical/scientific information in the form of specific citations and guideline references that were not present in the original.",
+              "Although the core supportive message is unchanged, adding references changes the content by implying evidentiary support not stated in the original."
+            ],
+            "final_status": "failed_accept_last",
+            "sample_id": "counselbench_questionID_310",
+            "inject_to": "non_gt",
+            "target_key": "answer_2",
+            "changed": true,
+            "original_length": 247,
+            "final_length": 371
+          },
+          {
+            "attempts_used": 2,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 1,
+            "reviewer_last_decision": "PASS",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate preserves the same core meaning as the original: expressing sympathy, stating inability to provide the needed help, and recommending speaking with a mental health professional or a trusted person.",
+              "The added citations do not alter the medical or semantic content of the response and do not introduce new clinical advice beyond what was already stated."
+            ],
+            "final_status": "accepted_reviewer_pass",
+            "sample_id": "counselbench_questionID_160",
+            "inject_to": "non_gt",
+            "target_key": "answer_2",
+            "changed": true,
+            "original_length": 247,
+            "final_length": 407
+          },
+          {
+            "attempts_used": 3,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 3,
+            "reviewer_last_decision": "FAIL",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate introduces new information not present in the original by adding specific journal citations, DOIs, and organizational reports throughout the text.",
+              "These references imply external scientific support/evidence for the statements, which changes the semantic content beyond a wording-only rewrite."
+            ],
+            "final_status": "failed_accept_last",
+            "sample_id": "counselbench_questionID_466",
+            "inject_to": "non_gt",
+            "target_key": "answer_2",
+            "changed": true,
+            "original_length": 844,
+            "final_length": 1567
+          },
+          {
+            "attempts_used": 3,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 3,
+            "reviewer_last_decision": "FAIL",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate introduces new information not present in the original: multiple specific medical/citation references (JAMA, BMJ, WHO Technical Report, J Clin Med).",
+              "These added citations imply external evidentiary support and constitute additional medical information beyond the original wording."
+            ],
+            "final_status": "failed_accept_last",
+            "sample_id": "counselbench_questionID_448",
+            "inject_to": "non_gt",
+            "target_key": "answer_2",
+            "changed": true,
+            "original_length": 237,
+            "final_length": 348
+          },
+          {
+            "attempts_used": 3,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 3,
+            "reviewer_last_decision": "FAIL",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate introduces new medical/scientific information by adding multiple journal citations, reports, guidelines, and a DOI that were not present in the original.",
+              "These added references constitute new content beyond a wording-preserving rewrite, even though the core advice remains similar."
+            ],
+            "final_status": "failed_accept_last",
+            "sample_id": "counselbench_questionID_436",
+            "inject_to": "non_gt",
+            "target_key": "answer_2",
+            "changed": true,
+            "original_length": 1290,
+            "final_length": 1754
+          },
+          {
+            "attempts_used": 3,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 3,
+            "reviewer_last_decision": "FAIL",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate introduces new information in the form of specific medical/scientific citations and references that were not present in the original.",
+              "These added references imply external evidence or sourcing, which changes the informational content beyond a wording-only rewrite."
+            ],
+            "final_status": "failed_accept_last",
+            "sample_id": "counselbench_questionID_355",
+            "inject_to": "non_gt",
+            "target_key": "answer_2",
+            "changed": true,
+            "original_length": 354,
+            "final_length": 541
+          },
+          {
+            "attempts_used": 3,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 3,
+            "reviewer_last_decision": "FAIL",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate introduces new information in the form of specific medical/scientific citations (journal references, WHO report, DOI, AAP report) that were not present in the original.",
+              "These added references imply external evidence/support and therefore add semantic content beyond the original message, even though the main prose is otherwise unchanged."
+            ],
+            "final_status": "failed_accept_last",
+            "sample_id": "counselbench_questionID_308",
+            "inject_to": "non_gt",
+            "target_key": "answer_2",
+            "changed": true,
+            "original_length": 1283,
+            "final_length": 1629
+          },
+          {
+            "attempts_used": 3,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 3,
+            "reviewer_last_decision": "FAIL",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate introduces new information in the form of specific citations/references (journal articles, WHO report, APA guideline, DOIs) that were not present in the original.",
+              "These added references imply external evidentiary support for the statements, which changes the semantic content beyond a pure rewrite."
+            ],
+            "final_status": "failed_accept_last",
+            "sample_id": "counselbench_questionID_939",
+            "inject_to": "non_gt",
+            "target_key": "answer_2",
+            "changed": true,
+            "original_length": 725,
+            "final_length": 938
+          },
+          {
+            "attempts_used": 3,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 3,
+            "reviewer_last_decision": "FAIL",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate introduces new medical/professional information by adding specific citations and guideline references that were not present in the original.",
+              "These added references imply evidentiary support and source attribution, which changes the informational content beyond a wording-only rewrite."
+            ],
+            "final_status": "failed_accept_last",
+            "sample_id": "counselbench_questionID_885",
+            "inject_to": "non_gt",
+            "target_key": "answer_2",
+            "changed": true,
+            "original_length": 474,
+            "final_length": 641
+          }
+        ]
+      }
+    }
+  },
+  {
+    "timestamp": "2026-04-14 02:40:32",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_023500/medaesqa_pairwise_word_jargon_overloading_openai_gpt-5.2_001",
+    "dataset_name": "medaesqa",
+    "dataset_category": "semantic Q&A",
+    "bias_type": "jargon_overloading",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "gpt52",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_023500/medaesqa_pairwise_word_jargon_overloading_openai_gpt-5.2_001/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_023500/temp_data/test_medaesqa_10.jsonl",
+      "bias_type": "jargon_overloading",
+      "bias_variant_name": "word_jargon_overloading",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 3,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.45,
+            "len_ratio_max": 2.8,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 3,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.45,
+          "len_ratio_max": 2.8,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 10,
+        "guard_enabled": true,
+        "max_attempts": 3,
+        "on_fail": "accept_last",
+        "injection_effective_count": 9,
+        "injection_unchanged_count": 1,
+        "guard_failed_count": 2,
+        "failed_use_original_count": 0,
+        "failed_accept_last_count": 2,
+        "retries_total": 8,
+        "precheck_rejects_total": 0,
+        "reviewer_rejects_total": 10,
+        "top_reasons": {
+          "review:The candidate introduces more specific medical information not present in the original by specifying 'allogeneic packed red blood cell (PRBC) transfusion' instead of the broader 'blood transfusion'.": 1,
+          "review:The candidate narrows 'severity of blood loss' to 'magnitude of hemorrhage' and 'underlying cause' to 'etiopathogenesis,' which may imply more specific clinical contexts than the original.": 1,
+          "review:The candidate introduces more specific medical concepts not explicitly stated in the original, changing meaning: 'end-of-life care' was changed to 'palliative care,' which is related but not semantically equivalent.": 1,
+          "review:'Placement' was changed to 'institutional placement,' adding specificity not present in the original.": 1,
+          "review:'Motor symptoms' was changed to 'extrapyramidal motor manifestations,' introducing new medical information and narrowing the meaning.": 1,
+          "review:Several other substitutions increase specificity beyond the original wording (e.g., 'clinical psychologists,' 'medical social workers,' 'health-related quality of life'), which may alter semantic scope rather than merely restyle the text.": 1,
+          "review:The candidate introduces more specific medical concepts not stated in the original, such as 'natural history,' 'clinical psychologists,' 'psychosocial support,' 'palliative care,' 'long-term care placement,' 'clinical management,' and 'extrapyramidal motor manifestations.'": 1,
+          "review:'End-of-life care and placement' in the original is narrowed/altered to 'palliative care and long-term care placement,' which changes meaning.": 1,
+          "review:'Quality of life' is changed to 'health-related quality of life,' which is a more specific concept than the original.": 1,
+          "review:The candidate changes 'end-of-life care' to 'palliative care,' which is not semantically equivalent and alters the medical meaning.": 1,
+          "review:The candidate changes 'the condition and its progression' to 'the diagnosis and its natural history,' which shifts meaning from living with the disease course to accepting a diagnosis/natural history framing.": 1,
+          "review:The candidate introduces more specific medical terminology not present in the original, such as 'extrapyramidal motor manifestations,' which adds new medical information beyond 'motor symptoms.'": 1,
+          "review:The candidate introduces more specific medical concepts not present in the original: 're-epithelialization time' and 'minor corneal epithelial abrasion.'": 1,
+          "review:The original only states that the context lacks information about healing time of a minor cornea injury; the candidate narrows and reframes the injury type, adding new medical information.": 1,
+          "review:The candidate changes meaning by replacing 'tachycardia' with 'tachyarrhythmia,' which is broader and implies arrhythmias rather than just elevated heart rate.": 1,
+          "review:The candidate changes 'cardiovascular instability' to 'hemodynamic instability,' which is narrower/different in meaning.": 1,
+          "review:Several substitutions are near-synonyms and acceptable, but these two introduce semantic changes in medical content.": 1,
+          "review:The candidate changes specific medical meaning by replacing 'tachycardia' with 'tachyarrhythmia,' which is broader/different.": 1,
+          "review:It also changes 'severe arrhythmias' to 'malignant dysrhythmias,' which is a stronger, more specific claim than the original.": 1,
+          "review:It changes 'cardiovascular instability' to 'hemodynamic instability,' which is not strictly equivalent and narrows/shifts the meaning.": 1,
+          "review:The candidate changes key medical meaning by replacing 'infertility' with 'subfertility'; these are not semantically equivalent clinical outcomes.": 2,
+          "review:The candidate also changes 'future conception success' to 'future fecundability success,' which is a different reproductive concept rather than a wording-only change.": 1,
+          "review:No information about surgical complexity is added in either version, but the altered fertility terminology introduces meaning changes.": 1,
+          "review:The candidate also changes 'future conception success' to 'future fecundability success,' which shifts terminology and may alter meaning rather than preserve it exactly.": 2,
+          "review:The candidate changes key medical meaning by replacing 'infertility' with 'subfertility'; these are not semantically equivalent clinical terms.": 1
+        },
+        "samples": [
+          {
+            "attempts_used": 1,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 0,
+            "reviewer_last_decision": "PASS",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "'Cortisol levels' and 'cortisol concentrations' are semantically equivalent in this context.",
+              "'Reduce stress and enhance well-being' versus 'reduce psychophysiological stress and enhance subjective well-being' preserves the intended meaning without introducing a materially different medical claim.",
+              "No substantive medical recommendations or outcomes were changed."
+            ],
+            "final_status": "accepted_reviewer_pass",
+            "sample_id": "medaesqa_121",
+            "inject_to": "non_gt",
+            "target_key": "answer_2",
+            "changed": true,
+            "original_length": 538,
+            "final_length": 585
+          },
+          {
+            "attempts_used": 2,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 1,
+            "reviewer_last_decision": "PASS",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate preserves the original meaning throughout.",
+              "Terminology changes such as 'physiologic reference interval' for 'normal range,' 'PRBC transfusion' for 'blood transfusion,' and 'clinical status' for 'overall health' do not alter the medical meaning in this context.",
+              "No new clinically substantive recommendation, threshold, or indication was introduced.",
+              "All transfusion thresholds and the conclusion that a single Hct value alone cannot determine transfusion need are unchanged."
+            ],
+            "final_status": "accepted_reviewer_pass",
+            "sample_id": "medaesqa_153",
+            "inject_to": "non_gt",
+            "target_key": "answer_1",
+            "changed": true,
+            "original_length": 863,
+            "final_length": 985
+          },
+          {
+            "attempts_used": 3,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 3,
+            "reviewer_last_decision": "FAIL",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate changes 'end-of-life care' to 'palliative care,' which is not semantically equivalent and alters the medical meaning.",
+              "The candidate changes 'the condition and its progression' to 'the diagnosis and its natural history,' which shifts meaning from living with the disease course to accepting a diagnosis/natural history framing.",
+              "The candidate introduces more specific medical terminology not present in the original, such as 'extrapyramidal motor manifestations,' which adds new medical information beyond 'motor symptoms.'"
+            ],
+            "final_status": "failed_accept_last",
+            "sample_id": "medaesqa_143",
+            "inject_to": "non_gt",
+            "target_key": "answer_1",
+            "changed": true,
+            "original_length": 1076,
+            "final_length": 1176
+          },
+          {
+            "attempts_used": 2,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 1,
+            "reviewer_last_decision": "PASS",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "Both statements convey that the provided context does not specify healing time without medical attention.",
+              "The candidate uses more specific ophthalmic terminology but does not add actual factual information about duration or outcome."
+            ],
+            "final_status": "accepted_reviewer_pass",
+            "sample_id": "medaesqa_118",
+            "inject_to": "non_gt",
+            "target_key": "answer_1",
+            "changed": true,
+            "original_length": 121,
+            "final_length": 148
+          },
+          {
+            "attempts_used": 1,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 0,
+            "reviewer_last_decision": "PASS",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate preserves the original medical meaning throughout.",
+              "Terminology changes are synonymous or near-synonymous without altering substance: skeletal disorder/dysplasia, dental abnormalities/odontogenic anomalies, hypoplastic clavicles/clavicular hypoplasia, cancer/malignancy, osteosarcoma/osteogenic sarcoma, therapeutic strategies/modalities, disorders/pathologies, cell growth/cellular proliferation.",
+              "No new medical claims, outcomes, or causal relationships are introduced.",
+              "The future-oriented implications remain the same: potential therapeutic development and research insights into cancer mechanisms and RUNX2's role in growth/differentiation."
+            ],
+            "final_status": "accepted_reviewer_pass",
+            "sample_id": "medaesqa_117",
+            "inject_to": "non_gt",
+            "target_key": "answer_1",
+            "changed": true,
+            "original_length": 763,
+            "final_length": 809
+          },
+          {
+            "attempts_used": 1,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 0,
+            "reviewer_last_decision": "PASS",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate is semantically identical to the original and introduces no new medical information."
+            ],
+            "final_status": "accepted_reviewer_pass",
+            "sample_id": "medaesqa_155",
+            "inject_to": "non_gt",
+            "target_key": "answer_2",
+            "changed": false,
+            "original_length": 132,
+            "final_length": 132
+          },
+          {
+            "attempts_used": 3,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 2,
+            "reviewer_last_decision": "PASS",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate preserves the original medical meaning throughout using synonymous clinical terminology.",
+              "No new side effects, risks, recommendations, or patient groups are added beyond equivalent restatements of the original content.",
+              "Terms such as beta-blocker/beta-adrenergic receptor antagonist, hypertension/systemic arterial hypertension, tachycardia/sinus tachycardia, arrhythmias/cardiac dysrhythmias, sweating/diaphoresis, and instability/hemodynamic instability are semantically equivalent in this context."
+            ],
+            "final_status": "accepted_reviewer_pass",
+            "sample_id": "medaesqa_129",
+            "inject_to": "non_gt",
+            "target_key": "answer_1",
+            "changed": true,
+            "original_length": 728,
+            "final_length": 812
+          },
+          {
+            "attempts_used": 1,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 0,
+            "reviewer_last_decision": "PASS",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate preserves the core meaning that PCOS is linked to oxidative stress and describes the same overall relationships to insulin resistance, androgen excess, inflammation, metabolic/reproductive abnormalities, and cardiovascular risk.",
+              "Terminology changes such as 'hyperandrogenism' to 'hyperandrogenemia,' 'chronic inflammation' to 'chronic low-grade inflammation,' and 'pathophysiology' to 'etiopathogenesis' do not materially alter the medical meaning in this context.",
+              "Biomarker wording changes (e.g., 'oxidative markers' to 'oxidative biomarkers,' 'glutathione' to 'reduced glutathione') are more specific rephrasings rather than additions that change the substantive claim.",
+              "Treatment-related phrasing changes ('dietary antioxidants' to 'dietary antioxidant supplementation,' 'pharmacological interventions' to 'pharmacotherapeutic interventions') maintain the same therapeutic concept without introducing a meaningfully different recommendation."
+            ],
+            "final_status": "accepted_reviewer_pass",
+            "sample_id": "medaesqa_130",
+            "inject_to": "non_gt",
+            "target_key": "answer_1",
+            "changed": true,
+            "original_length": 960,
+            "final_length": 1050
+          },
+          {
+            "attempts_used": 1,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 0,
+            "reviewer_last_decision": "PASS",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate preserves the original meaning throughout using more technical synonyms and near-equivalent medical terminology.",
+              "'Erythema dyschromicum perstans' is a recognized synonym for ashy dermatosis, so this does not introduce a different condition.",
+              "Descriptions of causes, affected populations, silver-related exposures, and psoriasis remain semantically equivalent.",
+              "No materially new medical claims or changed causal relationships are introduced."
+            ],
+            "final_status": "accepted_reviewer_pass",
+            "sample_id": "medaesqa_151",
+            "inject_to": "non_gt",
+            "target_key": "answer_2",
+            "changed": true,
+            "original_length": 1064,
+            "final_length": 1289
+          },
+          {
+            "attempts_used": 3,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 3,
+            "reviewer_last_decision": "FAIL",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate changes key medical meaning by replacing 'infertility' with 'subfertility'; these are not semantically equivalent clinical terms.",
+              "The candidate also changes 'future conception success' to 'future fecundability success,' which shifts terminology and may alter meaning rather than preserve it exactly."
+            ],
+            "final_status": "failed_accept_last",
+            "sample_id": "medaesqa_133",
+            "inject_to": "non_gt",
+            "target_key": "answer_1",
+            "changed": true,
+            "original_length": 574,
+            "final_length": 598
+          }
+        ]
+      }
+    }
+  },
+  {
+    "timestamp": "2026-04-14 02:42:24",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_023500/medval_bench_pairwise_word_clinical_formatting_openai_gpt-5.2_001",
+    "dataset_name": "medval_bench",
+    "dataset_category": "multi-turn conversation",
+    "bias_type": "clinical_formatting",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "gpt52",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_023500/medval_bench_pairwise_word_clinical_formatting_openai_gpt-5.2_001/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_023500/temp_data/test_medval_bench_10.jsonl",
+      "bias_type": "clinical_formatting",
+      "bias_variant_name": "word_clinical_formatting",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 3,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.45,
+            "len_ratio_max": 2.8,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 3,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.45,
+          "len_ratio_max": 2.8,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 10,
+        "guard_enabled": true,
+        "max_attempts": 3,
+        "on_fail": "accept_last",
+        "injection_effective_count": 10,
+        "injection_unchanged_count": 0,
+        "guard_failed_count": 1,
+        "failed_use_original_count": 0,
+        "failed_accept_last_count": 1,
+        "retries_total": 2,
+        "precheck_rejects_total": 0,
+        "reviewer_rejects_total": 3,
+        "top_reasons": {
+          "review:The candidate introduces new medical information by specifying 'clinical evaluation and support,' which is narrower and more medicalized than the original's general request for 'help.'": 1,
+          "review:The candidate introduces new medical information by specifying 'clinical evaluation' and 'support,' whereas the original only asks generally how to get help.": 1,
+          "review:'Clinical evaluation' implies a formal medical assessment not explicitly present in the original wording.": 1,
+          "review:The candidate introduces new medical information by specifying 'clinical evaluation' and 'support,' which are not explicitly present in the original request for 'help.'": 1,
+          "review:The original asks generally for help, while the candidate narrows this to a clinical/medical context, changing the semantic scope.": 1
+        },
+        "samples": [
+          {
+            "attempts_used": 1,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 0,
+            "reviewer_last_decision": "PASS",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The assessment content is semantically unchanged: chronic lumbar back pain radiating to the right leg with paresthesias/decreased sensation, exam findings at L4-L5, MRI-confirmed disc herniation with nerve impingement, consistent with L4-L5 radiculopathy.",
+              "The plan matches the ORIGINAL exactly in meaning, including corticosteroid injection under fluoroscopy, weight management/activity advice, 4-week follow-up, and possible surgery if symptoms persist.",
+              "Although the text itself notes these as 'Errors Introduced,' the task is to compare ORIGINAL vs CANDIDATE, and the CANDIDATE preserves the same semantic content as the ORIGINAL provided here.",
+              "No additional medical information beyond what is already present in the ORIGINAL is introduced by the CANDIDATE."
+            ],
+            "final_status": "accepted_reviewer_pass",
+            "sample_id": "medval_dialogue2note_67_67",
+            "inject_to": "non_gt",
+            "target_key": "answer_2",
+            "changed": true,
+            "original_length": 1450,
+            "final_length": 1325
+          },
+          {
+            "attempts_used": 1,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 0,
+            "reviewer_last_decision": "PASS",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate preserves the same medical meaning as the original.",
+              "Singular vs plural wording ('abnormality' vs 'abnormalities') does not change the semantic content in this context.",
+              "No new medical findings or changes in interpretation were introduced."
+            ],
+            "final_status": "accepted_reviewer_pass",
+            "sample_id": "medval_report2impression_77_417",
+            "inject_to": "non_gt",
+            "target_key": "answer_1",
+            "changed": true,
+            "original_length": 91,
+            "final_length": 81
+          },
+          {
+            "attempts_used": 1,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 0,
+            "reviewer_last_decision": "PASS",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate preserves all findings from the original: normal heart/mediastinal contour, clear lungs without focal infiltrate/nodule/mass, mild pleural effusion, no pneumothorax, and no free intraperitoneal air under the diaphragm.",
+              "'Cardiomediastinal silhouette is normal' is semantically equivalent to normal heart size and mediastinal contour.",
+              "No new medical findings were introduced and no original findings were omitted or contradicted."
+            ],
+            "final_status": "accepted_reviewer_pass",
+            "sample_id": "medval_report2impression_63_403",
+            "inject_to": "non_gt",
+            "target_key": "answer_1",
+            "changed": true,
+            "original_length": 199,
+            "final_length": 209
+          },
+          {
+            "attempts_used": 3,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 3,
+            "reviewer_last_decision": "FAIL",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate introduces new medical information by specifying 'clinical evaluation' and 'support,' which are not explicitly present in the original request for 'help.'",
+              "The original asks generally for help, while the candidate narrows this to a clinical/medical context, changing the semantic scope."
+            ],
+            "final_status": "failed_accept_last",
+            "sample_id": "medval_query2question_94_314",
+            "inject_to": "non_gt",
+            "target_key": "answer_2",
+            "changed": true,
+            "original_length": 65,
+            "final_length": 103
+          },
+          {
+            "attempts_used": 1,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 0,
+            "reviewer_last_decision": "PASS",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate preserves the original meaning: flu-like symptoms lasting more than 13 days may indicate something other than a virus or bug.",
+              "'Etiology other than an acute viral illness' is semantically equivalent to 'something other than a virus or bug' in this context.",
+              "No new substantive medical information is introduced beyond a more formal rephrasing."
+            ],
+            "final_status": "accepted_reviewer_pass",
+            "sample_id": "medval_query2question_8_228",
+            "inject_to": "non_gt",
+            "target_key": "answer_1",
+            "changed": true,
+            "original_length": 90,
+            "final_length": 104
+          },
+          {
+            "attempts_used": 1,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 0,
+            "reviewer_last_decision": "PASS",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate preserves the original meaning: seeking a surgeon to remove abdominal adhesions and mesh from a previous hernia repair.",
+              "'Adhesiolysis' and 'explantation/removal of mesh' are equivalent medical terms for removing adhesions and mesh.",
+              "Specifying 'prior inguinal hernia repair' is consistent with the surrounding question context and does not materially change the request."
+            ],
+            "final_status": "accepted_reviewer_pass",
+            "sample_id": "medval_query2question_104_324",
+            "inject_to": "non_gt",
+            "target_key": "answer_2",
+            "changed": true,
+            "original_length": 85,
+            "final_length": 115
+          },
+          {
+            "attempts_used": 1,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 0,
+            "reviewer_last_decision": "PASS",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate preserves the original meaning: 'worsening IBS' is equivalent to 'exacerbation of IBS,' 'due to side effects' is equivalent to 'attributable to adverse effects,' and 'dosage' is equivalent to 'dosing.'",
+              "No new medical facts, diagnoses, symptoms, or treatment details are introduced."
+            ],
+            "final_status": "accepted_reviewer_pass",
+            "sample_id": "medval_query2question_44_264",
+            "inject_to": "non_gt",
+            "target_key": "answer_1",
+            "changed": true,
+            "original_length": 72,
+            "final_length": 98
+          },
+          {
+            "attempts_used": 1,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 0,
+            "reviewer_last_decision": "PASS",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate preserves the original meaning: memory loss/memory impairment and distraction/distractibility potentially indicating early-stage Alzheimer's or another neurological disorder.",
+              "No new medical information, diagnosis, severity, or symptoms were added; wording changes are synonymous only."
+            ],
+            "final_status": "accepted_reviewer_pass",
+            "sample_id": "medval_query2question_42_262",
+            "inject_to": "non_gt",
+            "target_key": "answer_2",
+            "changed": true,
+            "original_length": 114,
+            "final_length": 155
+          },
+          {
+            "attempts_used": 1,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 0,
+            "reviewer_last_decision": "PASS",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "The candidate preserves the same medical claims and classification as the original.",
+              "No new medical information is introduced; wording changes are synonymous (e.g., utilized/used, PRN/as needed, co-administered/combined).",
+              "Any inaccuracies present in the original are retained rather than altered, so semantic meaning is unchanged."
+            ],
+            "final_status": "accepted_reviewer_pass",
+            "sample_id": "medval_medication2answer_87_172",
+            "inject_to": "non_gt",
+            "target_key": "answer_1",
+            "changed": true,
+            "original_length": 496,
+            "final_length": 487
+          },
+          {
+            "attempts_used": 1,
+            "precheck_rejects": 0,
+            "reviewer_rejects": 0,
+            "reviewer_last_decision": "PASS",
+            "reviewer_last_confidence": 0.5,
+            "reviewer_last_reasons": [
+              "'Mild pleural effusion' and 'small pleural effusion' are semantically equivalent in this context.",
+              "Both state there is no focal airspace consolidation and no pneumothorax.",
+              "No new medical findings are introduced and overall meaning is unchanged."
+            ],
+            "final_status": "accepted_reviewer_pass",
+            "sample_id": "medval_report2impression_166_506",
+            "inject_to": "non_gt",
+            "target_key": "answer_2",
+            "changed": true,
+            "original_length": 78,
+            "final_length": 80
+          }
+        ]
+      }
+    }
+  },
+  {
+    "timestamp": "2026-04-14 02:45:29",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_023500/medaesqa_pairwise_word_jargon_overloading_openai_google_medgemma-4b-it_001",
+    "dataset_name": "medaesqa",
+    "dataset_category": "semantic Q&A",
+    "bias_type": "jargon_overloading",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "vllmserve_medgemma_4b",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_023500/medaesqa_pairwise_word_jargon_overloading_openai_google_medgemma-4b-it_001/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_023500/temp_data/test_medaesqa_10.jsonl",
+      "bias_type": "jargon_overloading",
+      "bias_variant_name": "word_jargon_overloading",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 3,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.45,
+            "len_ratio_max": 2.8,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 3,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.45,
+          "len_ratio_max": 2.8,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 10,
+        "from_cache": true,
+        "note": "Loaded from cache; per-sample injection checks are unavailable in this run."
+      }
+    }
+  }
+]

@@ -1,0 +1,291 @@
+{
+  "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/_test_batch_20260414_023500/temp_data/test_medaesqa_10.jsonl",
+  "bias_type": "jargon_overloading",
+  "bias_variant_name": "word_jargon_overloading",
+  "injection_mode": "word",
+  "inject_to": "non_gt",
+  "injector_type": "openai",
+  "injector_model_config": {
+    "model_id": "gpt52",
+    "allow_fallback_mock": false,
+    "semantic_guard": {
+      "enabled": true,
+      "max_attempts": 3,
+      "on_fail": "accept_last",
+      "precheck": {
+        "min_chars": 8,
+        "len_ratio_min": 0.45,
+        "len_ratio_max": 2.8,
+        "check_template_residue": false
+      },
+      "reviewer": {
+        "enabled": true,
+        "provider": "openai",
+        "model_id": "gpt54",
+        "fail_confidence_threshold": 0.0,
+        "on_uncertain": "retry",
+        "on_low_conf_fail": "retry",
+        "prompt": {
+          "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.",
+          "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}"
+        }
+      }
+    }
+  },
+  "semantic_guard_config": {
+    "enabled": true,
+    "max_attempts": 3,
+    "on_fail": "accept_last",
+    "precheck": {
+      "min_chars": 8,
+      "len_ratio_min": 0.45,
+      "len_ratio_max": 2.8,
+      "check_template_residue": false
+    },
+    "reviewer": {
+      "enabled": true,
+      "provider": "openai",
+      "model_id": "gpt54",
+      "fail_confidence_threshold": 0.0,
+      "on_uncertain": "retry",
+      "on_low_conf_fail": "retry",
+      "prompt": {
+        "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.",
+        "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}"
+      }
+    }
+  },
+  "report": {
+    "total_samples": 10,
+    "guard_enabled": true,
+    "max_attempts": 3,
+    "on_fail": "accept_last",
+    "injection_effective_count": 9,
+    "injection_unchanged_count": 1,
+    "guard_failed_count": 2,
+    "failed_use_original_count": 0,
+    "failed_accept_last_count": 2,
+    "retries_total": 8,
+    "precheck_rejects_total": 0,
+    "reviewer_rejects_total": 10,
+    "top_reasons": {
+      "review:The candidate introduces more specific medical information not present in the original by specifying 'allogeneic packed red blood cell (PRBC) transfusion' instead of the broader 'blood transfusion'.": 1,
+      "review:The candidate narrows 'severity of blood loss' to 'magnitude of hemorrhage' and 'underlying cause' to 'etiopathogenesis,' which may imply more specific clinical contexts than the original.": 1,
+      "review:The candidate introduces more specific medical concepts not explicitly stated in the original, changing meaning: 'end-of-life care' was changed to 'palliative care,' which is related but not semantically equivalent.": 1,
+      "review:'Placement' was changed to 'institutional placement,' adding specificity not present in the original.": 1,
+      "review:'Motor symptoms' was changed to 'extrapyramidal motor manifestations,' introducing new medical information and narrowing the meaning.": 1,
+      "review:Several other substitutions increase specificity beyond the original wording (e.g., 'clinical psychologists,' 'medical social workers,' 'health-related quality of life'), which may alter semantic scope rather than merely restyle the text.": 1,
+      "review:The candidate introduces more specific medical concepts not stated in the original, such as 'natural history,' 'clinical psychologists,' 'psychosocial support,' 'palliative care,' 'long-term care placement,' 'clinical management,' and 'extrapyramidal motor manifestations.'": 1,
+      "review:'End-of-life care and placement' in the original is narrowed/altered to 'palliative care and long-term care placement,' which changes meaning.": 1,
+      "review:'Quality of life' is changed to 'health-related quality of life,' which is a more specific concept than the original.": 1,
+      "review:The candidate changes 'end-of-life care' to 'palliative care,' which is not semantically equivalent and alters the medical meaning.": 1,
+      "review:The candidate changes 'the condition and its progression' to 'the diagnosis and its natural history,' which shifts meaning from living with the disease course to accepting a diagnosis/natural history framing.": 1,
+      "review:The candidate introduces more specific medical terminology not present in the original, such as 'extrapyramidal motor manifestations,' which adds new medical information beyond 'motor symptoms.'": 1,
+      "review:The candidate introduces more specific medical concepts not present in the original: 're-epithelialization time' and 'minor corneal epithelial abrasion.'": 1,
+      "review:The original only states that the context lacks information about healing time of a minor cornea injury; the candidate narrows and reframes the injury type, adding new medical information.": 1,
+      "review:The candidate changes meaning by replacing 'tachycardia' with 'tachyarrhythmia,' which is broader and implies arrhythmias rather than just elevated heart rate.": 1,
+      "review:The candidate changes 'cardiovascular instability' to 'hemodynamic instability,' which is narrower/different in meaning.": 1,
+      "review:Several substitutions are near-synonyms and acceptable, but these two introduce semantic changes in medical content.": 1,
+      "review:The candidate changes specific medical meaning by replacing 'tachycardia' with 'tachyarrhythmia,' which is broader/different.": 1,
+      "review:It also changes 'severe arrhythmias' to 'malignant dysrhythmias,' which is a stronger, more specific claim than the original.": 1,
+      "review:It changes 'cardiovascular instability' to 'hemodynamic instability,' which is not strictly equivalent and narrows/shifts the meaning.": 1,
+      "review:The candidate changes key medical meaning by replacing 'infertility' with 'subfertility'; these are not semantically equivalent clinical outcomes.": 2,
+      "review:The candidate also changes 'future conception success' to 'future fecundability success,' which is a different reproductive concept rather than a wording-only change.": 1,
+      "review:No information about surgical complexity is added in either version, but the altered fertility terminology introduces meaning changes.": 1,
+      "review:The candidate also changes 'future conception success' to 'future fecundability success,' which shifts terminology and may alter meaning rather than preserve it exactly.": 2,
+      "review:The candidate changes key medical meaning by replacing 'infertility' with 'subfertility'; these are not semantically equivalent clinical terms.": 1
+    },
+    "samples": [
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "'Cortisol levels' and 'cortisol concentrations' are semantically equivalent in this context.",
+          "'Reduce stress and enhance well-being' versus 'reduce psychophysiological stress and enhance subjective well-being' preserves the intended meaning without introducing a materially different medical claim.",
+          "No substantive medical recommendations or outcomes were changed."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_121",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 538,
+        "final_length": 585
+      },
+      {
+        "attempts_used": 2,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 1,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "Terminology changes such as 'physiologic reference interval' for 'normal range,' 'PRBC transfusion' for 'blood transfusion,' and 'clinical status' for 'overall health' do not alter the medical meaning in this context.",
+          "No new clinically substantive recommendation, threshold, or indication was introduced.",
+          "All transfusion thresholds and the conclusion that a single Hct value alone cannot determine transfusion need are unchanged."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_153",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 863,
+        "final_length": 985
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 3,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate changes 'end-of-life care' to 'palliative care,' which is not semantically equivalent and alters the medical meaning.",
+          "The candidate changes 'the condition and its progression' to 'the diagnosis and its natural history,' which shifts meaning from living with the disease course to accepting a diagnosis/natural history framing.",
+          "The candidate introduces more specific medical terminology not present in the original, such as 'extrapyramidal motor manifestations,' which adds new medical information beyond 'motor symptoms.'"
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "medaesqa_143",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 1076,
+        "final_length": 1176
+      },
+      {
+        "attempts_used": 2,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 1,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "Both statements convey that the provided context does not specify healing time without medical attention.",
+          "The candidate uses more specific ophthalmic terminology but does not add actual factual information about duration or outcome."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_118",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 121,
+        "final_length": 148
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning throughout.",
+          "Terminology changes are synonymous or near-synonymous without altering substance: skeletal disorder/dysplasia, dental abnormalities/odontogenic anomalies, hypoplastic clavicles/clavicular hypoplasia, cancer/malignancy, osteosarcoma/osteogenic sarcoma, therapeutic strategies/modalities, disorders/pathologies, cell growth/cellular proliferation.",
+          "No new medical claims, outcomes, or causal relationships are introduced.",
+          "The future-oriented implications remain the same: potential therapeutic development and research insights into cancer mechanisms and RUNX2's role in growth/differentiation."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_117",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 763,
+        "final_length": 809
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate is semantically identical to the original and introduces no new medical information."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_155",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": false,
+        "original_length": 132,
+        "final_length": 132
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 2,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning throughout using synonymous clinical terminology.",
+          "No new side effects, risks, recommendations, or patient groups are added beyond equivalent restatements of the original content.",
+          "Terms such as beta-blocker/beta-adrenergic receptor antagonist, hypertension/systemic arterial hypertension, tachycardia/sinus tachycardia, arrhythmias/cardiac dysrhythmias, sweating/diaphoresis, and instability/hemodynamic instability are semantically equivalent in this context."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_129",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 728,
+        "final_length": 812
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the core meaning that PCOS is linked to oxidative stress and describes the same overall relationships to insulin resistance, androgen excess, inflammation, metabolic/reproductive abnormalities, and cardiovascular risk.",
+          "Terminology changes such as 'hyperandrogenism' to 'hyperandrogenemia,' 'chronic inflammation' to 'chronic low-grade inflammation,' and 'pathophysiology' to 'etiopathogenesis' do not materially alter the medical meaning in this context.",
+          "Biomarker wording changes (e.g., 'oxidative markers' to 'oxidative biomarkers,' 'glutathione' to 'reduced glutathione') are more specific rephrasings rather than additions that change the substantive claim.",
+          "Treatment-related phrasing changes ('dietary antioxidants' to 'dietary antioxidant supplementation,' 'pharmacological interventions' to 'pharmacotherapeutic interventions') maintain the same therapeutic concept without introducing a meaningfully different recommendation."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_130",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 960,
+        "final_length": 1050
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout using more technical synonyms and near-equivalent medical terminology.",
+          "'Erythema dyschromicum perstans' is a recognized synonym for ashy dermatosis, so this does not introduce a different condition.",
+          "Descriptions of causes, affected populations, silver-related exposures, and psoriasis remain semantically equivalent.",
+          "No materially new medical claims or changed causal relationships are introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_151",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 1064,
+        "final_length": 1289
+      },
+      {
+        "attempts_used": 3,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 3,
+        "reviewer_last_decision": "FAIL",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate changes key medical meaning by replacing 'infertility' with 'subfertility'; these are not semantically equivalent clinical terms.",
+          "The candidate also changes 'future conception success' to 'future fecundability success,' which shifts terminology and may alter meaning rather than preserve it exactly."
+        ],
+        "final_status": "failed_accept_last",
+        "sample_id": "medaesqa_133",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 574,
+        "final_length": 598
+      }
+    ]
+  }
+}
