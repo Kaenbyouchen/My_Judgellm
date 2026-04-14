@@ -144,12 +144,16 @@ def create_temp_data_files(
             print(f"  [WARN] No records in {src_path}, skipping")
             continue
         chosen = rng.sample(records, min(num_samples, len(records)))
-        out_path = tmp_dir / f"test_{ds_name}_{num_samples}.jsonl"
+        # Each dataset gets its own subdirectory to avoid bias injection
+        # cache collisions (cache key is parent_dir + bias_type + model).
+        ds_dir = tmp_dir / ds_name
+        ds_dir.mkdir(parents=True, exist_ok=True)
+        out_path = ds_dir / f"test_{ds_name}_{num_samples}.jsonl"
         with out_path.open("w", encoding="utf-8") as f:
             for r in chosen:
                 f.write(json.dumps(r, ensure_ascii=False) + "\n")
         result[ds_name] = out_path
-        print(f"  {ds_name}: {len(chosen)} samples → {out_path.name}")
+        print(f"  {ds_name}: {len(chosen)} samples → {ds_name}/{out_path.name}")
     return result
 
 
