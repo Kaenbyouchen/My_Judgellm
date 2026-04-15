@@ -224,45 +224,23 @@ def load_existing_judgments(run_dir: Path, judgment_type: str = "original") -> L
     try:
         with open(judgment_file, 'r', encoding='utf-8') as f:
             content = f.read()
-            # Split by newlines and parse each JSON object
-            # Handle multi-line formatted JSON
-            lines = content.split('\n')
-            current_json = ""
-            brace_count = 0
-            
-            for line in lines:
-                if not line.strip() and brace_count == 0:
-                    # Empty line between JSON objects, skip
-                    continue
-                    
-                current_json += line + '\n'
-                brace_count += line.count('{') - line.count('}')
-                
-                if brace_count == 0 and current_json.strip():
-                    try:
-                        judgment = json.loads(current_json.strip())
-                        judgments.append(judgment)
-                        current_json = ""
-                    except json.JSONDecodeError:
-                        # Try to extract JSON from the text using regex
-                        import re
-                        json_match = re.search(r'\{.*\}', current_json, re.DOTALL)
-                        if json_match:
-                            try:
-                                judgment = json.loads(json_match.group(0))
-                                judgments.append(judgment)
-                            except:
-                                pass
-                        current_json = ""
-            
-            # Handle any remaining JSON at the end
-            if current_json.strip() and brace_count == 0:
-                try:
-                    judgment = json.loads(current_json.strip())
-                    judgments.append(judgment)
-                except:
-                    pass
+
+        decoder = json.JSONDecoder()
+        idx = 0
+        length = len(content)
+        while idx < length:
+            # Skip whitespace between JSON objects
+            while idx < length and content[idx] in ' \t\n\r':
+                idx += 1
+            if idx >= length:
+                break
+            try:
+                obj, end_idx = decoder.raw_decode(content, idx)
+                judgments.append(obj)
+                idx = end_idx
+            except json.JSONDecodeError:
+                idx += 1
     except Exception as e:
         logger.warning(f"Error loading existing judgments from {judgment_file}: {e}")
-    
+
     return judgments
