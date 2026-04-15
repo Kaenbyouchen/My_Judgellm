@@ -574,3 +574,818 @@
 2026-04-15 12:55:31 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
 2026-04-15 12:55:33 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
 2026-04-15 12:55:35 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:55:41 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:55:41 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:55:41 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:55:41 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:55:41 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:55:41 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:55:41 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:55:41 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:55:59 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:55:59 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:55:59 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:55:59 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:55:59 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:55:59 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:55:59 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:55:59 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:55:59 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:55:59 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:55:59 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:55:59 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:01 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:01 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:03 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:03 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:03 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:03 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:03 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:03 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:07 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:07 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:07 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:07 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:09 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:09 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:12 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:12 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:14 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:14 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:14 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:14 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:14 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:14 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:14 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:14 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:16 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:16 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:16 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:16 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:18 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:20 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:20 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:22 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:22 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:23 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:24 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:24 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:26 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:29 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:29 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:29 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:29 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:29 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:29 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:31 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:31 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:39 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:43 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:43 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:43 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:43 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:43 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:43 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:46 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:58 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:58 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:58 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:56:58 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:58 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:58 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:58 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:58 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:58 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:58 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:56:58 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:01 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:01 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:02 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:02 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:02 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:02 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:04 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:04 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:06 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:06 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:08 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:08 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:08 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:08 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:12 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:12 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:13 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:13 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:13 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:13 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:13 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:13 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:13 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:13 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:13 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:13 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:13 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:17 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:17 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:17 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:21 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:21 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:23 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:27 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:27 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:27 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:28 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:27 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:28 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:27 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:28 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:32 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:32 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:32 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:32 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:37 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:42 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:42 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:42 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:42 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:42 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:42 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:45 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:46 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:56 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:56 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:56 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:56 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:56 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:56 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:56 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:56 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:56 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:56 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:57:59 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:57:59 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:00 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:00 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:01 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:01 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:01 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:01 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:01 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:01 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:02 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:02 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:04 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:04 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:05 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:05 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:06 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:06 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:11 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:11 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:11 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:11 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:11 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:11 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:11 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:11 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:16 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:16 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:16 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:16 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:19 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:19 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:20 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:20 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:20 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:20 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:24 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:26 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:26 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:26 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:26 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:26 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:26 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:26 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:29 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:30 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:31 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:32 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:34 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:35 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:41 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:41 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:41 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:41 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:45 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:55 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:55 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:55 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:55 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:55 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:55 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:55 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:55 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:55 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:58:58 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:58:58 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:00 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:00 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:02 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:02 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:04 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:04 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:10 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:10 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:10 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:10 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:10 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:10 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:10 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:10 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:10 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:10 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:10 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:10 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:13 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:13 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:15 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:15 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:16 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:16 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:19 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:19 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:25 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:25 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:25 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:25 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:25 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:25 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:25 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:25 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:25 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:25 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:28 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:28 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:29 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:29 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:30 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:30 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:31 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:34 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:40 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:40 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:40 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:40 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:40 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:40 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:44 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:54 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:54 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:54 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:54 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:54 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:54 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:54 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:54 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:54 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:54 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:54 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:57 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:57 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:58 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:58 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:59 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:59 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 12:59:59 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 12:59:59 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:02 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:02 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:03 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:03 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:09 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:09 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:09 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:09 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:09 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:09 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:09 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:09 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:12 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:12 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:14 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:14 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:15 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:15 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:17 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:17 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:18 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:18 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:18 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:22 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:24 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:24 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:24 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:24 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:24 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:24 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:24 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:24 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:28 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:28 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:30 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:30 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:33 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:33 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:39 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:39 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:39 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:39 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:39 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:39 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:42 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:42 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:44 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:53 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:53 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:53 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:53 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:53 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:53 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:53 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:53 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:53 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:55 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:55 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:56 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:56 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:56 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:56 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:57 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:57 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:57 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:57 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:00:58 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:00:58 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:00 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:00 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:00 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:00 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:01 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:01 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:01 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:01 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:06 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:06 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:08 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:08 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:08 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:08 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:08 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:08 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:10 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:11 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:11 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:13 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:13 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:15 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:15 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:15 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:15 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:16 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:16 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:20 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:23 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:23 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:23 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:23 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:26 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:26 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:27 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:30 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:31 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:37 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:37 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:37 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:37 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:40 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:52 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:52 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:52 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:52 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:52 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:52 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:52 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:52 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:52 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:52 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:55 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:55 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:55 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:55 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:56 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:56 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:01:59 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:01:59 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:04 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:04 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:07 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:07 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:07 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:07 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:07 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:07 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:07 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:07 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:07 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:07 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:09 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:10 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:10 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:10 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:10 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:12 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:12 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:13 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:13 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:14 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:17 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:17 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:21 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:21 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:21 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:21 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:21 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:21 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:21 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:21 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:22 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:25 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:25 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:25 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:25 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:26 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:26 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:29 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:36 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:36 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:36 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:36 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:39 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:40 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:50 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:50 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:50 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:50 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:50 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:50 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:50 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:50 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:50 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:50 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:53 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:53 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:54 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:54 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:55 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:55 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:56 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:56 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:57 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:57 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:58 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:58 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:59 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:59 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:02:59 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:02:59 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:01 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:02 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:05 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:05 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:05 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:05 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:05 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:05 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:05 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:05 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:05 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:05 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:14 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:14 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:18 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:20 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:20 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:20 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:20 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:20 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:20 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:20 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:20 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:20 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:20 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:22 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:22 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:24 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:24 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:35 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:35 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:35 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:35 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:35 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:35 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:37 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:38 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:40 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:49 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:49 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:49 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:49 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:49 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:49 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:49 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:49 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:49 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:49 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:52 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:52 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:53 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:53 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:54 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:54 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:55 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:55 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:59 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:59 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:03:59 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:03:59 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:04 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:04 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:04 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:04 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:04 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:04 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:04 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:04 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:04 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:04 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:07 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:07 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:08 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:08 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:08 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:08 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:11 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:11 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:14 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:14 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:14 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:17 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:19 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:19 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:19 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:19 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:19 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:19 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:23 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:23 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:23 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:23 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:29 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:34 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:34 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:34 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:34 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:34 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:34 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:37 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:37 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:37 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:48 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:48 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:48 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:48 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:48 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:48 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:48 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:48 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:48 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:48 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:51 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:51 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:53 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:53 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:53 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:53 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:53 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:53 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:57 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:57 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:04:57 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:04:57 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:03 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:03 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:03 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:03 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:03 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:03 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:03 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:03 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:03 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:03 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:06 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:06 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:07 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:07 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:08 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:08 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:09 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:09 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:09 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:09 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:10 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:10 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:12 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:12 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:12 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:13 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:15 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:18 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:18 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:18 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:18 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:18 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:21 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:21 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:22 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:22 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:24 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:24 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:33 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:33 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:36 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:37 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:39 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:47 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:47 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:47 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:47 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:47 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:47 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:47 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:47 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:47 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:50 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:50 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:50 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:50 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:51 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:51 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:51 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:51 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:51 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:51 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:52 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:52 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:52 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:52 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:53 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:53 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:54 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:54 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:55 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:55 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:55 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:55 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:57 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:05:57 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:05:58 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:00 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:00 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:01 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:01 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:02 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:02 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:02 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:02 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:05 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:05 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:06 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:07 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:09 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:09 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:10 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:10 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:12 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:14 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:17 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:17 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:17 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:17 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:20 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:20 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:21 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:21 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:25 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:26 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:31 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:31 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:44 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:45 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:45 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:45 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:45 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:45 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:45 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:45 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:45 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:47 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:47 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:48 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:48 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:49 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:49 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:49 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:49 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:49 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:49 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:52 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:52 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:53 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:53 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:54 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:54 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:57 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:57 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:06:57 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:06:57 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:07:00 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:07:00 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:07:00 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:07:00 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:07:00 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:07:00 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:07:00 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:07:00 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:07:01 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:07:02 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:07:02 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:07:04 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:07:04 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:07:07 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:07:08 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:07:08 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:07:12 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:07:12 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:07:14 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:07:14 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:07:14 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:07:14 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:07:14 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:07:14 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:07:17 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:07:17 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:07:19 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:07:19 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:07:19 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:07:19 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:07:23 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:07:23 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:07:27 | WARNING  | src.pipeline.run_pairwise:_signal_handler:54 - 
+============================================================
+2026-04-15 13:07:27 | WARNING  | src.pipeline.run_pairwise:_signal_handler:55 - ⚠️  Interrupt signal received (Ctrl+C or SIGTERM)
+2026-04-15 13:07:27 | WARNING  | src.pipeline.run_pairwise:_signal_handler:56 - ⚠️  Current progress will be saved. You can resume later by running the same command.
+2026-04-15 13:07:27 | WARNING  | src.pipeline.run_pairwise:_signal_handler:57 - ============================================================
+2026-04-15 13:07:29 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:07:29 | DEBUG    | src.models.openai_client:is_available:254 - OpenAIModel.is_available: True - model=prometheus-eval/prometheus-7b-v2.0
+2026-04-15 13:07:31 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:07:32 | DEBUG    | src.judge.judge_runner:_parse_response:333 - Failed to parse as JSON, falling back to text parsing: Expecting value: line 1 column 1 (char 0)
+2026-04-15 13:07:32 | WARNING  | src.pipeline.run_pairwise:run_pairwise_evaluation:598 - Shutdown requested after saving. Exiting gracefully...
+2026-04-15 13:07:32 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:619 - Injection target audit: inject_to=non_gt, changed=158, unchanged=2, total=400
+2026-04-15 13:07:32 | WARNING  | src.pipeline.run_pairwise:run_pairwise_evaluation:663 - Bias round1 judgments incomplete due to local interruption: expected 400, got 160. Padding 240 local-invalid placeholders.
+2026-04-15 13:07:32 | WARNING  | src.pipeline.run_pairwise:run_pairwise_evaluation:690 - Bias round2 judgments incomplete due to local interruption: expected 400, got 160. Padding 240 local-invalid placeholders.
+2026-04-15 13:07:32 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:732 - Computing position-debiased biased accuracy, RR and CR...
+2026-04-15 13:07:32 | WARNING  | src.metrics.pairwise_metrics:compute_cr:313 - Excluding 240 model-invalid judgment pairs from CR denominator (e.g., safety filter blocks, quota errors, timeout).
+2026-04-15 13:07:32 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:909 - Bias judgments saved incrementally to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medical_eval_sphere_pairwise_word_plain_language_openai_prometheus-eval_prometheus-7b-v2.0_001/judge_raw_bias.jsonl (160 total)
+2026-04-15 13:07:32 | INFO     | src.metrics.reports:save_judgments_jsonl:313 - Judgments saved to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medical_eval_sphere_pairwise_word_plain_language_openai_prometheus-eval_prometheus-7b-v2.0_001/judge_raw.jsonl (160 judgments)
+2026-04-15 13:07:32 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:925 - All judgments saved to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medical_eval_sphere_pairwise_word_plain_language_openai_prometheus-eval_prometheus-7b-v2.0_001/judge_raw.jsonl
+2026-04-15 13:07:32 | INFO     | src.metrics.reports:save_metrics_json:108 - Metrics saved to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medical_eval_sphere_pairwise_word_plain_language_openai_prometheus-eval_prometheus-7b-v2.0_001/metrics.json
+2026-04-15 13:07:32 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:930 - Metrics saved to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medical_eval_sphere_pairwise_word_plain_language_openai_prometheus-eval_prometheus-7b-v2.0_001/metrics.json
+2026-04-15 13:07:32 | INFO     | src.metrics.reports:save_metrics_csv:174 - Metrics summary saved to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medical_eval_sphere_pairwise_word_plain_language_openai_prometheus-eval_prometheus-7b-v2.0_001/results.csv
+2026-04-15 13:07:32 | INFO     | src.pipeline.run_pairwise:run_pairwise_evaluation:934 - Metrics summary saved to /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medical_eval_sphere_pairwise_word_plain_language_openai_prometheus-eval_prometheus-7b-v2.0_001/results.csv
+2026-04-15 13:07:32 | WARNING  | src.pipeline.run_pairwise:run_pairwise_evaluation:941 - ============================================================
+2026-04-15 13:07:32 | WARNING  | src.pipeline.run_pairwise:run_pairwise_evaluation:942 - ⚠️  Evaluation interrupted by user
+2026-04-15 13:07:32 | WARNING  | src.pipeline.run_pairwise:run_pairwise_evaluation:943 - ⚠️  Progress saved to: /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medical_eval_sphere_pairwise_word_plain_language_openai_prometheus-eval_prometheus-7b-v2.0_001
+2026-04-15 13:07:32 | WARNING  | src.pipeline.run_pairwise:run_pairwise_evaluation:944 - ⚠️  You can resume by running the same command again
+2026-04-15 13:07:32 | WARNING  | src.pipeline.run_pairwise:run_pairwise_evaluation:945 - ============================================================
+2026-04-15 13:07:32 | ERROR    | src.main:main:541 - Quality gate FAILED for accuracy_biased: 240/400 judgments are invalid (>50%). This run will NOT be written to results_summary.
+2026-04-15 13:07:32 | WARNING  | src.main:main:548 - Run interrupted; skip appending results_summary.* to avoid treating partial run as completed.
+2026-04-15 13:07:32 | INFO     | src.main:main:595 - Aggregated bias injection report updated: /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/bias_injection_report_all.json
+2026-04-15 13:07:32 | INFO     | src.main:main:597 - Evaluation completed successfully
+2026-04-15 13:07:32 | WARNING  | __main__:main:902 - KeyboardInterrupt: 091_medical_eval_sphere_vllmserve_prometheus2_7b_gpt52_plain_language_word. Stopping remaining batch runs.
+2026-04-15 13:07:32 | INFO     | __main__:_stop_vllm_server:156 - Stopping vLLM server
+2026-04-15 13:07:36 | INFO     | __main__:_stop_vllm_server:197 - vLLM server stopped
+2026-04-15 13:07:36 | INFO     | __main__:main:979 - ========================================================================
+2026-04-15 13:07:36 | INFO     | __main__:main:980 - Done. success=90, failed=0, dry_run=0, skipped_existing_eval=0
+2026-04-15 13:07:36 | INFO     | __main__:main:981 - Summary: /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/batch_logs/yaml_batch_20260415_002750/yaml_batch_summary.json
+2026-04-15 13:07:36 | INFO     | __main__:main:982 - Each run is executed by src.main, so outputs are stored under outputs/ and appended to results_summary.*
+2026-04-15 13:07:36 | INFO     | __main__:main:985 - ========================================================================
