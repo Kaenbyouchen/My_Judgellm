@@ -18,7 +18,6 @@ batch:
   # 指定评测模型（judge），可一次配置多个
   # 推荐使用 judge_models（列表）；judge_model 保留兼容旧写法
   judge_models:
-    - "gpt52"
     - "vllmserve_medgemma_4b"
     - "vllmserve_biomistral_7b"
     - "vllmserve_prometheus2_7b"
@@ -57,7 +56,7 @@ batch:
 
   # 运行控制
   continue_on_error: true
-  dry_run: true
+  dry_run: false
   # true: 每个 judge_model 只在第一个组合里计算一次 original judgment
   # 后续 bias 组合跳过 original，仅计算 bias 相关指标
   reuse_original_per_judge: true

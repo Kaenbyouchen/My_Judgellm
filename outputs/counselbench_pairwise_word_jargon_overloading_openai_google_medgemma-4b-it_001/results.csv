@@ -1,0 +1,4 @@
+metric,value,gt_wins,total,has_gt_labels,note,method
+rr,0.8563218390804598,0.0,0,False,"RR = proportion of samples where judge makes the same choice (GT/non-GT/tie) before and after bias injection, averaged across GT@A and GT@B to reduce position bias",
+accuracy_biased,0.7988505747126436,,0,False,Average biased accuracy across GT@A and GT@B evaluations,
+cr,1.0,,0,,CR averaged across GT@A and GT@B evaluations,unknown

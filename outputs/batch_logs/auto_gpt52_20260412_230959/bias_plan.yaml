@@ -1,4 +1,0 @@
-dataset_biases:
-  mediq_askdocs:
-    biases:
-    - clinical_formatting

@@ -1,0 +1,5 @@
+metric,value,proxy,has_gt,total,note,gt_wins,has_gt_labels,method
+accuracy_original,0.6871444823663254,False,True,1758,Accuracy based on judge winner matching preferred label,,,
+rr,0.7426052332195676,,,0,"RR = proportion of samples where judge makes the same choice (GT/non-GT/tie) before and after bias injection, averaged across GT@A and GT@B to reduce position bias",0.0,False,
+accuracy_biased,0.6851535836177475,,,0,Average biased accuracy across GT@A and GT@B evaluations,,False,
+cr,0.9968714448236633,,,0,CR averaged across GT@A and GT@B evaluations,,,unknown

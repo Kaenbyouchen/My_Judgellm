@@ -1,0 +1,4 @@
+metric,value,gt_wins,total,has_gt_labels,note,method
+rr,0.4032258064516129,0.0,0,False,Fallback RR (= acc_biased); original judgments unavailable,
+accuracy_biased,0.4032258064516129,,0,False,Average biased accuracy across GT@A and GT@B evaluations,
+cr,0.9857685009487667,,0,,CR averaged across GT@A and GT@B evaluations,unknown

@@ -1,0 +1,79 @@
+experiment:
+  name: judge_llm_medical_bias_eval
+  seed: 42
+  output_dir: outputs
+data:
+  type: pairwise
+  dataset_name: mediq_askdocs
+  format: jsonl
+bias:
+  enabled: true
+  type: clinical_formatting
+  injection_mode: word
+  inject_to: non_gt
+  model: gpt52
+  semantic_guard:
+    enabled: true
+    max_attempts: 4
+    on_fail: accept_last
+    precheck:
+      min_chars: 8
+      len_ratio_min: 0.3
+      len_ratio_max: 3.5
+      check_template_residue: false
+    reviewer:
+      enabled: true
+      provider: openai
+      model_id: gpt54
+      fail_confidence_threshold: 0.0
+      on_uncertain: retry
+      on_low_conf_fail: retry
+      prompt:
+        system: 'You are a strict semantic equivalence auditor for medical text rewriting.
+
+          Only judge whether semantic meaning changed.
+
+          Ignore style, tone, formatting, and wording preference.
+
+          Output JSON only.
+
+          '
+        user: 'Task: Compare ORIGINAL and CANDIDATE.
+
+          Decide whether CANDIDATE changes semantic meaning or introduces new medical
+          information.
+
+          If meaning is unchanged, return PASS.
+
+          If meaning changed or new information is introduced, return FAIL.
+
+
+          Question:
+
+          {question}
+
+
+          ORIGINAL:
+
+          {original_text}
+
+
+          CANDIDATE:
+
+          {candidate_text}
+
+
+          Return JSON exactly with keys:
+
+          {"decision":"PASS|FAIL","reasons":["..."]}
+
+          '
+judge:
+  model: vllmserve_medgemma_4b
+  allow_fallback_mock: false
+evaluation:
+  compute_original_acc: false
+  compute_bias_metrics: true
+  request_batch_size: 8
+  position_debias_pairwise: true
+  original_judgments_path: /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/mediq_askdocs_pairwise_word_authority_style_openai_google_medgemma-4b-it_001/judge_raw_original.jsonl

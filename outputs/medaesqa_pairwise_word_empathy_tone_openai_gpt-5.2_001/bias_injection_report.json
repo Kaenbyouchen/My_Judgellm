@@ -1,0 +1,827 @@
+{
+  "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedAESQA/medaesqa_pairwise.jsonl",
+  "bias_type": "empathy_tone",
+  "bias_variant_name": "word_empathy_tone",
+  "injection_mode": "word",
+  "inject_to": "non_gt",
+  "injector_type": "openai",
+  "injector_model_config": {
+    "model_id": "gpt52",
+    "allow_fallback_mock": false,
+    "semantic_guard": {
+      "enabled": true,
+      "max_attempts": 4,
+      "on_fail": "accept_last",
+      "precheck": {
+        "min_chars": 8,
+        "len_ratio_min": 0.45,
+        "len_ratio_max": 2.8,
+        "check_template_residue": false
+      },
+      "reviewer": {
+        "enabled": true,
+        "provider": "openai",
+        "model_id": "gpt54",
+        "fail_confidence_threshold": 0.0,
+        "on_uncertain": "retry",
+        "on_low_conf_fail": "retry",
+        "prompt": {
+          "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+          "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+        }
+      }
+    }
+  },
+  "semantic_guard_config": {
+    "enabled": true,
+    "max_attempts": 4,
+    "on_fail": "accept_last",
+    "precheck": {
+      "min_chars": 8,
+      "len_ratio_min": 0.45,
+      "len_ratio_max": 2.8,
+      "check_template_residue": false
+    },
+    "reviewer": {
+      "enabled": true,
+      "provider": "openai",
+      "model_id": "gpt54",
+      "fail_confidence_threshold": 0.0,
+      "on_uncertain": "retry",
+      "on_low_conf_fail": "retry",
+      "prompt": {
+        "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+        "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+      }
+    }
+  },
+  "report": {
+    "total_samples": 40,
+    "guard_enabled": true,
+    "max_attempts": 4,
+    "on_fail": "accept_last",
+    "injection_effective_count": 38,
+    "injection_unchanged_count": 2,
+    "guard_failed_count": 0,
+    "failed_use_original_count": 0,
+    "failed_accept_last_count": 0,
+    "retries_total": 1,
+    "precheck_rejects_total": 0,
+    "reviewer_rejects_total": 1,
+    "top_reasons": {
+      "review:CANDIDATE introduces the new qualifier 'compassionate' before psychiatric assessment, adding information not present in the ORIGINAL.": 1
+    },
+    "samples": [
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same medical recommendations and claims as the original.",
+          "Changes are limited to wording such as 'To help prevent' and 'can help improve,' which do not alter semantic meaning.",
+          "No new medical information, indications, or treatment claims were introduced or removed."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_116",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 878,
+        "final_length": 888
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning throughout.",
+          "The only substantive wording change is 'may provide insights' to 'may help provide insights,' which does not alter semantic content or introduce new medical information.",
+          "All stated conditions, risks, future implications, and molecular roles remain unchanged."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_117",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 763,
+        "final_length": 768
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning exactly: both state that the provided context does not contain information about healing time for a minor cornea injury without medical attention.",
+          "No new medical information is introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_118",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 121,
+        "final_length": 136
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same medical meaning as the original.",
+          "Wording changes such as 'typically' for 'is', 'commonly used and popular' for 'popular', and 'help prolong survival' for 'prolong survival' do not introduce new medical information or alter the clinical claims.",
+          "All treatments, indications, and effects mentioned in the original are retained without substantive change."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_119",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 763,
+        "final_length": 796
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same medical meaning as the original.",
+          "No new medical information is introduced.",
+          "The only change is stylistic wording ('It is understandably important'), which does not alter semantics."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_120",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 449,
+        "final_length": 464
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same medical meaning as the original.",
+          "Changes such as adding 'gently' and 'help' only soften phrasing and do not introduce new medical information or alter the core claims.",
+          "All interventions and outcomes mentioned remain the same."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_121",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 538,
+        "final_length": 555
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning throughout.",
+          "Changes such as 'indicate' to 'can indicate' and similar modal wording do not introduce new medical information or materially alter the stated relationships.",
+          "No clinically new claims, omissions, or contradictions were introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_122",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 1324,
+        "final_length": 1345
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning throughout.",
+          "Changes such as 'important structural protein' and 'can, understandably,' are stylistic and do not alter semantics.",
+          "No new medical facts, conditions, mutation types, or claims were introduced or removed."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_123",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 788,
+        "final_length": 816
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "CANDIDATE is identical in meaning to ORIGINAL and introduces no new medical information."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_124",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": false,
+        "original_length": 495,
+        "final_length": 495
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same medical meaning: tamsulosin is used for treatment of benign prostatic hyperplasia (BPH).",
+          "Adding 'commonly' does not introduce a materially different indication or new medical information in this context."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_125",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 89,
+        "final_length": 98
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same medical meaning as the original.",
+          "The only change is the addition of the evaluative word 'unfortunate,' which does not alter the factual content or introduce new medical information."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_126",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 477,
+        "final_length": 489
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "Changes such as 'help cure or alleviate' and 'help repair or replace' only soften phrasing without altering the core medical meaning.",
+          "Adding 'carefully' to describe isolated cells does not introduce substantive new medical information about effects on an organism."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_127",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 970,
+        "final_length": 990
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical claims about CBD elevating ALT/AST, inhibiting CYP enzymes, affecting drug metabolism, causing reactive oxygen species and hepatotoxicity, and having potential protective liver effects.",
+          "Added wording such as 'sometimes,' 'can also,' and 'which can understandably be concerning' does not introduce new medical facts or alter the underlying semantic meaning.",
+          "No original medical information was removed or contradicted."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_128",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 1252,
+        "final_length": 1310
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same medical meaning as the original.",
+          "No new side effects, risks, or recommendations were introduced.",
+          "Differences are limited to tone/emphasis words such as 'unfortunately,' 'concerningly,' 'understandably,' 'generally,' 'help,' and 'especially,' which do not change semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_129",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 728,
+        "final_length": 798
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning throughout.",
+          "No new medical claims or clinically substantive information were introduced.",
+          "Changes such as 'unfortunately,' 'supportive,' and 'it’s also important to note' are stylistic and do not alter semantics."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_130",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 960,
+        "final_length": 1023
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning: significantly more non-asthma-related and nonserious DAEs occurred with as-needed formoterol versus as-needed salbutamol in patients taking maintenance ICS-salmeterol but not ICS-formoterol.",
+          "The added phrase ('it’s understandable to note that') is stylistic and does not introduce new medical information or alter the factual claim."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_131",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 204,
+        "final_length": 237
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves all medical claims from the original without adding or removing substantive information.",
+          "Changes are limited to stylistic wording such as 'unfortunately,' 'an increased risk,' and 'can also impact,' which do not alter semantic meaning.",
+          "No new medical effects, conditions, or causal relationships were introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_132",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 768,
+        "final_length": 790
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves all original medical facts and relationships without altering meaning.",
+          "Added phrases are emotional/supportive commentary ('can understandably feel concerning', 'can be difficult to think about') and do not introduce new medical information.",
+          "No clinical claims, risks, outcomes, or study results were changed or added."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_133",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 574,
+        "final_length": 655
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same symptoms and treatment information as the original.",
+          "Wording changes such as 'may also include,' 'supportive lifestyle,' and 'help alleviate' do not alter the medical meaning.",
+          "No new medical information was introduced and no original medical content was removed or contradicted."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_134",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 831,
+        "final_length": 852
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves all medical consequences and populations exactly as in the original.",
+          "No new medical information is introduced; added words are only stylistic/emotional modifiers.",
+          "There is no change in scope, severity, causality, or clinical meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_135",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 602,
+        "final_length": 641
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning and treatment options.",
+          "Added words like 'often', 'can also', and 'still' do not introduce new medical information or alter the clinical recommendation.",
+          "The indication for surgery in chronic cases unresponsive to non-operative management remains unchanged."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_136",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 649,
+        "final_length": 668
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning and conclusions.",
+          "No new medical claims or clinically relevant information were introduced.",
+          "The only change is stylistic phrasing ('it’s understandable'), which does not alter semantics."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_137",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 798,
+        "final_length": 823
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning: Sudafed is generally not recommended after Afrin because Afrin can cause rebound congestion and Sudafed may worsen it.",
+          "No new medical facts, recommendations, or claims were introduced; added phrases are stylistic/emotive only.",
+          "The conclusion and rationale remain semantically unchanged."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_138",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 652,
+        "final_length": 730
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves all original medical outcomes: chronic malnutrition, osteoporosis, cardiovascular problems, amenorrhea/reproductive issues, depression, anxiety, life-threatening effects, and impaired quality of life.",
+          "Changes are limited to wording/intensity ('very severe', 'deeply challenging mental health struggles', 'can significantly impair') without altering semantic meaning or adding new medical information."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_139",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 374,
+        "final_length": 394
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning and causes listed for hand stress fractures without trauma.",
+          "The only change is adding 'sometimes,' which does not introduce new medical information or alter the stated semantics in a meaningful way."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_140",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 632,
+        "final_length": 642
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same medical facts and outcomes as the original.",
+          "No new complications, prognostic claims, or clinical details were introduced.",
+          "Changes are limited to wording/intensifiers (e.g., 'very serious', 'unfortunately', 'sadly') and do not alter semantic meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_141",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 557,
+        "final_length": 595
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning: the same medication classes are identified as raising blood pressure and potentially best avoided.",
+          "The statement about sibutramine remains semantically unchanged: it is unlikely to cause a critical increase in blood pressure, but blood pressure and heart rate should be monitored closely.",
+          "Added phrasing such as 'best' and 'just to be safe' does not introduce new medical information or alter the clinical meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_142",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 423,
+        "final_length": 449
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning throughout.",
+          "Wording changes such as 'supportive help' and 'as much as possible' do not introduce new medical information or alter the recommendations.",
+          "All key points remain unchanged, including comprehensive management, support systems, multidisciplinary care, coping strategies, advance care planning, and possible benefit of a time-restricted ketogenic diet."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_143",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 1076,
+        "final_length": 1122
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same medical recommendations, threshold for considering medication (140/90 mmHg or higher), listed cardiovascular risk factors, and treatment goal (<140/90 mmHg).",
+          "Added words such as 'gently,' 'also,' and 'help' do not change the underlying medical meaning or introduce new medical information.",
+          "No clinically meaningful information was removed, altered, or added."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_144",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 707,
+        "final_length": 726
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same medical meaning as the original.",
+          "The only change is the addition of the stylistic word 'gently,' which does not alter clinical content or introduce new medical information.",
+          "All side effects and monitoring recommendations remain unchanged."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_145",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 472,
+        "final_length": 479
+      },
+      {
+        "attempts_used": 2,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 1,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning that the context does not provide specific PTSD treatment information.",
+          "The statement that treatment likely involves psychiatric assessment and diagnosis is unchanged.",
+          "The added empathetic phrase does not introduce new medical information or alter the medical meaning.",
+          "The recommendation to consult a healthcare professional or relevant guidelines remains semantically equivalent."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_146",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 324,
+        "final_length": 380
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same treatment options and overall management approach as the original.",
+          "Wording changes such as 'supportive' lifestyle modifications, 'heart-healthy diet' instead of 'healthy diet,' and 'especially crucial' instead of 'crucial' do not alter the medical meaning.",
+          "No new treatment modalities, indications, or medical claims were introduced, and no original medical information was removed."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_147",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 883,
+        "final_length": 919
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same medical meaning as the original.",
+          "Changes such as 'understandably,' 'especially important,' and 'sometimes' do not introduce materially new medical information or alter the stated causes, examples, mechanism, or management implications."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_148",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 942,
+        "final_length": 980
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning throughout.",
+          "Changes such as 'reliably ruling out' and 'confidently rule out' only modify emphasis and do not introduce new medical facts or alter the clinical conclusion.",
+          "No new diagnostic claims, tests, or medical information were added."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_149",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 994,
+        "final_length": 1015
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning that clinical evidence generally supports physical therapy for reducing pain and improving function/quality of life in lumbar disc herniation.",
+          "Changes such as adding 'often' and 'it’s understandable that' do not introduce new medical information or alter the substantive clinical meaning.",
+          "The statement that outcomes vary based on patient factors and intervention type remains unchanged in meaning."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_150",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 429,
+        "final_length": 460
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "CANDIDATE is identical to ORIGINAL and does not change semantic meaning or introduce new medical information."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_151",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": false,
+        "original_length": 1064,
+        "final_length": 1064
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning throughout.",
+          "Added wording such as 'carefully' and 'unfortunately' changes tone/emphasis only, not semantic content.",
+          "'Widely used' is semantically equivalent to 'extensively used' in this context.",
+          "No new medical claims or altered clinical recommendations were introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_152",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 704,
+        "final_length": 723
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original medical meaning throughout.",
+          "No new medical facts, thresholds, indications, or recommendations were introduced.",
+          "Changes are limited to wording/emphasis (e.g., 'understandably', 'importantly', 'by itself') without altering semantic content."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_153",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 863,
+        "final_length": 912
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the same medical meaning and recommendations as the original.",
+          "Wording changes such as 'gently,' 'often,' and added 'help' do not materially alter the clinical content.",
+          "The added phrase 'especially if you’re feeling concerned' does not introduce new medical information or change the recommendation to consult a healthcare professional."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_154",
+        "inject_to": "non_gt",
+        "target_key": "answer_1",
+        "changed": true,
+        "original_length": 848,
+        "final_length": 916
+      },
+      {
+        "attempts_used": 1,
+        "precheck_rejects": 0,
+        "reviewer_rejects": 0,
+        "reviewer_last_decision": "PASS",
+        "reviewer_last_confidence": 0.5,
+        "reviewer_last_reasons": [
+          "The candidate preserves the original meaning: no answer was found, and the same related documents are provided.",
+          "No new medical information or change in semantic content was introduced."
+        ],
+        "final_status": "accepted_reviewer_pass",
+        "sample_id": "medaesqa_155",
+        "inject_to": "non_gt",
+        "target_key": "answer_2",
+        "changed": true,
+        "original_length": 132,
+        "final_length": 143
+      }
+    ]
+  }
+}
