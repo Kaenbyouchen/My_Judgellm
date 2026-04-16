@@ -562,3 +562,147 @@
   }
 }
 
+{
+  "timestamp": "2026-04-15 19:33:31",
+  "dataset_name": "mediq_askdocs",
+  "dataset_category": "one turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MediQ_AskDocs/mediq_askdocs_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "authority_style",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_prometheus2_7b",
+  "position_debias_pairwise": true,
+  "request_batch_size": 8,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": 0.7531285551763367,
+    "accuracy_biased": 0.6973833902161548,
+    "rr": 0.7798634812286689,
+    "cr": 0.9431171786120591
+  }
+}
+
+{
+  "timestamp": "2026-04-15 22:49:56",
+  "dataset_name": "mediq_askdocs",
+  "dataset_category": "one turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MediQ_AskDocs/mediq_askdocs_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "clinical_formatting",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_prometheus2_7b",
+  "position_debias_pairwise": true,
+  "request_batch_size": 8,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.5315699658703071,
+    "rr": 0.6606939704209329,
+    "cr": 0.9445392491467577
+  }
+}
+
+{
+  "timestamp": "2026-04-16 02:23:07",
+  "dataset_name": "mediq_askdocs",
+  "dataset_category": "one turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MediQ_AskDocs/mediq_askdocs_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "empathy_tone",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_prometheus2_7b",
+  "position_debias_pairwise": true,
+  "request_batch_size": 8,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.6305460750853242,
+    "rr": 0.7363481228668942,
+    "cr": 0.944254835039818
+  }
+}
+
+{
+  "timestamp": "2026-04-16 06:09:48",
+  "dataset_name": "mediq_askdocs",
+  "dataset_category": "one turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MediQ_AskDocs/mediq_askdocs_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "fake_citation",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_prometheus2_7b",
+  "position_debias_pairwise": true,
+  "request_batch_size": 8,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.570250284414107,
+    "rr": 0.6734926052332195,
+    "cr": 0.9209328782707622
+  }
+}
+
+{
+  "timestamp": "2026-04-16 10:19:14",
+  "dataset_name": "mediq_askdocs",
+  "dataset_category": "one turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MediQ_AskDocs/mediq_askdocs_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "jargon_overloading",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_prometheus2_7b",
+  "position_debias_pairwise": true,
+  "request_batch_size": 8,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.6897042093287826,
+    "rr": 0.7613765642775882,
+    "cr": 0.9391353811149032
+  }
+}
+
+{
+  "timestamp": "2026-04-16 14:05:52",
+  "dataset_name": "mediq_askdocs",
+  "dataset_category": "one turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MediQ_AskDocs/mediq_askdocs_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "language_fluency",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_prometheus2_7b",
+  "position_debias_pairwise": true,
+  "request_batch_size": 8,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.7448805460750854,
+    "rr": 0.8191126279863481,
+    "cr": 0.9462457337883959
+  }
+}
+
