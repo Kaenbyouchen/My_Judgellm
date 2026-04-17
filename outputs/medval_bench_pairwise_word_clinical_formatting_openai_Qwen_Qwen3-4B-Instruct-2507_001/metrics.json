@@ -1,0 +1,94 @@
+{
+  "accuracy_biased": {
+    "accuracy_biased": 0.31214421252371916,
+    "position_A_gt": {
+      "rate": 0.2884250474383302,
+      "wins": 152,
+      "ties": 0,
+      "total": 527,
+      "valid_count": 527,
+      "invalid_count": 0
+    },
+    "position_B_gt": {
+      "rate": 0.33586337760910817,
+      "wins": 177,
+      "ties": 0,
+      "total": 527,
+      "valid_count": 527,
+      "invalid_count": 0
+    },
+    "metadata": {
+      "note": "Average biased accuracy across GT@A and GT@B evaluations",
+      "position_debias_pairwise": true
+    }
+  },
+  "rr": {
+    "rr": 0.8681214421252372,
+    "rr_gt_at_A": 0.8633776091081594,
+    "rr_gt_at_B": 0.872865275142315,
+    "position_A_gt": {
+      "rate": 0.8633776091081594,
+      "same": 455,
+      "total_valid": 527,
+      "invalid_count": 0
+    },
+    "position_B_gt": {
+      "rate": 0.872865275142315,
+      "same": 460,
+      "total_valid": 527,
+      "invalid_count": 0
+    },
+    "metadata": {
+      "note": "RR = proportion of samples where judge makes the same choice (GT/non-GT/tie) before and after bias injection, averaged across GT@A and GT@B to reduce position bias",
+      "position_debias_pairwise": true
+    }
+  },
+  "cr": {
+    "cr": 1.0,
+    "cr_gt_at_A": 1.0,
+    "cr_gt_at_B": 1.0,
+    "position_A_gt": {
+      "cr": 1.0,
+      "method": "consistency",
+      "total": 527,
+      "valid_count": 527,
+      "invalid_count": 0,
+      "consistent_count": 527,
+      "inconsistent_count": 0,
+      "inconsistent_samples": [],
+      "metadata": {
+        "note": "CR = proportion of samples with consistent judgment across two rounds",
+        "definition": "For each sample, if round1 winner == round2 winner, CR=1; else CR=0. Final CR is the average.",
+        "invalid_excluded": true
+      }
+    },
+    "position_B_gt": {
+      "cr": 1.0,
+      "method": "consistency",
+      "total": 527,
+      "valid_count": 527,
+      "invalid_count": 0,
+      "consistent_count": 527,
+      "inconsistent_count": 0,
+      "inconsistent_samples": [],
+      "metadata": {
+        "note": "CR = proportion of samples with consistent judgment across two rounds",
+        "definition": "For each sample, if round1 winner == round2 winner, CR=1; else CR=0. Final CR is the average.",
+        "invalid_excluded": true
+      }
+    },
+    "metadata": {
+      "note": "CR averaged across GT@A and GT@B evaluations",
+      "position_debias_pairwise": true
+    }
+  },
+  "metadata": {
+    "injection_target_audit": {
+      "inject_to": "non_gt",
+      "target_changed_count": 527,
+      "target_unchanged_count": 0,
+      "total_samples": 527,
+      "request_batch_size": 32
+    }
+  }
+}

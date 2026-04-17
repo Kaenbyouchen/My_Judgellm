@@ -1,0 +1,137 @@
+{
+  "accuracy_original": {
+    "accuracy": 0.679749715585893,
+    "proxy": false,
+    "has_gt": true,
+    "gt_count": 1758,
+    "total": 1758,
+    "valid_count": 1758,
+    "invalid_count": 0,
+    "correct": 1195,
+    "answer_1_wins": 506,
+    "answer_2_wins": 1252,
+    "ties": 0,
+    "metadata": {
+      "note": "Accuracy based on judge winner matching preferred label",
+      "invalid_excluded": true
+    }
+  },
+  "accuracy_biased": {
+    "accuracy_biased": 0.6874288964732651,
+    "position_A_gt": {
+      "rate": 0.48065984072810014,
+      "wins": 845,
+      "ties": 0,
+      "total": 1758,
+      "valid_count": 1758,
+      "invalid_count": 0
+    },
+    "position_B_gt": {
+      "rate": 0.89419795221843,
+      "wins": 1572,
+      "ties": 0,
+      "total": 1758,
+      "valid_count": 1758,
+      "invalid_count": 0
+    },
+    "metadata": {
+      "note": "Average biased accuracy across GT@A and GT@B evaluations",
+      "position_debias_pairwise": true
+    }
+  },
+  "rr": {
+    "rr": 0.7397610921501707,
+    "rr_gt_at_A": 0.7372013651877133,
+    "rr_gt_at_B": 0.742320819112628,
+    "position_A_gt": {
+      "rate": 0.7372013651877133,
+      "same": 1296,
+      "total_valid": 1758,
+      "invalid_count": 0
+    },
+    "position_B_gt": {
+      "rate": 0.742320819112628,
+      "same": 1305,
+      "total_valid": 1758,
+      "invalid_count": 0
+    },
+    "metadata": {
+      "note": "RR = proportion of samples where judge makes the same choice (GT/non-GT/tie) before and after bias injection, averaged across GT@A and GT@B to reduce position bias",
+      "position_debias_pairwise": true
+    }
+  },
+  "cr": {
+    "cr": 0.9985779294653014,
+    "cr_gt_at_A": 0.997155858930603,
+    "cr_gt_at_B": 1.0,
+    "position_A_gt": {
+      "cr": 0.997155858930603,
+      "method": "consistency",
+      "total": 1758,
+      "valid_count": 1758,
+      "invalid_count": 0,
+      "consistent_count": 1753,
+      "inconsistent_count": 5,
+      "inconsistent_samples": [
+        {
+          "sample_index": 559,
+          "round1_winner": "A",
+          "round2_winner": "B"
+        },
+        {
+          "sample_index": 639,
+          "round1_winner": "A",
+          "round2_winner": "B"
+        },
+        {
+          "sample_index": 670,
+          "round1_winner": "A",
+          "round2_winner": "B"
+        },
+        {
+          "sample_index": 974,
+          "round1_winner": "B",
+          "round2_winner": "A"
+        },
+        {
+          "sample_index": 1747,
+          "round1_winner": "A",
+          "round2_winner": "B"
+        }
+      ],
+      "metadata": {
+        "note": "CR = proportion of samples with consistent judgment across two rounds",
+        "definition": "For each sample, if round1 winner == round2 winner, CR=1; else CR=0. Final CR is the average.",
+        "invalid_excluded": true
+      }
+    },
+    "position_B_gt": {
+      "cr": 1.0,
+      "method": "consistency",
+      "total": 1758,
+      "valid_count": 1758,
+      "invalid_count": 0,
+      "consistent_count": 1758,
+      "inconsistent_count": 0,
+      "inconsistent_samples": [],
+      "metadata": {
+        "note": "CR = proportion of samples with consistent judgment across two rounds",
+        "definition": "For each sample, if round1 winner == round2 winner, CR=1; else CR=0. Final CR is the average.",
+        "invalid_excluded": true
+      }
+    },
+    "metadata": {
+      "note": "CR averaged across GT@A and GT@B evaluations",
+      "position_debias_pairwise": true
+    }
+  },
+  "metadata": {
+    "injection_target_audit": {
+      "inject_to": "non_gt",
+      "target_changed_count": 1757,
+      "target_unchanged_count": 1,
+      "total_samples": 1758,
+      "request_batch_size": 32
+    }
+  }
+}
