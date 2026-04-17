@@ -78,7 +78,6 @@ def start_vllm(hf_model: str, port: int, gpu_ids: str) -> subprocess.Popen:
         "--trust-remote-code",
         "--max-model-len", "2048",
         "--gpu-memory-utilization", "0.85",
-        "--enforce-eager",  # skip CUDA graph capture (faster startup on V100)
     ]
     log_dir = PROJECT_ROOT / "outputs" / "test_vllm_logs"
     log_dir.mkdir(parents=True, exist_ok=True)

@@ -198,7 +198,6 @@ def start_vllm_server(
         "--gpu-memory-utilization", str(gpu_mem_util),
         "--dtype", "auto",
         "--download-dir", str(PROJECT_ROOT / "src" / "models"),
-        "--enforce-eager",
         "--trust-remote-code",
         "--disable-log-requests",
     ]

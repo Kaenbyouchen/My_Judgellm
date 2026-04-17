@@ -72,5 +72,10 @@ judge:
 evaluation:
   compute_original_acc: true  # compute accuracy on original R1 vs R2
   compute_bias_metrics: true  # compute RR/CR on R1 vs biased_R2
-  request_batch_size: 8  # Number of concurrent pairwise requests (increase for vLLM serve throughput)
+  request_batch_size: 32  # Concurrent pairwise requests. 32 is a safe sweet-spot:
+  # - For fast short-output models (medgemma/gemma/qwen/llama/biomistral with max_tokens=80),
+  #   vLLM's continuous batching keeps GPU saturated at 32 with very little queuing.
+  # - For Prometheus2 (max_tokens=1024) and DeepSeek-R1-Distill (max_tokens=2048),
+  #   32 keeps KV-cache usage bounded so decode doesn't thrash on A40/A100 48-80GB GPUs.
+  # Raising to 64 only helps the short-output models and risks OOM on thinking models.
 

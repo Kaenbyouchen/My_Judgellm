@@ -90,6 +90,12 @@ def _start_vllm_server(
     _kill_port_occupant(port)
 
     log_file = log_dir / f"vllm_{model_id}.log"
+    # Note: --enforce-eager was previously set to avoid CUDA Graph issues on some
+    # models, but it slows decode by 2-3x. All dense models in our list
+    # (Llama / Qwen / Mistral / Gemma / DeepSeek-R1-Distill / BioMistral / Prometheus2-7B)
+    # support CUDA Graph fine on modern vLLM, so we drop it for large speedups.
+    # If a MoE / exotic model fails to start, re-add "--enforce-eager" here or
+    # expose it as a per-model flag in models.yaml.
     cmd = [
         sys.executable, "-m", "vllm.entrypoints.openai.api_server",
         "--model", hf_model,
@@ -98,7 +104,6 @@ def _start_vllm_server(
         "--gpu-memory-utilization", str(gpu_mem_util),
         "--dtype", "auto",
         "--download-dir", str(PROJECT_ROOT / "src" / "models"),
-        "--enforce-eager",
         "--trust-remote-code",
         "--disable-log-requests",
     ]
