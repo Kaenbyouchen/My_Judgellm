@@ -329,54 +329,82 @@ class ModelJudge(BaseJudge):
             return winner, score_A, score_B, explanation
             
         except (json.JSONDecodeError, AttributeError, KeyError) as e:
-            # Fall back to text-based parsing (supports both new format and old format)
+            # Fall back to text-based parsing (supports multiple free-text formats).
             logger.debug(f"Failed to parse as JSON, falling back to text parsing: {e}")
-            response_lower = response.lower()
-            
-            # Try structured format: "Verdict: [[A]]" / "[[B]]" and "Explanation:"
+
+            # Strip <think>...</think> blocks (DeepSeek-R1-Distill reasoning traces).
+            # Only parse the text AFTER </think>, otherwise keyword matching will be
+            # polluted by reasoning prose that mentions "Answer A" / "Answer B" many
+            # times regardless of the model's final conclusion.
+            if "<think>" in response and "</think>" in response:
+                post_think = response.rsplit("</think>", 1)[-1]
+            else:
+                post_think = response
+
             winner = "tie"
             explanation = ""
-            
-            # Extract verdict from "[[A]]" or "[[B]]" format (order-independent)
-            verdict_match = re.search(r'\[\[([AB])\]\]', response, re.IGNORECASE)
-            
-            # Extract explanation: capture everything after "Explanation:" until
-            # "Verdict:" (old order) or end-of-string (new order: verdict first)
+
+            # Extract verdict by trying increasingly lenient patterns.
+            # Always take the LAST match — for reasoning models the last verdict is final.
+            #   Priority 1: [[A]] / [[B]]   (most models incl. Prometheus2)
+            #   Priority 2: [A]  / [B]      (DeepSeek-R1-Distill)
+            #   Priority 3: Verdict: A / B  (BioMistral; no brackets at all)
+            def _last_match(pattern: str, text: str) -> Optional[str]:
+                hits = re.findall(pattern, text, re.IGNORECASE)
+                return hits[-1].upper() if hits else None
+
+            # Priority 1: strict double-bracket. Search post_think first (after </think>),
+            # then fall back to full response (covers Prometheus2 whose [[A]] sits inside
+            # a long Feedback block without any <think> tags).
+            v = _last_match(r'\[\[([AB])\]\]', post_think) or _last_match(r'\[\[([AB])\]\]', response)
+            if v is None:
+                # Priority 2: single bracket (DeepSeek-R1-Distill style).
+                v = _last_match(r'\[([AB])\]', post_think)
+            if v is None:
+                # Priority 3: bare "Verdict: A" / "Verdict: B" (BioMistral style).
+                # \b prevents matching 'A' inside "Apple", etc.
+                v = _last_match(r'verdict\s*:\s*([AB])\b', post_think)
+            if v is None:
+                # Priority 4 (last resort): keyword fallback, scoped to post_think so we
+                # never key off mentions inside a <think> reasoning trace.
+                pt_lower = post_think.lower()
+                if "answer a" in pt_lower or "answer_a" in pt_lower or "a is better" in pt_lower:
+                    v = "A"
+                elif "answer b" in pt_lower or "answer_b" in pt_lower or "b is better" in pt_lower:
+                    v = "B"
+                elif "tie" in pt_lower or "equal" in pt_lower or "both" in pt_lower:
+                    v = "tie"
+            if v is not None:
+                winner = v if v == "tie" else v.upper()
+
+            # Extract explanation. Look inside post_think first; fall back to full response.
             explanation_match = re.search(
-                r'explanation:\s*(.+?)(?=\nverdict:|\Z)',
-                response, re.IGNORECASE | re.DOTALL
+                r'explanation\s*:\s*(.+?)(?=\nverdict\s*:|\Z)',
+                post_think, re.IGNORECASE | re.DOTALL
             )
             if explanation_match:
                 explanation = explanation_match.group(1).strip()
-            if verdict_match:
-                winner = verdict_match.group(1).upper()
             else:
-                # Fall back to old format parsing for backward compatibility
-                if "answer a" in response_lower or "answer_a" in response_lower or "a is better" in response_lower:
-                    winner = "A"
-                elif "answer b" in response_lower or "answer_b" in response_lower or "b is better" in response_lower:
-                    winner = "B"
-                elif "tie" in response_lower or "equal" in response_lower or "both" in response_lower:
-                    winner = "tie"
-                
-                # If no explanation extracted, use first 500 chars as fallback
-                if not explanation:
-                    explanation = response[:500].strip()
-            
-            # Try to extract scores (for old format compatibility)
+                explanation_match = re.search(
+                    r'explanation\s*:\s*(.+?)(?=\nverdict\s*:|\Z)',
+                    response, re.IGNORECASE | re.DOTALL
+                )
+                if explanation_match:
+                    explanation = explanation_match.group(1).strip()
+                else:
+                    explanation = post_think[:500].strip() or response[:500].strip()
+
+            # Try to extract numeric scores (for old scalar-format compatibility).
             score_A = None
             score_B = None
-            
-            score_pattern = r'score[_\s]*(?:a|1)[:\s]*(\d+\.?\d*)'
-            match = re.search(score_pattern, response_lower)
-            if match:
-                score_A = float(match.group(1))
-            
-            score_pattern = r'score[_\s]*(?:b|2)[:\s]*(\d+\.?\d*)'
-            match = re.search(score_pattern, response_lower)
-            if match:
-                score_B = float(match.group(1))
-            
+            response_lower = response.lower()
+            m = re.search(r'score[_\s]*(?:a|1)[:\s]*(\d+\.?\d*)', response_lower)
+            if m:
+                score_A = float(m.group(1))
+            m = re.search(r'score[_\s]*(?:b|2)[:\s]*(\d+\.?\d*)', response_lower)
+            if m:
+                score_B = float(m.group(1))
+
             return winner, score_A, score_B, explanation
     
     def is_available(self) -> bool:

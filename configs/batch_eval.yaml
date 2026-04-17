@@ -17,15 +17,17 @@ batch:
 
   # 指定评测模型（judge），可一次配置多个
   # 推荐使用 judge_models（列表）；judge_model 保留兼容旧写法
+  #
+  # Round-2 补跑（parser 修好后）：
+  #   - biomistral_7b: 旧数据因 "Verdict: A" 无括号被错判 ~3.2%，本轮重跑纠正
+  #   - deepseek_r1_distill_qwen_14b: 14B thinking 模型，首次跑
+  #   - medical_qwen3_14b_1218: 医学 14B 指令模型，首次跑
+  # 其他已完成的模型（medgemma_4b / gemma3_4b / llama31_8b / qwen3_4b /
+  # prometheus2_7b / gpt52）数据干净，靠 skip_existing_evals=true 直接跳过。
   judge_models:
-    - "vllmserve_medgemma_4b"
     - "vllmserve_biomistral_7b"
-    - "vllmserve_prometheus2_7b"
-    - "vllmserve_gemma3_4b"
-    - "vllmserve_qwen3_4b_instruct"
-    - "vllmserve_llama31_8b_instruct"
-    - "vllmserve_deepseek_r1_distill_qwen_7b"
-    - "vllmserve_deepseek_r1_distill_llama_8b"
+    - "vllmserve_deepseek_r1_distill_qwen_14b"
+    - "vllmserve_medical_qwen3_14b_1218"
   # judge_model: "qwen3_4b_instruct"
 
   # 指定 bias 注入模型（可多个）:
