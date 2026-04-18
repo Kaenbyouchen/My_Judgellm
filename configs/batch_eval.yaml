@@ -18,15 +18,16 @@ batch:
   # 指定评测模型（judge），可一次配置多个
   # 推荐使用 judge_models（列表）；judge_model 保留兼容旧写法
   #
-  # Round-3（只跑 Medical）：
-  #   biomistral_7b 和 deepseek_r1_distill_qwen_14b 已在 Round-2 跑完（各 35/35）。
-  #   只剩 medical_qwen3_14b_1218 这最后一个模型。单独跑它的目的：
-  #     1) 避免再启 vLLM 去白跑已完成模型（省 ~10 min）
-  #     2) 防止 VLLM_USE_MODELSCOPE=True 误导 vLLM 去 ModelScope 重下 BioMistral/DeepSeek
-  #   Medical 权重已由 modelscope CLI 预下载到本地路径，models.yaml 里直接指本地目录，
-  #   不再依赖 VLLM_USE_MODELSCOPE 环境变量。
+  # Round-4（补跑 Medical-Qwen3 修好版 + 补 GPT-5.2 缺失 combo）：
+  #   - vllmserve_medical_qwen3_14b_1218: 上一轮 max_tokens=80 把 thinking 截断导致全部
+  #     失败，已清理脏数据，本轮 max_tokens=4096 重跑全部 35 combo。
+  #   - gpt52: JSONL 里已有 23 个 completed combo，skip_existing_evals=true 会自动跳过，
+  #     本轮只补跑缺失的 12 个（counselbench/empathy_tone, medical_eval_sphere/empathy_tone,
+  #     mediq_askdocs 4 个 + medval_bench 6 个）。
+  #   执行顺序：先 Medical-Qwen3（起 vLLM → 跑完 → 停），再 gpt52（API，无 vLLM）。
   judge_models:
     - "vllmserve_medical_qwen3_14b_1218"
+    - "gpt52"
   # judge_model: "qwen3_4b_instruct"
 
   # 指定 bias 注入模型（可多个）:

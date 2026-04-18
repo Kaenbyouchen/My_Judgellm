@@ -108,7 +108,7 @@ openai:
     model_name: "/project2/ruishanl_1185/zrui6736/My_Judgellm/src/models/modelscope_cache/zjydiary/Medical-Qwen3-14B-1218"
     base_url_env: "VLLM_BASE_URL"
     allow_empty_api_key: true
-    max_tokens: 80
+    max_tokens: 4096   # Qwen3 thinking model: <think>...</think> reasoning + verdict. 80 会中途被截断
   vllmserve_prometheus2_8x7b:
     model_name: "prometheus-eval/prometheus-8x7b-v2.0"
     base_url_env: "VLLM_BASE_URL"
