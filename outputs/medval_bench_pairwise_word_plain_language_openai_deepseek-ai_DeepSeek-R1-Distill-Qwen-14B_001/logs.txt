@@ -4305,3 +4305,11 @@
 2026-04-17 17:00:12 | INFO     | __main__:_stop_vllm_server:161 - Stopping vLLM server
 2026-04-17 17:00:17 | INFO     | __main__:_stop_vllm_server:202 - vLLM server stopped
 2026-04-17 17:00:19 | INFO     | __main__:_start_vllm_server:114 - Starting vLLM serve for vllmserve_medical_qwen3_14b_1218: zjydiary/Medical-Qwen3-14B-1218
+2026-04-17 17:10:20 | ERROR    | __main__:main:754 - vLLM health check timed out for vllmserve_medical_qwen3_14b_1218. Skipping.
+2026-04-17 17:10:20 | INFO     | __main__:_stop_vllm_server:161 - Stopping vLLM server
+2026-04-17 17:10:23 | INFO     | __main__:_stop_vllm_server:202 - vLLM server stopped
+2026-04-17 17:10:23 | INFO     | __main__:main:984 - ========================================================================
+2026-04-17 17:10:23 | INFO     | __main__:main:985 - Done. success=70, failed=0, dry_run=0, skipped_existing_eval=0
+2026-04-17 17:10:23 | INFO     | __main__:main:986 - Summary: /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/batch_logs/yaml_batch_20260417_055917/yaml_batch_summary.json
+2026-04-17 17:10:23 | INFO     | __main__:main:987 - Each run is executed by src.main, so outputs are stored under outputs/ and appended to results_summary.*
+2026-04-17 17:10:23 | INFO     | __main__:main:990 - ========================================================================
