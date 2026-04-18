@@ -30,7 +30,6 @@ batch:
   judge_models:
     - "vllmserve_medical_qwen3_14b_1218"
     - "vllmserve_prometheus2_7b"
-    - "gpt52"
   # judge_model: "qwen3_4b_instruct"
 
   # 指定 bias 注入模型（可多个）:
