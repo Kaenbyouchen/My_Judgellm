@@ -293,5 +293,3 @@ multi-turn conversation,medval_bench,plain_language,word,pairwise,vllmserve_llam
 multi-turn conversation,medval_bench,plain_language,word,pairwise,vllmserve_medgemma_4b,34.91,37.38,99.72,77.80
 multi-turn conversation,medval_bench,plain_language,word,pairwise,vllmserve_prometheus2_7b,28.08,32.54,93.93,75.05
 multi-turn conversation,medval_bench,plain_language,word,pairwise,vllmserve_qwen3_4b_instruct,34.91,42.41,99.62,83.78
-one turn conversation,mediq_askdocs,clinical_formatting,word,pairwise,gpt52,84.53,81.03,96.25,87.91
-one turn conversation,mediq_askdocs,plain_language,word,pairwise,vllmserve_prometheus2_7b,63.25,63.37,90.64,64.36
