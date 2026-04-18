@@ -18,15 +18,18 @@ batch:
   # 指定评测模型（judge），可一次配置多个
   # 推荐使用 judge_models（列表）；judge_model 保留兼容旧写法
   #
-  # Round-4（补跑 Medical-Qwen3 修好版 + 补 GPT-5.2 缺失 combo）：
+  # Round-5（修 max_tokens + 补 gpt52 quota 恢复后的缺失 combo + Prometheus2 漏的 1 条）：
   #   - vllmserve_medical_qwen3_14b_1218: 上一轮 max_tokens=80 把 thinking 截断导致全部
-  #     失败，已清理脏数据，本轮 max_tokens=4096 重跑全部 35 combo。
-  #   - gpt52: JSONL 里已有 23 个 completed combo，skip_existing_evals=true 会自动跳过，
-  #     本轮只补跑缺失的 12 个（counselbench/empathy_tone, medical_eval_sphere/empathy_tone,
-  #     mediq_askdocs 4 个 + medval_bench 6 个）。
-  #   执行顺序：先 Medical-Qwen3（起 vLLM → 跑完 → 停），再 gpt52（API，无 vLLM）。
+  #     失败，JSONL 脏数据已清，本轮 max_tokens=4096 重跑全部 35 combo。
+  #   - gpt52: 上一轮 OpenAI quota 用尽 + 偶发 Cloudflare HTML 错误，CSV 只有 22/35。
+  #     本轮假设 OPENAI_API_KEY 已换成有额度的 key，补跑缺失 13 个
+  #     （mediq_askdocs × 6 bias + medval_bench × 7 bias，全部 mode=word）。
+  #   - vllmserve_prometheus2_7b: 之前漏 1 条 (mediq_askdocs/plain_language/word)，
+  #     skip_existing 会自动只跑这 1 个缺口。
+  #   执行顺序：先 Medical-Qwen3 起 vLLM → Prometheus2 起 vLLM → gpt52（API，无 vLLM）。
   judge_models:
     - "vllmserve_medical_qwen3_14b_1218"
+    - "vllmserve_prometheus2_7b"
     - "gpt52"
   # judge_model: "qwen3_4b_instruct"
 
