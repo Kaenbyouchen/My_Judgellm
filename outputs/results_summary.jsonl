@@ -2783,3 +2783,51 @@
   }
 }
 
+{
+  "timestamp": "2026-04-18 00:08:50",
+  "dataset_name": "counselbench",
+  "dataset_category": "one turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/Counselbench/counselbench_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "empathy_tone",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "gpt52",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": 0.9195402298850575,
+    "accuracy_biased": 0.8908045977011494,
+    "rr": 0.9367816091954023,
+    "cr": 0.9770114942528736
+  }
+}
+
+{
+  "timestamp": "2026-04-18 00:11:55",
+  "dataset_name": "medical_eval_sphere",
+  "dataset_category": "multi-choice qa",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/medical_eval_sphere/medical_eval_sphere.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "empathy_tone",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "gpt52",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": 0.7175,
+    "accuracy_biased": 0.7424999999999999,
+    "rr": 0.85,
+    "cr": 0.96
+  }
+}
+

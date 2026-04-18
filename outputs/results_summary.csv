@@ -15,6 +15,7 @@ one turn conversation,counselbench,clinical_formatting,word,pairwise,vllmserve_l
 one turn conversation,counselbench,clinical_formatting,word,pairwise,vllmserve_medgemma_4b,68.97,80.46,100.00,81.61
 one turn conversation,counselbench,clinical_formatting,word,pairwise,vllmserve_prometheus2_7b,90.80,78.74,94.83,84.48
 one turn conversation,counselbench,clinical_formatting,word,pairwise,vllmserve_qwen3_4b_instruct,90.80,89.08,100.00,92.53
+one turn conversation,counselbench,empathy_tone,word,pairwise,gpt52,91.95,89.08,97.70,93.68
 one turn conversation,counselbench,empathy_tone,word,pairwise,vllmserve_biomistral_7b,98.85,61.49,100.00,61.49
 one turn conversation,counselbench,empathy_tone,word,pairwise,vllmserve_deepseek_r1_distill_qwen_14b,89.66,89.08,96.55,92.53
 one turn conversation,counselbench,empathy_tone,word,pairwise,vllmserve_gemma3_4b,93.10,88.51,98.85,93.10
@@ -126,6 +127,7 @@ multi-choice qa,medical_eval_sphere,clinical_formatting,word,pairwise,vllmserve_
 multi-choice qa,medical_eval_sphere,clinical_formatting,word,pairwise,vllmserve_medgemma_4b,60.25,53.37,99.25,64.88
 multi-choice qa,medical_eval_sphere,clinical_formatting,word,pairwise,vllmserve_prometheus2_7b,71.25,48.12,97.25,69.88
 multi-choice qa,medical_eval_sphere,clinical_formatting,word,pairwise,vllmserve_qwen3_4b_instruct,76.00,61.12,99.63,75.63
+multi-choice qa,medical_eval_sphere,empathy_tone,word,pairwise,gpt52,71.75,74.25,96.00,85.00
 multi-choice qa,medical_eval_sphere,empathy_tone,word,pairwise,vllmserve_biomistral_7b,53.50,50.88,99.63,51.62
 multi-choice qa,medical_eval_sphere,empathy_tone,word,pairwise,vllmserve_deepseek_r1_distill_qwen_14b,72.50,70.62,90.88,79.88
 multi-choice qa,medical_eval_sphere,empathy_tone,word,pairwise,vllmserve_gemma3_4b,66.00,66.75,99.75,75.50
