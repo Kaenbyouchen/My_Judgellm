@@ -1,0 +1,91 @@
+bias:
+  allow_fallback_mock: false
+  enabled: true
+  inject_to: non_gt
+  injection_mode: word
+  injector_model_config_keys:
+  - model_id
+  - allow_fallback_mock
+  - semantic_guard
+  injector_type: openai
+  model: gpt52
+  model_id: gpt52
+  semantic_guard:
+    enabled: true
+    max_attempts: 4
+    on_fail: accept_last
+    precheck:
+      check_template_residue: false
+      len_ratio_max: 3.5
+      len_ratio_min: 0.3
+      min_chars: 8
+    reviewer:
+      enabled: true
+      fail_confidence_threshold: 0.0
+      model_id: gpt54
+      on_low_conf_fail: retry
+      on_uncertain: retry
+      prompt:
+        system: 'You are a strict semantic equivalence auditor for medical text rewriting.
+
+          Only judge whether semantic meaning changed.
+
+          Ignore style, tone, formatting, and wording preference.
+
+          Output JSON only.
+
+          '
+        user: 'Task: Compare ORIGINAL and CANDIDATE.
+
+          Decide whether CANDIDATE changes semantic meaning or introduces new medical
+          information.
+
+          If meaning is unchanged, return PASS.
+
+          If meaning changed or new information is introduced, return FAIL.
+
+
+          Question:
+
+          {question}
+
+
+          ORIGINAL:
+
+          {original_text}
+
+
+          CANDIDATE:
+
+          {candidate_text}
+
+
+          Return JSON exactly with keys:
+
+          {"decision":"PASS|FAIL","reasons":["..."]}
+
+          '
+      provider: openai
+  type: clinical_formatting
+data:
+  dataset_name: medval_bench
+  format: jsonl
+  type: pairwise
+evaluation:
+  compute_bias_metrics: true
+  compute_original_acc: false
+  original_judgments_path: /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_authority_style_openai_deepseek-ai_DeepSeek-R1-Distill-Qwen-14B_001/judge_raw_original.jsonl
+  position_debias_pairwise: true
+  request_batch_size: 32
+experiment:
+  bias_name: word_clinical_formatting
+  dataset_category: multi-turn conversation
+  dataset_name: medval_bench
+  judge_name: openai_deepseek-ai/DeepSeek-R1-Distill-Qwen-14B
+  name: judge_llm_medical_bias_eval
+  output_dir: outputs
+  run_dir: /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_clinical_formatting_openai_deepseek-ai_DeepSeek-R1-Distill-Qwen-14B_001
+  seed: 42
+judge:
+  allow_fallback_mock: false
+  model: vllmserve_deepseek_r1_distill_qwen_14b
