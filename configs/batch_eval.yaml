@@ -18,15 +18,14 @@ batch:
   # 指定评测模型（judge），可一次配置多个
   # 推荐使用 judge_models（列表）；judge_model 保留兼容旧写法
   #
-  # Round-2 补跑（parser 修好后）：
-  #   - biomistral_7b: 旧数据因 "Verdict: A" 无括号被错判 ~3.2%，本轮重跑纠正
-  #   - deepseek_r1_distill_qwen_14b: 14B thinking 模型，首次跑
-  #   - medical_qwen3_14b_1218: 医学 14B 指令模型，首次跑
-  # 其他已完成的模型（medgemma_4b / gemma3_4b / llama31_8b / qwen3_4b /
-  # prometheus2_7b / gpt52）数据干净，靠 skip_existing_evals=true 直接跳过。
+  # Round-3（只跑 Medical）：
+  #   biomistral_7b 和 deepseek_r1_distill_qwen_14b 已在 Round-2 跑完（各 35/35）。
+  #   只剩 medical_qwen3_14b_1218 这最后一个模型。单独跑它的目的：
+  #     1) 避免再启 vLLM 去白跑已完成模型（省 ~10 min）
+  #     2) 防止 VLLM_USE_MODELSCOPE=True 误导 vLLM 去 ModelScope 重下 BioMistral/DeepSeek
+  #   Medical 权重已由 modelscope CLI 预下载到本地路径，models.yaml 里直接指本地目录，
+  #   不再依赖 VLLM_USE_MODELSCOPE 环境变量。
   judge_models:
-    - "vllmserve_biomistral_7b"
-    - "vllmserve_deepseek_r1_distill_qwen_14b"
     - "vllmserve_medical_qwen3_14b_1218"
   # judge_model: "qwen3_4b_instruct"
 
@@ -69,7 +68,8 @@ batch:
   vllm_port: 8000
   vllm_max_model_len: 8192
   vllm_gpu_memory_utilization: 0.90
-  vllm_startup_timeout: 600   # 等待 vLLM 启动的超时时间（秒）
+  vllm_startup_timeout: 1200  # 等待 vLLM 启动的超时时间（秒）。Medical-Qwen3-14B
+  # 从本地加载 ~28GB 权重 + torch.compile 编译 ~5-10min，600s 边界偏紧，给到 20min 稳。
 
   # 可选：日志目录（不填则自动生成到 outputs/batch_logs）
   log_dir: null

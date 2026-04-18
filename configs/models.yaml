@@ -99,7 +99,13 @@ openai:
     allow_empty_api_key: true
     max_tokens: 80
   vllmserve_medical_qwen3_14b_1218:
-    model_name: "zjydiary/Medical-Qwen3-14B-1218"
+    # 本地路径指向 modelscope 预下载的目录（避免 vLLM 启动时联网去 ModelScope 拉）。
+    # 预下载命令：
+    #   python -c "from modelscope import snapshot_download; \
+    #     print(snapshot_download('zjydiary/Medical-Qwen3-14B-1218', \
+    #       cache_dir='src/models/modelscope_cache'))"
+    # 如果你在别的机器跑，把这个 model_name 换成 snapshot_download 返回的路径即可。
+    model_name: "/project2/ruishanl_1185/zrui6736/My_Judgellm/src/models/modelscope_cache/zjydiary/Medical-Qwen3-14B-1218"
     base_url_env: "VLLM_BASE_URL"
     allow_empty_api_key: true
     max_tokens: 80
