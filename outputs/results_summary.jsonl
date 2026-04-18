@@ -1943,3 +1943,843 @@
   }
 }
 
+{
+  "timestamp": "2026-04-17 19:19:32",
+  "dataset_name": "counselbench",
+  "dataset_category": "one turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/Counselbench/counselbench_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "authority_style",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": 0.8850574712643678,
+    "accuracy_biased": 0.4482758620689655,
+    "rr": 0.5057471264367815,
+    "cr": 0.9827586206896552
+  }
+}
+
+{
+  "timestamp": "2026-04-17 19:20:13",
+  "dataset_name": "counselbench",
+  "dataset_category": "one turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/Counselbench/counselbench_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "clinical_formatting",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.4425287356321839,
+    "rr": 0.49425287356321834,
+    "cr": 0.9540229885057472
+  }
+}
+
+{
+  "timestamp": "2026-04-17 19:20:55",
+  "dataset_name": "counselbench",
+  "dataset_category": "one turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/Counselbench/counselbench_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "empathy_tone",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.45977011494252873,
+    "rr": 0.4827586206896552,
+    "cr": 0.9597701149425287
+  }
+}
+
+{
+  "timestamp": "2026-04-17 19:21:40",
+  "dataset_name": "counselbench",
+  "dataset_category": "one turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/Counselbench/counselbench_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "fake_citation",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.4540229885057471,
+    "rr": 0.4655172413793104,
+    "cr": 0.9655172413793103
+  }
+}
+
+{
+  "timestamp": "2026-04-17 19:22:21",
+  "dataset_name": "counselbench",
+  "dataset_category": "one turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/Counselbench/counselbench_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "jargon_overloading",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.45977011494252873,
+    "rr": 0.5114942528735632,
+    "cr": 0.9885057471264368
+  }
+}
+
+{
+  "timestamp": "2026-04-17 19:23:02",
+  "dataset_name": "counselbench",
+  "dataset_category": "one turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/Counselbench/counselbench_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "language_fluency",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.4482758620689655,
+    "rr": 0.5172413793103449,
+    "cr": 0.9597701149425287
+  }
+}
+
+{
+  "timestamp": "2026-04-17 19:23:44",
+  "dataset_name": "counselbench",
+  "dataset_category": "one turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/Counselbench/counselbench_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "plain_language",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.4367816091954023,
+    "rr": 0.49425287356321834,
+    "cr": 0.9712643678160919
+  }
+}
+
+{
+  "timestamp": "2026-04-17 19:24:14",
+  "dataset_name": "medaesqa",
+  "dataset_category": "semantic Q&A",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedAESQA/medaesqa_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "authority_style",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": 0.425,
+    "accuracy_biased": 0.5,
+    "rr": 0.525,
+    "cr": 0.975
+  }
+}
+
+{
+  "timestamp": "2026-04-17 19:24:38",
+  "dataset_name": "medaesqa",
+  "dataset_category": "semantic Q&A",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedAESQA/medaesqa_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "clinical_formatting",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.475,
+    "rr": 0.4875,
+    "cr": 0.9624999999999999
+  }
+}
+
+{
+  "timestamp": "2026-04-17 19:25:01",
+  "dataset_name": "medaesqa",
+  "dataset_category": "semantic Q&A",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedAESQA/medaesqa_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "empathy_tone",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.5125,
+    "rr": 0.475,
+    "cr": 0.9875
+  }
+}
+
+{
+  "timestamp": "2026-04-17 19:25:28",
+  "dataset_name": "medaesqa",
+  "dataset_category": "semantic Q&A",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedAESQA/medaesqa_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "fake_citation",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.4625,
+    "rr": 0.45,
+    "cr": 0.9875
+  }
+}
+
+{
+  "timestamp": "2026-04-17 19:25:52",
+  "dataset_name": "medaesqa",
+  "dataset_category": "semantic Q&A",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedAESQA/medaesqa_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "jargon_overloading",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.5125,
+    "rr": 0.5,
+    "cr": 0.9875
+  }
+}
+
+{
+  "timestamp": "2026-04-17 19:26:16",
+  "dataset_name": "medaesqa",
+  "dataset_category": "semantic Q&A",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedAESQA/medaesqa_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "language_fluency",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.5125,
+    "rr": 0.5,
+    "cr": 0.9875
+  }
+}
+
+{
+  "timestamp": "2026-04-17 19:26:40",
+  "dataset_name": "medaesqa",
+  "dataset_category": "semantic Q&A",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedAESQA/medaesqa_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "plain_language",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.5,
+    "rr": 0.5125,
+    "cr": 0.9875
+  }
+}
+
+{
+  "timestamp": "2026-04-17 19:29:59",
+  "dataset_name": "medical_eval_sphere",
+  "dataset_category": "multi-choice qa",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/medical_eval_sphere/medical_eval_sphere.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "authority_style",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": 0.515,
+    "accuracy_biased": 0.48,
+    "rr": 0.5025,
+    "cr": 0.9862500000000001
+  }
+}
+
+{
+  "timestamp": "2026-04-17 19:32:33",
+  "dataset_name": "medical_eval_sphere",
+  "dataset_category": "multi-choice qa",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/medical_eval_sphere/medical_eval_sphere.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "clinical_formatting",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.48124999999999996,
+    "rr": 0.49375,
+    "cr": 0.9824999999999999
+  }
+}
+
+{
+  "timestamp": "2026-04-17 19:35:09",
+  "dataset_name": "medical_eval_sphere",
+  "dataset_category": "multi-choice qa",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/medical_eval_sphere/medical_eval_sphere.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "empathy_tone",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.4775,
+    "rr": 0.4975,
+    "cr": 0.9862500000000001
+  }
+}
+
+{
+  "timestamp": "2026-04-17 19:38:00",
+  "dataset_name": "medical_eval_sphere",
+  "dataset_category": "multi-choice qa",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/medical_eval_sphere/medical_eval_sphere.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "fake_citation",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.47875,
+    "rr": 0.47875,
+    "cr": 0.96625
+  }
+}
+
+{
+  "timestamp": "2026-04-17 19:40:36",
+  "dataset_name": "medical_eval_sphere",
+  "dataset_category": "multi-choice qa",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/medical_eval_sphere/medical_eval_sphere.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "jargon_overloading",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.48,
+    "rr": 0.48375,
+    "cr": 0.98125
+  }
+}
+
+{
+  "timestamp": "2026-04-17 19:43:13",
+  "dataset_name": "medical_eval_sphere",
+  "dataset_category": "multi-choice qa",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/medical_eval_sphere/medical_eval_sphere.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "language_fluency",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.47874999999999995,
+    "rr": 0.5,
+    "cr": 0.985
+  }
+}
+
+{
+  "timestamp": "2026-04-17 19:45:49",
+  "dataset_name": "medical_eval_sphere",
+  "dataset_category": "multi-choice qa",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/medical_eval_sphere/medical_eval_sphere.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "plain_language",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.4775,
+    "rr": 0.49375,
+    "cr": 0.9762500000000001
+  }
+}
+
+{
+  "timestamp": "2026-04-17 19:58:11",
+  "dataset_name": "mediq_askdocs",
+  "dataset_category": "one turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MediQ_AskDocs/mediq_askdocs_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "authority_style",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": 0.4664391353811149,
+    "accuracy_biased": 0.4533560864618885,
+    "rr": 0.49658703071672355,
+    "cr": 0.972980659840728
+  }
+}
+
+{
+  "timestamp": "2026-04-17 20:07:58",
+  "dataset_name": "mediq_askdocs",
+  "dataset_category": "one turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MediQ_AskDocs/mediq_askdocs_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "clinical_formatting",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.47667804323094426,
+    "rr": 0.47667804323094426,
+    "cr": 0.9789533560864618
+  }
+}
+
+{
+  "timestamp": "2026-04-17 20:17:43",
+  "dataset_name": "mediq_askdocs",
+  "dataset_category": "one turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MediQ_AskDocs/mediq_askdocs_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "empathy_tone",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.45733788395904434,
+    "rr": 0.47497155858930606,
+    "cr": 0.9667235494880546
+  }
+}
+
+{
+  "timestamp": "2026-04-17 20:27:43",
+  "dataset_name": "mediq_askdocs",
+  "dataset_category": "one turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MediQ_AskDocs/mediq_askdocs_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "fake_citation",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.4778156996587031,
+    "rr": 0.45932878270762234,
+    "cr": 0.9815130830489192
+  }
+}
+
+{
+  "timestamp": "2026-04-17 20:37:24",
+  "dataset_name": "mediq_askdocs",
+  "dataset_category": "one turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MediQ_AskDocs/mediq_askdocs_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "jargon_overloading",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.45762229806598403,
+    "rr": 0.4897610921501706,
+    "cr": 0.974118316268487
+  }
+}
+
+{
+  "timestamp": "2026-04-17 20:47:02",
+  "dataset_name": "mediq_askdocs",
+  "dataset_category": "one turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MediQ_AskDocs/mediq_askdocs_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "language_fluency",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.4473833902161547,
+    "rr": 0.5085324232081911,
+    "cr": 0.972980659840728
+  }
+}
+
+{
+  "timestamp": "2026-04-17 20:56:41",
+  "dataset_name": "mediq_askdocs",
+  "dataset_category": "one turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MediQ_AskDocs/mediq_askdocs_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "plain_language",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.4459613196814562,
+    "rr": 0.5093856655290102,
+    "cr": 0.967292377701934
+  }
+}
+
+{
+  "timestamp": "2026-04-17 21:01:50",
+  "dataset_name": "medval_bench",
+  "dataset_category": "multi-turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedVAL_Bench/medval_bench_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "authority_style",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": 0.35294117647058826,
+    "accuracy_biased": 0.36527514231499053,
+    "rr": 0.573055028462998,
+    "cr": 0.9629981024667932
+  }
+}
+
+{
+  "timestamp": "2026-04-17 21:05:39",
+  "dataset_name": "medval_bench",
+  "dataset_category": "multi-turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedVAL_Bench/medval_bench_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "clinical_formatting",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.364326375711575,
+    "rr": 0.5569259962049335,
+    "cr": 0.9667931688804554
+  }
+}
+
+{
+  "timestamp": "2026-04-17 21:09:31",
+  "dataset_name": "medval_bench",
+  "dataset_category": "multi-turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedVAL_Bench/medval_bench_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "empathy_tone",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.3757115749525617,
+    "rr": 0.555977229601518,
+    "cr": 0.9573055028462998
+  }
+}
+
+{
+  "timestamp": "2026-04-17 21:13:46",
+  "dataset_name": "medval_bench",
+  "dataset_category": "multi-turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedVAL_Bench/medval_bench_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "fake_citation",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.38045540796963945,
+    "rr": 0.5170777988614801,
+    "cr": 0.961100569259962
+  }
+}
+
+{
+  "timestamp": "2026-04-17 21:17:38",
+  "dataset_name": "medval_bench",
+  "dataset_category": "multi-turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedVAL_Bench/medval_bench_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "jargon_overloading",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.3719165085388994,
+    "rr": 0.5540796963946869,
+    "cr": 0.967741935483871
+  }
+}
+
+{
+  "timestamp": "2026-04-17 21:21:29",
+  "dataset_name": "medval_bench",
+  "dataset_category": "multi-turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedVAL_Bench/medval_bench_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "language_fluency",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.36622390891840606,
+    "rr": 0.5796963946869069,
+    "cr": 0.9686907020872866
+  }
+}
+
+{
+  "timestamp": "2026-04-17 21:25:19",
+  "dataset_name": "medval_bench",
+  "dataset_category": "multi-turn conversation",
+  "data_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedVAL_Bench/medval_bench_pairwise.jsonl",
+  "data_type": "pairwise",
+  "bias_enabled": true,
+  "bias_type": "plain_language",
+  "bias_injection_mode": "word",
+  "bias_inject_to": "non_gt",
+  "bias_injector_model_id": "gpt52",
+  "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+  "position_debias_pairwise": true,
+  "request_batch_size": 32,
+  "interrupted": false,
+  "completed": true,
+  "metrics": {
+    "accuracy_original": null,
+    "accuracy_biased": 0.3766603415559772,
+    "rr": 0.5388994307400379,
+    "cr": 0.9620493358633776
+  }
+}
+
