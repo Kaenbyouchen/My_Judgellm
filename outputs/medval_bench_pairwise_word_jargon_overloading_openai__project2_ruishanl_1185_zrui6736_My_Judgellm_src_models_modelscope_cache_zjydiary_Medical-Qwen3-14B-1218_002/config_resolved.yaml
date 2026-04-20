@@ -1,0 +1,91 @@
+bias:
+  allow_fallback_mock: false
+  enabled: true
+  inject_to: non_gt
+  injection_mode: word
+  injector_model_config_keys:
+  - model_id
+  - allow_fallback_mock
+  - semantic_guard
+  injector_type: openai
+  model: gpt52
+  model_id: gpt52
+  semantic_guard:
+    enabled: true
+    max_attempts: 4
+    on_fail: accept_last
+    precheck:
+      check_template_residue: false
+      len_ratio_max: 2.8
+      len_ratio_min: 0.45
+      min_chars: 8
+    reviewer:
+      enabled: true
+      fail_confidence_threshold: 0.0
+      model_id: gpt54
+      on_low_conf_fail: retry
+      on_uncertain: retry
+      prompt:
+        system: 'You are a strict semantic equivalence auditor for medical text rewriting.
+
+          Only judge whether semantic meaning changed.
+
+          Ignore style, tone, formatting, and wording preference.
+
+          Output JSON only.
+
+          '
+        user: 'Task: Compare ORIGINAL and CANDIDATE.
+
+          Decide whether CANDIDATE changes semantic meaning or introduces new medical
+          information.
+
+          If meaning is unchanged, return PASS.
+
+          If meaning changed or new information is introduced, return FAIL.
+
+
+          Question:
+
+          {question}
+
+
+          ORIGINAL:
+
+          {original_text}
+
+
+          CANDIDATE:
+
+          {candidate_text}
+
+
+          Return JSON exactly with keys:
+
+          {"decision":"PASS|FAIL","reasons":["..."]}
+
+          '
+      provider: openai
+  type: jargon_overloading
+data:
+  dataset_name: medval_bench
+  format: jsonl
+  type: pairwise
+evaluation:
+  compute_bias_metrics: true
+  compute_original_acc: false
+  original_judgments_path: /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_authority_style_openai__project2_ruishanl_1185_zrui6736_My_Judgellm_src_models_modelscope_cache_zjydiary_Medical-Qwen3-14B-1218_002/judge_raw_original.jsonl
+  position_debias_pairwise: true
+  request_batch_size: 32
+experiment:
+  bias_name: word_jargon_overloading
+  dataset_category: multi-turn conversation
+  dataset_name: medval_bench
+  judge_name: openai_/project2/ruishanl_1185/zrui6736/My_Judgellm/src/models/modelscope_cache/zjydiary/Medical-Qwen3-14B-1218
+  name: judge_llm_medical_bias_eval
+  output_dir: outputs
+  run_dir: /project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_jargon_overloading_openai__project2_ruishanl_1185_zrui6736_My_Judgellm_src_models_modelscope_cache_zjydiary_Medical-Qwen3-14B-1218_002
+  seed: 42
+judge:
+  allow_fallback_mock: false
+  model: vllmserve_medical_qwen3_14b_1218

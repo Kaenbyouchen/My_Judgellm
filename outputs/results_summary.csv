@@ -197,6 +197,7 @@ one turn conversation,mediq_askdocs,authority_style,word,pairwise,vllmserve_medg
 one turn conversation,mediq_askdocs,authority_style,word,pairwise,vllmserve_medical_qwen3_14b_1218,79.52,79.18,92.89,85.27
 one turn conversation,mediq_askdocs,authority_style,word,pairwise,vllmserve_prometheus2_7b,75.31,69.74,94.31,77.99
 one turn conversation,mediq_askdocs,authority_style,word,pairwise,vllmserve_qwen3_4b_instruct,72.41,72.38,99.77,77.90
+one turn conversation,mediq_askdocs,clinical_formatting,word,pairwise,gpt52,84.53,81.03,96.25,87.91
 one turn conversation,mediq_askdocs,clinical_formatting,word,pairwise,vllmserve_biomistral_7b,55.63,57.59,98.78,54.47
 one turn conversation,mediq_askdocs,clinical_formatting,word,pairwise,vllmserve_deepseek_r1_distill_qwen_14b,77.25,73.21,92.26,82.65
 one turn conversation,mediq_askdocs,clinical_formatting,word,pairwise,vllmserve_gemma3_4b,67.97,59.93,99.49,68.00
@@ -205,6 +206,7 @@ one turn conversation,mediq_askdocs,clinical_formatting,word,pairwise,vllmserve_
 one turn conversation,mediq_askdocs,clinical_formatting,word,pairwise,vllmserve_medical_qwen3_14b_1218,79.52,70.45,91.35,80.46
 one turn conversation,mediq_askdocs,clinical_formatting,word,pairwise,vllmserve_prometheus2_7b,75.31,53.16,94.45,66.07
 one turn conversation,mediq_askdocs,clinical_formatting,word,pairwise,vllmserve_qwen3_4b_instruct,72.41,61.95,99.80,72.30
+one turn conversation,mediq_askdocs,empathy_tone,word,pairwise,gpt52,84.13,79.78,96.16,87.23
 one turn conversation,mediq_askdocs,empathy_tone,word,pairwise,vllmserve_biomistral_7b,55.63,51.91,99.20,53.61
 one turn conversation,mediq_askdocs,empathy_tone,word,pairwise,vllmserve_deepseek_r1_distill_qwen_14b,77.25,65.36,92.41,79.18
 one turn conversation,mediq_askdocs,empathy_tone,word,pairwise,vllmserve_gemma3_4b,67.97,61.04,99.46,68.66
@@ -213,6 +215,7 @@ one turn conversation,mediq_askdocs,empathy_tone,word,pairwise,vllmserve_medgemm
 one turn conversation,mediq_askdocs,empathy_tone,word,pairwise,vllmserve_medical_qwen3_14b_1218,79.52,74.74,91.67,82.42
 one turn conversation,mediq_askdocs,empathy_tone,word,pairwise,vllmserve_prometheus2_7b,75.31,63.05,94.43,73.63
 one turn conversation,mediq_askdocs,empathy_tone,word,pairwise,vllmserve_qwen3_4b_instruct,72.41,68.86,99.86,75.57
+one turn conversation,mediq_askdocs,fake_citation,word,pairwise,gpt52,85.21,96.27,98.24,86.21
 one turn conversation,mediq_askdocs,fake_citation,word,pairwise,vllmserve_biomistral_7b,55.63,50.94,99.15,52.93
 one turn conversation,mediq_askdocs,fake_citation,word,pairwise,vllmserve_deepseek_r1_distill_qwen_14b,77.25,79.18,92.86,81.68
 one turn conversation,mediq_askdocs,fake_citation,word,pairwise,vllmserve_gemma3_4b,67.97,60.58,99.80,67.92
@@ -221,6 +224,7 @@ one turn conversation,mediq_askdocs,fake_citation,word,pairwise,vllmserve_medgem
 one turn conversation,mediq_askdocs,fake_citation,word,pairwise,vllmserve_medical_qwen3_14b_1218,79.52,81.88,92.32,81.88
 one turn conversation,mediq_askdocs,fake_citation,word,pairwise,vllmserve_prometheus2_7b,75.31,57.03,92.09,67.35
 one turn conversation,mediq_askdocs,fake_citation,word,pairwise,vllmserve_qwen3_4b_instruct,72.41,78.24,99.72,77.33
+one turn conversation,mediq_askdocs,jargon_overloading,word,pairwise,gpt52,85.21,90.02,97.50,89.22
 one turn conversation,mediq_askdocs,jargon_overloading,word,pairwise,vllmserve_biomistral_7b,55.63,54.58,99.18,55.26
 one turn conversation,mediq_askdocs,jargon_overloading,word,pairwise,vllmserve_deepseek_r1_distill_qwen_14b,77.25,79.07,93.26,84.70
 one turn conversation,mediq_askdocs,jargon_overloading,word,pairwise,vllmserve_gemma3_4b,67.97,66.75,99.40,73.07
@@ -229,6 +233,7 @@ one turn conversation,mediq_askdocs,jargon_overloading,word,pairwise,vllmserve_m
 one turn conversation,mediq_askdocs,jargon_overloading,word,pairwise,vllmserve_medical_qwen3_14b_1218,79.52,79.35,91.67,82.99
 one turn conversation,mediq_askdocs,jargon_overloading,word,pairwise,vllmserve_prometheus2_7b,75.31,68.97,93.91,76.14
 one turn conversation,mediq_askdocs,jargon_overloading,word,pairwise,vllmserve_qwen3_4b_instruct,72.41,71.64,99.91,76.82
+one turn conversation,mediq_askdocs,language_fluency,word,pairwise,gpt52,85.21,84.04,96.96,91.15
 one turn conversation,mediq_askdocs,language_fluency,word,pairwise,vllmserve_biomistral_7b,55.63,54.04,99.12,55.23
 one turn conversation,mediq_askdocs,language_fluency,word,pairwise,vllmserve_deepseek_r1_distill_qwen_14b,77.25,77.22,93.74,85.52
 one turn conversation,mediq_askdocs,language_fluency,word,pairwise,vllmserve_gemma3_4b,67.97,68.15,99.74,75.20
@@ -237,61 +242,75 @@ one turn conversation,mediq_askdocs,language_fluency,word,pairwise,vllmserve_med
 one turn conversation,mediq_askdocs,language_fluency,word,pairwise,vllmserve_medical_qwen3_14b_1218,79.52,77.84,92.38,84.90
 one turn conversation,mediq_askdocs,language_fluency,word,pairwise,vllmserve_prometheus2_7b,75.31,74.49,94.62,81.91
 one turn conversation,mediq_askdocs,language_fluency,word,pairwise,vllmserve_qwen3_4b_instruct,72.41,71.76,99.83,79.15
+one turn conversation,mediq_askdocs,plain_language,word,pairwise,gpt52,85.21,84.78,96.96,91.33
 one turn conversation,mediq_askdocs,plain_language,word,pairwise,vllmserve_biomistral_7b,55.63,54.61,99.00,55.57
 one turn conversation,mediq_askdocs,plain_language,word,pairwise,vllmserve_deepseek_r1_distill_qwen_14b,77.25,77.05,94.31,85.64
 one turn conversation,mediq_askdocs,plain_language,word,pairwise,vllmserve_gemma3_4b,67.97,68.77,99.54,75.54
 one turn conversation,mediq_askdocs,plain_language,word,pairwise,vllmserve_llama31_8b_instruct,68.77,69.77,99.63,72.44
 one turn conversation,mediq_askdocs,plain_language,word,pairwise,vllmserve_medgemma_4b,68.71,68.54,99.57,75.43
 one turn conversation,mediq_askdocs,plain_language,word,pairwise,vllmserve_medical_qwen3_14b_1218,79.52,79.66,92.58,85.35
+one turn conversation,mediq_askdocs,plain_language,word,pairwise,vllmserve_prometheus2_7b,63.25,63.37,90.64,64.36
 one turn conversation,mediq_askdocs,plain_language,word,pairwise,vllmserve_qwen3_4b_instruct,72.41,71.70,99.97,78.70
+multi-turn conversation,medval_bench,authority_style,word,pairwise,gpt52,43.45,43.93,97.06,90.61
 multi-turn conversation,medval_bench,authority_style,word,pairwise,vllmserve_biomistral_7b,46.49,46.77,99.62,53.98
 multi-turn conversation,medval_bench,authority_style,word,pairwise,vllmserve_deepseek_r1_distill_qwen_14b,33.97,34.91,94.21,87.67
 multi-turn conversation,medval_bench,authority_style,word,pairwise,vllmserve_gemma3_4b,23.15,21.92,99.72,85.86
 multi-turn conversation,medval_bench,authority_style,word,pairwise,vllmserve_llama31_8b_instruct,34.72,32.83,99.05,83.68
 multi-turn conversation,medval_bench,authority_style,word,pairwise,vllmserve_medgemma_4b,34.91,34.06,99.72,79.41
+multi-turn conversation,medval_bench,authority_style,word,pairwise,vllmserve_medical_qwen3_14b_1218,40.04,40.13,95.07,89.85
 multi-turn conversation,medval_bench,authority_style,word,pairwise,vllmserve_prometheus2_7b,28.08,25.24,94.31,80.27
 multi-turn conversation,medval_bench,authority_style,word,pairwise,vllmserve_qwen3_4b_instruct,34.91,35.10,99.72,88.61
+multi-turn conversation,medval_bench,clinical_formatting,word,pairwise,gpt52,43.45,41.37,98.58,90.70
 multi-turn conversation,medval_bench,clinical_formatting,word,pairwise,vllmserve_biomistral_7b,46.49,47.34,99.72,53.32
 multi-turn conversation,medval_bench,clinical_formatting,word,pairwise,vllmserve_deepseek_r1_distill_qwen_14b,33.97,29.60,91.75,84.82
 multi-turn conversation,medval_bench,clinical_formatting,word,pairwise,vllmserve_gemma3_4b,23.15,17.17,99.81,84.16
 multi-turn conversation,medval_bench,clinical_formatting,word,pairwise,vllmserve_llama31_8b_instruct,34.72,28.18,99.15,80.93
 multi-turn conversation,medval_bench,clinical_formatting,word,pairwise,vllmserve_medgemma_4b,34.54,26.76,99.62,76.66
+multi-turn conversation,medval_bench,clinical_formatting,word,pairwise,vllmserve_medical_qwen3_14b_1218,40.04,37.10,95.07,88.71
 multi-turn conversation,medval_bench,clinical_formatting,word,pairwise,vllmserve_prometheus2_7b,26.57,21.63,96.58,76.09
 multi-turn conversation,medval_bench,clinical_formatting,word,pairwise,vllmserve_qwen3_4b_instruct,34.91,31.21,100.00,86.81
+multi-turn conversation,medval_bench,empathy_tone,word,pairwise,gpt52,43.45,47.06,96.96,88.99
 multi-turn conversation,medval_bench,empathy_tone,word,pairwise,vllmserve_biomistral_7b,46.49,46.96,99.81,52.85
 multi-turn conversation,medval_bench,empathy_tone,word,pairwise,vllmserve_deepseek_r1_distill_qwen_14b,33.97,32.83,93.17,86.15
 multi-turn conversation,medval_bench,empathy_tone,word,pairwise,vllmserve_gemma3_4b,23.15,23.53,99.53,83.30
 multi-turn conversation,medval_bench,empathy_tone,word,pairwise,vllmserve_llama31_8b_instruct,34.72,35.96,99.15,81.50
 multi-turn conversation,medval_bench,empathy_tone,word,pairwise,vllmserve_medgemma_4b,34.91,33.02,99.62,78.56
+multi-turn conversation,medval_bench,empathy_tone,word,pairwise,vllmserve_medical_qwen3_14b_1218,40.04,41.46,94.40,88.71
 multi-turn conversation,medval_bench,empathy_tone,word,pairwise,vllmserve_prometheus2_7b,28.08,25.14,95.26,78.46
 multi-turn conversation,medval_bench,empathy_tone,word,pairwise,vllmserve_qwen3_4b_instruct,34.91,36.43,99.91,87.67
+multi-turn conversation,medval_bench,fake_citation,word,pairwise,gpt52,43.45,85.77,97.25,54.84
 multi-turn conversation,medval_bench,fake_citation,word,pairwise,vllmserve_biomistral_7b,46.49,44.02,99.24,50.95
 multi-turn conversation,medval_bench,fake_citation,word,pairwise,vllmserve_deepseek_r1_distill_qwen_14b,33.97,40.99,89.18,80.65
 multi-turn conversation,medval_bench,fake_citation,word,pairwise,vllmserve_gemma3_4b,23.15,15.84,99.62,81.12
 multi-turn conversation,medval_bench,fake_citation,word,pairwise,vllmserve_llama31_8b_instruct,34.72,36.62,99.05,76.94
 multi-turn conversation,medval_bench,fake_citation,word,pairwise,vllmserve_medgemma_4b,34.91,38.52,99.34,73.62
+multi-turn conversation,medval_bench,fake_citation,word,pairwise,vllmserve_medical_qwen3_14b_1218,40.04,55.03,91.94,76.09
 multi-turn conversation,medval_bench,fake_citation,word,pairwise,vllmserve_prometheus2_7b,28.08,16.79,95.45,69.35
 multi-turn conversation,medval_bench,fake_citation,word,pairwise,vllmserve_qwen3_4b_instruct,34.91,46.20,99.72,78.27
+multi-turn conversation,medval_bench,jargon_overloading,word,pairwise,gpt52,43.45,51.33,96.96,84.91
 multi-turn conversation,medval_bench,jargon_overloading,word,pairwise,vllmserve_biomistral_7b,46.49,47.25,99.62,53.04
 multi-turn conversation,medval_bench,jargon_overloading,word,pairwise,vllmserve_deepseek_r1_distill_qwen_14b,33.97,33.78,92.60,85.77
 multi-turn conversation,medval_bench,jargon_overloading,word,pairwise,vllmserve_gemma3_4b,23.15,20.97,99.05,83.21
 multi-turn conversation,medval_bench,jargon_overloading,word,pairwise,vllmserve_llama31_8b_instruct,34.72,28.37,99.72,79.79
 multi-turn conversation,medval_bench,jargon_overloading,word,pairwise,vllmserve_medgemma_4b,34.91,31.78,99.62,77.51
+multi-turn conversation,medval_bench,jargon_overloading,word,pairwise,vllmserve_medical_qwen3_14b_1218,40.04,38.52,93.93,86.34
 multi-turn conversation,medval_bench,jargon_overloading,word,pairwise,vllmserve_prometheus2_7b,28.08,22.11,95.45,77.89
 multi-turn conversation,medval_bench,jargon_overloading,word,pairwise,vllmserve_qwen3_4b_instruct,34.91,34.06,99.81,86.05
+multi-turn conversation,medval_bench,language_fluency,word,pairwise,gpt52,43.45,46.49,96.58,89.75
 multi-turn conversation,medval_bench,language_fluency,word,pairwise,vllmserve_biomistral_7b,46.49,47.72,99.72,53.89
 multi-turn conversation,medval_bench,language_fluency,word,pairwise,vllmserve_deepseek_r1_distill_qwen_14b,33.97,36.34,93.36,86.43
 multi-turn conversation,medval_bench,language_fluency,word,pairwise,vllmserve_gemma3_4b,23.15,26.66,99.43,83.40
 multi-turn conversation,medval_bench,language_fluency,word,pairwise,vllmserve_llama31_8b_instruct,34.72,38.24,99.72,81.50
 multi-turn conversation,medval_bench,language_fluency,word,pairwise,vllmserve_medgemma_4b,34.91,37.38,99.72,77.42
+multi-turn conversation,medval_bench,language_fluency,word,pairwise,vllmserve_medical_qwen3_14b_1218,40.04,42.79,94.40,89.85
 multi-turn conversation,medval_bench,language_fluency,word,pairwise,vllmserve_prometheus2_7b,28.08,32.92,94.69,75.90
 multi-turn conversation,medval_bench,language_fluency,word,pairwise,vllmserve_qwen3_4b_instruct,34.91,38.14,100.00,87.29
+multi-turn conversation,medval_bench,plain_language,word,pairwise,gpt52,43.45,49.24,95.54,86.24
 multi-turn conversation,medval_bench,plain_language,word,pairwise,vllmserve_biomistral_7b,46.49,48.67,99.34,54.08
 multi-turn conversation,medval_bench,plain_language,word,pairwise,vllmserve_deepseek_r1_distill_qwen_14b,33.97,36.62,91.37,84.82
 multi-turn conversation,medval_bench,plain_language,word,pairwise,vllmserve_gemma3_4b,23.15,28.46,99.34,81.78
 multi-turn conversation,medval_bench,plain_language,word,pairwise,vllmserve_llama31_8b_instruct,34.72,40.61,99.53,80.83
 multi-turn conversation,medval_bench,plain_language,word,pairwise,vllmserve_medgemma_4b,34.91,37.38,99.72,77.80
+multi-turn conversation,medval_bench,plain_language,word,pairwise,vllmserve_medical_qwen3_14b_1218,40.04,45.64,92.31,86.81
 multi-turn conversation,medval_bench,plain_language,word,pairwise,vllmserve_prometheus2_7b,28.08,32.54,93.93,75.05
 multi-turn conversation,medval_bench,plain_language,word,pairwise,vllmserve_qwen3_4b_instruct,34.91,42.41,99.62,83.78
-one turn conversation,mediq_askdocs,clinical_formatting,word,pairwise,gpt52,84.53,81.03,96.25,87.91
-one turn conversation,mediq_askdocs,plain_language,word,pairwise,vllmserve_prometheus2_7b,63.25,63.37,90.64,64.36

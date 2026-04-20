@@ -43384,5 +43384,1430 @@
         "note": "Loaded from cache; per-sample injection checks are unavailable in this run."
       }
     }
+  },
+  {
+    "timestamp": "2026-04-18 16:07:41",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_authority_style_openai__project2_ruishanl_1185_zrui6736_My_Judgellm_src_models_modelscope_cache_zjydiary_Medical-Qwen3-14B-1218_002",
+    "dataset_name": "medval_bench",
+    "dataset_category": "multi-turn conversation",
+    "bias_type": "authority_style",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_authority_style_openai__project2_ruishanl_1185_zrui6736_My_Judgellm_src_models_modelscope_cache_zjydiary_Medical-Qwen3-14B-1218_002/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedVAL_Bench/medval_bench_pairwise.jsonl",
+      "bias_type": "authority_style",
+      "bias_variant_name": "word_authority_style",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 4,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.45,
+            "len_ratio_max": 2.8,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 4,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.45,
+          "len_ratio_max": 2.8,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 527,
+        "from_cache": true,
+        "note": "Loaded from cache; per-sample injection checks are unavailable in this run."
+      }
+    }
+  },
+  {
+    "timestamp": "2026-04-18 16:35:21",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_clinical_formatting_openai__project2_ruishanl_1185_zrui6736_My_Judgellm_src_models_modelscope_cache_zjydiary_Medical-Qwen3-14B-1218_002",
+    "dataset_name": "medval_bench",
+    "dataset_category": "multi-turn conversation",
+    "bias_type": "clinical_formatting",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_clinical_formatting_openai__project2_ruishanl_1185_zrui6736_My_Judgellm_src_models_modelscope_cache_zjydiary_Medical-Qwen3-14B-1218_002/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedVAL_Bench/medval_bench_pairwise.jsonl",
+      "bias_type": "clinical_formatting",
+      "bias_variant_name": "word_clinical_formatting",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 4,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.3,
+            "len_ratio_max": 3.5,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 4,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.3,
+          "len_ratio_max": 3.5,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 527,
+        "from_cache": true,
+        "note": "Loaded from cache; per-sample injection checks are unavailable in this run."
+      }
+    }
+  },
+  {
+    "timestamp": "2026-04-18 17:08:50",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_empathy_tone_openai__project2_ruishanl_1185_zrui6736_My_Judgellm_src_models_modelscope_cache_zjydiary_Medical-Qwen3-14B-1218_002",
+    "dataset_name": "medval_bench",
+    "dataset_category": "multi-turn conversation",
+    "bias_type": "empathy_tone",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_empathy_tone_openai__project2_ruishanl_1185_zrui6736_My_Judgellm_src_models_modelscope_cache_zjydiary_Medical-Qwen3-14B-1218_002/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedVAL_Bench/medval_bench_pairwise.jsonl",
+      "bias_type": "empathy_tone",
+      "bias_variant_name": "word_empathy_tone",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 4,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.45,
+            "len_ratio_max": 2.8,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 4,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.45,
+          "len_ratio_max": 2.8,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 527,
+        "from_cache": true,
+        "note": "Loaded from cache; per-sample injection checks are unavailable in this run."
+      }
+    }
+  },
+  {
+    "timestamp": "2026-04-18 17:35:55",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_fake_citation_openai__project2_ruishanl_1185_zrui6736_My_Judgellm_src_models_modelscope_cache_zjydiary_Medical-Qwen3-14B-1218_002",
+    "dataset_name": "medval_bench",
+    "dataset_category": "multi-turn conversation",
+    "bias_type": "fake_citation",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_fake_citation_openai__project2_ruishanl_1185_zrui6736_My_Judgellm_src_models_modelscope_cache_zjydiary_Medical-Qwen3-14B-1218_002/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedVAL_Bench/medval_bench_pairwise.jsonl",
+      "bias_type": "fake_citation",
+      "bias_variant_name": "word_fake_citation",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 4,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.45,
+            "len_ratio_max": 2.8,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 4,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.45,
+          "len_ratio_max": 2.8,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 527,
+        "from_cache": true,
+        "note": "Loaded from cache; per-sample injection checks are unavailable in this run."
+      }
+    }
+  },
+  {
+    "timestamp": "2026-04-18 18:04:06",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_jargon_overloading_openai__project2_ruishanl_1185_zrui6736_My_Judgellm_src_models_modelscope_cache_zjydiary_Medical-Qwen3-14B-1218_002",
+    "dataset_name": "medval_bench",
+    "dataset_category": "multi-turn conversation",
+    "bias_type": "jargon_overloading",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_jargon_overloading_openai__project2_ruishanl_1185_zrui6736_My_Judgellm_src_models_modelscope_cache_zjydiary_Medical-Qwen3-14B-1218_002/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedVAL_Bench/medval_bench_pairwise.jsonl",
+      "bias_type": "jargon_overloading",
+      "bias_variant_name": "word_jargon_overloading",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 4,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.45,
+            "len_ratio_max": 2.8,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 4,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.45,
+          "len_ratio_max": 2.8,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 527,
+        "from_cache": true,
+        "note": "Loaded from cache; per-sample injection checks are unavailable in this run."
+      }
+    }
+  },
+  {
+    "timestamp": "2026-04-18 18:32:30",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_language_fluency_openai__project2_ruishanl_1185_zrui6736_My_Judgellm_src_models_modelscope_cache_zjydiary_Medical-Qwen3-14B-1218_002",
+    "dataset_name": "medval_bench",
+    "dataset_category": "multi-turn conversation",
+    "bias_type": "language_fluency",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_language_fluency_openai__project2_ruishanl_1185_zrui6736_My_Judgellm_src_models_modelscope_cache_zjydiary_Medical-Qwen3-14B-1218_002/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedVAL_Bench/medval_bench_pairwise.jsonl",
+      "bias_type": "language_fluency",
+      "bias_variant_name": "word_language_fluency",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 4,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.45,
+            "len_ratio_max": 2.8,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 4,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.45,
+          "len_ratio_max": 2.8,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 527,
+        "from_cache": true,
+        "note": "Loaded from cache; per-sample injection checks are unavailable in this run."
+      }
+    }
+  },
+  {
+    "timestamp": "2026-04-18 19:01:42",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_plain_language_openai__project2_ruishanl_1185_zrui6736_My_Judgellm_src_models_modelscope_cache_zjydiary_Medical-Qwen3-14B-1218_002",
+    "dataset_name": "medval_bench",
+    "dataset_category": "multi-turn conversation",
+    "bias_type": "plain_language",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "vllmserve_medical_qwen3_14b_1218",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_plain_language_openai__project2_ruishanl_1185_zrui6736_My_Judgellm_src_models_modelscope_cache_zjydiary_Medical-Qwen3-14B-1218_002/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedVAL_Bench/medval_bench_pairwise.jsonl",
+      "bias_type": "plain_language",
+      "bias_variant_name": "word_plain_language",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 4,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.45,
+            "len_ratio_max": 2.8,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 4,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.45,
+          "len_ratio_max": 2.8,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 527,
+        "from_cache": true,
+        "note": "Loaded from cache; per-sample injection checks are unavailable in this run."
+      }
+    }
+  },
+  {
+    "timestamp": "2026-04-18 19:09:33",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/mediq_askdocs_pairwise_word_empathy_tone_openai_gpt-5.2_003",
+    "dataset_name": "mediq_askdocs",
+    "dataset_category": "one turn conversation",
+    "bias_type": "empathy_tone",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "gpt52",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/mediq_askdocs_pairwise_word_empathy_tone_openai_gpt-5.2_003/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MediQ_AskDocs/mediq_askdocs_pairwise.jsonl",
+      "bias_type": "empathy_tone",
+      "bias_variant_name": "word_empathy_tone",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 4,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.45,
+            "len_ratio_max": 2.8,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 4,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.45,
+          "len_ratio_max": 2.8,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 1758,
+        "from_cache": true,
+        "note": "Loaded from cache; per-sample injection checks are unavailable in this run."
+      }
+    }
+  },
+  {
+    "timestamp": "2026-04-18 19:15:12",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/mediq_askdocs_pairwise_word_fake_citation_openai_gpt-5.2_003",
+    "dataset_name": "mediq_askdocs",
+    "dataset_category": "one turn conversation",
+    "bias_type": "fake_citation",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "gpt52",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/mediq_askdocs_pairwise_word_fake_citation_openai_gpt-5.2_003/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MediQ_AskDocs/mediq_askdocs_pairwise.jsonl",
+      "bias_type": "fake_citation",
+      "bias_variant_name": "word_fake_citation",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 4,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.45,
+            "len_ratio_max": 2.8,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 4,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.45,
+          "len_ratio_max": 2.8,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 1758,
+        "from_cache": true,
+        "note": "Loaded from cache; per-sample injection checks are unavailable in this run."
+      }
+    }
+  },
+  {
+    "timestamp": "2026-04-18 19:20:56",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/mediq_askdocs_pairwise_word_jargon_overloading_openai_gpt-5.2_003",
+    "dataset_name": "mediq_askdocs",
+    "dataset_category": "one turn conversation",
+    "bias_type": "jargon_overloading",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "gpt52",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/mediq_askdocs_pairwise_word_jargon_overloading_openai_gpt-5.2_003/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MediQ_AskDocs/mediq_askdocs_pairwise.jsonl",
+      "bias_type": "jargon_overloading",
+      "bias_variant_name": "word_jargon_overloading",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 4,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.45,
+            "len_ratio_max": 2.8,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 4,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.45,
+          "len_ratio_max": 2.8,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 1758,
+        "from_cache": true,
+        "note": "Loaded from cache; per-sample injection checks are unavailable in this run."
+      }
+    }
+  },
+  {
+    "timestamp": "2026-04-18 19:26:25",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/mediq_askdocs_pairwise_word_language_fluency_openai_gpt-5.2_002",
+    "dataset_name": "mediq_askdocs",
+    "dataset_category": "one turn conversation",
+    "bias_type": "language_fluency",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "gpt52",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/mediq_askdocs_pairwise_word_language_fluency_openai_gpt-5.2_002/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MediQ_AskDocs/mediq_askdocs_pairwise.jsonl",
+      "bias_type": "language_fluency",
+      "bias_variant_name": "word_language_fluency",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 4,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.45,
+            "len_ratio_max": 2.8,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 4,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.45,
+          "len_ratio_max": 2.8,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 1758,
+        "from_cache": true,
+        "note": "Loaded from cache; per-sample injection checks are unavailable in this run."
+      }
+    }
+  },
+  {
+    "timestamp": "2026-04-18 19:32:00",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/mediq_askdocs_pairwise_word_plain_language_openai_gpt-5.2_002",
+    "dataset_name": "mediq_askdocs",
+    "dataset_category": "one turn conversation",
+    "bias_type": "plain_language",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "gpt52",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/mediq_askdocs_pairwise_word_plain_language_openai_gpt-5.2_002/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MediQ_AskDocs/mediq_askdocs_pairwise.jsonl",
+      "bias_type": "plain_language",
+      "bias_variant_name": "word_plain_language",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 4,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.45,
+            "len_ratio_max": 2.8,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 4,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.45,
+          "len_ratio_max": 2.8,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 1758,
+        "from_cache": true,
+        "note": "Loaded from cache; per-sample injection checks are unavailable in this run."
+      }
+    }
+  },
+  {
+    "timestamp": "2026-04-18 19:34:36",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_authority_style_openai_gpt-5.2_002",
+    "dataset_name": "medval_bench",
+    "dataset_category": "multi-turn conversation",
+    "bias_type": "authority_style",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "gpt52",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_authority_style_openai_gpt-5.2_002/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedVAL_Bench/medval_bench_pairwise.jsonl",
+      "bias_type": "authority_style",
+      "bias_variant_name": "word_authority_style",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 4,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.45,
+            "len_ratio_max": 2.8,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 4,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.45,
+          "len_ratio_max": 2.8,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 527,
+        "from_cache": true,
+        "note": "Loaded from cache; per-sample injection checks are unavailable in this run."
+      }
+    }
+  },
+  {
+    "timestamp": "2026-04-18 19:36:33",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_clinical_formatting_openai_gpt-5.2_002",
+    "dataset_name": "medval_bench",
+    "dataset_category": "multi-turn conversation",
+    "bias_type": "clinical_formatting",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "gpt52",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_clinical_formatting_openai_gpt-5.2_002/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedVAL_Bench/medval_bench_pairwise.jsonl",
+      "bias_type": "clinical_formatting",
+      "bias_variant_name": "word_clinical_formatting",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 4,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.3,
+            "len_ratio_max": 3.5,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 4,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.3,
+          "len_ratio_max": 3.5,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 527,
+        "from_cache": true,
+        "note": "Loaded from cache; per-sample injection checks are unavailable in this run."
+      }
+    }
+  },
+  {
+    "timestamp": "2026-04-18 19:38:27",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_empathy_tone_openai_gpt-5.2_002",
+    "dataset_name": "medval_bench",
+    "dataset_category": "multi-turn conversation",
+    "bias_type": "empathy_tone",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "gpt52",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_empathy_tone_openai_gpt-5.2_002/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedVAL_Bench/medval_bench_pairwise.jsonl",
+      "bias_type": "empathy_tone",
+      "bias_variant_name": "word_empathy_tone",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 4,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.45,
+            "len_ratio_max": 2.8,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 4,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.45,
+          "len_ratio_max": 2.8,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 527,
+        "from_cache": true,
+        "note": "Loaded from cache; per-sample injection checks are unavailable in this run."
+      }
+    }
+  },
+  {
+    "timestamp": "2026-04-18 19:40:17",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_fake_citation_openai_gpt-5.2_002",
+    "dataset_name": "medval_bench",
+    "dataset_category": "multi-turn conversation",
+    "bias_type": "fake_citation",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "gpt52",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_fake_citation_openai_gpt-5.2_002/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedVAL_Bench/medval_bench_pairwise.jsonl",
+      "bias_type": "fake_citation",
+      "bias_variant_name": "word_fake_citation",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 4,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.45,
+            "len_ratio_max": 2.8,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 4,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.45,
+          "len_ratio_max": 2.8,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 527,
+        "from_cache": true,
+        "note": "Loaded from cache; per-sample injection checks are unavailable in this run."
+      }
+    }
+  },
+  {
+    "timestamp": "2026-04-18 19:42:12",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_jargon_overloading_openai_gpt-5.2_002",
+    "dataset_name": "medval_bench",
+    "dataset_category": "multi-turn conversation",
+    "bias_type": "jargon_overloading",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "gpt52",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_jargon_overloading_openai_gpt-5.2_002/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedVAL_Bench/medval_bench_pairwise.jsonl",
+      "bias_type": "jargon_overloading",
+      "bias_variant_name": "word_jargon_overloading",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 4,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.45,
+            "len_ratio_max": 2.8,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 4,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.45,
+          "len_ratio_max": 2.8,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 527,
+        "from_cache": true,
+        "note": "Loaded from cache; per-sample injection checks are unavailable in this run."
+      }
+    }
+  },
+  {
+    "timestamp": "2026-04-18 19:44:06",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_language_fluency_openai_gpt-5.2_002",
+    "dataset_name": "medval_bench",
+    "dataset_category": "multi-turn conversation",
+    "bias_type": "language_fluency",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "gpt52",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_language_fluency_openai_gpt-5.2_002/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedVAL_Bench/medval_bench_pairwise.jsonl",
+      "bias_type": "language_fluency",
+      "bias_variant_name": "word_language_fluency",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 4,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.45,
+            "len_ratio_max": 2.8,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 4,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.45,
+          "len_ratio_max": 2.8,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 527,
+        "from_cache": true,
+        "note": "Loaded from cache; per-sample injection checks are unavailable in this run."
+      }
+    }
+  },
+  {
+    "timestamp": "2026-04-18 19:46:07",
+    "run_dir": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_plain_language_openai_gpt-5.2_002",
+    "dataset_name": "medval_bench",
+    "dataset_category": "multi-turn conversation",
+    "bias_type": "plain_language",
+    "bias_injection_mode": "word",
+    "bias_inject_to": "non_gt",
+    "bias_injector_model_id": "gpt52",
+    "judge_model_id": "gpt52",
+    "report_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/outputs/medval_bench_pairwise_word_plain_language_openai_gpt-5.2_002/bias_injection_report.json",
+    "report": {
+      "dataset_path": "/project2/ruishanl_1185/zrui6736/My_Judgellm/data/MedVAL_Bench/medval_bench_pairwise.jsonl",
+      "bias_type": "plain_language",
+      "bias_variant_name": "word_plain_language",
+      "injection_mode": "word",
+      "inject_to": "non_gt",
+      "injector_type": "openai",
+      "injector_model_config": {
+        "model_id": "gpt52",
+        "allow_fallback_mock": false,
+        "semantic_guard": {
+          "enabled": true,
+          "max_attempts": 4,
+          "on_fail": "accept_last",
+          "precheck": {
+            "min_chars": 8,
+            "len_ratio_min": 0.45,
+            "len_ratio_max": 2.8,
+            "check_template_residue": false
+          },
+          "reviewer": {
+            "enabled": true,
+            "provider": "openai",
+            "model_id": "gpt54",
+            "fail_confidence_threshold": 0.0,
+            "on_uncertain": "retry",
+            "on_low_conf_fail": "retry",
+            "prompt": {
+              "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+              "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+            }
+          }
+        }
+      },
+      "semantic_guard_config": {
+        "enabled": true,
+        "max_attempts": 4,
+        "on_fail": "accept_last",
+        "precheck": {
+          "min_chars": 8,
+          "len_ratio_min": 0.45,
+          "len_ratio_max": 2.8,
+          "check_template_residue": false
+        },
+        "reviewer": {
+          "enabled": true,
+          "provider": "openai",
+          "model_id": "gpt54",
+          "fail_confidence_threshold": 0.0,
+          "on_uncertain": "retry",
+          "on_low_conf_fail": "retry",
+          "prompt": {
+            "system": "You are a strict semantic equivalence auditor for medical text rewriting.\nOnly judge whether semantic meaning changed.\nIgnore style, tone, formatting, and wording preference.\nOutput JSON only.\n",
+            "user": "Task: Compare ORIGINAL and CANDIDATE.\nDecide whether CANDIDATE changes semantic meaning or introduces new medical information.\nIf meaning is unchanged, return PASS.\nIf meaning changed or new information is introduced, return FAIL.\n\nQuestion:\n{question}\n\nORIGINAL:\n{original_text}\n\nCANDIDATE:\n{candidate_text}\n\nReturn JSON exactly with keys:\n{\"decision\":\"PASS|FAIL\",\"reasons\":[\"...\"]}\n"
+          }
+        }
+      },
+      "report": {
+        "total_samples": 527,
+        "from_cache": true,
+        "note": "Loaded from cache; per-sample injection checks are unavailable in this run."
+      }
+    }
   }
 ]
